@@ -1,0 +1,332 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:background="#ffffff"
+    tools:context="com.tyche.mobile.susco.MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:id="@+id/txvHeader"
+                android:gravity="center_horizontal|center_vertical"
+                android:background="@drawable/header_banner"
+                android:text="ข้อมูลสมาชิก"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/imgProfile"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/susco_banner_02_400px_200px" />
+                    <ImageView
+
+
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+
+                        app:srcCompat="@drawable/photo_frame" />
+
+                </FrameLayout>
+
+                <TextView
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/txvMyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="เจรฟฟี่ เลอโบสะกี้"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#444444"
+                    android:textSize="18sp" />
+
+
+            </LinearLayout>
+
+                <!-- your layout stuff here -->
+               <LinearLayout
+                   android:orientation="vertical"
+
+
+android:background="@color/colorMain"
+
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
+
+                   <LinearLayout
+                       android:divider="@drawable/ic_pump"
+                       android:background="#ffffff"
+                       android:layout_marginBottom="1dp"
+                       android:paddingTop="10dp"
+                       android:paddingBottom="10dp"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+
+                       android:orientation="horizontal" >
+                       <TextView
+
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+                           android:gravity="left"
+                           android:text="เบอร์โทรศัพท์ :"
+                           android:textColor="#444444"
+                           android:textSize="16sp"  />
+
+                       <TextView
+                           android:id="@+id/txvPhoneNo"
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+                           android:gravity="right"
+                           android:text="098-xxxxxxx"
+
+                           android:textColor="#444444"
+                           android:textSize="16sp" />
+
+
+
+                   </LinearLayout>
+                   <LinearLayout
+                       android:divider="@drawable/ic_pump"
+                       android:background="#ffffff"
+                       android:layout_marginBottom="1dp"
+                       android:paddingTop="10dp"
+                       android:paddingBottom="10dp"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+
+                       android:orientation="horizontal" >
+                       <TextView
+
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+                           android:gravity="left"
+                           android:text="เลขประจำตัวประชาชน :"
+                           android:textColor="#444444"
+                           android:textSize="16sp"  />
+
+                       <TextView
+                           android:id="@+id/txvIdCard"
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+                           android:gravity="right"
+                           android:text=""
+
+                           android:textColor="#444444"
+                           android:textSize="16sp" />
+
+
+
+                   </LinearLayout>
+                   <LinearLayout
+                       android:paddingTop="10dp"
+                       android:paddingBottom="10dp"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:background="#ffffff"
+                       android:layout_marginBottom="1dp"
+                       android:orientation="horizontal" >
+                       <TextView
+
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+                           android:gravity="left"
+                           android:text="รหัสผ่าน :"
+                           android:textColor="#444444"
+                           android:textSize="16sp"  />
+
+                       <TextView
+                           android:id="@+id/txvPassword"
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+
+                           android:gravity="right|center_vertical"
+                           android:text=".........."
+                           android:textColor="#444444"
+                           android:textSize="20sp" />
+
+
+
+                   </LinearLayout>
+                   <LinearLayout
+                       android:paddingTop="10dp"
+                       android:paddingBottom="10dp"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:background="#ffffff"
+                       android:layout_marginBottom="1dp"
+                       android:orientation="horizontal" >
+                       <TextView
+
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+                           android:gravity="left"
+                           android:text="อีเมล์ :"
+                           android:textColor="#444444"
+                           android:textSize="16sp"  />
+
+                       <TextView
+                           android:id="@+id/txvEmail"
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+
+                           android:gravity="right|center_vertical"
+                           android:text="jeffrey@susco.co.th"
+                           android:textColor="#444444"
+                           android:textSize="16sp" />
+
+
+
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:paddingTop="10dp"
+                       android:paddingBottom="10dp"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:background="#ffffff"
+                       android:layout_marginBottom="1dp"
+                       android:orientation="horizontal" >
+                       <TextView
+
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+                           android:gravity="left"
+                           android:drawableLeft="@drawable/member_card_32"
+                           android:text=""
+                           android:textColor="#444444"
+                           android:textSize="16sp"  />
+
+                       <TextView
+                           android:id="@+id/txvCard"
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+
+                           android:gravity="right|center_vertical"
+                           android:text="บัตรสมาชิก"
+
+                           android:textColor="#444444"
+                           android:textSize="14sp" />
+
+
+
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:paddingTop="10dp"
+                       android:paddingBottom="10dp"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:background="#ffffff"
+                       android:layout_marginBottom="1dp"
+                       android:orientation="horizontal" >
+                       <TextView
+
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+                           android:gravity="left"
+                           android:text=""
+                           android:drawableLeft="@drawable/document_32"
+                           android:textColor="#000000"
+                           android:textSize="16sp"  />
+
+                       <TextView
+                           android:id="@+id/txvHistory"
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+
+                           android:gravity="right|center_vertical"
+                           android:text="ประวัติการทำรายการ"
+                           android:textColor="#444444"
+                           android:textSize="14sp" />
+
+
+
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:paddingTop="10dp"
+                       android:paddingBottom="10dp"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:background="#ffffff"
+
+                       android:orientation="horizontal" >
+                       <TextView
+
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+                           android:gravity="left"
+                           android:text=""
+
+                           android:textColor="#000000"
+                           android:textSize="16sp"  />
+
+                       <TextView
+                           android:id="@+id/txvLogout"
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+
+                           android:gravity="right|center_vertical"
+                           android:text="ลงชื่อออก"
+                           android:textColor="#444444"
+                           android:textSize="14sp" />
+
+
+                   </LinearLayout>
+
+               </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:id="@+id/contentView"
+    android:background="@drawable/member_information"
+    android:gravity="center_vertical">
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+
+        android:orientation="vertical"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:gravity="center_vertical">
+        <ImageView
+            android:src="@drawable/ssmslogo"
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:visibility="gone"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="60dp"
+            android:text="Angkor Merchant"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:visibility="gone"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center">
+
+            <Button
+                android:layout_weight="1"
+                android:text="เข้าสู่ระบบ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnSwitchLogin"
+                android:textColor="@color/textWhite"
+                android:background="@drawable/button_left_radius_blue"
+                android:textSize="25sp" />
+
+            <Button
+                android:layout_weight="1"
+                android:text="สมัครสมาชิก"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnSwitchRegister"
+
+                android:background="@drawable/button_right_radius_white"
+                android:textColor="#0476B9"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:visibility="visible"
+            android:id="@+id/lnrLogin"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <ImageView
+                    android:src="@drawable/padlock64"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+
+                    android:background="@drawable/icon_border_left_radius" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edtUsername"
+                    android:background="@drawable/text_box_right_radius_white"
+                    android:textColorHint="#0476B9"
+                    android:hint="Ticket Code"
+                    android:gravity="center_horizontal"
+                    android:textColor="#0476B9" />
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp">
+                <ImageView
+                    android:src="@drawable/padlock64"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+
+                    android:background="@drawable/icon_border_left_radius" />
+                <EditText
+                    android:inputType="textPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edtPassword"
+                    android:background="@drawable/text_box_right_radius_white"
+                    android:textColorHint="#0476B9"
+                    android:textColor="#0476B9"
+                    android:hint="รหัสผ่าน"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+
+            <Button
+android:layout_marginTop="5dp"
+                android:text="Login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnLogin"
+                android:textColor="@color/textWhite"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button_submit"
+                android:textSize="25sp"
+                android:layout_marginBottom="20dp" />
+
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/lnrRegister"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout2"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <ImageView
+                    android:src="@drawable/phone64"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+
+                    android:background="@drawable/icon_border_left_radius" />
+                <EditText
+                    android:inputType="phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edtPhone"
+                    android:background="@drawable/text_box_right_radius_white"
+                    android:textColorHint="#0476B9"
+                    android:hint="เบอร์โทรศัพท์"
+                    android:gravity="left"
+                    android:textColor="#0476B9" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout3"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <ImageView
+                    android:src="@drawable/user64"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:id="@+id/imageView2"
+                    android:background="@drawable/icon_border_left_radius" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edtFname"
+                    android:background="@drawable/text_box_right_radius_white"
+                    android:textColorHint="#0476B9"
+                    android:hint="ชื่อ"
+                    android:gravity="left"
+                    android:textColor="#0476B9" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout4"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <ImageView
+                    android:src="@drawable/group64"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:id="@+id/imageView2"
+                    android:background="@drawable/icon_border_left_radius" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edtLname"
+                    android:background="@drawable/text_box_right_radius_white"
+                    android:textColorHint="#0476B9"
+                    android:hint="นามสกุล"
+                    android:gravity="left"
+                    android:textColor="#0476B9" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout7"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <ImageView
+                    android:src="@drawable/mail64"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+
+                    android:background="@drawable/icon_border_left_radius" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edtEmail"
+                    android:background="@drawable/text_box_right_radius_white"
+                    android:textColorHint="#0476B9"
+                    android:hint="อีเมล"
+                    android:gravity="left"
+                    android:textColor="#0476B9"
+                    android:inputType="textEmailAddress" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout5"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <ImageView
+                    android:src="@drawable/padlock64"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+
+                    android:background="@drawable/icon_border_left_radius" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edtRegistPassword"
+
+                    android:background="@drawable/text_box_right_radius_white"
+                    android:textColorHint="#0476B9"
+                    android:hint="รหัสผ่าน"
+                    android:gravity="left"
+                    android:textColor="#0476B9"
+                    android:inputType="textPassword" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout6"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <ImageView
+                    android:src="@drawable/padlock64"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+
+                    android:background="@drawable/icon_border_left_radius" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edtRePassword"
+                    android:background="@drawable/text_box_right_radius_white"
+                    android:textColorHint="#0476B9"
+                    android:hint="ยืนยันรหัสผ่าน"
+                    android:gravity="left"
+                    android:textColor="#0476B9"
+                    android:inputType="textPassword"
+
+                    />
+            </LinearLayout>
+
+            <Button
+                android:text="สมัครสมาชิก"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnRegister"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button_submit"
+                android:textSize="25sp"
+                android:textColor="@color/textWhite"
+                android:layout_marginBottom="20dp" />
+
+        </LinearLayout>
+        <TextView
+            android:text="V.1.0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txvVersion"
+            android:gravity="center"
+            android:textColor="#002060"
+            android:textSize="10sp"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="bottom" />
+    </LinearLayout>
+</LinearLayout>

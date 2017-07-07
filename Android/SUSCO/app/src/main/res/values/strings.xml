@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SUSCO Smart Member</string>
+    <string name="title_home">หน้าหลัก</string>
+    <string name="title_news">ข่าวประชาสัมพันธ์</string>
+    <string name="title_score">คะแนนสะสม</string>
+    <string name="title_branch">สาขา</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+</resources>

@@ -1,0 +1,191 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:background="@drawable/member_information"
+    tools:context="com.tyche.mobile.angkormer.MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="220dp"
+                        android:layout_height="220dp"
+                        app:srcCompat="@drawable/qr" />
+
+                </FrameLayout>
+
+                <TextView
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/txvMyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="เจรฟฟี่ เลอโบสะกี้"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#444444"
+                    android:textSize="22sp" />
+
+
+            </LinearLayout>
+
+                <!-- your layout stuff here -->
+               <LinearLayout
+                   android:orientation="vertical"
+
+
+android:layout_gravity="center_horizontal"
+                   android:layout_width="300dp"
+
+                   android:layout_height="match_parent">
+
+                   <android.support.v7.widget.CardView
+                       android:divider="@drawable/ic_pump"
+                       android:background="@drawable/box_cuve_fill_white_stroke_gray"
+
+                       app:cardCornerRadius="5dp"
+                       app:cardElevation="10dp"
+                       app:cardPreventCornerOverlap="false"
+
+                       app:contentPadding="0dp"
+
+                       android:layout_width="280dp"
+                       android:layout_height="80dp"
+
+                       android:layout_gravity="center_horizontal"
+
+ >
+
+                       <TextView
+
+                           android:id="@+id/txvPointNo"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+
+
+                           android:gravity="right"
+                           android:text="10,000\npoint(s)"
+                           android:textAlignment="center"
+                           android:textColor="#444444"
+                           android:layout_gravity="center_horizontal|center_vertical"
+                           android:textSize="18sp" />
+
+
+                   </android.support.v7.widget.CardView>
+
+
+
+
+                   <LinearLayout
+                       android:paddingTop="10dp"
+                       android:paddingBottom="10dp"
+                       android:layout_width="280dp"
+                       android:layout_height="match_parent"
+                       android:layout_gravity="center_horizontal"
+                       android:orientation="horizontal" >
+                       <TextView
+
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+                           android:gravity="left"
+                           android:text=""
+
+                           android:textColor="#000000"
+                           android:textSize="16sp"  />
+
+                       <TextView
+                           android:id="@+id/txvLogout"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+
+
+                           android:gravity="right|center_vertical"
+                           android:text="@string/logout_here"
+                           android:textColor="#4692BA"
+                           android:textSize="14sp" />
+
+
+                   </LinearLayout>
+
+               </LinearLayout>
+
+
+
+
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/camera" />
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/desc_take_photo"
+                android:textColor="#444444"
+                android:textSize="14sp" />
+
+            <LinearLayout
+
+android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+  >
+                 <Button
+                     android:id="@+id/btnGuide"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+
+                     android:text="GUIDE"
+                     android:layout_marginRight="30dp"
+                     android:textColor="#FFFFFF"
+                     android:background="@drawable/selector_button_cyan"
+                     />
+
+                <TextView
+android:layout_gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/desc_button_guide"
+                    android:textColor="#444444"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

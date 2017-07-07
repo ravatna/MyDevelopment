@@ -1,0 +1,832 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DB160E8F1EFCFD2E008C65EE /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB160E8E1EFCFD2E008C65EE /* UserTableViewCell.swift */; };
+		DB1CD4701EFB8DE1001A8CCF /* UtilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1CD46F1EFB8DE1001A8CCF /* UtilViewController.swift */; };
+		DB3B33CF1EFD1F180097BD3C /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3B33CE1EFD1F180097BD3C /* NewsDetailViewController.swift */; };
+		DB3B33D11EFD20900097BD3C /* ZoomPicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3B33D01EFD20900097BD3C /* ZoomPicViewController.swift */; };
+		DB483BF41F0E143C005C2C0D /* Main67.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB483BF31F0E143C005C2C0D /* Main67.storyboard */; };
+		DB483BF61F0E145D005C2C0D /* Main67Plus.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB483BF51F0E145D005C2C0D /* Main67Plus.storyboard */; };
+		DB7FB6821F00E8DE00DDD40A /* PointOutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FB6811F00E8DE00DDD40A /* PointOutTableViewCell.swift */; };
+		DB7FB6841F01020100DDD40A /* qr.png in Resources */ = {isa = PBXBuildFile; fileRef = DB7FB6831F01020100DDD40A /* qr.png */; };
+		DB7FB6861F01225700DDD40A /* SharedInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FB6851F01225700DDD40A /* SharedInfo.swift */; };
+		DB83EE151F0BAC9F00AFB556 /* OneTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB83EE141F0BAC9F00AFB556 /* OneTextViewController.swift */; };
+		DBB4D9161EF8FF4D007E7243 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB4D9151EF8FF4D007E7243 /* AppDelegate.swift */; };
+		DBB4D9181EF8FF4D007E7243 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB4D9171EF8FF4D007E7243 /* HomeViewController.swift */; };
+		DBB4D91A1EF8FF4D007E7243 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB4D9191EF8FF4D007E7243 /* ScoreViewController.swift */; };
+		DBB4D91D1EF8FF4D007E7243 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D91B1EF8FF4D007E7243 /* Main.storyboard */; };
+		DBB4D91F1EF8FF4D007E7243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D91E1EF8FF4D007E7243 /* Assets.xcassets */; };
+		DBB4D9221EF8FF4D007E7243 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9201EF8FF4D007E7243 /* LaunchScreen.storyboard */; };
+		DBB4D92D1EF8FF4D007E7243 /* Susco_Smart_MemberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB4D92C1EF8FF4D007E7243 /* Susco_Smart_MemberTests.swift */; };
+		DBB4D9381EF8FF4D007E7243 /* Susco_Smart_MemberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB4D9371EF8FF4D007E7243 /* Susco_Smart_MemberUITests.swift */; };
+		DBB4D9461EF90639007E7243 /* BranchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB4D9451EF90639007E7243 /* BranchViewController.swift */; };
+		DBB4D9481EFA2CBE007E7243 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB4D9471EFA2CBE007E7243 /* LoginController.swift */; };
+		DBB4D9E91EFA7558007E7243 /* banner_news_500px_214px_01.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9B41EFA7558007E7243 /* banner_news_500px_214px_01.png */; };
+		DBB4D9EA1EFA7558007E7243 /* banner_news_500px_214px_02.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9B51EFA7558007E7243 /* banner_news_500px_214px_02.png */; };
+		DBB4D9EB1EFA7558007E7243 /* banner_news_500px_214px_03.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9B61EFA7558007E7243 /* banner_news_500px_214px_03.png */; };
+		DBB4D9EC1EFA7558007E7243 /* banner_score_and_name_500px_214px.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9B71EFA7558007E7243 /* banner_score_and_name_500px_214px.png */; };
+		DBB4D9ED1EFA7558007E7243 /* banner_score_and_name_800px_400px.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9B81EFA7558007E7243 /* banner_score_and_name_800px_400px.png */; };
+		DBB4D9EE1EFA7558007E7243 /* banner_score_and_name.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9B91EFA7558007E7243 /* banner_score_and_name.png */; };
+		DBB4D9EF1EFA7558007E7243 /* close_64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9BA1EFA7558007E7243 /* close_64.png */; };
+		DBB4D9F01EFA7558007E7243 /* document_32.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9BB1EFA7558007E7243 /* document_32.png */; };
+		DBB4D9F11EFA7558007E7243 /* document_64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9BC1EFA7558007E7243 /* document_64.png */; };
+		DBB4D9F21EFA7558007E7243 /* gas_station.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9BD1EFA7558007E7243 /* gas_station.png */; };
+		DBB4D9F31EFA7558007E7243 /* giftboxes.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9BE1EFA7558007E7243 /* giftboxes.png */; };
+		DBB4D9F41EFA7558007E7243 /* group64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9BF1EFA7558007E7243 /* group64.png */; };
+		DBB4D9F51EFA7558007E7243 /* header_banner.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9C01EFA7558007E7243 /* header_banner.png */; };
+		DBB4D9F61EFA7558007E7243 /* home_gray_32.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9C11EFA7558007E7243 /* home_gray_32.png */; };
+		DBB4D9F71EFA7558007E7243 /* home_gray_64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9C21EFA7558007E7243 /* home_gray_64.png */; };
+		DBB4D9F81EFA7558007E7243 /* home32.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9C31EFA7558007E7243 /* home32.png */; };
+		DBB4D9F91EFA7558007E7243 /* home64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9C41EFA7558007E7243 /* home64.png */; };
+		DBB4D9FA1EFA7558007E7243 /* ic_pump.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9C51EFA7558007E7243 /* ic_pump.png */; };
+		DBB4D9FB1EFA7558007E7243 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9C61EFA7558007E7243 /* icon.png */; };
+		DBB4D9FC1EFA7558007E7243 /* left_arrow_64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9C71EFA7558007E7243 /* left_arrow_64.png */; };
+		DBB4D9FD1EFA7558007E7243 /* logo_smart_member.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9C81EFA7558007E7243 /* logo_smart_member.png */; };
+		DBB4D9FE1EFA7558007E7243 /* logo_susco_500.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9C91EFA7558007E7243 /* logo_susco_500.png */; };
+		DBB4D9FF1EFA7558007E7243 /* mail64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9CA1EFA7558007E7243 /* mail64.png */; };
+		DBB4DA001EFA7558007E7243 /* medal_gray_32.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9CB1EFA7558007E7243 /* medal_gray_32.png */; };
+		DBB4DA011EFA7558007E7243 /* medal_gray_64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9CC1EFA7558007E7243 /* medal_gray_64.png */; };
+		DBB4DA021EFA7558007E7243 /* medal32.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9CD1EFA7558007E7243 /* medal32.png */; };
+		DBB4DA031EFA7558007E7243 /* medal64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9CE1EFA7558007E7243 /* medal64.png */; };
+		DBB4DA041EFA7558007E7243 /* megaphon_gray_32.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9CF1EFA7558007E7243 /* megaphon_gray_32.png */; };
+		DBB4DA051EFA7558007E7243 /* megaphon_gray_64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9D01EFA7558007E7243 /* megaphon_gray_64.png */; };
+		DBB4DA061EFA7558007E7243 /* megaphon32.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9D11EFA7558007E7243 /* megaphon32.png */; };
+		DBB4DA071EFA7558007E7243 /* megaphon64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9D21EFA7558007E7243 /* megaphon64.png */; };
+		DBB4DA081EFA7558007E7243 /* member_card_32.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9D31EFA7558007E7243 /* member_card_32.png */; };
+		DBB4DA091EFA7558007E7243 /* member_card_64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9D41EFA7558007E7243 /* member_card_64.png */; };
+		DBB4DA0A1EFA7558007E7243 /* member_card_600px_1050px.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9D51EFA7558007E7243 /* member_card_600px_1050px.png */; };
+		DBB4DA0B1EFA7558007E7243 /* padlock64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9D61EFA7558007E7243 /* padlock64.png */; };
+		DBB4DA0C1EFA7558007E7243 /* phone64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9D71EFA7558007E7243 /* phone64.png */; };
+		DBB4DA0D1EFA7558007E7243 /* photo_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9D81EFA7558007E7243 /* photo_frame.png */; };
+		DBB4DA0E1EFA7558007E7243 /* placeholder_gray_32.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9D91EFA7558007E7243 /* placeholder_gray_32.png */; };
+		DBB4DA0F1EFA7558007E7243 /* placeholder_gray_64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9DA1EFA7558007E7243 /* placeholder_gray_64.png */; };
+		DBB4DA101EFA7558007E7243 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9DB1EFA7558007E7243 /* placeholder.png */; };
+		DBB4DA111EFA7558007E7243 /* placeholder32.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9DC1EFA7558007E7243 /* placeholder32.png */; };
+		DBB4DA121EFA7558007E7243 /* placeholder64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9DD1EFA7558007E7243 /* placeholder64.png */; };
+		DBB4DA131EFA7558007E7243 /* promotion_567px_300px_01.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9DE1EFA7558007E7243 /* promotion_567px_300px_01.png */; };
+		DBB4DA141EFA7558007E7243 /* promotion_567px_300px_02.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9DF1EFA7558007E7243 /* promotion_567px_300px_02.png */; };
+		DBB4DA151EFA7558007E7243 /* ssmslogo.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9E01EFA7558007E7243 /* ssmslogo.png */; };
+		DBB4DA161EFA7558007E7243 /* susco_banner_01.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9E11EFA7558007E7243 /* susco_banner_01.png */; };
+		DBB4DA171EFA7558007E7243 /* susco_banner_02_400px_200px.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9E21EFA7558007E7243 /* susco_banner_02_400px_200px.png */; };
+		DBB4DA181EFA7558007E7243 /* susco_banner_03_1000px_500px.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9E31EFA7558007E7243 /* susco_banner_03_1000px_500px.png */; };
+		DBB4DA191EFA7558007E7243 /* susco_bg01.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9E41EFA7558007E7243 /* susco_bg01.png */; };
+		DBB4DA1A1EFA7558007E7243 /* user_gray_32.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9E51EFA7558007E7243 /* user_gray_32.png */; };
+		DBB4DA1B1EFA7558007E7243 /* user_gray_64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9E61EFA7558007E7243 /* user_gray_64.png */; };
+		DBB4DA1C1EFA7558007E7243 /* user32.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9E71EFA7558007E7243 /* user32.png */; };
+		DBB4DA1D1EFA7558007E7243 /* user64.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB4D9E81EFA7558007E7243 /* user64.png */; };
+		DBB4DA201EFA77B2007E7243 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB4DA1F1EFA77B2007E7243 /* UserViewController.swift */; };
+		DBFD53A11F00AA7200575B9F /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFD53A01F00AA7200575B9F /* CardViewController.swift */; };
+		DBFD53A31F00AA9B00575B9F /* HistoryTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFD53A21F00AA9B00575B9F /* HistoryTransactionViewController.swift */; };
+		DBFD53A51F00B0C800575B9F /* PointInTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFD53A41F00B0C800575B9F /* PointInTableViewCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DBB4D9291EF8FF4D007E7243 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBB4D90A1EF8FF4D007E7243 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DBB4D9111EF8FF4D007E7243;
+			remoteInfo = "Susco Smart Member";
+		};
+		DBB4D9341EF8FF4D007E7243 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBB4D90A1EF8FF4D007E7243 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DBB4D9111EF8FF4D007E7243;
+			remoteInfo = "Susco Smart Member";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DB160E8E1EFCFD2E008C65EE /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		DB1CD46F1EFB8DE1001A8CCF /* UtilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilViewController.swift; sourceTree = "<group>"; };
+		DB3B33CE1EFD1F180097BD3C /* NewsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
+		DB3B33D01EFD20900097BD3C /* ZoomPicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomPicViewController.swift; sourceTree = "<group>"; };
+		DB483BF31F0E143C005C2C0D /* Main67.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main67.storyboard; sourceTree = "<group>"; };
+		DB483BF51F0E145D005C2C0D /* Main67Plus.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main67Plus.storyboard; sourceTree = "<group>"; };
+		DB7FB6811F00E8DE00DDD40A /* PointOutTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PointOutTableViewCell.swift; path = ../PointOutTableViewCell.swift; sourceTree = "<group>"; };
+		DB7FB6831F01020100DDD40A /* qr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qr.png; sourceTree = "<group>"; };
+		DB7FB6851F01225700DDD40A /* SharedInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedInfo.swift; sourceTree = "<group>"; };
+		DB83EE141F0BAC9F00AFB556 /* OneTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTextViewController.swift; sourceTree = "<group>"; };
+		DBB4D9121EF8FF4D007E7243 /* Susco Smart Member.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Susco Smart Member.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBB4D9151EF8FF4D007E7243 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DBB4D9171EF8FF4D007E7243 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		DBB4D9191EF8FF4D007E7243 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		DBB4D91C1EF8FF4D007E7243 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DBB4D91E1EF8FF4D007E7243 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DBB4D9211EF8FF4D007E7243 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DBB4D9231EF8FF4D007E7243 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBB4D9281EF8FF4D007E7243 /* Susco Smart MemberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Susco Smart MemberTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBB4D92C1EF8FF4D007E7243 /* Susco_Smart_MemberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Susco_Smart_MemberTests.swift; sourceTree = "<group>"; };
+		DBB4D92E1EF8FF4D007E7243 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBB4D9331EF8FF4D007E7243 /* Susco Smart MemberUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Susco Smart MemberUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBB4D9371EF8FF4D007E7243 /* Susco_Smart_MemberUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Susco_Smart_MemberUITests.swift; sourceTree = "<group>"; };
+		DBB4D9391EF8FF4D007E7243 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBB4D9451EF90639007E7243 /* BranchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchViewController.swift; sourceTree = "<group>"; };
+		DBB4D9471EFA2CBE007E7243 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		DBB4D9B41EFA7558007E7243 /* banner_news_500px_214px_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner_news_500px_214px_01.png; sourceTree = "<group>"; };
+		DBB4D9B51EFA7558007E7243 /* banner_news_500px_214px_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner_news_500px_214px_02.png; sourceTree = "<group>"; };
+		DBB4D9B61EFA7558007E7243 /* banner_news_500px_214px_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner_news_500px_214px_03.png; sourceTree = "<group>"; };
+		DBB4D9B71EFA7558007E7243 /* banner_score_and_name_500px_214px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner_score_and_name_500px_214px.png; sourceTree = "<group>"; };
+		DBB4D9B81EFA7558007E7243 /* banner_score_and_name_800px_400px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner_score_and_name_800px_400px.png; sourceTree = "<group>"; };
+		DBB4D9B91EFA7558007E7243 /* banner_score_and_name.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner_score_and_name.png; sourceTree = "<group>"; };
+		DBB4D9BA1EFA7558007E7243 /* close_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_64.png; sourceTree = "<group>"; };
+		DBB4D9BB1EFA7558007E7243 /* document_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = document_32.png; sourceTree = "<group>"; };
+		DBB4D9BC1EFA7558007E7243 /* document_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = document_64.png; sourceTree = "<group>"; };
+		DBB4D9BD1EFA7558007E7243 /* gas_station.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gas_station.png; sourceTree = "<group>"; };
+		DBB4D9BE1EFA7558007E7243 /* giftboxes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giftboxes.png; sourceTree = "<group>"; };
+		DBB4D9BF1EFA7558007E7243 /* group64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group64.png; sourceTree = "<group>"; };
+		DBB4D9C01EFA7558007E7243 /* header_banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header_banner.png; sourceTree = "<group>"; };
+		DBB4D9C11EFA7558007E7243 /* home_gray_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_gray_32.png; sourceTree = "<group>"; };
+		DBB4D9C21EFA7558007E7243 /* home_gray_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_gray_64.png; sourceTree = "<group>"; };
+		DBB4D9C31EFA7558007E7243 /* home32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home32.png; sourceTree = "<group>"; };
+		DBB4D9C41EFA7558007E7243 /* home64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home64.png; sourceTree = "<group>"; };
+		DBB4D9C51EFA7558007E7243 /* ic_pump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_pump.png; sourceTree = "<group>"; };
+		DBB4D9C61EFA7558007E7243 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		DBB4D9C71EFA7558007E7243 /* left_arrow_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_arrow_64.png; sourceTree = "<group>"; };
+		DBB4D9C81EFA7558007E7243 /* logo_smart_member.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_smart_member.png; sourceTree = "<group>"; };
+		DBB4D9C91EFA7558007E7243 /* logo_susco_500.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_susco_500.png; sourceTree = "<group>"; };
+		DBB4D9CA1EFA7558007E7243 /* mail64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail64.png; sourceTree = "<group>"; };
+		DBB4D9CB1EFA7558007E7243 /* medal_gray_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = medal_gray_32.png; sourceTree = "<group>"; };
+		DBB4D9CC1EFA7558007E7243 /* medal_gray_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = medal_gray_64.png; sourceTree = "<group>"; };
+		DBB4D9CD1EFA7558007E7243 /* medal32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = medal32.png; sourceTree = "<group>"; };
+		DBB4D9CE1EFA7558007E7243 /* medal64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = medal64.png; sourceTree = "<group>"; };
+		DBB4D9CF1EFA7558007E7243 /* megaphon_gray_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = megaphon_gray_32.png; sourceTree = "<group>"; };
+		DBB4D9D01EFA7558007E7243 /* megaphon_gray_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = megaphon_gray_64.png; sourceTree = "<group>"; };
+		DBB4D9D11EFA7558007E7243 /* megaphon32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = megaphon32.png; sourceTree = "<group>"; };
+		DBB4D9D21EFA7558007E7243 /* megaphon64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = megaphon64.png; sourceTree = "<group>"; };
+		DBB4D9D31EFA7558007E7243 /* member_card_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = member_card_32.png; sourceTree = "<group>"; };
+		DBB4D9D41EFA7558007E7243 /* member_card_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = member_card_64.png; sourceTree = "<group>"; };
+		DBB4D9D51EFA7558007E7243 /* member_card_600px_1050px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = member_card_600px_1050px.png; sourceTree = "<group>"; };
+		DBB4D9D61EFA7558007E7243 /* padlock64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = padlock64.png; sourceTree = "<group>"; };
+		DBB4D9D71EFA7558007E7243 /* phone64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone64.png; sourceTree = "<group>"; };
+		DBB4D9D81EFA7558007E7243 /* photo_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo_frame.png; sourceTree = "<group>"; };
+		DBB4D9D91EFA7558007E7243 /* placeholder_gray_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder_gray_32.png; sourceTree = "<group>"; };
+		DBB4D9DA1EFA7558007E7243 /* placeholder_gray_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder_gray_64.png; sourceTree = "<group>"; };
+		DBB4D9DB1EFA7558007E7243 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		DBB4D9DC1EFA7558007E7243 /* placeholder32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder32.png; sourceTree = "<group>"; };
+		DBB4D9DD1EFA7558007E7243 /* placeholder64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder64.png; sourceTree = "<group>"; };
+		DBB4D9DE1EFA7558007E7243 /* promotion_567px_300px_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = promotion_567px_300px_01.png; sourceTree = "<group>"; };
+		DBB4D9DF1EFA7558007E7243 /* promotion_567px_300px_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = promotion_567px_300px_02.png; sourceTree = "<group>"; };
+		DBB4D9E01EFA7558007E7243 /* ssmslogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ssmslogo.png; sourceTree = "<group>"; };
+		DBB4D9E11EFA7558007E7243 /* susco_banner_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = susco_banner_01.png; sourceTree = "<group>"; };
+		DBB4D9E21EFA7558007E7243 /* susco_banner_02_400px_200px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = susco_banner_02_400px_200px.png; sourceTree = "<group>"; };
+		DBB4D9E31EFA7558007E7243 /* susco_banner_03_1000px_500px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = susco_banner_03_1000px_500px.png; sourceTree = "<group>"; };
+		DBB4D9E41EFA7558007E7243 /* susco_bg01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = susco_bg01.png; sourceTree = "<group>"; };
+		DBB4D9E51EFA7558007E7243 /* user_gray_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_gray_32.png; sourceTree = "<group>"; };
+		DBB4D9E61EFA7558007E7243 /* user_gray_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_gray_64.png; sourceTree = "<group>"; };
+		DBB4D9E71EFA7558007E7243 /* user32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user32.png; sourceTree = "<group>"; };
+		DBB4D9E81EFA7558007E7243 /* user64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user64.png; sourceTree = "<group>"; };
+		DBB4DA1F1EFA77B2007E7243 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		DBE4F19F1F0242570022CE5E /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		DBFD53A01F00AA7200575B9F /* CardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
+		DBFD53A21F00AA9B00575B9F /* HistoryTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTransactionViewController.swift; sourceTree = "<group>"; };
+		DBFD53A41F00B0C800575B9F /* PointInTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointInTableViewCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DBB4D90F1EF8FF4D007E7243 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBB4D9251EF8FF4D007E7243 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBB4D9301EF8FF4D007E7243 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DBB4D9091EF8FF4D007E7243 = {
+			isa = PBXGroup;
+			children = (
+				DBE4F19F1F0242570022CE5E /* MyPlayground.playground */,
+				DBB4D9141EF8FF4D007E7243 /* Susco Smart Member */,
+				DBB4D92B1EF8FF4D007E7243 /* Susco Smart MemberTests */,
+				DBB4D9361EF8FF4D007E7243 /* Susco Smart MemberUITests */,
+				DBB4D9131EF8FF4D007E7243 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DBB4D9131EF8FF4D007E7243 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DBB4D9121EF8FF4D007E7243 /* Susco Smart Member.app */,
+				DBB4D9281EF8FF4D007E7243 /* Susco Smart MemberTests.xctest */,
+				DBB4D9331EF8FF4D007E7243 /* Susco Smart MemberUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DBB4D9141EF8FF4D007E7243 /* Susco Smart Member */ = {
+			isa = PBXGroup;
+			children = (
+				DBB4DA1E1EFA7564007E7243 /* assets */,
+				DBB4D9151EF8FF4D007E7243 /* AppDelegate.swift */,
+				DBB4D9171EF8FF4D007E7243 /* HomeViewController.swift */,
+				DBB4D9191EF8FF4D007E7243 /* ScoreViewController.swift */,
+				DBB4D9451EF90639007E7243 /* BranchViewController.swift */,
+				DBB4D9471EFA2CBE007E7243 /* LoginController.swift */,
+				DB7FB6811F00E8DE00DDD40A /* PointOutTableViewCell.swift */,
+				DBFD53A41F00B0C800575B9F /* PointInTableViewCell.swift */,
+				DBB4DA1F1EFA77B2007E7243 /* UserViewController.swift */,
+				DB83EE141F0BAC9F00AFB556 /* OneTextViewController.swift */,
+				DB160E8E1EFCFD2E008C65EE /* UserTableViewCell.swift */,
+				DB3B33CE1EFD1F180097BD3C /* NewsDetailViewController.swift */,
+				DB3B33D01EFD20900097BD3C /* ZoomPicViewController.swift */,
+				DBFD53A01F00AA7200575B9F /* CardViewController.swift */,
+				DBFD53A21F00AA9B00575B9F /* HistoryTransactionViewController.swift */,
+				DBB4D91B1EF8FF4D007E7243 /* Main.storyboard */,
+				DB483BF51F0E145D005C2C0D /* Main67Plus.storyboard */,
+				DB483BF31F0E143C005C2C0D /* Main67.storyboard */,
+				DBB4D91E1EF8FF4D007E7243 /* Assets.xcassets */,
+				DBB4D9201EF8FF4D007E7243 /* LaunchScreen.storyboard */,
+				DBB4D9231EF8FF4D007E7243 /* Info.plist */,
+				DB1CD46F1EFB8DE1001A8CCF /* UtilViewController.swift */,
+				DB7FB6851F01225700DDD40A /* SharedInfo.swift */,
+			);
+			path = "Susco Smart Member";
+			sourceTree = "<group>";
+		};
+		DBB4D92B1EF8FF4D007E7243 /* Susco Smart MemberTests */ = {
+			isa = PBXGroup;
+			children = (
+				DBB4D92C1EF8FF4D007E7243 /* Susco_Smart_MemberTests.swift */,
+				DBB4D92E1EF8FF4D007E7243 /* Info.plist */,
+			);
+			path = "Susco Smart MemberTests";
+			sourceTree = "<group>";
+		};
+		DBB4D9361EF8FF4D007E7243 /* Susco Smart MemberUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DBB4D9371EF8FF4D007E7243 /* Susco_Smart_MemberUITests.swift */,
+				DBB4D9391EF8FF4D007E7243 /* Info.plist */,
+			);
+			path = "Susco Smart MemberUITests";
+			sourceTree = "<group>";
+		};
+		DBB4DA1E1EFA7564007E7243 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				DB7FB6831F01020100DDD40A /* qr.png */,
+				DBB4D9B41EFA7558007E7243 /* banner_news_500px_214px_01.png */,
+				DBB4D9B51EFA7558007E7243 /* banner_news_500px_214px_02.png */,
+				DBB4D9B61EFA7558007E7243 /* banner_news_500px_214px_03.png */,
+				DBB4D9B71EFA7558007E7243 /* banner_score_and_name_500px_214px.png */,
+				DBB4D9B81EFA7558007E7243 /* banner_score_and_name_800px_400px.png */,
+				DBB4D9B91EFA7558007E7243 /* banner_score_and_name.png */,
+				DBB4D9BA1EFA7558007E7243 /* close_64.png */,
+				DBB4D9BB1EFA7558007E7243 /* document_32.png */,
+				DBB4D9BC1EFA7558007E7243 /* document_64.png */,
+				DBB4D9BD1EFA7558007E7243 /* gas_station.png */,
+				DBB4D9BE1EFA7558007E7243 /* giftboxes.png */,
+				DBB4D9BF1EFA7558007E7243 /* group64.png */,
+				DBB4D9C01EFA7558007E7243 /* header_banner.png */,
+				DBB4D9C11EFA7558007E7243 /* home_gray_32.png */,
+				DBB4D9C21EFA7558007E7243 /* home_gray_64.png */,
+				DBB4D9C31EFA7558007E7243 /* home32.png */,
+				DBB4D9C41EFA7558007E7243 /* home64.png */,
+				DBB4D9C51EFA7558007E7243 /* ic_pump.png */,
+				DBB4D9C61EFA7558007E7243 /* icon.png */,
+				DBB4D9C71EFA7558007E7243 /* left_arrow_64.png */,
+				DBB4D9C81EFA7558007E7243 /* logo_smart_member.png */,
+				DBB4D9C91EFA7558007E7243 /* logo_susco_500.png */,
+				DBB4D9CA1EFA7558007E7243 /* mail64.png */,
+				DBB4D9CB1EFA7558007E7243 /* medal_gray_32.png */,
+				DBB4D9CC1EFA7558007E7243 /* medal_gray_64.png */,
+				DBB4D9CD1EFA7558007E7243 /* medal32.png */,
+				DBB4D9CE1EFA7558007E7243 /* medal64.png */,
+				DBB4D9CF1EFA7558007E7243 /* megaphon_gray_32.png */,
+				DBB4D9D01EFA7558007E7243 /* megaphon_gray_64.png */,
+				DBB4D9D11EFA7558007E7243 /* megaphon32.png */,
+				DBB4D9D21EFA7558007E7243 /* megaphon64.png */,
+				DBB4D9D31EFA7558007E7243 /* member_card_32.png */,
+				DBB4D9D41EFA7558007E7243 /* member_card_64.png */,
+				DBB4D9D51EFA7558007E7243 /* member_card_600px_1050px.png */,
+				DBB4D9D61EFA7558007E7243 /* padlock64.png */,
+				DBB4D9D71EFA7558007E7243 /* phone64.png */,
+				DBB4D9D81EFA7558007E7243 /* photo_frame.png */,
+				DBB4D9D91EFA7558007E7243 /* placeholder_gray_32.png */,
+				DBB4D9DA1EFA7558007E7243 /* placeholder_gray_64.png */,
+				DBB4D9DB1EFA7558007E7243 /* placeholder.png */,
+				DBB4D9DC1EFA7558007E7243 /* placeholder32.png */,
+				DBB4D9DD1EFA7558007E7243 /* placeholder64.png */,
+				DBB4D9DE1EFA7558007E7243 /* promotion_567px_300px_01.png */,
+				DBB4D9DF1EFA7558007E7243 /* promotion_567px_300px_02.png */,
+				DBB4D9E01EFA7558007E7243 /* ssmslogo.png */,
+				DBB4D9E11EFA7558007E7243 /* susco_banner_01.png */,
+				DBB4D9E21EFA7558007E7243 /* susco_banner_02_400px_200px.png */,
+				DBB4D9E31EFA7558007E7243 /* susco_banner_03_1000px_500px.png */,
+				DBB4D9E41EFA7558007E7243 /* susco_bg01.png */,
+				DBB4D9E51EFA7558007E7243 /* user_gray_32.png */,
+				DBB4D9E61EFA7558007E7243 /* user_gray_64.png */,
+				DBB4D9E71EFA7558007E7243 /* user32.png */,
+				DBB4D9E81EFA7558007E7243 /* user64.png */,
+			);
+			name = assets;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DBB4D9111EF8FF4D007E7243 /* Susco Smart Member */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DBB4D93C1EF8FF4D007E7243 /* Build configuration list for PBXNativeTarget "Susco Smart Member" */;
+			buildPhases = (
+				DBB4D90E1EF8FF4D007E7243 /* Sources */,
+				DBB4D90F1EF8FF4D007E7243 /* Frameworks */,
+				DBB4D9101EF8FF4D007E7243 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Susco Smart Member";
+			productName = "Susco Smart Member";
+			productReference = DBB4D9121EF8FF4D007E7243 /* Susco Smart Member.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DBB4D9271EF8FF4D007E7243 /* Susco Smart MemberTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DBB4D93F1EF8FF4D007E7243 /* Build configuration list for PBXNativeTarget "Susco Smart MemberTests" */;
+			buildPhases = (
+				DBB4D9241EF8FF4D007E7243 /* Sources */,
+				DBB4D9251EF8FF4D007E7243 /* Frameworks */,
+				DBB4D9261EF8FF4D007E7243 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DBB4D92A1EF8FF4D007E7243 /* PBXTargetDependency */,
+			);
+			name = "Susco Smart MemberTests";
+			productName = "Susco Smart MemberTests";
+			productReference = DBB4D9281EF8FF4D007E7243 /* Susco Smart MemberTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DBB4D9321EF8FF4D007E7243 /* Susco Smart MemberUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DBB4D9421EF8FF4D007E7243 /* Build configuration list for PBXNativeTarget "Susco Smart MemberUITests" */;
+			buildPhases = (
+				DBB4D92F1EF8FF4D007E7243 /* Sources */,
+				DBB4D9301EF8FF4D007E7243 /* Frameworks */,
+				DBB4D9311EF8FF4D007E7243 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DBB4D9351EF8FF4D007E7243 /* PBXTargetDependency */,
+			);
+			name = "Susco Smart MemberUITests";
+			productName = "Susco Smart MemberUITests";
+			productReference = DBB4D9331EF8FF4D007E7243 /* Susco Smart MemberUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DBB4D90A1EF8FF4D007E7243 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = TYCHE;
+				TargetAttributes = {
+					DBB4D9111EF8FF4D007E7243 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 8J7ENPYFR7;
+						ProvisioningStyle = Automatic;
+					};
+					DBB4D9271EF8FF4D007E7243 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 8J7ENPYFR7;
+						ProvisioningStyle = Automatic;
+						TestTargetID = DBB4D9111EF8FF4D007E7243;
+					};
+					DBB4D9321EF8FF4D007E7243 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 8J7ENPYFR7;
+						ProvisioningStyle = Automatic;
+						TestTargetID = DBB4D9111EF8FF4D007E7243;
+					};
+				};
+			};
+			buildConfigurationList = DBB4D90D1EF8FF4D007E7243 /* Build configuration list for PBXProject "Susco Smart Member" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DBB4D9091EF8FF4D007E7243;
+			productRefGroup = DBB4D9131EF8FF4D007E7243 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DBB4D9111EF8FF4D007E7243 /* Susco Smart Member */,
+				DBB4D9271EF8FF4D007E7243 /* Susco Smart MemberTests */,
+				DBB4D9321EF8FF4D007E7243 /* Susco Smart MemberUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DBB4D9101EF8FF4D007E7243 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBB4DA141EFA7558007E7243 /* promotion_567px_300px_02.png in Resources */,
+				DBB4D9EF1EFA7558007E7243 /* close_64.png in Resources */,
+				DBB4D9F61EFA7558007E7243 /* home_gray_32.png in Resources */,
+				DBB4DA0B1EFA7558007E7243 /* padlock64.png in Resources */,
+				DBB4D9F81EFA7558007E7243 /* home32.png in Resources */,
+				DBB4DA091EFA7558007E7243 /* member_card_64.png in Resources */,
+				DBB4DA151EFA7558007E7243 /* ssmslogo.png in Resources */,
+				DBB4D9221EF8FF4D007E7243 /* LaunchScreen.storyboard in Resources */,
+				DBB4D9F51EFA7558007E7243 /* header_banner.png in Resources */,
+				DBB4D9F11EFA7558007E7243 /* document_64.png in Resources */,
+				DBB4DA111EFA7558007E7243 /* placeholder32.png in Resources */,
+				DBB4DA1B1EFA7558007E7243 /* user_gray_64.png in Resources */,
+				DBB4DA071EFA7558007E7243 /* megaphon64.png in Resources */,
+				DBB4D9FD1EFA7558007E7243 /* logo_smart_member.png in Resources */,
+				DB483BF61F0E145D005C2C0D /* Main67Plus.storyboard in Resources */,
+				DBB4DA001EFA7558007E7243 /* medal_gray_32.png in Resources */,
+				DBB4D9FB1EFA7558007E7243 /* icon.png in Resources */,
+				DBB4DA171EFA7558007E7243 /* susco_banner_02_400px_200px.png in Resources */,
+				DBB4D9F71EFA7558007E7243 /* home_gray_64.png in Resources */,
+				DBB4D9FC1EFA7558007E7243 /* left_arrow_64.png in Resources */,
+				DBB4DA0F1EFA7558007E7243 /* placeholder_gray_64.png in Resources */,
+				DBB4DA101EFA7558007E7243 /* placeholder.png in Resources */,
+				DBB4DA1A1EFA7558007E7243 /* user_gray_32.png in Resources */,
+				DBB4D9EA1EFA7558007E7243 /* banner_news_500px_214px_02.png in Resources */,
+				DBB4DA121EFA7558007E7243 /* placeholder64.png in Resources */,
+				DBB4D9F91EFA7558007E7243 /* home64.png in Resources */,
+				DB7FB6841F01020100DDD40A /* qr.png in Resources */,
+				DBB4D9E91EFA7558007E7243 /* banner_news_500px_214px_01.png in Resources */,
+				DBB4DA041EFA7558007E7243 /* megaphon_gray_32.png in Resources */,
+				DBB4D91F1EF8FF4D007E7243 /* Assets.xcassets in Resources */,
+				DBB4DA031EFA7558007E7243 /* medal64.png in Resources */,
+				DB483BF41F0E143C005C2C0D /* Main67.storyboard in Resources */,
+				DBB4DA051EFA7558007E7243 /* megaphon_gray_64.png in Resources */,
+				DBB4DA081EFA7558007E7243 /* member_card_32.png in Resources */,
+				DBB4DA0D1EFA7558007E7243 /* photo_frame.png in Resources */,
+				DBB4D9F01EFA7558007E7243 /* document_32.png in Resources */,
+				DBB4DA0C1EFA7558007E7243 /* phone64.png in Resources */,
+				DBB4D9FE1EFA7558007E7243 /* logo_susco_500.png in Resources */,
+				DBB4DA061EFA7558007E7243 /* megaphon32.png in Resources */,
+				DBB4D9EC1EFA7558007E7243 /* banner_score_and_name_500px_214px.png in Resources */,
+				DBB4DA191EFA7558007E7243 /* susco_bg01.png in Resources */,
+				DBB4DA0E1EFA7558007E7243 /* placeholder_gray_32.png in Resources */,
+				DBB4D9ED1EFA7558007E7243 /* banner_score_and_name_800px_400px.png in Resources */,
+				DBB4DA1C1EFA7558007E7243 /* user32.png in Resources */,
+				DBB4DA161EFA7558007E7243 /* susco_banner_01.png in Resources */,
+				DBB4DA0A1EFA7558007E7243 /* member_card_600px_1050px.png in Resources */,
+				DBB4D9FF1EFA7558007E7243 /* mail64.png in Resources */,
+				DBB4D91D1EF8FF4D007E7243 /* Main.storyboard in Resources */,
+				DBB4DA021EFA7558007E7243 /* medal32.png in Resources */,
+				DBB4DA181EFA7558007E7243 /* susco_banner_03_1000px_500px.png in Resources */,
+				DBB4D9F21EFA7558007E7243 /* gas_station.png in Resources */,
+				DBB4DA011EFA7558007E7243 /* medal_gray_64.png in Resources */,
+				DBB4D9FA1EFA7558007E7243 /* ic_pump.png in Resources */,
+				DBB4DA131EFA7558007E7243 /* promotion_567px_300px_01.png in Resources */,
+				DBB4D9EB1EFA7558007E7243 /* banner_news_500px_214px_03.png in Resources */,
+				DBB4D9EE1EFA7558007E7243 /* banner_score_and_name.png in Resources */,
+				DBB4D9F41EFA7558007E7243 /* group64.png in Resources */,
+				DBB4DA1D1EFA7558007E7243 /* user64.png in Resources */,
+				DBB4D9F31EFA7558007E7243 /* giftboxes.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBB4D9261EF8FF4D007E7243 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBB4D9311EF8FF4D007E7243 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DBB4D90E1EF8FF4D007E7243 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB3B33D11EFD20900097BD3C /* ZoomPicViewController.swift in Sources */,
+				DB1CD4701EFB8DE1001A8CCF /* UtilViewController.swift in Sources */,
+				DB7FB6861F01225700DDD40A /* SharedInfo.swift in Sources */,
+				DB160E8F1EFCFD2E008C65EE /* UserTableViewCell.swift in Sources */,
+				DBB4D91A1EF8FF4D007E7243 /* ScoreViewController.swift in Sources */,
+				DBB4DA201EFA77B2007E7243 /* UserViewController.swift in Sources */,
+				DB3B33CF1EFD1F180097BD3C /* NewsDetailViewController.swift in Sources */,
+				DBFD53A31F00AA9B00575B9F /* HistoryTransactionViewController.swift in Sources */,
+				DBB4D9461EF90639007E7243 /* BranchViewController.swift in Sources */,
+				DB7FB6821F00E8DE00DDD40A /* PointOutTableViewCell.swift in Sources */,
+				DBB4D9161EF8FF4D007E7243 /* AppDelegate.swift in Sources */,
+				DBFD53A11F00AA7200575B9F /* CardViewController.swift in Sources */,
+				DB83EE151F0BAC9F00AFB556 /* OneTextViewController.swift in Sources */,
+				DBB4D9181EF8FF4D007E7243 /* HomeViewController.swift in Sources */,
+				DBFD53A51F00B0C800575B9F /* PointInTableViewCell.swift in Sources */,
+				DBB4D9481EFA2CBE007E7243 /* LoginController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBB4D9241EF8FF4D007E7243 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBB4D92D1EF8FF4D007E7243 /* Susco_Smart_MemberTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBB4D92F1EF8FF4D007E7243 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBB4D9381EF8FF4D007E7243 /* Susco_Smart_MemberUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DBB4D92A1EF8FF4D007E7243 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DBB4D9111EF8FF4D007E7243 /* Susco Smart Member */;
+			targetProxy = DBB4D9291EF8FF4D007E7243 /* PBXContainerItemProxy */;
+		};
+		DBB4D9351EF8FF4D007E7243 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DBB4D9111EF8FF4D007E7243 /* Susco Smart Member */;
+			targetProxy = DBB4D9341EF8FF4D007E7243 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DBB4D91B1EF8FF4D007E7243 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DBB4D91C1EF8FF4D007E7243 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DBB4D9201EF8FF4D007E7243 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DBB4D9211EF8FF4D007E7243 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DBB4D93A1EF8FF4D007E7243 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DBB4D93B1EF8FF4D007E7243 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DBB4D93D1EF8FF4D007E7243 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8J7ENPYFR7;
+				INFOPLIST_FILE = "Susco Smart Member/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tyche.mobile.Susco-Smart-Member";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		DBB4D93E1EF8FF4D007E7243 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8J7ENPYFR7;
+				INFOPLIST_FILE = "Susco Smart Member/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tyche.mobile.Susco-Smart-Member";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		DBB4D9401EF8FF4D007E7243 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 8J7ENPYFR7;
+				INFOPLIST_FILE = "Susco Smart MemberTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tyche.mobile.Susco-Smart-MemberTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Susco Smart Member.app/Susco Smart Member";
+			};
+			name = Debug;
+		};
+		DBB4D9411EF8FF4D007E7243 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 8J7ENPYFR7;
+				INFOPLIST_FILE = "Susco Smart MemberTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tyche.mobile.Susco-Smart-MemberTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Susco Smart Member.app/Susco Smart Member";
+			};
+			name = Release;
+		};
+		DBB4D9431EF8FF4D007E7243 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 8J7ENPYFR7;
+				INFOPLIST_FILE = "Susco Smart MemberUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tyche.mobile.Susco-Smart-MemberUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Susco Smart Member";
+			};
+			name = Debug;
+		};
+		DBB4D9441EF8FF4D007E7243 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 8J7ENPYFR7;
+				INFOPLIST_FILE = "Susco Smart MemberUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tyche.mobile.Susco-Smart-MemberUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Susco Smart Member";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DBB4D90D1EF8FF4D007E7243 /* Build configuration list for PBXProject "Susco Smart Member" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBB4D93A1EF8FF4D007E7243 /* Debug */,
+				DBB4D93B1EF8FF4D007E7243 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DBB4D93C1EF8FF4D007E7243 /* Build configuration list for PBXNativeTarget "Susco Smart Member" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBB4D93D1EF8FF4D007E7243 /* Debug */,
+				DBB4D93E1EF8FF4D007E7243 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DBB4D93F1EF8FF4D007E7243 /* Build configuration list for PBXNativeTarget "Susco Smart MemberTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBB4D9401EF8FF4D007E7243 /* Debug */,
+				DBB4D9411EF8FF4D007E7243 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DBB4D9421EF8FF4D007E7243 /* Build configuration list for PBXNativeTarget "Susco Smart MemberUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBB4D9431EF8FF4D007E7243 /* Debug */,
+				DBB4D9441EF8FF4D007E7243 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DBB4D90A1EF8FF4D007E7243 /* Project object */;
+}

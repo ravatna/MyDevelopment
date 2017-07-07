@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true" >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/txvStarter"
+            android:text="0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/box_cuve_fill_white_stroke_gray"
+            android:orientation="horizontal"
+
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/edtPrice"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.6"
+                android:ems="10"
+                android:gravity="right"
+                android:inputType="numberDecimal"
+                android:textSize="30sp" />
+
+            <ImageView
+
+                android:id="@+id/imgDelNumber"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".4"
+                app:srcCompat="@drawable/del_back" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txvLogSpace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnOne"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/btnTwo"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/btnThree"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="3" />
+
+        <Button
+            android:id="@+id/btnPlus"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="+" />
+    </LinearLayout>
+
+    <LinearLayout
+android:layout_gravity="center_horizontal"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnFour"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/btnFive"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/btnSix"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="6" />
+        <Button
+            android:id="@+id/btnMinus"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="-" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnSeven"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/btnEight"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/btnNine"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="9" />
+        <Button
+            android:id="@+id/btnMultiple"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="X" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnEquals"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="="
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnZero"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btnPoint"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="."
+            android:visibility="visible" />
+        <Button
+            android:id="@+id/btnDiv"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="/" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnGenerateQr"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/selector_button_cyan"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/generate_qr_for_seller"
+        android:textColor="#FFFFFF" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical">
+
+
+    </LinearLayout>
+
+</LinearLayout>
