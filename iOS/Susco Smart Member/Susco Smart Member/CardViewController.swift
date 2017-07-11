@@ -85,15 +85,20 @@ class CardViewController: UIViewController {
     
     func createQRFromString(_ str: String) -> UIImage?
     {
-        let stringData = str.data(using: String.Encoding.utf8)
+        let data = str.data(using: String.Encoding.ascii)
         
-        let filter = CIFilter(name: "CIQRCodeGenerator")
+        if let filter = CIFilter(name: "CIQRCodeGenerator") {
+            filter.setValue(data, forKey: "inputMessage")
+            let transform = CGAffineTransform(scaleX: 5, y: 5)
+            
+            if let output = filter.outputImage?.applying(transform) {
+                return UIImage(ciImage: output)
+            }
+        }
         
-        filter?.setValue(stringData, forKey: "inputMessage")
+        return nil
         
-        filter?.setValue("H", forKey: "inputCorrectionLevel")
         
-        return  convert(cmage: (filter?.outputImage)!)
     }
     
     func convert(cmage:CIImage) -> UIImage

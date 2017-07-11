@@ -17,7 +17,7 @@ class ScoreViewController: UIViewController {
     @IBOutlet weak var lblName: UILabel!
     
     var isFirst = true
-    var yy:Int = 210
+    var yy:Int = 260
     var yy2:Int = 0
     
     func updateInfo() {
@@ -52,6 +52,10 @@ class ScoreViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
+        
+        
+        
+        
         updateScrollViewForHeight()
     }
 
@@ -60,6 +64,23 @@ class ScoreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        
+        if SharedInfo.getInstance.currentDevice == "45" {
+            yy =   220
+        }
+        else if SharedInfo.getInstance.currentDevice == "67"
+        {
+            yy =  255
+        }
+            
+        else if SharedInfo.getInstance.currentDevice == "67+"
+        {
+            yy =  300
+        }
+        
+        
         
         self.updateInfo() // update user data
         
@@ -77,16 +98,15 @@ class ScoreViewController: UIViewController {
     }
     
     
-    
-    
-    func updateCatalogDiscount() {
+    func updateCatalogDiscount(boxWidth:Int,boxHeight:Int) {
         let catalogs:[AnyObject]
         do{
 
             catalogs = SharedInfo.getInstance.jsonGift!["catalog"] as! [AnyObject]
             var view_tag = 1000
             var btn_tag = 0
-            
+            var xx:Int = 10
+            var loop = 0
             
             for item in catalogs {
                 
@@ -94,15 +114,35 @@ class ScoreViewController: UIViewController {
                 if item["check"] as! String == "0" {
                     continue
                 }
+                loop += 1
+                //print(item)
                 
-                print(item)
-                var xx:Int = 10
-                if (btn_tag + 1) % 2 == 0 {
-                    xx = 165
+                
+                if SharedInfo.getInstance.currentDevice == "45" {
+                    xx = 10
+                    if (btn_tag + 1) % 2 == 0 {
+                        xx = 165
+                    }
                 }
+                else if SharedInfo.getInstance.currentDevice == "67"
+                {
+                    xx = 10
+                    if (btn_tag + 1) % 2 == 0 {
+                        xx = 195
+                    }
+                }
+                    
+                else if SharedInfo.getInstance.currentDevice == "67+"
+                {
+                    xx = 10
+                    if (btn_tag + 1) % 2 == 0 {
+                        xx = 210
+                    }
+                }
+
                 
                 // view group
-                let itemView:UIView = UIView (frame: CGRect(x:xx,y:yy, width:145,height:170))
+                let itemView:UIView = UIView (frame: CGRect(x:xx,y:yy, width:boxWidth,height:boxHeight))
                 itemView.tag = view_tag
                 itemView.autoresizingMask = [.flexibleTopMargin]
                 itemView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
@@ -111,11 +151,11 @@ class ScoreViewController: UIViewController {
                 itemView.layer.shadowOffset = CGSize.zero
                 itemView.layer.shadowRadius = 1
                 
-                let lblTitle:UILabel = UILabel(frame:CGRect(x:8,y:115,width:140,height:28))
+                let lblTitle:UILabel = UILabel(frame:CGRect(x:8,y:(boxHeight-35),width:(boxWidth-8),height:21))
                 
                 lblTitle.text = item["redeem_item_desc"] as! String
                 
-                let buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:145, height:110))
+                let buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-60) ))
                 buttonConnect.tag = btn_tag
                 
                 let iconString:String = item["picture"] as! String
@@ -129,10 +169,25 @@ class ScoreViewController: UIViewController {
                 self.scrMain.addSubview(itemView)
                 
                 
-                if (btn_tag + 1) % 2 == 0 {
-                    yy = yy + 175
-                    yy2 = yy
+                if ( btn_tag + 1) % 2 == 0 {
+                    
+                    
+                    if SharedInfo.getInstance.currentDevice == "45" {
+                        yy +=   175
+                    }
+                    else if SharedInfo.getInstance.currentDevice == "67"
+                    {
+                        yy +=  225
+                    }
+                        
+                    else if SharedInfo.getInstance.currentDevice == "67+"
+                    {
+                        yy +=  240
+                    }
+
                 }
+                
+                yy2 = yy
                 
                 view_tag = view_tag + 1
                 btn_tag = btn_tag + 1
@@ -151,20 +206,19 @@ class ScoreViewController: UIViewController {
     }
     
     
-    func updateCatalogGift() {
+    func updateCatalogGift(boxWidth:Int,boxHeight:Int) {
         let catalogs:[AnyObject]
         do{
             
             catalogs = SharedInfo.getInstance.jsonGift!["catalog"] as! [AnyObject]
             var view_tag = 2000
             var btn_tag = 0
+            var xx:Int = 10
             
             yy2 += 0
             
             vweGIft.isHidden = false
-            
-//            vweGIft.frame(CGRect(x:0,y:yy2, width:vweGIft.frame.size.width,height:vweGIft.frame.size.height))
-            
+ 
             var f:CGRect = vweGIft.frame;
             f.origin.x = 0; // new x
             f.origin.y = CGFloat(yy2) // new y
@@ -180,14 +234,31 @@ class ScoreViewController: UIViewController {
                     continue
                 }
                 
-                print(item)
-                var xx:Int = 10
-                if (btn_tag + 1) % 2 == 0 {
-                    xx = 165
+                
+                if SharedInfo.getInstance.currentDevice == "45" {
+                    xx = 10
+                    if (btn_tag + 1) % 2 == 0 {
+                        xx = 165
+                    }
+                }
+                else if SharedInfo.getInstance.currentDevice == "67"
+                {
+                    xx = 10
+                    if (btn_tag + 1) % 2 == 0 {
+                        xx = 185
+                    }
+                }
+                    
+                else if SharedInfo.getInstance.currentDevice == "67+"
+                {
+                    xx = 10
+                    if (btn_tag + 1) % 2 == 0 {
+                        xx = 210
+                    }
                 }
                 
                 // view group
-                let itemView:UIView = UIView (frame: CGRect(x:xx,y:yy2, width:145,height:170))
+                let itemView:UIView = UIView (frame: CGRect(x:xx,y:yy2, width:boxWidth,height:boxHeight))
                 itemView.tag = view_tag
                 itemView.autoresizingMask = [.flexibleTopMargin]
                 itemView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
@@ -197,11 +268,11 @@ class ScoreViewController: UIViewController {
                 itemView.layer.shadowRadius = 1
                 
                 
-                let lblTitle:UILabel = UILabel(frame:CGRect(x:8,y:115,width:140,height:28))
+                let lblTitle:UILabel = UILabel(frame:CGRect(x:8,y:(boxHeight-35),width:(boxWidth-8),height:21))
                 
                 lblTitle.text = item["redeem_item_desc"] as! String
                 
-                let buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:145, height:110))
+                let buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height:boxHeight))
                 buttonConnect.tag = btn_tag
                 
                 let iconString:String = item["picture"] as! String
@@ -209,16 +280,27 @@ class ScoreViewController: UIViewController {
                 let decodedData:Data = Data(base64Encoded: iconString)!
                 buttonConnect.setImage(UIImage(data:decodedData), for: UIControlState.normal)
                 
-                
-                
                 itemView.addSubview(buttonConnect)
                 itemView.addSubview(lblTitle)
                 
                 self.scrMain.addSubview(itemView)
                 
-                
                 if (btn_tag + 1) % 2 == 0 {
-                    yy = yy + 175
+                    
+                    
+                    if SharedInfo.getInstance.currentDevice == "45" {
+                        yy +=   175
+                    }
+                    else if SharedInfo.getInstance.currentDevice == "67"
+                    {
+                        yy +=  225
+                    }
+                        
+                    else if SharedInfo.getInstance.currentDevice == "67+"
+                    {
+                        yy +=  240
+                    }
+                    
                 }
                 
                 view_tag = view_tag + 1
@@ -254,11 +336,7 @@ class ScoreViewController: UIViewController {
         scrMain.contentSize.height = CGFloat(sizeOfContent)
     }
     
-    /**
- strJson = "{'mobile':'" + _mcode  + "','formToken':'" + m_formToken  + "','cookieToken':'" + m_cookieToken  + "'}";
-     
- postUrl  = App.getInstance().m_server + "/GetCatalogForMember/catalog_for_member_mobile";
- */
+ 
     
     // mark: -- make connection to server
     func doLoadGift(){
@@ -311,8 +389,29 @@ class ScoreViewController: UIViewController {
                     // assign result from
                     SharedInfo.getInstance.jsonGift = json;
                     DispatchQueue.main.async(){
-                        self.updateCatalogDiscount() // update discount block
-                        self.updateCatalogGift() // update gift block
+                        var w:Int = 145
+                        var h:Int = 165
+                        
+                        if SharedInfo.getInstance.currentDevice == "45" {
+                            w = 145
+                            h = 165
+                        }
+                        else if SharedInfo.getInstance.currentDevice == "67"
+                        {
+                            w = 170
+                            h = 200
+                        }
+                            
+                        else if SharedInfo.getInstance.currentDevice == "67+"
+                        {
+                            w = 195
+                            h = 220
+                        }
+
+                        
+                        
+                        self.updateCatalogDiscount(boxWidth: w,boxHeight: h) // update discount block
+                        self.updateCatalogGift(boxWidth: w,boxHeight: h) // update gift block
                     }
                     
                     //print(json)

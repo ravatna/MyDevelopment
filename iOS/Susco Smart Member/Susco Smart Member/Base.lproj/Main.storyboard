@@ -754,7 +754,7 @@
                                         <rect key="frame" x="0.0" y="28" width="310" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cvG-d0-LcF" id="Y0c-t6-rMh">
-                                            <rect key="frame" x="0.0" y="0.0" width="310" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="310" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdf-cb-pu4">
@@ -805,7 +805,7 @@
         <!--Zoom Pic View Controller-->
         <scene sceneID="TUL-yy-yFP">
             <objects>
-                <viewController id="5Yo-HA-eBr" customClass="ZoomPicViewController" customModule="Susco_Smart_Member" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="zoom_view" id="5Yo-HA-eBr" customClass="ZoomPicViewController" customModule="Susco_Smart_Member" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1mf-4O-h3G"/>
                         <viewControllerLayoutGuide type="bottom" id="kyg-eS-hBO"/>
@@ -833,16 +833,31 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.81942151900000004" blue="0.091532897119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8DM-Fq-Ufo">
+                                <rect key="frame" x="0.0" y="78" width="320" height="402"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38D-ro-62w">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="402"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <connections>
+                                    <outlet property="delegate" destination="5Yo-HA-eBr" id="Ibk-o0-KmC"/>
+                                </connections>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="btnBack" destination="09H-GB-NZd" id="TaP-Dc-dco"/>
+                        <outlet property="img" destination="38D-ro-62w" id="xIC-VU-HQl"/>
+                        <outlet property="scrMain" destination="8DM-Fq-Ufo" id="7cF-EY-GR7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QUF-4N-HWe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-11" y="1484"/>
+            <point key="canvasLocation" x="-11.25" y="1483.75"/>
         </scene>
         <!--ประวัติการทำรายการ-->
         <scene sceneID="IeS-ky-8WL">
@@ -912,7 +927,7 @@
                                         <rect key="frame" x="0.0" y="28" width="310" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pz2-L6-KWC" id="9Gl-MT-8Gn">
-                                            <rect key="frame" x="0.0" y="0.0" width="310" height="64.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="310" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSt-gy-gnT">
@@ -959,7 +974,7 @@
                                         <rect key="frame" x="0.0" y="28" width="310" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jrG-ev-OML" id="GPC-7R-ok6">
-                                            <rect key="frame" x="0.0" y="0.0" width="310" height="64.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="310" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="สถานีน้ำมัน" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vge-wM-vbB">

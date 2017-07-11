@@ -8,8 +8,11 @@
 
 import UIKit
 
-class ZoomPicViewController: UIViewController {
+class ZoomPicViewController: UIViewController,UIScrollViewDelegate {
 
+    @IBOutlet weak var img: UIImageView!
+    @IBOutlet weak var scrMain: UIScrollView!
+    
     @IBOutlet weak var btnBack: UIButton!
     @IBAction func doBack(_ sender: Any) {
         self .dismiss(animated: true, completion: nil)
@@ -19,6 +22,23 @@ class ZoomPicViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        let decodedData = Data(base64Encoded: SharedInfo.getInstance.imgBase64)!
+        // กำหนดความกว่างของ วัตถุ และตำแหน่งที่จะแสดง
+        
+        
+        
+        img.image = UIImage(data:decodedData)
+        
+        
+        scrMain.minimumZoomScale = 1.0
+        scrMain.maximumZoomScale = 5.0
+        
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        
+        return self.img
     }
 
     override func didReceiveMemoryWarning() {

@@ -334,7 +334,7 @@ class LoginController:  UIViewController,UITextViewDelegate {
         
     }
     
-    func BuildAlertDialog(_ t:String, m:String,  btnAction:UIAlertAction,btnAction2:UIAlertAction) -> UIAlertController {
+    func BuildAlertDialog(_ t:String, m:String,  btnAction:UIAlertAction, btnAction2:UIAlertAction) -> UIAlertController {
         
         // create the alert
         let alert = UIAlertController(title: t, message: m, preferredStyle: UIAlertControllerStyle.alert)

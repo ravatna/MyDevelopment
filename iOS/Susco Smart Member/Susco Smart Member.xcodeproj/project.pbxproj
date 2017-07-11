@@ -13,6 +13,8 @@
 		DB3B33D11EFD20900097BD3C /* ZoomPicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3B33D01EFD20900097BD3C /* ZoomPicViewController.swift */; };
 		DB483BF41F0E143C005C2C0D /* Main67.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB483BF31F0E143C005C2C0D /* Main67.storyboard */; };
 		DB483BF61F0E145D005C2C0D /* Main67Plus.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB483BF51F0E145D005C2C0D /* Main67Plus.storyboard */; };
+		DB621CE91F14787E00E4D901 /* newhtml.html in Resources */ = {isa = PBXBuildFile; fileRef = DB621CE81F14787E00E4D901 /* newhtml.html */; };
+		DB621CEB1F14791500E4D901 /* images in Resources */ = {isa = PBXBuildFile; fileRef = DB621CEA1F14791500E4D901 /* images */; };
 		DB7FB6821F00E8DE00DDD40A /* PointOutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FB6811F00E8DE00DDD40A /* PointOutTableViewCell.swift */; };
 		DB7FB6841F01020100DDD40A /* qr.png in Resources */ = {isa = PBXBuildFile; fileRef = DB7FB6831F01020100DDD40A /* qr.png */; };
 		DB7FB6861F01225700DDD40A /* SharedInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FB6851F01225700DDD40A /* SharedInfo.swift */; };
@@ -110,6 +112,8 @@
 		DB3B33D01EFD20900097BD3C /* ZoomPicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomPicViewController.swift; sourceTree = "<group>"; };
 		DB483BF31F0E143C005C2C0D /* Main67.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main67.storyboard; sourceTree = "<group>"; };
 		DB483BF51F0E145D005C2C0D /* Main67Plus.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main67Plus.storyboard; sourceTree = "<group>"; };
+		DB621CE81F14787E00E4D901 /* newhtml.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = newhtml.html; sourceTree = "<group>"; };
+		DB621CEA1F14791500E4D901 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		DB7FB6811F00E8DE00DDD40A /* PointOutTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PointOutTableViewCell.swift; path = ../PointOutTableViewCell.swift; sourceTree = "<group>"; };
 		DB7FB6831F01020100DDD40A /* qr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qr.png; sourceTree = "<group>"; };
 		DB7FB6851F01225700DDD40A /* SharedInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedInfo.swift; sourceTree = "<group>"; };
@@ -215,6 +219,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB621CE71F14780900E4D901 /* html */ = {
+			isa = PBXGroup;
+			children = (
+				DB621CEA1F14791500E4D901 /* images */,
+				DB621CE81F14787E00E4D901 /* newhtml.html */,
+			);
+			name = html;
+			sourceTree = "<group>";
+		};
 		DBB4D9091EF8FF4D007E7243 = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +252,7 @@
 		DBB4D9141EF8FF4D007E7243 /* Susco Smart Member */ = {
 			isa = PBXGroup;
 			children = (
+				DB621CE71F14780900E4D901 /* html */,
 				DBB4DA1E1EFA7564007E7243 /* assets */,
 				DBB4D9151EF8FF4D007E7243 /* AppDelegate.swift */,
 				DBB4D9171EF8FF4D007E7243 /* HomeViewController.swift */,
@@ -475,6 +489,7 @@
 				DBB4DA171EFA7558007E7243 /* susco_banner_02_400px_200px.png in Resources */,
 				DBB4D9F71EFA7558007E7243 /* home_gray_64.png in Resources */,
 				DBB4D9FC1EFA7558007E7243 /* left_arrow_64.png in Resources */,
+				DB621CEB1F14791500E4D901 /* images in Resources */,
 				DBB4DA0F1EFA7558007E7243 /* placeholder_gray_64.png in Resources */,
 				DBB4DA101EFA7558007E7243 /* placeholder.png in Resources */,
 				DBB4DA1A1EFA7558007E7243 /* user_gray_32.png in Resources */,
@@ -513,6 +528,7 @@
 				DBB4D9EE1EFA7558007E7243 /* banner_score_and_name.png in Resources */,
 				DBB4D9F41EFA7558007E7243 /* group64.png in Resources */,
 				DBB4DA1D1EFA7558007E7243 /* user64.png in Resources */,
+				DB621CE91F14787E00E4D901 /* newhtml.html in Resources */,
 				DBB4D9F31EFA7558007E7243 /* giftboxes.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

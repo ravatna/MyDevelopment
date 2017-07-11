@@ -37,7 +37,24 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        updateInfo()
+        var w:Int = 320
+        var h:Int = 180
+        
+         if SharedInfo.getInstance.currentDevice == "67"
+        {
+           w = 375
+            h = 210
+        }
+            
+        else if SharedInfo.getInstance.currentDevice == "67+"
+        {
+            w = 414
+            h = 290
+        }
+
+        
+        
+        updateInfo(boxWidth: w,boxHeight: h)
     }
     
     
@@ -45,16 +62,14 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
     /**
      * ปรับปรุงข้อมูล ให้แสดงผลบนหน้าจอ
      */
-    func updateInfo() {
+    func updateInfo(boxWidth:Int,boxHeight:Int) {
         
         let selectNews:[AnyObject]
         
         var itemCounter:Int = 0
         var iconString:String
         var decodedData:Data
-        
-        let boxHeight : Int = 180
-        let boxWidth : Int = 320
+        var button_tag:Int = 0
         
         selectNews = SharedInfo.getInstance.json!["select_news"] as! [AnyObject]
         let item:AnyObject = selectNews[self.newsId]
@@ -74,10 +89,12 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
        
             var img:UIImage! = UIImage(data:decodedData)
             
-            var pic:UIButton = UIButton(frame: CGRect(x:320*itemCounter, y:0 ,width:320 ,height:180))
+            var pic:UIButton = UIButton(frame: CGRect(x:boxWidth*itemCounter, y:0 ,width:boxWidth ,height:boxHeight))
             pic.setBackgroundImage(img, for: UIControlState.normal)
-            
-            itemCounter = itemCounter + 1
+            pic.imageView?.contentMode = UIViewContentMode.scaleToFill
+            itemCounter += 1
+            pic.tag = 1
+            pic.addTarget(self, action: #selector(self.doOpenZoom(sender:)), for: UIControlEvents.touchUpInside)
             self.scrImg.addSubview(pic)
         } // end if
         
@@ -90,10 +107,12 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
             
             var img:UIImage! = UIImage(data:decodedData)
             
-            var pic:UIButton = UIButton(frame: CGRect(x:320*itemCounter, y:0 ,width:320 ,height:180))
+            var pic:UIButton = UIButton(frame: CGRect(x:boxWidth*itemCounter, y:0 ,width:boxWidth ,height:boxHeight))
             pic.setBackgroundImage(img, for: UIControlState.normal)
-            
-            itemCounter = itemCounter + 1
+            pic.imageView?.contentMode = UIViewContentMode.scaleToFill
+            pic.addTarget(self, action: #selector(self.doOpenZoom(sender:)), for: UIControlEvents.touchUpInside)
+            itemCounter +=   1
+            pic.tag = 2
             self.scrImg.addSubview(pic)
         } // end if
         
@@ -106,10 +125,13 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
             
             var img:UIImage! = UIImage(data:decodedData)
             
-            var pic:UIButton = UIButton(frame: CGRect(x:320*itemCounter, y:0 ,width:320 ,height:180))
+            var pic:UIButton = UIButton(frame: CGRect(x:boxWidth*itemCounter, y:0 ,width:boxWidth ,height:boxHeight))
+           pic.tag = 3
+            pic.imageView?.contentMode = UIViewContentMode.scaleToFill
             pic.setBackgroundImage(img, for: UIControlState.normal)
+            pic.addTarget(self, action: #selector(self.doOpenZoom(sender:)), for: UIControlEvents.touchUpInside)
             
-            itemCounter = itemCounter + 1
+            itemCounter +=  1
             self.scrImg.addSubview(pic)
         } // end if
         
@@ -130,7 +152,7 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
         lblTitle.text = item["news_head"] as! String
         wbvDetail.loadHTMLString(item["news_text"] as! String, baseURL: nil);
         
-        self.scrImg.contentSize = CGSize(width:(self.scrImg.frame.width * CGFloat(1+itemCounter)), height:self.scrImg.frame.height)
+        self.scrImg.contentSize = CGSize(width:(self.scrImg.frame.width * CGFloat(itemCounter)), height:self.scrImg.frame.height)
         
         //scrImg.delegate = self
         //self.pageControl.currentPage = 0
@@ -155,6 +177,34 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func doOpenZoom(sender: AnyObject) -> () {
+        
+        let selectNews:[AnyObject]
+        
+        
+        
+        selectNews = SharedInfo.getInstance.json!["select_news"] as! [AnyObject]
+        let item:AnyObject = selectNews[self.newsId]
+        
+        if sender.tag == 1 {
+        
+        SharedInfo.getInstance.imgBase64 =  item["pic1_id"] as! String
+        }else if sender.tag == 2 {
+            
+            SharedInfo.getInstance.imgBase64 =  item["pic2_id"] as! String
+        }else if sender.tag == 3 {
+            
+            SharedInfo.getInstance.imgBase64 =  item["pic3_id"] as! String
+        }
+
+        
+        let viewController:ZoomPicViewController! = self.storyboard?.instantiateViewController(withIdentifier: "zoom_view") as! ZoomPicViewController
+        
+        self.present(viewController!, animated:true,completion:nil);
+    }
+    
+    
     
     func changePage(sender: AnyObject) -> () {
         let x = CGFloat(pageControl.currentPage) * scrImg.frame.size.width

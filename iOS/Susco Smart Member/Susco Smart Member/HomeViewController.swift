@@ -17,9 +17,9 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     @IBOutlet weak var scrImg: UIScrollView!
     
     var isFirst = true
-    var yy:Int = 365
+    var yy:Int = 405
     
-    
+    var currentPage:Int = 0
     var loadingDialog:UIAlertController!
     
     
@@ -31,11 +31,41 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         
         // validLoginState()
         
+        if SharedInfo.getInstance.currentDevice == "45" {
+            yy =   365
+        }
+        else if SharedInfo.getInstance.currentDevice == "67"
+        {
+            yy =  405
+        }
+            
+        else if SharedInfo.getInstance.currentDevice == "67+"
+        {
+            yy =  405
+        }
+
+        
+        
         initView()
        
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.moveToNextPageTwoSecond), userInfo: nil, repeats: true)
         
         
         
+        
+        
+        
+    }
+    
+    func moveToNextPageTwoSecond (){
+        
+        
+        if currentPage >= (pageControl.numberOfPages - 1) {
+            currentPage = 0
+        }else{
+        currentPage += 1
+            }
+        scrollToPage(currentPage)
     }
     
     func initView() {
@@ -50,10 +80,10 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         
         self.loadingDialog.view.addSubview(loadingIndicator)
         
-        DispatchQueue.main.async(execute: {
+        
             self.doGetListBanner()
             self.doLoadTransaction()
-        })
+        
         
     }
     
@@ -157,16 +187,11 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         var banners = SharedInfo.getInstance.jsonBanner!["banner"] as! [AnyObject]
         var banner = banners[sender.tag]
         
-        
         do{
-            
-            
             if let requestUrl = URL( string:banner["banner_url"] as! String) {
                 UIApplication.shared.openURL(requestUrl)
-             
+                
             }
-            
-            
         } catch {
             // @todo: debug error
             print(error)
@@ -187,7 +212,7 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                 
                 if SharedInfo.getInstance.currentDevice == "67"
                 {
-                    w = 340
+                    w = 360
                     h = 250
                 }
                 else if SharedInfo.getInstance.currentDevice == "67+"
@@ -226,6 +251,13 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         scrMain.contentSize.height = CGFloat(sizeOfContent)
     }
 
+    
+    
+    func scrollToPage(_ page: Int) {
+        UIView.animate(withDuration: 0.3) {
+            self.scrImg.contentOffset.x = self.scrImg.frame.width * CGFloat(page)
+        }
+    }
     
     /**
      * scrollview scroll page
@@ -292,18 +324,20 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                 if SharedInfo.getInstance.currentDevice == "67"
                 
                 {
-                    w = 360
+                    w = 375
                     h = 190
                 }
                 
                 else if SharedInfo.getInstance.currentDevice == "67+"
                 
                 {
-                    w = 399
-                    h = 200
+                    w = 414
+                    h = 215
                 }
                 
+                DispatchQueue.main.async(execute: {
                 self.updateBanner(boxWidth:w,boxHeight:h)
+                })
                 
             } catch {
                 print("error:", error)
