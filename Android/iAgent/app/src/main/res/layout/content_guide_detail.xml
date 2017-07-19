@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.tyche.mobile.iagent.GuideDetailActivity"
+    tools:showIn="@layout/activity_guide_detail">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:layout_marginBottom="5dp"
+                android:id="@+id/txvCustomerNO"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Customer No: C000123 - Mr.Kumpoung" />
+
+            <TextView
+                android:layout_marginBottom="5dp"
+                android:id="@+id/txvInsureanceProgram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Insurance Program: Life Insurance Program 1" />
+
+            <TextView
+                android:layout_marginBottom="5dp"
+                android:id="@+id/txvInsurancePolicyNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Policy No: P2017/000103" />
+
+            <TextView
+                android:layout_marginBottom="5dp"
+                android:id="@+id/txvInsureancePremium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Premium: 10,000/ 3 months" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <Button
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/selector_button_cyan"
+    android:textColor="#FFFFFF"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/btn_premium"
+    android:text="Insurance premium"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List of Premium" />
+    <ListView
+        android:id="@+id/reviwe_guide_listview"
+        android:layout_width="match_parent"
+        tools:listitem="@layout/_item_info_2"
+        android:layout_height="match_parent">
+
+
+    </ListView>
+</LinearLayout>

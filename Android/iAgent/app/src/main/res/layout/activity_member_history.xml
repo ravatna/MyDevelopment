@@ -1,0 +1,336 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:id="@+id/contentView"
+    android:fitsSystemWindows="true"
+    tools:context="com.tyche.mobile.iagent.com.tyche.mobile.iagent.MainActivity$PlaceholderFragment">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorMain"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+
+            android:orientation="horizontal"
+            >
+
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="0dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/left_arrow_64"
+                android:text="" />
+            <ImageView
+
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="-10dp"
+                android:paddingBottom="15dp"
+                android:layout_weight="1"
+                android:paddingTop="15dp"
+
+                app:srcCompat="@drawable/ssmslogo" />
+
+            <TextView
+                android:id="@+id/toolbar_save"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+android:visibility="gone"
+                android:layout_weight="1"
+
+                android:gravity="center_vertical|center_horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="24sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="ประวัติทำรายการ"
+                />
+
+            <Button
+                android:visibility="invisible"
+                android:id="@+id/btnSuscoOnline"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@mipmap/ic_launcher"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="0dp"
+                />
+
+        </LinearLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+
+        android:layout_below="@+id/appbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:layout_margin ="10dp"
+
+        android:gravity="center_horizontal|center_vertical"
+        android:background="@drawable/header_banner"
+        android:text="ประวัติการทำรายการ"
+        android:id="@+id/txvHeader"
+        />
+
+    <TabHost
+        android:id="@+id/tabhost"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txvHeader">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:background="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <!--Tab 1-->
+
+                <LinearLayout
+                    android:id="@+id/tab1"
+
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorMain"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:background="#ffffff"
+                        android:divider="@drawable/ic_pump"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp"
+
+                        android:paddingTop="10dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/document_32" />
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="ประวัติสะสมแต้ม"
+                            android:textColor="#444444"
+                            android:textSize="18sp" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="0dp"
+                        android:background="#ffffff"
+                        android:divider="@drawable/ic_pump"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp"
+
+                        android:paddingTop="10dp">
+
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".6"
+                            android:gravity="center_horizontal"
+                            android:text="วันที่"
+                            android:textColor="#444444"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:text="สาขา"
+                            android:textColor="#444444"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".6"
+                            android:gravity="right"
+                            android:text="คะแนน"
+                            android:textColor="#444444"
+                            android:textSize="16sp" />
+
+
+                    </LinearLayout>
+
+
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:id="@+id/lnrContentHistory"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </ScrollView>
+
+
+
+                </LinearLayout>
+
+
+                <!--Tab 2-->
+                <LinearLayout
+                    android:id="@+id/tab2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="20dp"
+                    android:background="@color/colorMain"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:background="#ffffff"
+                        android:divider="@drawable/ic_pump"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp"
+android:visibility="gone"
+                        android:paddingTop="10dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/document_32" />
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="ประวัติแลกแต้ม"
+                            android:textColor="#444444"
+                            android:textSize="18sp" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="0dp"
+                        android:background="#ffffff"
+                        android:divider="@drawable/ic_pump"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp"
+
+                        android:paddingTop="10dp">
+
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".6"
+                            android:gravity="center_horizontal"
+                            android:text="วันที่"
+                            android:textColor="#444444"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:text="สาขา"
+                            android:textColor="#444444"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".6"
+                            android:gravity="right"
+                            android:text="คะแนน"
+                            android:textColor="#444444"
+                            android:textSize="16sp" />
+
+
+                    </LinearLayout>
+
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/lnrContentHistory2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+</LinearLayout>
+                </ScrollView>
+
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+
+
+
+</RelativeLayout>

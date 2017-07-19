@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    tools:context="com.tyche.mobile.iagent.NewsFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="10dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="4dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <ImageView
+            android:id="@+id/imgPic"
+            android:layout_width="160dp"
+            android:layout_height="120dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/susco_banner_02_400px_200px" />
+
+        <TextView
+            android:id="@+id/txvDesc"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="desc"
+            />
+
+    </LinearLayout>

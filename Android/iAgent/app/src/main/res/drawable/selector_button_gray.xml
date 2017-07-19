@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/box_cuve_gray_stroke_white"
+        android:state_pressed="true" />
+
+    <item android:drawable="@drawable/box_cuve_gray"
+        android:state_focused="true" />
+
+    <item android:drawable="@drawable/box_cuve_gray" />
+
+</selector>
