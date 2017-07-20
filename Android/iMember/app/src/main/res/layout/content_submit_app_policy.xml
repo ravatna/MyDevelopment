@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.tyche.mobile.imember.com.tyche.mobile.imember.SubmitAppPolicyActivity"
+    tools:showIn="@layout/activity_submit_app_policy">
+
+    <LinearLayout
+
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="72dp"
+        android:gravity="center_vertical"
+        android:minHeight="25px"
+        android:minWidth="25px"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+
+        <LinearLayout
+            android:id="@+id/lnrLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                android:minHeight="25px"
+                android:minWidth="25px"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/icon_border_left_radius"
+
+                    android:src="@drawable/medal32" />
+
+                <EditText
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/text_box_right_radius_white"
+                    android:gravity="center_horizontal"
+                    android:hint="Application Form ..."
+                    android:textColor="#0476B9"
+                    android:textColorHint="#0476B9" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                android:minHeight="25px"
+                android:minWidth="25px"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/icon_border_left_radius"
+ />
+
+                <EditText
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/text_box_right_radius_white"
+                    android:gravity="center_horizontal"
+                    android:hint="Insurance Program ..."
+                    android:textColor="#0476B9"
+                    android:textColorHint="#0476B9" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                android:minHeight="25px"
+                android:minWidth="25px"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/icon_border_left_radius"
+
+                    android:src="@drawable/user32" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/text_box_right_radius_white"
+                    android:gravity="center_horizontal"
+                    android:hint="The Insured ..."
+                    android:textColor="#0476B9"
+                    android:textColorHint="#0476B9" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                android:minHeight="25px"
+                android:minWidth="25px"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/icon_border_left_radius"
+
+                    android:src="@drawable/phone64" />
+
+                <EditText
+                    android:id="@+id/edtUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/text_box_right_radius_white"
+                    android:gravity="center_horizontal"
+                    android:inputType="phone"
+                    android:hint="Phone ..."
+                    android:textColor="#0476B9"
+                    android:textColorHint="#0476B9" />
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                android:minHeight="25px"
+                android:minWidth="25px"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/icon_border_left_radius"
+
+                    android:src="@drawable/mail64" />
+
+                <EditText
+                    android:id="@+id/edtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/text_box_right_radius_white"
+                    android:gravity="center_horizontal"
+                    android:hint="Email ..."
+                    android:textColor="#0476B9"
+                    android:textColorHint="#0476B9" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/button_submit"
+                android:text="Submit"
+                android:textColor="@color/textWhite"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>

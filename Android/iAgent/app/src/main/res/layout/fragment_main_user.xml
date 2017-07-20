@@ -30,7 +30,7 @@
                 <Button
                     android:id="@+id/btn_logout"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:text="Logout"/>
 
 
@@ -103,7 +103,7 @@
                 <!-- your layout stuff here -->
 
             <LinearLayout
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical"
 
 

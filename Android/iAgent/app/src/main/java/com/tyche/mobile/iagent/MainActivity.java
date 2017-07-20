@@ -95,21 +95,21 @@ public class MainActivity extends AppCompatActivity {
                 if(tabLayout.getSelectedTabPosition() == 2){
 
                     tabLayout.getTabAt(2).setIcon(R.drawable.man_user_active);
-                    tabLayout.getTabAt(1).setIcon(R.drawable.signs_inactive);
-                    tabLayout.getTabAt(0).setIcon(R.drawable.people_inactive);
+                    tabLayout.getTabAt(1).setIcon(R.drawable.people_inactive);
+                    tabLayout.getTabAt(0).setIcon(R.drawable.shopping_cart_inactive);
 
                     mCaptionTitle.setText(getResources().getString(R.string.title_user));
                 }
 
                 if(tabLayout.getSelectedTabPosition() == 0){
                     tabLayout.getTabAt(2).setIcon(R.drawable.man_user_inactive);
-                    tabLayout.getTabAt(1).setIcon(R.drawable.signs_inactive);
+                    tabLayout.getTabAt(1).setIcon(R.drawable.people_inactive);
                     tabLayout.getTabAt(0).setIcon(R.drawable.shopping_cart);
                     mCaptionTitle.setText(getResources().getString(R.string.title_main_program));
                 }
                 if(tabLayout.getSelectedTabPosition() == 1){
                     tabLayout.getTabAt(2).setIcon(R.drawable.man_user_inactive);
-                    tabLayout.getTabAt(1).setIcon(R.drawable.signs_active);
+                    tabLayout.getTabAt(1).setIcon(R.drawable.people_active);
                     tabLayout.getTabAt(0).setIcon(R.drawable.shopping_cart_inactive);
                     mCaptionTitle.setText(getResources().getString(R.string.title_search_insurance));
 
@@ -155,15 +155,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         btnUserInfo.setVisibility(View.INVISIBLE);
-        int[] tabIcons = new int[4];
 
-        tabLayout.getTabAt(2).setIcon(R.drawable.man_user_active);
-
+        tabLayout.getTabAt(2).setIcon(R.drawable.man_user_inactive);
         tabLayout.getTabAt(1).setIcon(R.drawable.people_inactive);
-        tabLayout.getTabAt(0).setIcon(R.drawable.shopping_cart_inactive);
-
-        //tabLayout.getTabAt(4).setIcon(R.drawable.megaphon_gray_32);
-
+        tabLayout.getTabAt(0).setIcon(R.drawable.shopping_cart);
     }
 
     @Override

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    tools:context="com.tyche.mobile.imember.NewsFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="10dp"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal"
+    android:padding="4dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    </LinearLayout>

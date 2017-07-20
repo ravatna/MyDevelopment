@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/box_cuve_fill_white_stroke_gray"
+
+        android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:layout_marginBottom="5dp"
+            android:id="@+id/txvCustomerNO"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Customer No: C000123 - Mr.Kumpoung" />
+
+        <TextView
+            android:layout_marginBottom="5dp"
+            android:id="@+id/txvInsureanceProgram"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Insurance Program: Life Insurance Program 1" />
+
+        <TextView
+            android:layout_marginBottom="5dp"
+            android:id="@+id/txvInsurancePolicyNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Policy No: P2017/000103" />
+
+        <TextView
+            android:id="@+id/txvInsureancePremium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Premium: 10,000/ 3 months" />
+    </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/box_cuve_fill_white_stroke_gray"
+
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edtPrice"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.6"
+            android:ems="10"
+            android:gravity="right"
+            android:text="0"
+            android:textSize="30sp"
+            android:inputType="numberDecimal" />
+
+        <ImageView
+
+            android:id="@+id/imgDelNumber"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight=".4"
+            app:srcCompat="@drawable/del_back" />
+    </LinearLayout>
+
+
+    <Button
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/btn_submit_payment"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+
+        android:text="Submit Payment"
+         android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/selector_button_cyan"
+        />
+
+</LinearLayout>
