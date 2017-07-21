@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.tyche.mobile.iagent.com.tyche.mobile.iagent.MainActivity$PlaceholderFragment">
+    tools:context="com.tyche.mobile.iagent.MainActivity$PlaceholderFragment">
 
     <TextView
         android:id="@+id/section_label"

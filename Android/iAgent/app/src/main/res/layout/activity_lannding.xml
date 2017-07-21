@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.tyche.mobile.iagent.com.tyche.mobile.iagent.LandingActivity">
+    tools:context="com.tyche.mobile.iagent.LandingActivity">
 
     <FrameLayout
         android:id="@+id/content"

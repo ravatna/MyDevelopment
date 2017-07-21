@@ -23,12 +23,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.tyche.mobile.iagent.fragment.BranchFragment;
 import com.tyche.mobile.iagent.fragment.FIndInsuranceProgramFragment;
-import com.tyche.mobile.iagent.fragment.GuideFragment;
-import com.tyche.mobile.iagent.fragment.HomeFragment;
 import com.tyche.mobile.iagent.fragment.MainProgramFragment;
-import com.tyche.mobile.iagent.fragment.ScanTradeFragment;
 import com.tyche.mobile.iagent.fragment.UserInfoFragment;
 
 import java.io.FileNotFoundException;
@@ -46,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    BranchFragment angkorMap;
+
     MainProgramFragment mainProgramFragment;
     Button btnSuscoOnline,btnUserInfo;
 
@@ -68,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         // set font to sukhumvit
         // * add id card line on user profile below mobile
 
-        angkorMap = new BranchFragment();
         mainProgramFragment = new MainProgramFragment();
 
 
@@ -107,15 +102,13 @@ public class MainActivity extends AppCompatActivity {
                     tabLayout.getTabAt(0).setIcon(R.drawable.shopping_cart);
                     mCaptionTitle.setText(getResources().getString(R.string.title_main_program));
                 }
+
                 if(tabLayout.getSelectedTabPosition() == 1){
                     tabLayout.getTabAt(2).setIcon(R.drawable.man_user_inactive);
                     tabLayout.getTabAt(1).setIcon(R.drawable.people_active);
                     tabLayout.getTabAt(0).setIcon(R.drawable.shopping_cart_inactive);
                     mCaptionTitle.setText(getResources().getString(R.string.title_search_insurance));
-
                 }
-
-
 
             }
 
@@ -278,8 +271,7 @@ public class MainActivity extends AppCompatActivity {
                 return  UserInfoFragment.newInstance(position);
             }
 
-            return HomeFragment.newInstance(0);
-            //return PlaceholderFragment.newInstance(position + 1);
+            return null;
         }
 
         @Override
@@ -290,41 +282,20 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-//            switch (position) {
-//                case 0:
-//                    return "หน้าหลัก";
-//                case 4:
-//                    return "ข่าวประชาสัมพันธ์";
-//                case 1:
-//                    return "คะแนนสะสม";
-//                case 2:
-//                    return "สาขา";
-//                case 3:
-//                    return "สมาชิก";
-//            }
+            switch (position) {
+                case 0:
+                    return "Insurance Program";
+                case 1:
+                    return "Find Policy";
+                case 2:
+                    return "Agent Info";
+            }
+
             return null;
 
         }
 
 
-//
-//@Override
-//public CharSequence getPageTitle(int position) {
-//
-//
-//    int icon[] = new int[4];
-//    icon[0] = R.drawable.ic_user_selector;
-//    icon[1] = R.drawable.ic_user_selector;
-//    icon[2] = R.drawable.ic_user_selector;
-//    icon[3] = R.drawable.ic_user_selector;
-//
-//    Drawable drawable = getApplicationContext().getResources().getDrawable(R.drawable.home64);
-//    drawable.setBounds(0,0,48,48);
-//    ImageSpan imageSpan = new ImageSpan(drawable);
-//    SpannableString spannableString = new SpannableString(" ");
-//    spannableString.setSpan(imageSpan, 0,spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//    return spannableString;
-//}
 
     }
 }

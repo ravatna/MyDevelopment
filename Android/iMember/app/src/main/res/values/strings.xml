@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">iAgent</string>
+    <string name="app_name">iMember</string>
     <string name="title_user">User Info</string>
     <string name="title_home">Home</string>
     <string name="title_main_program">Main Program</string>
@@ -128,4 +128,5 @@
     <string name="title_activity_scan_qrbuyer">ScanQRBuyerActivity</string>
     <string name="title_activity_peyment_confirm">PeymentConfirmActivity</string>
     <string name="title_activity_submit_app_policy">SubmitAppPolicyActivity</string>
+    <string name="title_activity_contact_point">ContactPointActivity</string>
 </resources>

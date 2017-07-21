@@ -6,7 +6,7 @@
 
     android:id="@+id/contentView"
     android:fitsSystemWindows="true"
-    tools:context="com.tyche.mobile.iagent.com.tyche.mobile.iagent.MainActivity$PlaceholderFragment">
+    tools:context="com.tyche.mobile.iagent.MainActivity$PlaceholderFragment">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"

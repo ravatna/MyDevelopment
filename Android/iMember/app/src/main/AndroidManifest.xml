@@ -24,7 +24,7 @@
             android:value="AIzaSyDGpHRx_g_IS8X-U1tBT-qw-YALqwtObP0" />
 
         <activity
-            android:name="com.tyche.mobile.imember.SplashActivity"
+            android:name=".SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.tyche.mobile.imember.LandingActivity"
+            android:name=".LandingActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -44,9 +44,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.tyche.mobile.imember.PremiumDetailActivity"
+            android:name=".PremiumDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -55,9 +54,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.tyche.mobile.imember.PaymentFormActivity"
+            android:name=".PaymentFormActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -66,9 +64,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.tyche.mobile.imember.LoginActivity"
+            android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -77,7 +74,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.tyche.mobile.imember.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -88,11 +85,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.tyche.mobile.imember.GuideDetailActivity"
+            android:name=".GuideDetailActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.tyche.mobile.imember.QrTradeActivity"
+            android:name=".QrTradeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -103,7 +100,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.tyche.mobile.imember.ScanTradeActivity"
+            android:name=".ScanTradeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -114,7 +111,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.tyche.mobile.imember.MemberHistoryActivity"
+            android:name=".MemberHistoryActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -125,12 +122,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.tyche.mobile.imember.VideoPlayerActivity"
+            android:name=".VideoPlayerActivity"
             android:label="@string/title_activity_video_player"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.tyche.mobile.imember.ResultScanTradeActivity"
+            android:name=".ResultScanTradeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -140,7 +137,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.tyche.mobile.imember.ScrollingActivity"
+            android:name=".ScrollingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -150,20 +147,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.tyche.mobile.imember.ReportCaseDetailActivity"
+            android:name=".ReportCaseDetailActivity"
             android:label="@string/title_activity_report_case_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.tyche.mobile.imember.ScanQRBuyerActivity"
+            android:name=".ScanQRBuyerActivity"
             android:label="@string/title_activity_scan_qrbuyer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.tyche.mobile.imember.PeymentConfirmActivity"
+            android:name=".PeymentConfirmActivity"
             android:label="@string/title_activity_peyment_confirm"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.tyche.mobile.imember.SubmitAppPolicyActivity"
+            android:name=".SubmitAppPolicyActivity"
             android:label="@string/title_activity_submit_app_policy"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ContactPointActivity"
+            android:label="@string/title_activity_contact_point"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

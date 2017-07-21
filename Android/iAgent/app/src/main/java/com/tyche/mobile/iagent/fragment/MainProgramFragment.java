@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.tyche.mobile.iagent.QrTradeActivity;
 import com.tyche.mobile.iagent.R;
 import com.tyche.mobile.iagent.SubmitAppPolicyActivity;
 

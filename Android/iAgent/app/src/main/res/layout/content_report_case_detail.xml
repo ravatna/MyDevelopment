@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.tyche.mobile.iagent.com.tyche.mobile.iagent.ReportCaseDetailActivity"
+    tools:context="com.tyche.mobile.iagent.ReportCaseDetailActivity"
     tools:showIn="@layout/activity_report_case_detail">
 
 </android.support.constraint.ConstraintLayout>

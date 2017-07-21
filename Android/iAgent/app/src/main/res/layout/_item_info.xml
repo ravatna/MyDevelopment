@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="0dp"
-    tools:context="com.tyche.mobile.iagent.com.tyche.mobile.iagent.GuideActivity">
+    tools:context="com.tyche.mobile.iagent.GuideActivity">
 
 
     <LinearLayout

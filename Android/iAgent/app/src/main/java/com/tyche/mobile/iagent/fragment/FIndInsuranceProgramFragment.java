@@ -9,11 +9,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.tyche.mobile.iagent.GuideDetailActivity;
 import com.tyche.mobile.iagent.PremiumDetailActivity;
 import com.tyche.mobile.iagent.R;
-import com.tyche.mobile.iagent.adapter.GuideAdapter;
-import com.tyche.mobile.iagent.adapter.GuideItem;
 import com.tyche.mobile.iagent.adapter.InsuranceProgramAdapter;
 import com.tyche.mobile.iagent.adapter.InsuranceProgramItem;
 

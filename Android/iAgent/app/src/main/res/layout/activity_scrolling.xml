@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.tyche.mobile.iagent.com.tyche.mobile.iagent.ScrollingActivity">
+    tools:context="com.tyche.mobile.iagent.ScrollingActivity">
 
     <include layout="@layout/content_scrolling" />
 

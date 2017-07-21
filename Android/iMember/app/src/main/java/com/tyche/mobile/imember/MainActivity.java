@@ -92,29 +92,22 @@ public class MainActivity extends AppCompatActivity {
 
                 if(tabLayout.getSelectedTabPosition() == 2){
 
-                    tabLayout.getTabAt(2).setIcon(R.drawable.man_user_active);
-                    tabLayout.getTabAt(1).setIcon(R.drawable.people_inactive);
-                    tabLayout.getTabAt(0).setIcon(R.drawable.shopping_cart_inactive);
+                    tabLayout.getTabAt(1).setIcon(R.drawable.man_user_active);
+                    tabLayout.getTabAt(0).setIcon(R.drawable.people_inactive);
 
                     mCaptionTitle.setText(getResources().getString(R.string.title_user));
                 }
 
                 if(tabLayout.getSelectedTabPosition() == 0){
-                    tabLayout.getTabAt(2).setIcon(R.drawable.man_user_inactive);
-                    tabLayout.getTabAt(1).setIcon(R.drawable.people_inactive);
-                    tabLayout.getTabAt(0).setIcon(R.drawable.shopping_cart);
+                    tabLayout.getTabAt(1).setIcon(R.drawable.man_user_inactive);
+                    tabLayout.getTabAt(0).setIcon(R.drawable.people_inactive);
                     mCaptionTitle.setText(getResources().getString(R.string.title_main_program));
                 }
                 if(tabLayout.getSelectedTabPosition() == 1){
-                    tabLayout.getTabAt(2).setIcon(R.drawable.man_user_inactive);
-                    tabLayout.getTabAt(1).setIcon(R.drawable.people_active);
-                    tabLayout.getTabAt(0).setIcon(R.drawable.shopping_cart_inactive);
+                    tabLayout.getTabAt(1).setIcon(R.drawable.man_user_inactive);
+                    tabLayout.getTabAt(0).setIcon(R.drawable.people_active);
                     mCaptionTitle.setText(getResources().getString(R.string.title_search_insurance));
-
                 }
-
-
-
             }
 
             @Override
@@ -154,9 +147,8 @@ public class MainActivity extends AppCompatActivity {
         });
         btnUserInfo.setVisibility(View.INVISIBLE);
 
-        tabLayout.getTabAt(2).setIcon(R.drawable.man_user_inactive);
-        tabLayout.getTabAt(1).setIcon(R.drawable.people_inactive);
-        tabLayout.getTabAt(0).setIcon(R.drawable.shopping_cart);
+        tabLayout.getTabAt(1).setIcon(R.drawable.man_user_inactive);
+        tabLayout.getTabAt(0).setIcon(R.drawable.people_inactive);
     }
 
     @Override
@@ -180,15 +172,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-//            fragment.onActivityResult(requestCode, resultCode, data);
-//        }
-//    }
+
 
     void selectPage(TabLayout tabLayout, ViewPager viewPager, int pageIndex){
         tabLayout.setScrollPosition(pageIndex,0f,true);
@@ -269,10 +253,8 @@ public class MainActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
 
             if(position == 0){
-                return  MainProgramFragment.newInstance(position);
-            } else if(position == 1){
                 return  FIndInsuranceProgramFragment.newInstance(position);
-            }else if(position == 2){
+            }else if(position == 1){
                 return  UserInfoFragment.newInstance(position);
             }
 
@@ -283,23 +265,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show  total pages.
-            return 3;
+            return 2;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-//            switch (position) {
-//                case 0:
-//                    return "หน้าหลัก";
-//                case 4:
-//                    return "ข่าวประชาสัมพันธ์";
-//                case 1:
-//                    return "คะแนนสะสม";
-//                case 2:
-//                    return "สาขา";
-//                case 3:
-//                    return "สมาชิก";
-//            }
+            switch (position) {
+                case 0:
+                    return "Insurance Policy";
+                case 1:
+                    return "My Info";
+                case 2:
+                    return "Emergency";
+
+            }
             return null;
 
         }
