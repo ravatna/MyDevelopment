@@ -9,32 +9,37 @@
     tools:context="com.tyche.mobile.imember.ContactPointActivity"
     tools:showIn="@layout/activity_contact_point">
 
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ອີເມວລ໌: info@vientiane-insurance.com
-ໂທລະສັບ: 021-226101
-ສາຍດ່ວນ: 1688" />
+    <ImageView
+        android:layout_margin="30dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/imageView5"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        app:srcCompat="@drawable/logo" />
 
     <Button
-        android:id="@+id/button4"
-        android:layout_width="match_parent"
+
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/btnEmail"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
 
         android:text="Email: info@vientiane-insurance.com" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
+        android:id="@+id/btnCallTel"
+
+        android:layout_gravity="center_horizontal"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
 
-        android:text="Telephone: 021-226101" />
+        android:text="Tel: 021-226101" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
+        android:id="@+id/btnCallHotLine"
+
+        android:layout_gravity="center_horizontal"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
 
         android:text="Hot Line: 1688" />

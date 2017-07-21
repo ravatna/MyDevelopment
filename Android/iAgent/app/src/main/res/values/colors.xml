@@ -5,6 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorMain">#FEDC00</color>
     <color name="yellow">#FEDC00</color>
-    <color name="logo_color">#5b984f</color>
+    <color name="logo_color">#4e7e44</color>
     <color name="textWhite">#FEFEFE</color>
+    <color name="colorLightGrey">#cfcfcf</color>
+
 </resources>

@@ -100,13 +100,13 @@ public class MainActivity extends AppCompatActivity {
 
                 if(tabLayout.getSelectedTabPosition() == 0){
                     tabLayout.getTabAt(1).setIcon(R.drawable.man_user_inactive);
-                    tabLayout.getTabAt(0).setIcon(R.drawable.people_inactive);
-                    mCaptionTitle.setText(getResources().getString(R.string.title_main_program));
+                    tabLayout.getTabAt(0).setIcon(R.drawable.people_active);
+                    mCaptionTitle.setText("Insurance Policy");
                 }
                 if(tabLayout.getSelectedTabPosition() == 1){
-                    tabLayout.getTabAt(1).setIcon(R.drawable.man_user_inactive);
-                    tabLayout.getTabAt(0).setIcon(R.drawable.people_active);
-                    mCaptionTitle.setText(getResources().getString(R.string.title_search_insurance));
+                    tabLayout.getTabAt(1).setIcon(R.drawable.man_user_active);
+                    tabLayout.getTabAt(0).setIcon(R.drawable.people_inactive);
+                    mCaptionTitle.setText("My Info");
                 }
             }
 
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         btnUserInfo.setVisibility(View.INVISIBLE);
 
         tabLayout.getTabAt(1).setIcon(R.drawable.man_user_inactive);
-        tabLayout.getTabAt(0).setIcon(R.drawable.people_inactive);
+        tabLayout.getTabAt(0).setIcon(R.drawable.people_active);
     }
 
     @Override
@@ -275,8 +275,7 @@ public class MainActivity extends AppCompatActivity {
                     return "Insurance Policy";
                 case 1:
                     return "My Info";
-                case 2:
-                    return "Emergency";
+
 
             }
             return null;

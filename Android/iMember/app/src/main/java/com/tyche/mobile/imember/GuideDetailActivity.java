@@ -64,50 +64,7 @@ initView();
         // Filled stars
         setRatingStarColor(stars.getDrawable(2), ContextCompat.getColor(this, R.color.yellow));
 
-        Button btnBookingGuide = (Button)findViewById(R.id.btn_premium);
 
-        btnBookingGuide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //@todo: add confirm dialog.
-                new AlertDialog.Builder(GuideDetailActivity.this)
-                        .setTitle("Confirm")
-                        .setMessage("Are you to booking this guide?")
-                        .setPositiveButton("Yes",
-                                new DialogInterface.OnClickListener() {
-
-                                    @Override
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-
-                                        ////////////////////////////////////////////////
-                                        new AlertDialog.Builder(GuideDetailActivity.this)
-                                                .setTitle("Info")
-                                                .setMessage("Service was accept your request. Please, wait for guide contact to you.")
-                                                .setPositiveButton("Ok",
-                                                        new DialogInterface.OnClickListener() {
-
-                                                            @Override
-                                                            public void onClick(DialogInterface dialog2,
-                                                                                int which) {
-                                                                    dialog2.dismiss();
-                                                            }
-                                                        }) .show();
-                                        ////////////////////////////////////////////////
-                                    }
-                                })
-                        .setNegativeButton(
-                                "No",
-                                new DialogInterface.OnClickListener() {
-
-                                    @Override
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-                                        dialog.cancel();
-                                    }
-                                }).show();
-            }
-        });
 
     }
 

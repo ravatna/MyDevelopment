@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private ScrollDisabledViewPager mViewPager;
     private TextView mCaptionTitle;
-    private ImageView mImgHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mCaptionTitle = (TextView)findViewById(R.id.toolbar_save);
-        mImgHeader = (ImageView)findViewById(R.id.imgHeader);
+
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -165,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
                     final Uri imageUri = data.getData();
                     final InputStream imageStream = this.getContentResolver().openInputStream(imageUri);
                     final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                    //((ImageView)findViewById(R.id.imgProfile)).setImageBitmap(selectedImage);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -175,15 +173,6 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-//            fragment.onActivityResult(requestCode, resultCode, data);
-//        }
-//    }
 
     void selectPage(TabLayout tabLayout, ViewPager viewPager, int pageIndex){
         tabLayout.setScrollPosition(pageIndex,0f,true);
@@ -284,9 +273,9 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Insurance Program";
+                    return "Main Program";
                 case 1:
-                    return "Find Policy";
+                    return "Search Policy";
                 case 2:
                     return "Agent Info";
             }

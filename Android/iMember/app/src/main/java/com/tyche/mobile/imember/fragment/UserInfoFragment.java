@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tyche.mobile.imember.App;
+import com.tyche.mobile.imember.ContactPointActivity;
 import com.tyche.mobile.imember.LoginActivity;
 import com.tyche.mobile.imember.R;
 
@@ -71,36 +72,13 @@ import com.tyche.mobile.imember.R;
         m_formToken = App.getInstance().formToken.toString();
 
         txvMyName = (TextView) rootView.findViewById(R.id.txvMyName);
-        btnCallHQ = (Button)rootView.findViewById(R.id.btn_call_HQ);
+        btnCallHQ = (Button)rootView.findViewById(R.id.btn_call_officer);
         btnCallHQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //@todo: add confirm dialog.
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("Logout")
-                        .setMessage("Are you want call HQ ?")
-                        .setPositiveButton("Yes",
-                                new DialogInterface.OnClickListener() {
-
-                                    @Override
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-
-                                        Toast.makeText(UserInfoFragment.this.getActivity() ,"Calling to HQ",Toast.LENGTH_SHORT).show();
-                                    }
-                                })
-                        .setNegativeButton(
-                                "No",
-                                new DialogInterface.OnClickListener() {
-
-                                    @Override
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-
-
-                                    }
-
-                                }).show();
+                Intent intent = new Intent(UserInfoFragment.this.getActivity(), ContactPointActivity.class);
+                startActivity(intent);
             }
         });
 

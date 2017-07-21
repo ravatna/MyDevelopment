@@ -61,8 +61,13 @@ private ArrayList<InsuranceProgramItem> mGuideList;
         ImageView thumb_image=(ImageView)vi.findViewById(R.id.imgPic); // thumb image
         TextView txvTitle = (TextView)vi.findViewById(R.id.txtTitle);
         TextView txvShortDesc = (TextView)vi.findViewById(R.id.txtShortDesc);
+        LinearLayout lnrColor = (LinearLayout)vi.findViewById(R.id.lnrColor);
 
-
+        if(position % 2 == 1){
+            lnrColor.setBackgroundColor(Color.parseColor("#D9AE91"));
+        }else{
+            lnrColor.setBackgroundColor(Color.parseColor("#8794D9"));
+        }
 
 
         // Setting all values in listview

@@ -48,17 +48,7 @@
                 android:textSize="24sp"
                 android:visibility="visible" />
 
-            <ImageView
 
-                android:id="@+id/imgHeader"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_marginTop="-10dp"
-                android:layout_weight="1"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp"
-                android:visibility="gone"
-                app:srcCompat="@drawable/ssmslogo" />
 
 
             <Button
@@ -85,14 +75,14 @@
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
-
+            android:background="@color/colorLightGrey"
             android:layout_gravity="bottom"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
 
             android:textColor="#999999"
             app:tabIndicatorHeight="0dp"
-            app:tabGravity="fill"
+            app:tabGravity="center"
             app:tabMode="fixed"
             />
      </com.tyche.mobile.iagent.ScrollDisabledViewPager>

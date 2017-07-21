@@ -93,7 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Agent Code: A000236"
+                    android:text="Member Code: M002236"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#444444"
                     android:textSize="18sp" />
@@ -112,13 +112,13 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/btn_call_HQ"
+                    android:id="@+id/btn_call_officer"
                     android:layout_gravity="center_horizontal"
-                    android:layout_width="120dp"
+                    android:layout_width="140dp"
                     android:layout_height="35dp"
                     android:textColor="@color/textWhite"
                     android:background="@drawable/selector_button_cyan"
-                    android:text="Call to HQ"/>
+                    android:text="Contact Officer"/>
 
 
             </LinearLayout>

@@ -24,6 +24,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.tyche.mobile.iagent.App;
+import com.tyche.mobile.iagent.ContactHQActivity;
 import com.tyche.mobile.iagent.LoginActivity;
 import com.tyche.mobile.iagent.R;
 
@@ -88,31 +89,8 @@ import java.io.IOException;
             @Override
             public void onClick(View v) {
                 //@todo: add confirm dialog.
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("Logout")
-                        .setMessage("Are you want call HQ ?")
-                        .setPositiveButton("Yes",
-                                new DialogInterface.OnClickListener() {
-
-                                    @Override
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-
-                                        Toast.makeText(UserInfoFragment.this.getActivity() ,"Calling to HQ",Toast.LENGTH_SHORT).show();
-                                    }
-                                })
-                        .setNegativeButton(
-                                "No",
-                                new DialogInterface.OnClickListener() {
-
-                                    @Override
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-
-
-                                    }
-
-                                }).show();
+                Intent intent = new Intent(UserInfoFragment.this.getActivity(), ContactHQActivity.class);
+                startActivity(intent);
             }
         });
 

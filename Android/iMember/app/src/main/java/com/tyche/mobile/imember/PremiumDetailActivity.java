@@ -38,16 +38,6 @@ initView();
         ((ListView)findViewById(R.id.reviwe_guide_listview)).setAdapter(mAdapter);
 
 
-        Button bntPremium = (Button)findViewById(R.id.btn_premium);
-
-        bntPremium.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //@todo: add confirm dialog.
-                Intent intent = new Intent(PremiumDetailActivity.this, PaymentFormActivity.class);
-                startActivity(intent);
-            }
-        });
 
     }
 

@@ -1,11 +1,13 @@
 package com.tyche.mobile.imember.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tyche.mobile.imember.R;
@@ -52,7 +54,13 @@ private ArrayList<InsuranceProgramItem> mGuideList;
         TextView txvTitle = (TextView)vi.findViewById(R.id.txtTitle);
         TextView txvShortDesc = (TextView)vi.findViewById(R.id.txtShortDesc);
 
+        LinearLayout lnrColor = (LinearLayout)vi.findViewById(R.id.lnrColor);
 
+        if(position % 2 == 1){
+            lnrColor.setBackgroundColor(Color.parseColor("#D9AE91"));
+        }else{
+            lnrColor.setBackgroundColor(Color.parseColor("#8794D9"));
+        }
 
 
         // Setting all values in listview

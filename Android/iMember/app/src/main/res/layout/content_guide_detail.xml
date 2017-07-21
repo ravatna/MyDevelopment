@@ -8,16 +8,18 @@
     android:padding="10dp"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.tyche.mobile.imember.com.tyche.mobile.imember.GuideDetailActivity"
+    tools:context="com.tyche.mobile.imember.GuideDetailActivity"
     tools:showIn="@layout/activity_guide_detail">
 
 
 
     <LinearLayout
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical">
+        android:background="@drawable/box_cuve_fill_white_stroke_gray"
+
+        android:orientation="horizontal">
 
 
         <LinearLayout
@@ -60,15 +62,6 @@
 
 
     </LinearLayout>
-
-    <Button
-    android:layout_gravity="center_horizontal"
-    android:background="@drawable/selector_button_cyan"
-    android:textColor="#FFFFFF"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/btn_premium"
-    android:text="Insurance premium"/>
 
     <TextView
         android:layout_marginTop="20dp"

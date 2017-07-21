@@ -1,25 +1,14 @@
 package com.tyche.mobile.iagent;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RatingBar;
 
 import com.tyche.mobile.iagent.adapter.InsuranceProgramAdapter;
 import com.tyche.mobile.iagent.adapter.InsuranceProgramItem;
-import com.tyche.mobile.iagent.adapter.PaymentLogItem;
 
 import java.util.ArrayList;
 
@@ -31,7 +20,7 @@ public class PremiumDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guide_detail);
+        setContentView(R.layout.activity_premium_detail);
 
 
 initView();
