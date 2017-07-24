@@ -81,8 +81,8 @@ public class LoginActivity extends AppCompatActivity {
 
         edtUsername = (EditText)findViewById(R.id.edtUsername);
         edtPassword = (EditText)findViewById(R.id.edtPassword);
-        edtUsername.setText("0831356653");
-        edtPassword.setText("6653");
+       /// edtUsername.setText("0831356653");
+        // edtPassword.setText("6653");
 
 
         edtRegistPassword = (EditText)findViewById(R.id.edtRegistPassword);
@@ -313,21 +313,56 @@ public class LoginActivity extends AppCompatActivity {
             App.getInstance().loginObject = jsonObj;
             editor.putString("login_json",jsonObj.toString());
             editor.commit();
-            JSONArray arr = jsonObj.getJSONArray("customer_detail");
 
-            App.getInstance().formToken = jsonObj.getString("formToken");
-            App.getInstance().cookieToken = jsonObj.getString("cookieToken");
+            if(jsonObj.getBoolean("success"))
+            {
 
-            App.getInstance().customerMember = arr.getJSONObject(0);
-            App.getInstance().selectNews = jsonObj.getJSONArray("select_news");
 
-            // when logoin state valid next load dialy transaction
-            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
+                JSONArray arr = jsonObj.getJSONArray("customer_detail");
+
+                App.getInstance().formToken = jsonObj.getString("formToken");
+                App.getInstance().cookieToken = jsonObj.getString("cookieToken");
+
+                App.getInstance().customerMember = arr.getJSONObject(0);
+                App.getInstance().selectNews = jsonObj.getJSONArray("select_news");
+
+                // when logoin state valid next load dialy transaction
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+            else
+            {
+
+                new AlertDialog.Builder(LoginActivity.this)
+                        .setTitle("ลงชื่อเข้าใช้งาน")
+                        .setMessage("การลงชื่อเข้าใช้งานไม่สำเร็จ กรุณาตรวจสอบ ชื่อผู้ใช้งาน และรหัสผ่านอีกครั้ง")
+                        .setPositiveButton("ปิด",
+                                new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog,  int which) {
+                                    }
+                                })
+                        .show();
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
+
+            new AlertDialog.Builder(LoginActivity.this)
+                    .setTitle("ลงชื่อเข้าใช้งาน")
+                    .setMessage("การลงชื่อเข้าใช้งานไม่สำเร็จ กรุณาตรวจสอบ ผู้ใช้งาน และรหัสผ่านอีกครั้ง")
+                    .setPositiveButton("ปิด",
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog,  int which) {
+                                }
+                            })
+                    .show();
         }
 
     }
