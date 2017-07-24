@@ -136,40 +136,57 @@ public class NewsDetailActivity extends AppCompatActivity {
 
         decodedImage = new Bitmap[NUM_ITEMS];
 
+
+
+    try {
+        if(!App.getInstance().objNews.getString("pic1_id").equals("")) {
+        //Log.i("JSON News", App.getInstance().objNews.toString());
+
+
+        imgB1 = App.getInstance().objNews.getString("pic1_id");
+        //decode base64 string to image
+        imageBytes = Base64.decode(imgB1, Base64.DEFAULT);
+
+        decodedImage[0] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        //imgPicture1.setImageBitmap(decodedImage);
+        //imgPicture1.setVisibility(View.VISIBLE);
+
+        //NUM_ITEMS++;
+
+    }
+    } catch (JSONException e) {
+        e.printStackTrace();
+    }
+
+
+
+
+
         try {
-            imgB1= App.getInstance().objNews.getString("pic1_id");
-            //decode base64 string to image
-            imageBytes = Base64.decode(imgB1, Base64.DEFAULT);
+            if(!App.getInstance().objNews.getString("pic2_id").equals("")) {
+                imgB2 = App.getInstance().objNews.getString("pic2_id");
 
-             decodedImage[0] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-            //imgPicture1.setImageBitmap(decodedImage);
-            //imgPicture1.setVisibility(View.VISIBLE);
-
-            //NUM_ITEMS++;
+                //decode base64 string to image
+                imageBytes = Base64.decode(imgB2, Base64.DEFAULT);
+                decodedImage[1] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                //imgPicture2.setImageBitmap(decodedImage);
+                //imgPicture2.setVisibility(View.VISIBLE);
+                //NUM_ITEMS++;
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         try {
-            imgB2= App.getInstance().objNews.getString("pic2_id");
-            //decode base64 string to image
-            imageBytes = Base64.decode(imgB2, Base64.DEFAULT);
-            decodedImage[1] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-            //imgPicture2.setImageBitmap(decodedImage);
-            //imgPicture2.setVisibility(View.VISIBLE);
-            //NUM_ITEMS++;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            imgB3= App.getInstance().objNews.getString("pic3_id");
-            //decode base64 string to image
-            imageBytes = Base64.decode(imgB3, Base64.DEFAULT);
-            decodedImage[2] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-            //imgPicture3.setImageBitmap(decodedImage);
-            //imgPicture3.setVisibility(View.VISIBLE);
-            //NUM_ITEMS++;
+            if(!App.getInstance().objNews.getString("pic3_id").equals("")) {
+                imgB3 = App.getInstance().objNews.getString("pic3_id");
+                //decode base64 string to image
+                imageBytes = Base64.decode(imgB3, Base64.DEFAULT);
+                decodedImage[2] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                //imgPicture3.setImageBitmap(decodedImage);
+                //imgPicture3.setVisibility(View.VISIBLE);
+                //NUM_ITEMS++;
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -101,8 +101,13 @@ import java.lang.reflect.Member;
             txvMyName.setText(App.getInstance().customerMember.getString("fname") + " " + App.getInstance().customerMember.getString("lname"));
             txvEmail.setText(App.getInstance().customerMember.getString("email"));
             txvPhoneNo.setText(App.getInstance().customerMember.getString("mobile"));
-            txvIdCard.setText(App.getInstance().customerMember.getString("cid_card"));
 
+            if(!App.getInstance().customerMember.getString("cid_card").equals("")) {
+
+                txvIdCard.setText(App.getInstance().customerMember.getString("cid_card"));
+            }else{
+                txvIdCard.setText("* แตะที่นี่เพื่อแก้ไข *");
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -298,6 +303,81 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
                     if(!App.getInstance().customerMember.getString("email").equals("")){
                         AlertDialog.Builder aaDialog = new AlertDialog.Builder(getActivity());
                         aaDialog.setTitle("แก้ไขอีเมล์");
+                        aaDialog.setMessage("โปรดติดต่อสำนักงาน SUSCO เพื่อขอแก้ไขข้อมูล");
+                        aaDialog.setNegativeButton("ปิด",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog aa = aaDialog.create();
+                        aa.show();
+                    }else {
+                        alert11.show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    alert11.show();
+                }
+            }
+        });
+
+///////////////////////////////////////////////////////////////////////
+        txvIdCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                alertDialog.setTitle("แก้ไขเลขบัตรประจำตัวประชาชน");
+                final EditText edtPassword = new EditText(getActivity());
+                edtPassword.setHint("เลขบัตรประจำตัวประชาชน");
+                edtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+
+                LinearLayout ll = new LinearLayout(getActivity());
+                ll.setOrientation(LinearLayout.VERTICAL);
+
+                ll.addView(edtPassword);
+                alertDialog.setView(ll);
+                alertDialog.setPositiveButton("ปรับปรุง",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                if(edtPassword.getText().toString().length() == 13) {
+
+                                    _cid_card = edtPassword.getText().toString();
+                                    dialog.dismiss();
+                                    doUpdateInfo();
+
+                                }else{
+                                    AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
+                                    ad.setMessage("เลขบัตรประจำตัวประชาชนถูกต้อง");
+                                    ad.setTitle("แจ้งเตือน");
+                                    ad.setNeutralButton("ปิด", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface d, int which) {
+                                            d.dismiss();
+                                        }
+                                    });
+                                    ad.show();
+                                }
+
+                            }
+                        });
+
+                alertDialog.setNegativeButton("ยกเลิก",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                _cid_card = "";
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = alertDialog.create();
+//alert11.show();
+                try {
+                    if(!App.getInstance().customerMember.getString("cid_card").equals("")){
+                        AlertDialog.Builder aaDialog = new AlertDialog.Builder(getActivity());
+                        aaDialog.setTitle("แก้ไขเลขบัตรประจำตัวประชาชน");
                         aaDialog.setMessage("โปรดติดต่อสำนักงาน SUSCO เพื่อขอแก้ไขข้อมูล");
                         aaDialog.setNegativeButton("ปิด",
                                 new DialogInterface.OnClickListener() {

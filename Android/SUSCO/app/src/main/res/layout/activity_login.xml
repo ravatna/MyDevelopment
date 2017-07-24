@@ -87,6 +87,9 @@
                     android:background="@drawable/text_box_right_radius_white"
                     android:textColorHint="#0476B9"
                     android:hint="ชื่อผู้ใช้งาน"
+                    android:maxEms="10"
+                    android:maxLines="1"
+                    android:inputType="phone"
                     android:gravity="center_horizontal"
                     android:textColor="#0476B9" />
             </LinearLayout>
@@ -114,6 +117,8 @@
                     android:background="@drawable/text_box_right_radius_white"
                     android:textColorHint="#0476B9"
                     android:textColor="#0476B9"
+                    android:maxEms="10"
+                    android:maxLines="1"
                     android:hint="รหัสผ่าน"
                     android:gravity="center_horizontal" />
             </LinearLayout>

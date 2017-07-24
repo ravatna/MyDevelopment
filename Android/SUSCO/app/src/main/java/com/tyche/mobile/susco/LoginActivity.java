@@ -81,8 +81,8 @@ public class LoginActivity extends AppCompatActivity {
 
         edtUsername = (EditText)findViewById(R.id.edtUsername);
         edtPassword = (EditText)findViewById(R.id.edtPassword);
-       /// edtUsername.setText("0831356653");
-        // edtPassword.setText("6653");
+        //edtUsername.setText("0831356653");
+        //edtPassword.setText("6653");
 
 
         edtRegistPassword = (EditText)findViewById(R.id.edtRegistPassword);
@@ -382,7 +382,7 @@ public class LoginActivity extends AppCompatActivity {
             strJson = "{'mobile':'" + edtPhone.getText().toString()  + "'"
                     + ",'fname':'" + edtFname.getText().toString() + "'"
                     + ",'lname':'" + edtLname.getText().toString() + "'"
-                    + ",'password':'" + edtPassword.getText().toString() + "'"
+                    + ",'password':'" + edtRegistPassword.getText().toString() + "'"
                     + ",'email':'" + edtEmail.getText().toString() + "'"
 
                     + "}";
@@ -454,6 +454,8 @@ public class LoginActivity extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog,
                                                         int which) {
                                         RegisterToLoginView();
+                                        edtUsername.setText("");
+                                        edtPassword.setText("");
                                     }
                                 })
                         .show();
@@ -467,7 +469,8 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialog,
                                                         int which) {
-
+                                        edtUsername.setText("");
+                                        edtPassword.setText("");
                                     }
                                 })
                         .show();
@@ -483,6 +486,9 @@ public class LoginActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onClick(DialogInterface dialog,  int which) {
+
+                                    edtUsername.setText("");
+                                    edtPassword.setText("");
                                 }
                             })
                      .show();

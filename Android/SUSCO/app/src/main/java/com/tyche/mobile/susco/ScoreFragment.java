@@ -182,6 +182,7 @@ import java.util.ArrayList;
             return ;
 
         ////////////////////////////////
+        Log.i("JSON Score ", result);
         try {
             JSONObject jsonObj = new JSONObject(result);
             App.getInstance().loginObject = jsonObj;

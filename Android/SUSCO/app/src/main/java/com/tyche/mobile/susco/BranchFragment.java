@@ -48,7 +48,9 @@ import android.widget.TextView;
         myWebView.getSettings().setGeolocationEnabled(true);
         myWebView.getSettings().setAllowContentAccess(true);
         myWebView.setWebViewClient(new WebViewClient());
-        myWebView.loadUrl("https://www.google.com/maps/d/viewer?mid=1Y0VSBNMlw9Q2r4Wpk5NkPrUbn9s&ll=14.305836340137358%2C102.16185804805923&z=6");
+        //myWebView.loadUrl("https://www.google.com/maps/d/viewer?mid=1Y0VSBNMlw9Q2r4Wpk5NkPrUbn9s&ll=14.305836340137358%2C102.16185804805923&z=6");
+
+        myWebView.loadUrl("file:///android_asset/newhtml.html");
 
         return rootView;
     }
