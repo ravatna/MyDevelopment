@@ -32,6 +32,7 @@
             -->
 
             <RelativeLayout
+
                 android:layout_width="fill_parent"
                 android:layout_height="200dp" >
                 <android.support.v4.view.ViewPager
@@ -146,7 +147,7 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/card_view"
                 android:layout_width="match_parent"
-                android:layout_height="580dp"
+                android:layout_height="610dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -405,8 +406,9 @@
 
                         android:visibility="visible"
 
-                        android:layout_width="150dp"
-                        android:layout_height="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
                         android:textSize="14sp"
 
                         android:text="*ราคานี้ไม่รวมภาษีบำรุงท้องที่"

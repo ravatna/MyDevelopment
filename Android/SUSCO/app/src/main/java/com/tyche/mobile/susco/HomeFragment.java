@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment {
     private TextView txvMyNumber;
     private TextView txvMyScore;
 
-    private TextView txtTitle1,txtTitle2,txtTitle3,txtTitle4,txtTitle5,txtTitle6,txtTitle7,txtTitle8;
+    private TextView txvDateUpdate,txtTitle1,txtTitle2,txtTitle3,txtTitle4,txtTitle5,txtTitle6,txtTitle7,txtTitle8;
 
 
     LinearLayout lnrPromotion;
@@ -102,6 +102,7 @@ public class HomeFragment extends Fragment {
         indicator = (CirclePageIndicator)
                 rootView.findViewById(R.id.indicator);
 
+        txvDateUpdate = (TextView)rootView.findViewById(R.id.txvDateUpdate);
         lnrPromotion = (LinearLayout)rootView.findViewById(R.id.lnrPromotion);
         txvMyName = (TextView) rootView.findViewById(R.id.txvMyName);
         txvMyNumber = (TextView) rootView.findViewById(R.id.txvMyNumber);
@@ -357,6 +358,7 @@ public class HomeFragment extends Fragment {
             for(int i =0; i < jsonArray.length(); i++){
                 JSONObject item = jsonArray.getJSONObject(i);
 
+                txvDateUpdate.setText(item.getString("updatedate").replace("-","/"));
 
                 if(item.getString("product_desc").equals("เบนซิน")){
                     txtTitle1.setText(item.getString("set_price") + " บาท/ลิตร");
