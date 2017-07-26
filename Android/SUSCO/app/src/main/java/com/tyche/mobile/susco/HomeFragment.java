@@ -37,7 +37,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -354,11 +356,19 @@ public class HomeFragment extends Fragment {
 
             JSONArray  jsonArray = jsonObj.getJSONArray("current_price");
 
+            Calendar c = Calendar.getInstance();
+            //System.out.println("Current time => "+c.getTime());
+
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+            String formattedDate = df.format(c.getTime());
+            txvDateUpdate.setText(formattedDate);
+
             Log.i("JSON",result);
             for(int i =0; i < jsonArray.length(); i++){
                 JSONObject item = jsonArray.getJSONObject(i);
 
-                txvDateUpdate.setText(item.getString("updatedate").replace("-","/"));
+                //txvDateUpdate.setText(item.getString("updatedate").replace("-","/"));
 
                 if(item.getString("product_desc").equals("เบนซิน")){
                     txtTitle1.setText(item.getString("set_price") + " บาท/ลิตร");
