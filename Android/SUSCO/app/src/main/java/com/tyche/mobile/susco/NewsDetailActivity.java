@@ -72,6 +72,7 @@ public class NewsDetailActivity extends AppCompatActivity {
         });
 
         TextView txvTitle = (TextView)findViewById(R.id.txtTitle);
+        TextView txvNewsDate = (TextView)findViewById(R.id.txtNewsDate);
         WebView txvDesc = (WebView)findViewById(R.id.txtDesc);
         imgPicture1 = (ImageView)findViewById(R.id.imgBanner1);
         imgPicture2 = (ImageView)findViewById(R.id.imgBanner2);
@@ -122,7 +123,7 @@ public class NewsDetailActivity extends AppCompatActivity {
         try {
 
              txvTitle.setText(App.getInstance().objNews.getString("news_head"));// not yet to use title.
-           // txvDesc.setText(App.getInstance().objNews.getString("news_text"));
+            txvNewsDate.setText(App.getInstance().objNews.getString("news_date"));
 
             WebSettings settings = txvDesc.getSettings();
             settings.setDefaultTextEncodingName("utf-8");

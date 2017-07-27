@@ -384,6 +384,7 @@ public class LoginActivity extends AppCompatActivity {
         try {
             JSONObject jsonObj = new JSONObject(result);
             App.getInstance().loginObject = jsonObj;
+            editor.putString("pw",edtPassword.getText().toString());
             editor.putString("login_json",jsonObj.toString());
             editor.commit();
 

@@ -103,7 +103,7 @@
             </android.support.v7.widget.CardView>
 
             <TextView
-                android:layout_marginTop="8dp"
+                android:layout_margin="8dp"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:textSize="12sp"
@@ -138,6 +138,18 @@
                     android:layout_marginRight="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txvDiscountEmpty"
+                        android:layout_margin="4dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="#000000"
+                        android:text="คะแนนสะสมของท่านยังไม่สามารถแลกส่วนลดได้"
+                        />
+
                 </LinearLayout>
 
             <TextView
@@ -158,6 +170,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <TextView
+                        android:id="@+id/txvGiftEmpty"
+                        android:layout_margin="4dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="#000000"
+                        android:text="คะแนนสะสมของท่านยังไม่สามารถแลกของรางวัลได้"
+                        />
 
                 </LinearLayout>
 

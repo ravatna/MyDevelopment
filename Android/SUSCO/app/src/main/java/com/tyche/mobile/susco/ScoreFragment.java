@@ -52,6 +52,8 @@ import java.util.ArrayList;
     private TextView txvMyName;
     private TextView txvMyNumber;
     private TextView txvMyScore;
+    private TextView txvGiftEmpty;
+    private TextView txvDiscountEmpty;
 
 
     private String m_formToken,m_cookieToken;
@@ -78,6 +80,8 @@ import java.util.ArrayList;
         txvMyName = (TextView) rootView.findViewById(R.id.txvMyName);
         txvMyNumber = (TextView) rootView.findViewById(R.id.txvMyNumber);
         txvMyScore = (TextView)rootView.findViewById(R.id.txvMyScore);
+        txvDiscountEmpty = (TextView)rootView.findViewById(R.id.txvDiscountEmpty);
+        txvGiftEmpty = (TextView)rootView.findViewById(R.id.txvGiftEmpty);
 
         try {
             txvMyName.setText(App.getInstance().customerMember.getString("fname") + " " + App.getInstance().customerMember.getString("lname"));
@@ -232,6 +236,7 @@ import java.util.ArrayList;
         //////////////////////////////////////////
         // count item
         ArrayList<JSONObject> objObjects = new ArrayList<>();
+
         for(int i = 0; i <  App.getInstance().giftCatalogs.length(); i ++){
 
             try {
@@ -249,8 +254,10 @@ import java.util.ArrayList;
         }
 
         //////////////////////////////////////////
+        txvDiscountEmpty.setVisibility(View.VISIBLE);
 
         for(int i = 0; i <   objObjects.size() ; i ++){
+            txvDiscountEmpty.setVisibility(View.INVISIBLE);
             if( i%2 == 0){
                 lnrVoucher.addView(blogView);
                 blogView = (LinearLayout) inflater.inflate(R.layout._blog_gift,null);
@@ -305,8 +312,10 @@ import java.util.ArrayList;
         }
         ////////////////////////////////////////////
         //lnrGiftBox.removeAllViews();
-        for(int i = 0; i <   objObjects.size() ; i ++){
+        txvGiftEmpty.setVisibility(View.VISIBLE);
 
+        for(int i = 0; i <   objObjects.size() ; i ++){
+            txvGiftEmpty.setVisibility(View.INVISIBLE);
             if( i%2 == 0){
 
                 lnrGiftBox.addView(blogView);
