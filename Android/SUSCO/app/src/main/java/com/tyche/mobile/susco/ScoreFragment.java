@@ -2,12 +2,16 @@ package com.tyche.mobile.susco;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -85,7 +89,12 @@ import java.util.ArrayList;
 
         m_cookieToken = App.getInstance().cookieToken.toString();
         m_formToken = App.getInstance().formToken.toString();
-        doCatalogForMember();
+
+
+        // check internet connection.
+        if( isCanOnline()){
+             doCatalogForMember();
+        }
 
         overrideFonts(getActivity(),rootView );
         return rootView;
@@ -93,24 +102,40 @@ import java.util.ArrayList;
 
     private void overrideFonts(final Context context, final View v) {
         try {
+
             if (v instanceof ViewGroup) {
+
                 ViewGroup vg = (ViewGroup) v;
+
                 for (int i = 0; i < vg.getChildCount(); i++) {
                     View child = vg.getChildAt(i);
                     overrideFonts(context, child);
                 }
+
             } else if (v instanceof TextView ) {
                 ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/Kanit-Regular.ttf"));
             }
+
         } catch (Exception e) {
             Log.e("UpdateFontface",e.getMessage());
         }
     } // end method
 
     /////////////////////////////////////////////////////////
+    public  boolean isCanOnline() {
+        ConnectivityManager
+                cm = (ConnectivityManager) getActivity().getApplicationContext()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null
+                && activeNetwork.isConnectedOrConnecting();
+    } // .End isCanOnline
 
     private void doCatalogForMember() {
-        new CatalogForMember().execute();
+
+
+            new CatalogForMember().execute();
+
     }
 
     private class CatalogForMember extends AsyncTask<Void, Void, String> {

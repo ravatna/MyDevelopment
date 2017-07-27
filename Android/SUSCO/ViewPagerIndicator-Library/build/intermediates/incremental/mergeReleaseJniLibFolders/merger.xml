@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/tyche/Documents/GitHub/TyChe/Android/SUSCO/ViewPagerIndicator-Library/src/main/jniLibs"/></dataSet><dataSet config="release"><source path="/Users/tyche/Documents/GitHub/TyChe/Android/SUSCO/ViewPagerIndicator-Library/src/release/jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\GitHub\MyDevelopment\Android\SUSCO\ViewPagerIndicator-Library\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="C:\GitHub\MyDevelopment\Android\SUSCO\ViewPagerIndicator-Library\src\release\jniLibs"/></dataSet></merger>

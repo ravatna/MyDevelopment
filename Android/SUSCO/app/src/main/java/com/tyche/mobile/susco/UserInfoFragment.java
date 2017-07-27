@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -469,20 +471,21 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
             e.printStackTrace();
         }
 
-        //decode base64 string to image
-        imageBytes = Base64.decode(imageString, Base64.DEFAULT);
-        Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-        imgProfile.setImageBitmap(decodedImage);
+        if(!imageString.equals("")) {
+            //decode base64 string to image
+            imageBytes = Base64.decode(imageString, Base64.DEFAULT);
+            Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            imgProfile.setImageBitmap(decodedImage);
 
-//        imgProfile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-//                photoPickerIntent.setType("image/*");
-//                getActivity().startActivityForResult(photoPickerIntent, SELECT_PHOTO);
-//            }
-//        });
-
+        //        imgProfile.setOnClickListener(new View.OnClickListener() {
+        //            @Override
+        //            public void onClick(View v) {
+        //                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        //                photoPickerIntent.setType("image/*");
+        //                getActivity().startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+        //            }
+        //        });
+        }
         overrideFonts(getActivity(),rootView );
         return rootView;
     }
@@ -503,13 +506,45 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
         }
     } // end method
 
-
-
+    /////////////////////////////////////////////////////////////
+    public  boolean isCanOnline() {
+        ConnectivityManager
+                cm = (ConnectivityManager) getActivity().getApplicationContext()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null
+                && activeNetwork.isConnectedOrConnecting();
+    } // .End isCanOnline
 
 
     /////////////////////////////////////////////////////////
     private void doUpdateInfo() {
-        new  UpdateInfo().execute();
+
+        // check internet connection.
+        if(! isCanOnline()){
+
+            // alert message about internet state on screen
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("การเชื่อมต่อเครือข่าย")
+                    .setMessage("ไม่พบการเชื่อมต่อเครือข่าวอินเตอร์เน็ตในปัจจุบัน")
+                    .setNeutralButton("ปิด",
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog,  int which) {
+
+                                }
+                            })
+                    .show();
+
+
+        } else{
+            // new ScoreFragment.CatalogForMember().execute();
+            new  UpdateInfo().execute();
+        }
+
+
+
     }
 
     private class UpdateInfo extends AsyncTask<Void, Void, String> {

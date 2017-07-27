@@ -498,7 +498,7 @@ public class HomeFragment extends Fragment {
             JSONObject jsonObj = new JSONObject(result);
             App.getInstance().objBanner = jsonObj;
             JSONArray jsonArray = jsonObj.getJSONArray("banner");
-
+ImagesArray = new ArrayList<>();
             Log.i("JSON Banner",result);
             for(int i =0; i < jsonArray.length(); i++){
                 final JSONObject item = jsonArray.getJSONObject(i);

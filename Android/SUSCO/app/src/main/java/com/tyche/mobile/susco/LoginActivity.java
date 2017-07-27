@@ -1,5 +1,6 @@
 package com.tyche.mobile.susco;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,6 +10,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +20,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -59,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
     private static final String MY_PREFS = "susco_tyche";
+    private LinearLayout contentView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +74,22 @@ public class LoginActivity extends AppCompatActivity {
         editor = sharedPreferences.edit();
 
         initView();
-    }
+
+
+
+    }// .End onCreate
+
+    public  boolean isCanOnline() {
+        ConnectivityManager
+                cm = (ConnectivityManager) LoginActivity.this.getApplicationContext()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null
+                && activeNetwork.isConnectedOrConnecting();
+    } // .End isCanOnline
 
     private void initView() {
-
+        contentView = (LinearLayout) findViewById(R.id.contentView);
         btnSwitchLogin = (Button)findViewById(R.id.btnSwitchLogin);
         btnSwitchRegister = (Button)findViewById(R.id.btnSwitchRegister);
 
@@ -81,12 +98,11 @@ public class LoginActivity extends AppCompatActivity {
 
         edtUsername = (EditText)findViewById(R.id.edtUsername);
         edtPassword = (EditText)findViewById(R.id.edtPassword);
-        //edtUsername.setText("0831356653");
-        //edtPassword.setText("6653");
+//        edtUsername.setText("0831356653");
+//        edtPassword.setText("6653");
 
 
         edtRegistPassword = (EditText)findViewById(R.id.edtRegistPassword);
-
         edtRePassword = (EditText)findViewById(R.id.edtRePassword);
         edtFname = (EditText)findViewById(R.id.edtFname);
         edtLname = (EditText)findViewById(R.id.edtLname);
@@ -102,47 +118,74 @@ public class LoginActivity extends AppCompatActivity {
         btnRegister = (Button)findViewById(R.id.btnRegister);
         txvVersion = (TextView)findViewById(R.id.txvVersion);
 
+        contentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideSoftKeyboard(LoginActivity.this);
+            }
+        });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-            boolean b = true;
-            //@todo : validate user input data.
+                // check internet connection.
+                if(!isCanOnline()){
 
-            if(edtPhone.getText().toString().length() != 10){
-                edtPhone.setError("ระบุหมายเลขโทรศัพท์");
-                b = false;
-            }
+                    // alert message about internet state on screen
+                    new AlertDialog.Builder(LoginActivity.this)
+                            .setTitle("การเชื่อมต่อเครือข่าย")
+                            .setMessage("ไม่พบการเชื่อมต่อเครือข่าวอินเตอร์เน็ตในปัจจุบัน")
+                            .setNeutralButton("ปิด",
+                                    new DialogInterface.OnClickListener() {
 
-            if(edtFname.getText().toString().length() < 1){
-                edtFname.setError("ระบุชื่อ");
-                b = false;
-            }
+                                        @Override
+                                        public void onClick(DialogInterface dialog,  int which) {
 
-            if(edtLname.getText().toString().length() < 1){
-                edtLname.setError("ระบุนามสกุล");
-                b = false;
-            }
+                                        }
+                                    })
+                            .show();
 
-            if(edtEmail.getText().toString().length() < 4){
-                edtEmail.setError("อีเมล์ไม่ถูกต้อง");
-                b = false;
-            }
 
-                if(edtRegistPassword.getText().toString().length() <=0){
-                    edtEmail.setError("ระบุรหัสผ่าน");
-                    b = false;
-                }
+                } else {
 
-            if(! edtRegistPassword.getText().toString().equals(edtRePassword.getText().toString())  ){
-                edtRePassword.setError("ยืนยันรหัสผ่านไม่ถูกต้อง");
-                b = false;
-            }
 
-            if(b){
-                doRegister();
-            }
+                    boolean b = true;
+                    //@todo : validate user input data.
+                    if (edtPhone.getText().toString().length() != 10) {
+                        edtPhone.setError("ระบุหมายเลขโทรศัพท์");
+                        b = false;
+                    }
+
+                    if (edtFname.getText().toString().length() < 1) {
+                        edtFname.setError("ระบุชื่อ");
+                        b = false;
+                    }
+
+                    if (edtLname.getText().toString().length() < 1) {
+                        edtLname.setError("ระบุนามสกุล");
+                        b = false;
+                    }
+
+                    if (edtEmail.getText().toString().length() < 4) {
+                        edtEmail.setError("อีเมล์ไม่ถูกต้อง");
+                        b = false;
+                    }
+
+                    if (edtRegistPassword.getText().toString().length() <= 0) {
+                        edtEmail.setError("ระบุรหัสผ่าน");
+                        b = false;
+                    }
+
+                    if (!edtRegistPassword.getText().toString().equals(edtRePassword.getText().toString())) {
+                        edtRePassword.setError("ยืนยันรหัสผ่านไม่ถูกต้อง");
+                        b = false;
+                    }
+
+                    if (b) {
+                        doRegister();
+                    }
+                }// .End else
 
 
             }
@@ -165,24 +208,46 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean b = true;
-                //@todo : validate user input data.
 
-                if(edtUsername.getText().toString().length() <= 0){
-                    edtUsername.setError("โปรดระบุชื่อผู้ใช้งาน");
-                    b = false;
-                }
+                // check internet connection.
+                if(!isCanOnline()){
 
-                if(edtPassword.getText().toString().length() <= 0){
-                    edtPassword.setError("โปรดระบุรหัสผ่าน");
-                    b = false;
-                }
+                    // alert message about internet state on screen
+                    new AlertDialog.Builder(LoginActivity.this)
+                            .setTitle("การเชื่อมต่อเครือข่าย")
+                            .setMessage("ไม่พบการเชื่อมต่อเครือข่าวอินเตอร์เน็ตในปัจจุบัน")
+                            .setNeutralButton("ปิด",
+                                    new DialogInterface.OnClickListener() {
 
-                if(b) {
-                    doLogin();
-                }
+                                        @Override
+                                        public void onClick(DialogInterface dialog,  int which) {
+
+                                        }
+                                    })
+                            .show();
+
+
+                } else {
+
+                    boolean b = true;
+                    //@todo : validate user input data.
+
+                    if (edtUsername.getText().toString().length() <= 0) {
+                        edtUsername.setError("โปรดระบุชื่อผู้ใช้งาน");
+                        b = false;
+                    }
+
+                    if (edtPassword.getText().toString().length() <= 0) {
+                        edtPassword.setError("โปรดระบุรหัสผ่าน");
+                        b = false;
+                    }
+
+                    if (b) {
+                        doLogin();
+                    }
+                } // .End else
             }
-        });
+        });// .End btnLogin
 
 //        btnRegister.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -204,6 +269,14 @@ public class LoginActivity extends AppCompatActivity {
 
         overrideFonts(this,findViewById(R.id.contentView) );
 
+    }
+
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(
+                activity.getCurrentFocus().getWindowToken(), 0);
     }
 
     private void overrideFonts(final Context context, final View v) {
@@ -229,7 +302,7 @@ public class LoginActivity extends AppCompatActivity {
         btnSwitchLogin.setTextColor(Color.WHITE);
         btnSwitchLogin.setBackgroundResource(R.drawable.button_left_radius_blue);
 
-        btnSwitchRegister.setTextColor(Color.BLUE);
+        btnSwitchRegister.setTextColor(Color.parseColor("#0476B9"));
         btnSwitchRegister.setBackgroundResource(R.drawable.button_right_radius_white);
 
     }
@@ -238,7 +311,7 @@ public class LoginActivity extends AppCompatActivity {
         lnrLogin.setVisibility(View.GONE);
         lnrRegister.setVisibility(View.VISIBLE);
 
-        btnSwitchLogin.setTextColor(Color.BLUE);
+        btnSwitchLogin.setTextColor(Color.parseColor("#0476B9"));
         btnSwitchLogin.setBackgroundResource(R.drawable.button_left_radius_white);
 
         btnSwitchRegister.setTextColor(Color.WHITE);
@@ -316,7 +389,6 @@ public class LoginActivity extends AppCompatActivity {
 
             if(jsonObj.getBoolean("success"))
             {
-
 
                 JSONArray arr = jsonObj.getJSONArray("customer_detail");
 

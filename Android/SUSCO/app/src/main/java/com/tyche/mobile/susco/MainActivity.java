@@ -1,12 +1,17 @@
 package com.tyche.mobile.susco;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.app.Fragment;
@@ -55,9 +60,42 @@ public class MainActivity extends AppCompatActivity {
     private TextView mCaptionTitle;
     private ImageView mImgHeader;
 
+    public  boolean isCanOnline() {
+        ConnectivityManager
+                cm = (ConnectivityManager) MainActivity.this.getApplicationContext()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null
+                && activeNetwork.isConnectedOrConnecting();
+    } // .End isCanOnline
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        // check internet connection.
+        if(!isCanOnline()){
+
+            // alert message about internet state on screen
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("การเชื่อมต่อเครือข่าย")
+                    .setMessage("ไม่เพบการเชื่อมต่อเครือข่าวอินเตอร์เน็ตในปัจจุบัน")
+                    .setNeutralButton("ปิด",
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog,  int which) {
+
+                                }
+                            })
+                    .show();
+
+
+        }
+
+
+
         setContentView(R.layout.activity_main);
 
         // * การแลกรับส่วนลดและของรางวัลท่านสามารถแลกได้ที่สถานีบริการใกล้บ้านท่าน (add this text to hint)
@@ -188,12 +226,14 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(3).setIcon(R.drawable.user_gray_64);
 
 
+
+
+
+
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-
 
         if(-1 == requestCode) {
             if (resultCode == Activity.RESULT_OK) {
@@ -306,15 +346,12 @@ public class MainActivity extends AppCompatActivity {
             }else if(position == 1){
                 return  ScoreFragment.newInstance(position);
             }else if(position == 2){
-
                 return  BranchFragment.newInstance(position);
             } else if(position == 3){
-
                 return  UserInfoFragment.newInstance(position);
             }
 
             return HomeFragment.newInstance(0);
-
             //return PlaceholderFragment.newInstance(position + 1);
         }
 
