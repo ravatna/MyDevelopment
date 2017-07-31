@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                     // alert message about internet state on screen
                     new AlertDialog.Builder(LoginActivity.this)
                             .setTitle("การเชื่อมต่อเครือข่าย")
-                            .setMessage("ไม่พบการเชื่อมต่อเครือข่าวอินเตอร์เน็ตในปัจจุบัน")
+                            .setMessage("ไม่พบการเชื่อมต่อเครือข่ายอินเตอร์เน็ตในปัจจุบัน")
                             .setNeutralButton("ปิด",
                                     new DialogInterface.OnClickListener() {
 
@@ -215,7 +215,7 @@ public class LoginActivity extends AppCompatActivity {
                     // alert message about internet state on screen
                     new AlertDialog.Builder(LoginActivity.this)
                             .setTitle("การเชื่อมต่อเครือข่าย")
-                            .setMessage("ไม่พบการเชื่อมต่อเครือข่าวอินเตอร์เน็ตในปัจจุบัน")
+                            .setMessage("ไม่พบการเชื่อมต่อเครือข่ายอินเตอร์เน็ตในปัจจุบัน")
                             .setNeutralButton("ปิด",
                                     new DialogInterface.OnClickListener() {
 

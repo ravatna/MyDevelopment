@@ -7,8 +7,8 @@ android {
         applicationId "com.tyche.mobile.susco"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 1
-        versionName '0.921'
+        versionCode 2
+        versionName '0.927'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         versionNameSuffix 'dev'

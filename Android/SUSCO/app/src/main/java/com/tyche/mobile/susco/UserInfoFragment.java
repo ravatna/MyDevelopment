@@ -65,6 +65,8 @@ import java.lang.reflect.Member;
     private String m_formToken,m_cookieToken;
     private static final String MY_PREFS = "susco_tyche";
     private String _mobile = "";
+    private String tmpIdCard = "";
+
 
     public UserInfoFragment() {
     }
@@ -107,13 +109,13 @@ import java.lang.reflect.Member;
             if(!App.getInstance().customerMember.getString("cid_card").equals("")) {
 
                 txvIdCard.setText(App.getInstance().customerMember.getString("cid_card"));
+                tmpIdCard = App.getInstance().customerMember.getString("cid_card");
             }else{
                 txvIdCard.setText("* แตะที่นี่เพื่อแก้ไข *");
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
         TextView txvEmail = (TextView)rootView.findViewById(R.id.txvEmail);
         TextView txvPhone = (TextView)rootView.findViewById(R.id.txvPhoneNo);
@@ -349,7 +351,7 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
                 alertDialog.setTitle("แก้ไขเลขบัตรประจำตัวประชาชน");
                 final EditText edtPassword = new EditText(getActivity());
                 edtPassword.setHint("เลขบัตรประจำตัวประชาชน");
-                edtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                edtPassword.setInputType(InputType.TYPE_CLASS_NUMBER);
 
                 LinearLayout ll = new LinearLayout(getActivity());
                 ll.setOrientation(LinearLayout.VERTICAL);
@@ -362,13 +364,32 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
 
                                 if(edtPassword.getText().toString().length() == 13) {
 
-                                    _cid_card = edtPassword.getText().toString();
+                                    long v = Long.parseLong(edtPassword.getText().toString());
+
+                                    if(App.getInstance().validThaiIDCard(v)){
+                                        _cid_card = edtPassword.getText().toString();
+
+                                        doUpdateInfo();
+                                    }else{
+                                        AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
+                                        ad.setMessage("เลขบัตรประจำตัวประชาชนไม่ถูกต้อง");
+                                        ad.setTitle("แจ้งเตือน");
+                                        ad.setNeutralButton("ปิด", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface d, int which) {
+                                                d.dismiss();
+                                            }
+                                        });
+                                        ad.show();
+                                    }
+
+
                                     dialog.dismiss();
-                                    doUpdateInfo();
+
 
                                 }else{
                                     AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
-                                    ad.setMessage("เลขบัตรประจำตัวประชาชนถูกต้อง");
+                                    ad.setMessage("เลขบัตรประจำตัวประชาชนไม่ถูกต้อง");
                                     ad.setTitle("แจ้งเตือน");
                                     ad.setNeutralButton("ปิด", new DialogInterface.OnClickListener() {
                                         @Override
@@ -391,9 +412,10 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
                         });
 
                 AlertDialog alert11 = alertDialog.create();
-//alert11.show();
-                try {
-                    if(!App.getInstance().customerMember.getString("cid_card").equals("")){
+
+
+                    // ถ้ามีข้อมูล เดิมอยู่แล้ว หรือ มีข้อมูลที่ได้จากการกรอกสำเร็จ ให้ป้องกันการแก้ไขทันท่ี
+                    if(!tmpIdCard.equals("")){
                         AlertDialog.Builder aaDialog = new AlertDialog.Builder(getActivity());
                         aaDialog.setTitle("แก้ไขเลขบัตรประจำตัวประชาชน");
                         aaDialog.setMessage("โปรดติดต่อสำนักงาน SUSCO เพื่อขอแก้ไขข้อมูล");
@@ -409,10 +431,7 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
                     }else {
                         alert11.show();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    alert11.show();
-                }
+
             }
         });
 ///////////////////////////////////////////////////////////////////////
@@ -542,7 +561,7 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
             // alert message about internet state on screen
             new AlertDialog.Builder(getActivity())
                     .setTitle("การเชื่อมต่อเครือข่าย")
-                    .setMessage("ไม่พบการเชื่อมต่อเครือข่าวอินเตอร์เน็ตในปัจจุบัน")
+                    .setMessage("ไม่พบการเชื่อมต่อเครือข่ายอินเตอร์เน็ตในปัจจุบัน")
                     .setNeutralButton("ปิด",
                             new DialogInterface.OnClickListener() {
 
@@ -638,11 +657,7 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
             return ;
 
         ////////////////////////////////
-        _cid_card = "";
-        _mobile = "";
-        _email = "";
-        _imagebase64 = "";
-        _password = "";
+
 
         try {
             JSONObject jsonObj = new JSONObject(result);
@@ -656,6 +671,16 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog,
                                                         int which) {
+                                        if(!_cid_card.isEmpty()){
+                                            tmpIdCard = _cid_card;
+                                            txvIdCard.setText(_cid_card);
+                                            _cid_card = "";
+                                        }
+
+                                        _mobile = "";
+                                        _email = "";
+                                        _imagebase64 = "";
+                                        _password = "";
                                         dialog.dismiss();
                                     }
                                 })
@@ -674,6 +699,12 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
                                     }
                                 })
                         .show();
+
+                _cid_card = "";
+                _mobile = "";
+                _email = "";
+                _imagebase64 = "";
+                _password = "";
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -691,7 +722,14 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
                                 }
                             })
                     .show();
+
+            _cid_card = "";
+            _mobile = "";
+            _email = "";
+            _imagebase64 = "";
+            _password = "";
         }
+
     }
 
 }

@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             // alert message about internet state on screen
             new AlertDialog.Builder(MainActivity.this)
                     .setTitle("การเชื่อมต่อเครือข่าย")
-                    .setMessage("ไม่เพบการเชื่อมต่อเครือข่าวอินเตอร์เน็ตในปัจจุบัน")
+                    .setMessage("ไม่เพบการเชื่อมต่อเครือข่ายอินเตอร์เน็ตในปัจจุบัน")
                     .setNeutralButton("ปิด",
                             new DialogInterface.OnClickListener() {
 

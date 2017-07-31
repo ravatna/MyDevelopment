@@ -104,8 +104,10 @@ android:visibility="gone"
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="480dp"
-                android:layout_height="280dp"
+                android:layout_width="420dp"
+                android:layout_height="220dp"
+                android:maxWidth="480dp"
+                android:maxHeight="280dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/member_card_600px_1050px"
 
@@ -118,8 +120,8 @@ android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="60XXXXXXXX"
-android:textColor="#333333"
-                android:layout_marginTop="20dp"
+                android:textColor="#333333"
+                android:layout_marginTop="12dp"
                 android:layout_below="@+id/imgQr"
                 android:layout_alignLeft="@+id/txvDate"
                 android:layout_alignStart="@+id/txvDate" />

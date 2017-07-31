@@ -159,7 +159,7 @@ import java.util.ArrayList;
             pd = new ProgressDialog(getActivity());
             pd.setMessage("กำลังดำเนินการ...");
             pd.setCancelable(false);
-            pd.show();
+          //  pd.show();
 
         }
 

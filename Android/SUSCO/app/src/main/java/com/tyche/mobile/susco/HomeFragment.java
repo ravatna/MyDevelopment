@@ -37,9 +37,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -358,11 +361,28 @@ public class HomeFragment extends Fragment {
 
             Calendar c = Calendar.getInstance();
             //System.out.println("Current time => "+c.getTime());
-
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            Locale lc = new Locale("th","TH");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
             String formattedDate = df.format(c.getTime());
-            txvDateUpdate.setText(formattedDate);
+
+            int year=0,month=0,day=0;
+
+               // Date date = new Date();
+
+                //c.setTime(date);
+
+                year = c.get(Calendar.YEAR);
+                month = c.get(Calendar.MONTH);
+                day = c.get(Calendar.DATE);
+
+
+             String d =  "ณ วันที่ " + day + "/" + (month+1) + "/" + (year+543) + " 11:00 น.";
+             //String.format("%s",d );
+
+
+
+            txvDateUpdate.setText(d);
 
             Log.i("JSON",result);
             for(int i =0; i < jsonArray.length(); i++){
