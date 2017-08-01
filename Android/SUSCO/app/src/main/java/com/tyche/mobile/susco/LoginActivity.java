@@ -98,8 +98,8 @@ public class LoginActivity extends AppCompatActivity {
 
         edtUsername = (EditText)findViewById(R.id.edtUsername);
         edtPassword = (EditText)findViewById(R.id.edtPassword);
-//        edtUsername.setText("0831356653");
-//        edtPassword.setText("6653");
+        edtUsername.setText("0831356653");
+        edtPassword.setText("6653");
 
 
         edtRegistPassword = (EditText)findViewById(R.id.edtRegistPassword);

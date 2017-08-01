@@ -362,11 +362,11 @@ public class HomeFragment extends Fragment {
             Calendar c = Calendar.getInstance();
             //System.out.println("Current time => "+c.getTime());
             Locale lc = new Locale("th","TH");
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
             String formattedDate = df.format(c.getTime());
 
-            int year=0,month=0,day=0;
+            int year=0,month=0,day=0,hh=0,mm=0;
 
                // Date date = new Date();
 
@@ -375,9 +375,11 @@ public class HomeFragment extends Fragment {
                 year = c.get(Calendar.YEAR);
                 month = c.get(Calendar.MONTH);
                 day = c.get(Calendar.DATE);
+                hh = c.get(Calendar.HOUR);
+                mm = c.get(Calendar.MINUTE);
 
 
-             String d =  "ณ วันที่ " + day + "/" + (month+1) + "/" + (year+543) + " 11:00 น.";
+             String d =  "ณ วันที่ " + day + "/" + (month+1) + "/" + (year+543) + " " + hh + ":" + mm + " น.";
              //String.format("%s",d );
 
 

@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Base64;
@@ -121,80 +122,80 @@ import java.lang.reflect.Member;
         TextView txvPhone = (TextView)rootView.findViewById(R.id.txvPhoneNo);
         TextView txvPassword = (TextView)rootView.findViewById(R.id.txvPassword);
 ///////////////////////////////////////////////////////////////////////
-//        txvPassword.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-//                alertDialog.setTitle("แก้ไขรหัสผ่าน");
-//                //final EditText oldPass = new EditText(getActivity());
-//                final EditText newPass = new EditText(getActivity());
-//                final EditText confirmPass = new EditText(getActivity());
-//
-//               // oldPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
-//                newPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
-//                confirmPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
-//
-//               // oldPass.setHint("รหัสผ่านเดิม");
-//                newPass.setHint("รหัสผ่านใหม่");
-//                confirmPass.setHint("ยืนยันรหัสผ่าน");
-//                LinearLayout ll=new LinearLayout(getActivity());
-//                ll.setOrientation(LinearLayout.VERTICAL);
-//
-//                //ll.addView(oldPass);
-//                ll.addView(newPass);
-//                ll.addView(confirmPass);
-//                alertDialog.setView(ll);
-//                alertDialog.setPositiveButton("ปรับปรุง",
-//                        new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) {
-//
-//                                String pw = sharedPreferences.getString("pw","");
-//                                //@todo: valid add content
-//                                //if( oldPass.getText().toString().equals(pw)){
-//                                if(newPass.getText().toString().length() > 0
-//                                        &&newPass.getText().toString().equals(confirmPass.getText().toString())){
-//                                    _password = newPass.getText().toString();
-//                                    dialog.dismiss(); doUpdateInfo();
-//                                }else{
-//                                    AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
-//                                    ad.setTitle("แจ้งเตือน");
-//                                    ad.setMessage("รหัสผ่านใหม่ไม่ถูกต้อง");
-//                                    ad.setNeutralButton("ปิด",new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface d, int which) {
-//                                            d.dismiss();
-//                                        }
-//                                    });
-//                                    ad.show();
-//                                }
-//
-////                                }else{
-////                                    AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
-////                                    ad.setTitle("แจ้งเตือน");
-////                                    ad.setMessage("รหัสผ่านเดิมไม่ถูกต้อง");
-////                                    ad.setNeutralButton("ปิด",new DialogInterface.OnClickListener() {
-////                                        @Override
-////                                        public void onClick(DialogInterface d, int which) {
-////                                            d.dismiss();
-////                                        }
-////                                    });
-////                                    ad.show();
-////                                }
-//
-//                            }
-//
-//                        }).setNegativeButton("ยกเลิก",
-//                        new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) {
-//                                dialog.cancel();
-//                                _password = "";
-//                            }
-//                        });
-//
-//                AlertDialog alert11 = alertDialog.create();
-//                alert11.show();
-//            }
-//        });
+        txvPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder pDialog = new AlertDialog.Builder(getActivity());
+                pDialog.setTitle("แก้ไขรหัสผ่าน");
+                final EditText oldPass = new EditText(getActivity());
+                final EditText newPass = new EditText(getActivity());
+                final EditText confirmPass = new EditText(getActivity());
+
+                oldPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                newPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                confirmPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+                oldPass.setHint("รหัสผ่านเดิม");
+                newPass.setHint("รหัสผ่านใหม่");
+                confirmPass.setHint("ยืนยันรหัสผ่าน");
+                LinearLayout ll=new LinearLayout(getActivity());
+                ll.setOrientation(LinearLayout.VERTICAL);
+
+                ll.addView(oldPass);
+                ll.addView(newPass);
+                ll.addView(confirmPass);
+                pDialog.setView(ll);
+                pDialog.setPositiveButton("ปรับปรุง",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                String pw = sharedPreferences.getString("pw","");
+                                //@todo: valid add content
+                                if( oldPass.getText().toString().equals(pw)){
+                                if(newPass.getText().toString().length() > 0
+                                        &&newPass.getText().toString().equals(confirmPass.getText().toString())){
+                                    _password = newPass.getText().toString();
+                                    dialog.dismiss(); doUpdateInfo();
+                                }else{
+                                    AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
+                                    ad.setTitle("แจ้งเตือน");
+                                    ad.setMessage("รหัสผ่านใหม่ไม่ถูกต้อง");
+                                    ad.setNeutralButton("ปิด",new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface d, int which) {
+                                            d.dismiss();
+                                        }
+                                    });
+                                    ad.show();
+                                }
+
+                                }else{
+                                    AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
+                                    ad.setTitle("แจ้งเตือน");
+                                    ad.setMessage("รหัสผ่านเดิมไม่ถูกต้อง");
+                                    ad.setNeutralButton("ปิด",new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface d, int which) {
+                                            d.dismiss();
+                                        }
+                                    });
+                                    ad.show();
+                                }
+
+                            }
+
+                        }).setNegativeButton("ยกเลิก",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                _password = "";
+                            }
+                        });
+
+                AlertDialog alert111 = pDialog.create();
+                alert111.show();
+            }
+        });
 ///////////////////////////////////////////////////////////////////////
 txvPhone.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -352,6 +353,8 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
                 final EditText edtPassword = new EditText(getActivity());
                 edtPassword.setHint("เลขบัตรประจำตัวประชาชน");
                 edtPassword.setInputType(InputType.TYPE_CLASS_NUMBER);
+                InputFilter.LengthFilter lengthFilter = new InputFilter.LengthFilter(13);
+                edtPassword.setFilters(new InputFilter[]{lengthFilter});
 
                 LinearLayout ll = new LinearLayout(getActivity());
                 ll.setOrientation(LinearLayout.VERTICAL);
@@ -512,14 +515,14 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
             Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
             imgProfile.setImageBitmap(decodedImage);
 
-        //        imgProfile.setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View v) {
-        //                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-        //                photoPickerIntent.setType("image/*");
-        //                getActivity().startActivityForResult(photoPickerIntent, SELECT_PHOTO);
-        //            }
-        //        });
+            imgProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                    photoPickerIntent.setType("image/*");
+                    getActivity().startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+                }
+            });
         }
         overrideFonts(getActivity(),rootView );
         return rootView;
