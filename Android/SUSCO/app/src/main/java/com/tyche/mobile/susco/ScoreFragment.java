@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
@@ -138,7 +139,8 @@ import java.util.ArrayList;
     private void doCatalogForMember() {
 
 
-            new CatalogForMember().execute();
+
+    // new CatalogForMember().execute();
 
     }
 
@@ -190,17 +192,20 @@ import java.util.ArrayList;
 
         OkHttpClient client = new OkHttpClient();
 
-        String post(String url, String json) throws IOException {
+        String post(String url, String json) throws IOException,OutOfMemoryError {
             RequestBody body = RequestBody.create(JSON, json);
-
-            Request request = new Request.Builder()
-                    .url(url)
-                    .addHeader("formToken",m_formToken)
-                    .addHeader("cookieToken",m_cookieToken)
-                    .post(body)
-                    .build();
-            Response response = client.newCall(request).execute();
-            return response.body().string();
+try {
+    Request request = new Request.Builder()
+            .url(url)
+            .addHeader("formToken", m_formToken)
+            .addHeader("cookieToken", m_cookieToken)
+            .post(body)
+            .build();
+    Response response = client.newCall(request).execute();
+    return "{}"; //response.body().string();
+} catch ( Exception e){
+    return "{}";
+}
 
         }
 
@@ -349,4 +354,15 @@ import java.util.ArrayList;
 
         }
     }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        Toast.makeText(getActivity(),"ScoreFrament",Toast.LENGTH_LONG).show();
+    }
+
+
+
+
+
 }

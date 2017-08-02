@@ -1,7 +1,12 @@
 package com.tyche.mobile.susco;
 
+import android.graphics.Bitmap;
+import android.util.Base64;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * Created by Vinit on 24/5/2560.
@@ -20,6 +25,8 @@ public class App {
     JSONObject objNews;
     JSONObject objBanner;
     String cookieToken,formToken;
+    Bitmap imgProfile = null;
+    Bitmap imgTempProfile = null;
 
     String m_server = "http://suscoapidev-iCRM.atlasicloud.com/V2";// "http://192.168.88.197/SUSCOAPI/";  //
 //    String m_server =  "http://192.168.88.196/SUSCOAPIV2/";  //
@@ -30,6 +37,15 @@ public class App {
         }
 
         return object;
+    }
+
+
+    public static String convert(Bitmap bitmap)
+    {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+
+        return Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
     }
 
     public  boolean validThaiIDCard(long v) {

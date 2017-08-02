@@ -58,7 +58,7 @@ import java.lang.reflect.Member;
     private TextView txvPhoneNo;
     private TextView txvEmail,txvIdCard;
     private byte[] imageBytes;
-    private ImageView imgProfile;
+    private ImageView imgProfile,imgFrameProfile;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     String _password="",_email="",_cid_card="",_imagebase64="";
@@ -100,6 +100,7 @@ import java.lang.reflect.Member;
         txvEmail = (TextView) rootView.findViewById(R.id.txvEmail);
         txvPhoneNo = (TextView) rootView.findViewById(R.id.txvPhoneNo);
         imgProfile = (ImageView)rootView.findViewById(R.id.imgProfile);
+        imgFrameProfile = (ImageView)rootView.findViewById(R.id.imgFrameProfile);
 
         try {
 
@@ -502,6 +503,14 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
             }
         });
 
+        imgFrameProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChangePictureProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
         String imageString = "";
         try {
             imageString= App.getInstance().customerMember.getString("cid_card_pic");
@@ -585,6 +594,60 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
 
     }
 
+    /////////////////////////////////////////////////////////
+    private void doUpdateInfoImage() {
+
+        // check internet connection.
+        if(! isCanOnline()){
+
+            // alert message about internet state on screen
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("การเชื่อมต่อเครือข่าย")
+                    .setMessage("ไม่พบการเชื่อมต่อเครือข่ายอินเตอร์เน็ตในปัจจุบัน")
+                    .setNeutralButton("ปิด",
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog,  int which) {
+
+                                }
+                            })
+                    .show();
+
+
+        } else{
+            // new ScoreFragment.CatalogForMember().execute();
+
+
+            // alert message about internet state on screen
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("ยืนยัน")
+                    .setMessage("ต้องการบันทึกภาพที่เลือกใช่หรือไม่")
+                    .setPositiveButton("ใช่",
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog,  int which) {
+                                    new  UpdateInfoImage().execute();
+                                    dialog.dismiss();
+                                }
+                            }).setNegativeButton("ไม่",
+                    new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog,  int which) {
+                           dialog.cancel();
+                        }
+                    })
+                    .show();
+
+
+        }
+
+
+
+    }
+
     private class UpdateInfo extends AsyncTask<Void, Void, String> {
         String strJson,postUrl;
         ProgressDialog pd;
@@ -654,6 +717,77 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
         }
 
     }
+
+
+    private class UpdateInfoImage extends AsyncTask<Void, Void, String> {
+        String strJson,postUrl;
+        ProgressDialog pd;
+        String _mcode = "";
+        @Override
+        protected void onPreExecute() {
+
+            try {
+                _mcode = App.getInstance().customerMember.getString("member_code");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            // Create Show ProgressBar
+            strJson = "{'member_code':'" + _mcode  + "'"
+
+                    + ",'password':'" + _password + "'"
+                    + ",'email':'" + _email + "'"
+                    + ",'cid_card':'" + _cid_card + "'"
+                    + ",'imagebase64':'" + _imagebase64 + "'"
+
+                    + ",'formToken':'" + m_formToken + "'"
+                    + ",'cookieToken':'" + m_cookieToken
+                    + "'}";
+            postUrl  = App.getInstance().m_server + "/UpdateDetailCustomer/UpdateDetail";
+            pd = new ProgressDialog(getActivity());
+            pd.setMessage("กำลังดำเนินการ...");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        protected String doInBackground(Void... urls)   {
+            String result = null;
+            try {
+                result = post(postUrl, strJson);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // blah blah
+
+            return result;
+        }
+
+        protected void onPostExecute(String result)  {
+
+            if(pd.isShowing()){
+                pd.dismiss();
+                pd = null;
+            }
+
+            parseResultUpdateInfoImage(result);
+
+        }
+
+        public  final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+        OkHttpClient client = new OkHttpClient();
+
+        String post(String url, String json) throws IOException {
+            RequestBody body = RequestBody.create(JSON, json);
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+            Response response = client.newCall(request).execute();
+            return response.body().string();
+        }
+
+    }// .End update image
 
     private void parseResultUpdateInfo(String result) {
         if(result == null)
@@ -735,4 +869,99 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
 
     }
 
+    private void parseResultUpdateInfoImage(String result) {
+        if(result == null)
+            return ;
+
+        ////////////////////////////////
+
+        try {
+            JSONObject jsonObj = new JSONObject(result);
+            if(jsonObj.getString("success").equals("true")) {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("ปรับปรุงข้อมูล")
+                        .setMessage("ปรับปรุงข้อมูลเรียบร้อยแล้ว")
+                        .setPositiveButton("ปิด",
+                                new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog,
+                                                        int which) {
+
+                                        _cid_card = "";
+                                        App.getInstance().imgProfile = App.getInstance().imgTempProfile;
+                                        App.getInstance().imgTempProfile = null;
+                                        _mobile = "";
+                                        _email = "";
+                                        _imagebase64 = "";
+                                        _password = "";
+                                        dialog.dismiss();
+                                    }
+                                })
+                        .show();
+            }else{
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("ปรับปรุงข้อมูล")
+                        .setMessage("ไม่สามารถแก้ไขข้อมูลขณะนี้ โปรดทำรายการใหม่ภายหลัง")
+                        .setPositiveButton("ปิด",
+                                new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog,
+                                                        int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                        .show();
+
+                _cid_card = "";
+                _mobile = "";
+                _email = "";
+                _imagebase64 = "";
+                _password = "";
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("ปรับปรุงข้อมูล")
+                    .setMessage("ไม่สามารถแก้ไขข้อมูลขณะนี้ โปรดทำรายการใหม่ภายหลัง")
+                    .setPositiveButton("ปิด",
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                    .show();
+
+            _cid_card = "";
+            _mobile = "";
+            _email = "";
+            _imagebase64 = "";
+            _password = "";
+        }
+
+    }// End
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Log.i("ddddd",  "dddddd");
+        if(App.getInstance().imgTempProfile!=null){
+            imgProfile.setImageBitmap(App.getInstance().imgTempProfile);
+            _imagebase64 = App.convert(App.getInstance().imgTempProfile);
+            doUpdateInfoImage();
+        }
+
+
+
+
+
+
+
+    }
 }

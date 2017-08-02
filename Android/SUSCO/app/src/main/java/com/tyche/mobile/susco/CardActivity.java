@@ -1,9 +1,11 @@
 package com.tyche.mobile.susco;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,14 +13,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
 import org.json.JSONException;
+
+import java.io.IOException;
 
 public class CardActivity extends AppCompatActivity {
 
@@ -28,7 +38,7 @@ public class CardActivity extends AppCompatActivity {
     private TextView txvMyNumber;
     private TextView txvMyDateExpire;
     private ImageView imgQr;
-
+    ProgressBar p;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +56,7 @@ public class CardActivity extends AppCompatActivity {
         txvMyName = (TextView) findViewById(R.id.txvName);
         txvMyNumber = (TextView) findViewById(R.id.txvCode);
         txvMyDateExpire = (TextView)findViewById(R.id.txvDate);
+         p  = (ProgressBar) findViewById(R.id.progressBar);
 
 
         try {
@@ -56,29 +67,56 @@ public class CardActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        QRCodeWriter writer = new QRCodeWriter();
-        try {
-            BitMatrix bitMatrix = null;
-            try {
-                bitMatrix = writer.encode(App.getInstance().customerMember.getString("member_code"), BarcodeFormat.QR_CODE, 512, 512);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            int width = bitMatrix.getWidth();
-            int height = bitMatrix.getHeight();
-            Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
-                    bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
-                }
-            }
-            ((ImageView) findViewById(R.id.imgQr)).setImageBitmap(bmp);
+        new UpdateCard().execute();
+        overrideFonts(CardActivity.this,findViewById(R.id.main_content) );
 
-        } catch (WriterException e) {
-            e.printStackTrace();
+    }
+
+    private class UpdateCard extends AsyncTask<Void, Void, Bitmap> {
+
+
+        @Override
+        protected void onPreExecute() {
+            p.setEnabled(true);
         }
 
-        overrideFonts(this,findViewById(R.id.main_content) );
+        protected Bitmap doInBackground(Void... urls)   {
+
+            QRCodeWriter writer = new QRCodeWriter();
+            Bitmap bmp = null;
+            try {
+                BitMatrix bitMatrix = null;
+                try {
+                    bitMatrix = writer.encode(App.getInstance().customerMember.getString("member_code"), BarcodeFormat.QR_CODE, 512, 512);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                int width = bitMatrix.getWidth();
+                int height = bitMatrix.getHeight();
+                 bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+                for (int x = 0; x < width; x++) {
+                    for (int y = 0; y < height; y++) {
+                        bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                    }
+                }
+
+
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
+
+            return bmp;
+        }
+
+        protected void onPostExecute(Bitmap result)  {
+p.setEnabled(false);
+
+            p.setVisibility(View.GONE);
+            ((ImageView) findViewById(R.id.imgQr)).setImageBitmap(result);
+
+
+        }
+
 
     }
 

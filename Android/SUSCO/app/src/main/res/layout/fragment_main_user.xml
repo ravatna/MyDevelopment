@@ -51,7 +51,7 @@
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/user" />
                     <ImageView
-
+                        android:id="@+id/imgFrameProfile"
 
                         android:layout_width="120dp"
                         android:layout_height="120dp"
