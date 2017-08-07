@@ -35,6 +35,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,6 +43,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Member;
+
+import static com.tyche.mobile.susco.R.id.edtPassword;
 
 /**
  * Created by Vinit on 24/5/2560.
@@ -54,6 +57,9 @@ import java.lang.reflect.Member;
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
     public static int SELECT_PHOTO = -1;
+    static UserInfoFragment fragment;
+
+
     private TextView txvMyName;
     private TextView txvPhoneNo;
     private TextView txvEmail,txvIdCard;
@@ -77,10 +83,12 @@ import java.lang.reflect.Member;
      * number.
      */
     public static UserInfoFragment newInstance(int sectionNumber) {
-        UserInfoFragment fragment = new UserInfoFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
+        if(fragment == null) {
+            fragment = new UserInfoFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+        }
         return fragment;
     }
 
@@ -511,28 +519,37 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
             }
         });
 
-        String imageString = "";
-        try {
-            imageString= App.getInstance().customerMember.getString("cid_card_pic");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        if(!imageString.equals("")) {
-            //decode base64 string to image
-            imageBytes = Base64.decode(imageString, Base64.DEFAULT);
-            Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-            imgProfile.setImageBitmap(decodedImage);
+        // if imgProfile == null then do assign value image from base64 string.
+        if(App.getInstance().imgProfile == null) {
+            String imageString = "";
+            try {
+                imageString = App.getInstance().customerMember.getString("cid_card_pic");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-            imgProfile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                    photoPickerIntent.setType("image/*");
-                    getActivity().startActivityForResult(photoPickerIntent, SELECT_PHOTO);
-                }
-            });
-        }
+            if (!imageString.equals("")) {
+                //decode base64 string to image
+                imageBytes = Base64.decode(imageString, Base64.DEFAULT);
+                Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                App.getInstance().imgProfile = decodedImage;
+
+            } // .End if !imageString == ""
+
+        }// .End if imgProfile != null
+
+        imgProfile.setImageBitmap(App.getInstance().imgProfile);
+
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                getActivity().startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+            }
+        });
+
         overrideFonts(getActivity(),rootView );
         return rootView;
     }
@@ -616,8 +633,6 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
 
 
         } else{
-            // new ScoreFragment.CatalogForMember().execute();
-
 
             // alert message about internet state on screen
             new AlertDialog.Builder(getActivity())
@@ -636,7 +651,9 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialog,  int which) {
-                           dialog.cancel();
+
+                            imgProfile.setImageBitmap(App.getInstance().imgProfile);
+                            dialog.cancel();
                         }
                     })
                     .show();
@@ -719,6 +736,9 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
     }
 
 
+    /**
+     * Task for update image profile of user.
+      */
     private class UpdateInfoImage extends AsyncTask<Void, Void, String> {
         String strJson,postUrl;
         ProgressDialog pd;
@@ -790,6 +810,9 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
     }// .End update image
 
     private void parseResultUpdateInfo(String result) {
+        // clear need update image and clear temp image
+        clearTempProfileProcess();
+
         if(result == null)
             return ;
 
@@ -819,6 +842,7 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
                                         _imagebase64 = "";
                                         _password = "";
                                         dialog.dismiss();
+                                        new ReLogin().execute();
                                     }
                                 })
                         .show();
@@ -867,9 +891,21 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
             _password = "";
         }
 
+
+
     }
 
+    /**
+     * Parse content from json string.
+     * @param result
+     */
     private void parseResultUpdateInfoImage(String result) {
+
+
+
+        clearTempProfileProcess();
+
+
         if(result == null)
             return ;
 
@@ -890,12 +926,13 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
 
                                         _cid_card = "";
                                         App.getInstance().imgProfile = App.getInstance().imgTempProfile;
-                                        App.getInstance().imgTempProfile = null;
+                                        //App.getInstance().imgTempProfile = null;
                                         _mobile = "";
                                         _email = "";
                                         _imagebase64 = "";
                                         _password = "";
                                         dialog.dismiss();
+                                        new ReLogin().execute();
                                     }
                                 })
                         .show();
@@ -944,24 +981,140 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
             _password = "";
         }
 
+        new ReLogin().execute();
+
     }// End
+
+    private void clearTempProfileProcess() {
+        // update need update image prifile to false in any case.
+        App.getInstance().needUpdateImageProfile = false;
+        // clear temp in image
+        App.getInstance().imgTempProfile = null;
+    }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        Log.i("ddddd",  "dddddd");
-        if(App.getInstance().imgTempProfile!=null){
-            imgProfile.setImageBitmap(App.getInstance().imgTempProfile);
-            _imagebase64 = App.convert(App.getInstance().imgTempProfile);
-            doUpdateInfoImage();
+        // check pass working form change image profile.
+        if(App.getInstance().needUpdateImageProfile == true) {
+
+            if (App.getInstance().imgTempProfile != null) {
+                imgProfile.setImageBitmap(App.getInstance().imgTempProfile);
+                _imagebase64 = App.convert(App.getInstance().imgTempProfile);
+
+                doUpdateInfoImage();
+            }
+
+            App.getInstance().needUpdateImageProfile = false;
+        }
+    }
+
+
+    private class ReLogin extends AsyncTask<Void, Void, String> {
+        String strJson,postUrl;
+        ProgressDialog pd;
+        String u = "",p = "";
+        @Override
+        protected void onPreExecute() {
+            try {
+                u = App.getInstance().customerMember.getString("mobile");
+                p = sharedPreferences.getString("pw","");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            // Create Show ProgressBar
+            strJson = "{'mobile_customer':'" + u  + "','pass_customer':'" + p + "'}";
+            postUrl  = App.getInstance().m_server + "/Security/login_customer_susco";
+            pd = new ProgressDialog(getActivity());
+            pd.setMessage("กำลังดำเนินการ...");
+            pd.setCancelable(false);
+            pd.show();
+
+        }
+
+        protected String doInBackground(Void... urls)   {
+
+            String result = null;
+            try {
+                result = post(postUrl, strJson);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        protected void onPostExecute(String result)  {
+
+            if(pd.isShowing()){
+                pd.dismiss();
+                pd = null;
+            }
+
+            parseResultLogin(result);
+
         }
 
 
+        public  final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
+        OkHttpClient client = new OkHttpClient();
 
-
-
+        String post(String url, String json) throws IOException {
+            RequestBody body = RequestBody.create(JSON, json);
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+            Response response = client.newCall(request).execute();
+            return response.body().string();
+        }
 
     }
-}
+
+    private void parseResultLogin(String result) {
+
+        try {
+            JSONObject jsonObj = new JSONObject(result);
+            App.getInstance().loginObject = jsonObj;
+
+            editor.putString("login_json",jsonObj.toString());
+            editor.commit();
+
+            if(jsonObj.getBoolean("success"))
+            {
+
+                JSONArray arr = jsonObj.getJSONArray("customer_detail");
+
+                App.getInstance().formToken = jsonObj.getString("formToken");
+                App.getInstance().cookieToken = jsonObj.getString("cookieToken");
+
+                App.getInstance().customerMember = arr.getJSONObject(0);
+                App.getInstance().selectNews = jsonObj.getJSONArray("select_news");
+
+                byte[] imageBytes;
+                String imageString = "";
+                try {
+                    imageString = App.getInstance().customerMember.getString("cid_card_pic");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if (!imageString.equals("")) {
+                    //decode base64 string to image
+                    imageBytes = Base64.decode(imageString, Base64.DEFAULT);
+                    Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                    App.getInstance().imgProfile = decodedImage;
+
+                } // .End if !imageString == ""
+            } // .End if
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }// .End parseResult
+
+    }

@@ -29,6 +29,7 @@ public class App {
     Bitmap imgTempProfile = null;
 
     String m_server = "http://suscoapidev-iCRM.atlasicloud.com/V2";// "http://192.168.88.197/SUSCOAPI/";  //
+    public boolean needUpdateImageProfile = false;
 //    String m_server =  "http://192.168.88.196/SUSCOAPIV2/";  //
 
     static public App getInstance(){

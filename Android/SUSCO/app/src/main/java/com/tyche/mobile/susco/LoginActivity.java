@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
@@ -17,6 +19,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,8 +101,8 @@ public class LoginActivity extends AppCompatActivity {
 
         edtUsername = (EditText)findViewById(R.id.edtUsername);
         edtPassword = (EditText)findViewById(R.id.edtPassword);
-        //edtUsername.setText("0831356653");
-       // edtPassword.setText("6653");
+//        edtUsername.setText("0831356653");
+//        edtPassword.setText("6653");
 
 
         edtRegistPassword = (EditText)findViewById(R.id.edtRegistPassword);
@@ -398,6 +401,25 @@ public class LoginActivity extends AppCompatActivity {
 
                 App.getInstance().customerMember = arr.getJSONObject(0);
                 App.getInstance().selectNews = jsonObj.getJSONArray("select_news");
+
+                byte[] imageBytes;
+                String imageString = "";
+                try {
+                    imageString = App.getInstance().customerMember.getString("cid_card_pic");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if (!imageString.equals("")) {
+                    //decode base64 string to image
+                    imageBytes = Base64.decode(imageString, Base64.DEFAULT);
+                    Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                    App.getInstance().imgProfile = decodedImage;
+
+                } // .End if !imageString == ""
+
+
+
 
                 // when logoin state valid next load dialy transaction
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);

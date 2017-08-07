@@ -177,6 +177,7 @@ public class ChangePictureProfileActivity extends AppCompatActivity {
 
 
                     App.getInstance().imgTempProfile = bmpPic1;
+                    App.getInstance().needUpdateImageProfile = true;
 
 //                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
 //                            realPath1 = getRealPathFromURI_API19(ChangePictureProfileActivity.this,uri);

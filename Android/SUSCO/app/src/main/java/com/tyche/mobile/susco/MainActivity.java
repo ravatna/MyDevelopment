@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
+    UserInfoFragment userInfoFragment;
     Button btnSuscoOnline,btnUserInfo;
 
     /**
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_main);
-
+        userInfoFragment = new UserInfoFragment();
         // * การแลกรับส่วนลดและของรางวัลท่านสามารถแลกได้ที่สถานีบริการใกล้บ้านท่าน (add this text to hint)
         // * home set header caption
         // * news detail use like banner and touch to big picture
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ScrollDisabledViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setPagingEnabled(false);
-
+        mViewPager.setOffscreenPageLimit(4);
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
@@ -348,7 +348,7 @@ public class MainActivity extends AppCompatActivity {
             }else if(position == 2){
                 return  BranchFragment.newInstance(position);
             } else if(position == 3){
-                return  UserInfoFragment.newInstance(position);
+                return  userInfoFragment.newInstance(position);
             }
 
             return HomeFragment.newInstance(0);

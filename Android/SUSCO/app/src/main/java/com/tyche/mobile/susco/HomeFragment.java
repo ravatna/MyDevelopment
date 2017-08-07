@@ -360,11 +360,13 @@ public class HomeFragment extends Fragment {
             JSONArray  jsonArray = jsonObj.getJSONArray("current_price");
 
             Calendar c = Calendar.getInstance();
-            //System.out.println("Current time => "+c.getTime());
+
             Locale lc = new Locale("th","TH");
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm",lc);
+            SimpleDateFormat tf = new SimpleDateFormat("kk:mm",lc);
 
             String formattedDate = df.format(c.getTime());
+            String formattedTime = tf.format(c.getTime());
 
             int year=0,month=0,day=0,hh=0,mm=0;
 
@@ -379,12 +381,10 @@ public class HomeFragment extends Fragment {
                 mm = c.get(Calendar.MINUTE);
 
 
-             String d =  "ณ วันที่ " + day + "/" + (month+1) + "/" + (year+543) + " " + hh + ":" + mm + " น.";
-             //String.format("%s",d );
+            String d =   day + "/" + (month+1) + "/" + (year+543) ;
 
 
-
-            txvDateUpdate.setText(d);
+            txvDateUpdate.setText(String.format("ณ วันที่ %s %s น.",d ,formattedTime));
 
             Log.i("JSON",result);
             for(int i =0; i < jsonArray.length(); i++){
