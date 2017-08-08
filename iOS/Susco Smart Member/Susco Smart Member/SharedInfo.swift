@@ -14,6 +14,7 @@ class SharedInfo: NSObject {
     var jsonTransaction:[String: AnyObject]?
     var jsonGift:[String: AnyObject]?
     var jsonBanner:[String: AnyObject]?
+    var jsonPriceOil:[String:AnyObject]?
     var currentDevice : String = "45" // 67, 67+
     var imgBase64:String = ""
     

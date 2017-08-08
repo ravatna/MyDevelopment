@@ -16,6 +16,10 @@ class ScoreViewController: UIViewController {
     @IBOutlet weak var lblScore: UILabel!
     @IBOutlet weak var lblName: UILabel!
     
+    @IBOutlet weak var lblDiscountNotReady: UILabel!
+    @IBOutlet weak var lblGiftNotReady: UILabel!
+    
+    
     var isFirst = true
     var yy:Int = 260
     var yy2:Int = 0
@@ -56,7 +60,7 @@ class ScoreViewController: UIViewController {
         
         
         
-        updateScrollViewForHeight()
+        //updateScrollViewForHeight()
     }
 
     
@@ -97,6 +101,7 @@ class ScoreViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    var bit: Int = 0 // 0 = left, 1 = right
     
     func updateCatalogDiscount(boxWidth:Int,boxHeight:Int) {
         let catalogs:[AnyObject]
@@ -110,10 +115,16 @@ class ScoreViewController: UIViewController {
             
             for item in catalogs {
                 
+                
+                
                 // ให้สร้างรายการเฉพาะส่วนลด = 0
-                if item["check"] as! String == "0" {
+                if item["check"] as! String == "1" {
                     continue
                 }
+                
+                
+                lblDiscountNotReady.isHidden = true
+                
                 loop += 1
                 //print(item)
                 
@@ -168,9 +179,9 @@ class ScoreViewController: UIViewController {
                 
                 self.scrMain.addSubview(itemView)
                 
-                
+                bit = 0
                 if ( btn_tag + 1) % 2 == 0 {
-                    
+                    bit = 1
                     
                     if SharedInfo.getInstance.currentDevice == "45" {
                         yy +=   175
@@ -217,7 +228,13 @@ class ScoreViewController: UIViewController {
             
             yy2 += 0
             
+            // if not end on two column by discount group
+            if(bit == 0){
+                yy2 += 240
+            }
+            
             vweGIft.isHidden = false
+            
  
             var f:CGRect = vweGIft.frame;
             f.origin.x = 0; // new x
@@ -225,15 +242,26 @@ class ScoreViewController: UIViewController {
             vweGIft.frame = f
            
             
+            
             yy2 += 35
+            
+//             f = lblGiftNotReady.frame;
+//            f.origin.x = 0; // new x
+//            f.origin.y = CGFloat(yy2) // new y
+//            lblGiftNotReady.frame = f
+//            
+//            yy2 += 45
+            
             
             for item in catalogs {
                 
                 // ให้สร้างรายการเฉพาะของแลก = 1
-                if item["check"] as! String == "1" {
+                if item["check"] as! String == "0" {
                     continue
                 }
                 
+                
+                lblGiftNotReady.isHidden = true
                 
                 if SharedInfo.getInstance.currentDevice == "45" {
                     xx = 10
@@ -261,6 +289,7 @@ class ScoreViewController: UIViewController {
                 let itemView:UIView = UIView (frame: CGRect(x:xx,y:yy2, width:boxWidth,height:boxHeight))
                 itemView.tag = view_tag
                 itemView.autoresizingMask = [.flexibleTopMargin]
+                
                 itemView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
                 itemView.layer.shadowColor = UIColor.black.cgColor
                 itemView.layer.shadowOpacity = 1
@@ -389,6 +418,10 @@ class ScoreViewController: UIViewController {
                     // assign result from
                     SharedInfo.getInstance.jsonGift = json;
                     DispatchQueue.main.async(){
+                        
+                        self.lblGiftNotReady.isHidden = false;
+                        self.lblDiscountNotReady.isHidden = false;
+                        
                         var w:Int = 145
                         var h:Int = 165
                         
@@ -415,6 +448,12 @@ class ScoreViewController: UIViewController {
                     }
                     
                     //print(json)
+                }
+                else
+                {
+                    self.vweGIft.isHidden = true;
+                    self.lblGiftNotReady.isHidden = true;
+                    self.lblDiscountNotReady.isHidden = true;
                 }
                 
              

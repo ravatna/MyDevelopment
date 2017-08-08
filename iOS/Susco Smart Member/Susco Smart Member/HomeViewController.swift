@@ -16,6 +16,17 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var scrImg: UIScrollView!
     
+    @IBOutlet weak var lblUpdatedate: UILabel!
+    @IBOutlet weak var lblText1: UILabel!
+    @IBOutlet weak var lblText2: UILabel!
+    @IBOutlet weak var lblText3: UILabel!
+    @IBOutlet weak var lblText4: UILabel!
+    @IBOutlet weak var lblText5: UILabel!
+    @IBOutlet weak var lblText6: UILabel!
+    @IBOutlet weak var lblText7: UILabel!
+    @IBOutlet weak var lblText8: UILabel!
+    
+    
     var isFirst = true
     var yy:Int = 405
     
@@ -36,25 +47,15 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         }
         else if SharedInfo.getInstance.currentDevice == "67"
         {
-            yy =  405
+            yy =  725
         }
             
         else if SharedInfo.getInstance.currentDevice == "67+"
         {
-            yy =  405
+            yy =  725
         }
-
-        
-        
         initView()
-       
         Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.moveToNextPageTwoSecond), userInfo: nil, repeats: true)
-        
-        
-        
-        
-        
-        
     }
     
     func moveToNextPageTwoSecond (){
@@ -83,6 +84,7 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         
             self.doGetListBanner()
             self.doLoadTransaction()
+            self.doPriceOil()
         
         
     }
@@ -102,9 +104,9 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
             var score = customer[0]["point_summary"] as! String
             var phone = customer[0]["mobile"] as! String
             
-            lblName.text = fname + " " + lname
-            lblPhone.text = phone
-            lblScore.text = score
+           // lblName.text = fname + " " + lname
+           // lblPhone.text = phone
+           // lblScore.text = score
            
             
             selectNews = SharedInfo.getInstance.json!["select_news"] as! [AnyObject]
@@ -214,12 +216,13 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                 {
                     w = 360
                     h = 250
+                    yy =  762
                 }
                 else if SharedInfo.getInstance.currentDevice == "67+"
                 {
                     w = 398
                     h = 280
-                    yy = 452
+                    yy = 762
                 }
                 
                 self.updateNewsSection(boxWidth:w,boxHeight:h)
@@ -252,8 +255,9 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     }
 
     
-    
+    // -- update scroll
     func scrollToPage(_ page: Int) {
+        // set time to play anime
         UIView.animate(withDuration: 0.3) {
             self.scrImg.contentOffset.x = self.scrImg.frame.width * CGFloat(page)
         }
@@ -265,6 +269,9 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     func changePage(sender: AnyObject) -> () {
         let x = CGFloat(pageControl.currentPage) * scrImg.frame.size.width
         scrImg.setContentOffset(CGPoint(x:x, y:0), animated: true)
+        
+        let pageNumber = round(scrImg.contentOffset.x / scrImg.frame.size.width)
+        pageControl.currentPage = Int(pageNumber)
     }
     
     
@@ -278,7 +285,6 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     // mark: -- make connection to server
     func doGetListBanner(){
         
-       
         let customer:[AnyObject]
         
         customer = SharedInfo.getInstance.json!["customer_detail"] as! [AnyObject]
@@ -336,7 +342,7 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                 }
                 
                 DispatchQueue.main.async(execute: {
-                self.updateBanner(boxWidth:w,boxHeight:h)
+                    self.updateBanner(boxWidth:w,boxHeight:h)
                 })
                 
             } catch {
@@ -348,6 +354,131 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         
     } // end func
     
+    
+    
+    
+    func doPriceOil(){
+        
+        
+        let customer:[AnyObject]
+        
+        customer = SharedInfo.getInstance.json!["customer_detail"] as! [AnyObject]
+        
+        let membercode = customer[0]["member_code"] as! String
+        let formToken:String = SharedInfo.getInstance.json!["formToken"] as! String
+        let cookieToken:String = SharedInfo.getInstance.json!["cookieToken"] as! String
+        
+        
+        // create post request
+        
+        let url = URL(string: SharedInfo.getInstance.serviceUrl + "/Standardprice/Get")!
+        let jsonDict = [ "membercode": membercode
+            ,"formToken": formToken
+            ,"cookieToken": cookieToken ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "post"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            
+            
+            if let error = error {
+                print("error:", error)
+                return
+            }
+            
+            do {
+                guard let data = data else { return }
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
+                
+                // assign result from
+                SharedInfo.getInstance.jsonPriceOil = json;
+                
+                DispatchQueue.main.async(execute: {
+                    self.updatePriceOil()
+                })
+
+            } catch {
+                print("error:", error)
+            }
+        }
+        
+        task.resume()
+        
+    } // end func
+
+    
+    
+    /////////////////////////////////////////////////////////////////////////////////
+    
+    
+    // 320x180 = 45s, 67,399x190 = 67Plus
+    func updatePriceOil( ) -> Void {
+        
+        
+        let priceOils:[AnyObject]
+        
+    
+        priceOils = SharedInfo.getInstance.jsonPriceOil!["current_price"] as! [AnyObject]
+       
+        let currentDate = Date()
+        
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "ณ วันที่ dd/MM/yyyy HH:mm น."
+        let s = dateFormatter.string(from:currentDate)
+        
+        
+        lblUpdatedate.text = s
+        
+        for priceOil in priceOils {
+            
+            
+            
+            if priceOil["product_desc"] as! String == "เบนซิน" {
+                let p:Float = priceOil["set_price"] as! Float
+                lblText1.text = p.description + " บาท/ลิตร"
+            }
+            if priceOil["product_desc"] as! String == "แก๊สโซฮอล์ 95" {
+                let p:Float = priceOil["set_price"] as! Float
+                lblText2.text = p.description + " บาท/ลิตร"
+            }
+            if priceOil["product_desc"] as! String == "แก๊สโซฮอล์ 91" {
+                let p:Float = priceOil["set_price"] as! Float
+                lblText3.text = p.description + " บาท/ลิตร"
+            }
+            if priceOil["product_desc"] as! String == "แก๊สโซฮอล์ อี 20" {
+                let p:Float = priceOil["set_price"] as! Float
+                lblText4.text = p.description + " บาท/ลิตร"
+            }
+            if priceOil["product_desc"] as! String == "แก๊สโซฮอล์ อี 85" {
+                let p:Float = priceOil["set_price"] as! Float
+                lblText5.text = p.description + " บาท/ลิตร"
+            }
+            if priceOil["product_desc"] as! String == "ดีเซลหมุนเร็ว" {
+                let p:Float = priceOil["set_price"] as! Float
+                lblText6.text = p.description + " บาท/ลิตร"
+            }
+            if priceOil["product_desc"] as! String == "ก๊าซ LPG" {
+                let p:Float = priceOil["set_price"] as! Float
+                lblText7.text = p.description + " บาท/กก."
+            }
+            if priceOil["product_desc"] as! String == "ก๊าซ NGV" {
+                let p:Float = priceOil["set_price"] as! Float
+                lblText8.text = p.description + " บาท/ลิตร"
+            }
+            
+            
+           
+            
+        }
+
+
+    }
     
     /////////////////////////////////////////////////////////////////////////////////
     
@@ -374,31 +505,32 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                 
                 decodedData = Data(base64Encoded: iconString)!
                 // กำหนดความกว่างของ วัตถุ และตำแหน่งที่จะแสดง
-
+                
                 let buttonConnect = UIButton(frame: CGRect(x:boxWidth*itemCounter, y:0 ,width:boxWidth ,height:boxHeight))
                 buttonConnect.tag = btn_tag
-
-                
-                
-                buttonConnect.setImage(UIImage(data:decodedData), for: UIControlState.normal)
-                buttonConnect.imageView?.contentMode = UIViewContentMode.scaleToFill
-                
-                
+               
+                //buttonConnect.imageView?.contentMode = UIViewContentMode.scaleToFill
                 buttonConnect.addTarget(self, action: #selector(doGotoURL), for:.touchUpInside)
                 
-              itemCounter += 1
+                buttonConnect.autoresizingMask = [.flexibleWidth, .flexibleHeight, .flexibleBottomMargin, .flexibleRightMargin, .flexibleLeftMargin, .flexibleTopMargin]
+                buttonConnect.contentMode = .redraw // OR .scaleAspectFit
+                buttonConnect.clipsToBounds = true
+                buttonConnect.setBackgroundImage(UIImage(data:decodedData), for: UIControlState.normal)
+                
+                itemCounter += 1
                 self.scrImg.addSubview(buttonConnect)
                 btn_tag += 1
             } // end if
-
+            
             // หลังจากที่ได้ข้อมูลมาแล้วว่ามีภาพที่ต้องแสดงกี่ภาพ ก็จะมาจัดการส่วนพื้นที่ให้แสดงภาพ ต่อว่าจะเปิดหรือปิด พื้นที่ส่วนแสดง
             
         }
-
+        
         self.pageControl.numberOfPages = itemCounter
         self.scrImg.contentSize = CGSize(width:(self.scrImg.frame.width * CGFloat(itemCounter)), height:self.scrImg.frame.height)
+        
+    } // .End updatePriceOil
 
-    }
     
     
     ///////////////////////////////////////////////////////////////////////////////

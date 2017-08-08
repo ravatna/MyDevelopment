@@ -52,7 +52,7 @@
                                                         </connections>
                                                     </scrollView>
                                                     <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="1" translatesAutoresizingMaskIntoConstraints="NO" id="Yv3-SM-ikm">
-                                                        <rect key="frame" x="108" y="238" width="156" height="38"/>
+                                                        <rect key="frame" x="108" y="145" width="156" height="38"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="currentPageIndicatorTintColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -60,19 +60,19 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vFo-cZ-nqB" userLabel="คะแนนสะสม">
-                                                <rect key="frame" x="0.0" y="195" width="375" height="170"/>
+                                            <view autoresizesSubviews="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3cx-yS-iEY" userLabel="ราคาน้ำมันวันนี้">
+                                                <rect key="frame" x="0.0" y="195" width="375" height="520"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7b-Fy-fei" userLabel="หัวข้อ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="28"/>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVc-hj-FM8" userLabel="หัวข้อ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="header_banner.png" translatesAutoresizingMaskIntoConstraints="NO" id="kSU-U2-Dzf">
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="header_banner.png" translatesAutoresizingMaskIntoConstraints="NO" id="lH9-KA-Tob">
                                                                 <rect key="frame" x="8" y="0.0" width="359" height="30"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="คะแนนสะสม" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y88-ht-0PD">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ราคาน้ำมันวันนี้" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zb8-00-47t">
                                                                 <rect key="frame" x="16" y="5" width="343" height="21"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -81,38 +81,102 @@
                                                             </label>
                                                         </subviews>
                                                     </view>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="banner_score_and_name_500px_214px.png" translatesAutoresizingMaskIntoConstraints="NO" id="TPK-9H-8uC">
-                                                        <rect key="frame" x="8" y="40" width="360" height="130"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="_95.png" translatesAutoresizingMaskIntoConstraints="NO" id="4hs-1S-BCu">
+                                                        <rect key="frame" x="22" y="58" width="120" height="50"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0N-oW-tuv">
-                                                        <rect key="frame" x="43" y="139" width="288" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mNS-3R-a8v">
+                                                        <rect key="frame" x="159" y="73" width="203" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="คะแนน" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7T3-yS-LgB">
-                                                        <rect key="frame" x="43" y="80" width="288" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mpg-jH-We4">
+                                                        <rect key="frame" x="24" y="35" width="270" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BwR-S2-E4H">
-                                                        <rect key="frame" x="43" y="110" width="288" height="21"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="so95.png" translatesAutoresizingMaskIntoConstraints="NO" id="4j9-Rw-4AP">
+                                                        <rect key="frame" x="22" y="109" width="120" height="50"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62X-zG-jUO">
+                                                        <rect key="frame" x="159" y="124" width="203" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g12-M5-NLt">
-                                                        <rect key="frame" x="43" y="57" width="288" height="21"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="so91.png" translatesAutoresizingMaskIntoConstraints="NO" id="TP6-xE-AbG">
+                                                        <rect key="frame" x="22" y="160" width="120" height="50"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKK-ts-fS9">
+                                                        <rect key="frame" x="159" y="175" width="203" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="e20.png" translatesAutoresizingMaskIntoConstraints="NO" id="hgg-e8-caP">
+                                                        <rect key="frame" x="22" y="210" width="120" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99s-aa-dEL">
+                                                        <rect key="frame" x="159" y="225" width="203" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="e85.png" translatesAutoresizingMaskIntoConstraints="NO" id="A9z-qz-7zp">
+                                                        <rect key="frame" x="22" y="261" width="120" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JwM-Yk-hJI">
+                                                        <rect key="frame" x="159" y="276" width="203" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="diesel.png" translatesAutoresizingMaskIntoConstraints="NO" id="uo0-vB-Yvr">
+                                                        <rect key="frame" x="22" y="312" width="120" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7HC-3I-jBy">
+                                                        <rect key="frame" x="159" y="327" width="203" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lpg.png" translatesAutoresizingMaskIntoConstraints="NO" id="HcU-sR-1K9">
+                                                        <rect key="frame" x="22" y="362" width="120" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hm-nf-qLP">
+                                                        <rect key="frame" x="159" y="377" width="203" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ngv.png" translatesAutoresizingMaskIntoConstraints="NO" id="o8R-hb-8bo">
+                                                        <rect key="frame" x="22" y="413" width="120" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NiX-Mh-GPG">
+                                                        <rect key="frame" x="159" y="428" width="203" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*ราคานี้ไม่รวมภาษีบำรุงท้องที่" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2u-3e-c7P">
+                                                        <rect key="frame" x="24" y="475" width="203" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UF1-je-kvK" userLabel="หัวข้อ">
-                                                <rect key="frame" x="0.0" y="370" width="375" height="30"/>
+                                                <rect key="frame" x="0.0" y="725" width="375" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="header_banner.png" translatesAutoresizingMaskIntoConstraints="NO" id="aSn-Dp-fdH" userLabel="หัวข้อ">
@@ -129,7 +193,7 @@
                                                 </subviews>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TXr-MW-8gC">
-                                                <rect key="frame" x="35" y="405" width="304" height="169"/>
+                                                <rect key="frame" x="35" y="785" width="304" height="169"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ggu-7c-yoe">
@@ -162,9 +226,15 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="หน้าหลัก" image="home" selectedImage="home" id="7jc-Vs-JZU"/>
                     <connections>
-                        <outlet property="lblName" destination="BwR-S2-E4H" id="pAQ-gb-mjr"/>
-                        <outlet property="lblPhone" destination="i0N-oW-tuv" id="maj-Bl-TX3"/>
-                        <outlet property="lblScore" destination="g12-M5-NLt" id="3SP-Sw-xNj"/>
+                        <outlet property="lblText1" destination="mNS-3R-a8v" id="dfc-CC-vX8"/>
+                        <outlet property="lblText2" destination="62X-zG-jUO" id="530-5e-Pej"/>
+                        <outlet property="lblText3" destination="lKK-ts-fS9" id="imi-Sy-1sa"/>
+                        <outlet property="lblText4" destination="99s-aa-dEL" id="kHG-2s-uyc"/>
+                        <outlet property="lblText5" destination="JwM-Yk-hJI" id="WiP-kb-9nH"/>
+                        <outlet property="lblText6" destination="7HC-3I-jBy" id="ReT-P8-efs"/>
+                        <outlet property="lblText7" destination="5hm-nf-qLP" id="dha-Hr-C79"/>
+                        <outlet property="lblText8" destination="NiX-Mh-GPG" id="cgI-5d-ron"/>
+                        <outlet property="lblUpdatedate" destination="mpg-jH-We4" id="Smg-aC-4Jo"/>
                         <outlet property="pageControl" destination="Yv3-SM-ikm" id="6qx-UN-S5A"/>
                         <outlet property="scrImg" destination="Wa2-a6-XRS" id="z4K-hG-zl0"/>
                         <outlet property="scrMain" destination="Oat-1R-BRK" id="Dos-ZB-r0q"/>
@@ -172,7 +242,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6it-Bf-2X0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1008.75" y="620"/>
+            <point key="canvasLocation" x="-1008.8" y="619.34032983508246"/>
         </scene>
         <!--คะแนนสะสม-->
         <scene sceneID="Dtg-KJ-An2">
@@ -273,8 +343,8 @@
                                                     </label>
                                                 </subviews>
                                             </view>
-                                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lAf-rH-MLS" userLabel="หัวข้อ">
-                                                <rect key="frame" x="0.0" y="246" width="375" height="30"/>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lAf-rH-MLS" userLabel="หัวข้อ">
+                                                <rect key="frame" x="0.0" y="300" width="375" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="header_banner.png" translatesAutoresizingMaskIntoConstraints="NO" id="t32-mn-WaS" userLabel="หัวข้อ">
@@ -290,29 +360,32 @@
                                                     </label>
                                                 </subviews>
                                             </view>
-                                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Cy-Z0-UyT" userLabel="gift_item_right">
-                                                <rect key="frame" x="10" y="255" width="175" height="200"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="คะแนนสะสมของท่านยังไม่สามาถแลกส่วนลดได้" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHG-mh-uHR">
+                                                <rect key="frame" x="9" y="259" width="357" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="banner_news_500px_214px_03.png" translatesAutoresizingMaskIntoConstraints="NO" id="KC9-IV-MlO">
-                                                        <rect key="frame" x="0.0" y="0.0" width="175" height="110"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="คะแนนสะสมคะแนนสะสมคะแนนสะสมคะแนนสะสมคะแนนสะสม" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ie-nr-ndQ">
-                                                        <rect key="frame" x="0.0" y="110" width="145" height="59"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*การแลกรับส่วนลดและของรางวับท่านสามารถแลกได้ที่สานีบริการใกล้บ้านท่าน" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQD-Jc-zHY">
-                                                <rect key="frame" x="8" y="170" width="359" height="52"/>
+                                                <rect key="frame" x="8" y="188" width="359" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="รายการส่วนลด และของรางวัล จะแสดงตามคะแนนที่ท่านมีอยู่ ณ ปัจจุบัน" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEB-i4-H93">
+                                                <rect key="frame" x="9" y="170" width="357" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="คะแนนสะสมของท่านยังไม่สามาถแลกของรางวัลได้" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nza-dB-alU">
+                                                <rect key="frame" x="9" y="344" width="358" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -325,6 +398,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="คะแนนสะสม" image="medal" id="LWe-ge-n75"/>
                     <connections>
+                        <outlet property="lblDiscountNotReady" destination="hHG-mh-uHR" id="Mpv-Pz-BbN"/>
+                        <outlet property="lblGiftNotReady" destination="nza-dB-alU" id="LrS-qI-Iww"/>
                         <outlet property="lblName" destination="YUW-9x-hvZ" id="YlV-hE-CeT"/>
                         <outlet property="lblPhone" destination="W0r-7a-HpQ" id="JDi-ho-8P2"/>
                         <outlet property="lblScore" destination="Gxs-mf-S6C" id="cgM-Bf-tmq"/>
@@ -390,7 +465,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p5D-wp-31d">
-                                        <rect key="frame" x="0.0" y="255" width="375" height="347"/>
+                                        <rect key="frame" x="0.0" y="277" width="375" height="325"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </webView>
@@ -398,7 +473,19 @@
                                         <rect key="frame" x="8" y="218" width="304" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HgJ-aL-h6y">
+                                        <rect key="frame" x="8" y="245" width="360" height="1"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="08/08/2560" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTj-Tp-Xdc">
+                                        <rect key="frame" x="8" y="247" width="359" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -408,6 +495,7 @@
                     </view>
                     <connections>
                         <outlet property="btnBack" destination="Ho3-9b-ajC" id="V2R-j2-mdO"/>
+                        <outlet property="lblDate" destination="OTj-Tp-Xdc" id="RgQ-KV-FhM"/>
                         <outlet property="lblTitle" destination="V2r-Ad-RYC" id="FGh-7a-hvk"/>
                         <outlet property="pageControl" destination="vaN-9d-1qI" id="l6Y-sz-VTW"/>
                         <outlet property="scrImg" destination="fOK-As-N3d" id="HtS-MS-xHv"/>
@@ -756,8 +844,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWz-MK-2m6">
-                                                    <rect key="frame" x="169" y="11" width="131" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWz-MK-2m6">
+                                                    <rect key="frame" x="233" y="11" width="131" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -767,10 +855,15 @@
                                                     <rect key="frame" x="8" y="4" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="log_out03.png" translatesAutoresizingMaskIntoConstraints="NO" id="wvy-RM-y9X">
+                                                    <rect key="frame" x="262" y="6" width="32" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="imgIcon" destination="nVj-Di-sgz" id="uou-6r-t16"/>
+                                            <outlet property="imgIcon2" destination="wvy-RM-y9X" id="Eox-gv-MSL"/>
                                             <outlet property="lblCaption" destination="Xlp-1f-G1i" id="MtJ-C7-mWm"/>
                                             <outlet property="lblWording" destination="eWz-MK-2m6" id="1wN-bP-qM3"/>
                                         </connections>
@@ -1181,22 +1274,30 @@
         </scene>
     </scenes>
     <resources>
+        <image name="_95.png" width="660" height="294"/>
         <image name="banner_news_500px_214px_01.png" width="500" height="214"/>
-        <image name="banner_news_500px_214px_03.png" width="500" height="214"/>
         <image name="banner_score_and_name_500px_214px.png" width="500" height="214"/>
+        <image name="diesel.png" width="660" height="294"/>
+        <image name="e20.png" width="660" height="294"/>
+        <image name="e85.png" width="660" height="294"/>
         <image name="group64.png" width="64" height="64"/>
         <image name="header_banner.png" width="409" height="41"/>
         <image name="home" width="25" height="25"/>
         <image name="left_arrow_64.png" width="64" height="64"/>
+        <image name="log_out03.png" width="48" height="48"/>
+        <image name="lpg.png" width="660" height="294"/>
         <image name="mail64.png" width="64" height="64"/>
         <image name="medal" width="25" height="25"/>
         <image name="member_card_600px_1050px.png" width="1050" height="600"/>
         <image name="member_card_64.png" width="64" height="64"/>
+        <image name="ngv.png" width="660" height="294"/>
         <image name="padlock64.png" width="64" height="64"/>
         <image name="phone64.png" width="64" height="64"/>
         <image name="photo_frame.png" width="500" height="500"/>
         <image name="place" width="25" height="25"/>
         <image name="qr.png" width="167" height="167"/>
+        <image name="so91.png" width="660" height="294"/>
+        <image name="so95.png" width="660" height="294"/>
         <image name="ssmslogo.png" width="567" height="149"/>
         <image name="susco_banner_01.png" width="500" height="200"/>
         <image name="user" width="25" height="25"/>

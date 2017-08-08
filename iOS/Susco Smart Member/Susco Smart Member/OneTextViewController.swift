@@ -15,6 +15,7 @@ class OneTextViewController: UIViewController {
     
     @IBOutlet weak var txtInput: UITextField!
     @IBOutlet weak var txtInput2: UITextField!
+    @IBOutlet weak var txtInput3: UITextField!
     
     @IBOutlet weak var lblCaption: UILabel!
     
@@ -41,7 +42,7 @@ class OneTextViewController: UIViewController {
     // clear all variable data
     func resetInputValue()
     {
-    strEmail = ""
+        strEmail = ""
         strMobile = ""
         strCidCard = ""
         strPassword = ""
@@ -77,7 +78,7 @@ class OneTextViewController: UIViewController {
         
         switch process {
         case 1:
-            if txtInput.text!.characters.count < 13 {
+            if txtInput.text!.characters.count != 13 {
                 
                 let alert = self.BuildAlertDialog("แจ้งเตือน", "หมายเลขประจำตัวประชาชนไม่ถูกต้อง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:nil))
                 
@@ -90,6 +91,21 @@ class OneTextViewController: UIViewController {
             
             break
         case 2:
+            
+            
+            // -- @todo: add check old password here.
+            let defaults = UserDefaults.standard
+            
+            let oldPass = defaults.string(forKey: "pw")
+            
+//            if txtInput3.text! != oldPass {
+//                let alert = self.BuildAlertDialog("แจ้งเตือน", "รหัสผ่านเดิมไม่ถูกต้อง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:nil))
+//                
+//                self.present(alert, animated:true, completion:nil)
+//                
+//                return b;
+//            }
+            
             if txtInput.text! == "" || txtInput2.text! == "" {
                 
                 //@todo: alert message.
@@ -146,10 +162,18 @@ class OneTextViewController: UIViewController {
     func updateLabel(_ process:Int) -> Void
     {
         
-        
         txtInput2.isHidden = true
+        txtInput3.isHidden = true
+        
         txtInput.isSecureTextEntry = false
         txtInput2.isSecureTextEntry = false
+        
+        var f:CGRect = vweContent.frame
+        
+        f.size.width = vweContent.frame.size.width  // new width
+        f.size.height = vweContent.frame.size.height - 40 // new height
+        
+        vweContent.frame = f
         
         switch process {
         case 1:
@@ -159,8 +183,13 @@ class OneTextViewController: UIViewController {
         case 2:
             lblCaption.text = "แก้ไขรหัสผ่าน"
             txtInput2.isHidden = false
+            txtInput3.isHidden = false
             txtInput.isSecureTextEntry = true
             txtInput2.isSecureTextEntry = true
+            txtInput3.isSecureTextEntry = true
+            
+            
+            
             break
         case 3:
             lblCaption.text = "แก้ไขอีเมล์"

@@ -11,6 +11,7 @@
 		DB1CD4701EFB8DE1001A8CCF /* UtilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1CD46F1EFB8DE1001A8CCF /* UtilViewController.swift */; };
 		DB3B33CF1EFD1F180097BD3C /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3B33CE1EFD1F180097BD3C /* NewsDetailViewController.swift */; };
 		DB3B33D11EFD20900097BD3C /* ZoomPicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3B33D01EFD20900097BD3C /* ZoomPicViewController.swift */; };
+		DB3EA3CF1F395FAF0073AF60 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = DB3EA3CE1F395FAF0073AF60 /* jquery-3.2.1.min.js */; };
 		DB483BF41F0E143C005C2C0D /* Main67.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB483BF31F0E143C005C2C0D /* Main67.storyboard */; };
 		DB483BF61F0E145D005C2C0D /* Main67Plus.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB483BF51F0E145D005C2C0D /* Main67Plus.storyboard */; };
 		DB621CE91F14787E00E4D901 /* newhtml.html in Resources */ = {isa = PBXBuildFile; fileRef = DB621CE81F14787E00E4D901 /* newhtml.html */; };
@@ -19,6 +20,15 @@
 		DB7FB6841F01020100DDD40A /* qr.png in Resources */ = {isa = PBXBuildFile; fileRef = DB7FB6831F01020100DDD40A /* qr.png */; };
 		DB7FB6861F01225700DDD40A /* SharedInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FB6851F01225700DDD40A /* SharedInfo.swift */; };
 		DB83EE151F0BAC9F00AFB556 /* OneTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB83EE141F0BAC9F00AFB556 /* OneTextViewController.swift */; };
+		DB8E3CC01F26FCBA0093136C /* _95.png in Resources */ = {isa = PBXBuildFile; fileRef = DB8E3CB71F26FCBA0093136C /* _95.png */; };
+		DB8E3CC11F26FCBA0093136C /* diesel.png in Resources */ = {isa = PBXBuildFile; fileRef = DB8E3CB81F26FCBA0093136C /* diesel.png */; };
+		DB8E3CC21F26FCBA0093136C /* e20.png in Resources */ = {isa = PBXBuildFile; fileRef = DB8E3CB91F26FCBA0093136C /* e20.png */; };
+		DB8E3CC31F26FCBA0093136C /* e85.png in Resources */ = {isa = PBXBuildFile; fileRef = DB8E3CBA1F26FCBA0093136C /* e85.png */; };
+		DB8E3CC41F26FCBA0093136C /* log_out03.png in Resources */ = {isa = PBXBuildFile; fileRef = DB8E3CBB1F26FCBA0093136C /* log_out03.png */; };
+		DB8E3CC51F26FCBA0093136C /* lpg.png in Resources */ = {isa = PBXBuildFile; fileRef = DB8E3CBC1F26FCBA0093136C /* lpg.png */; };
+		DB8E3CC61F26FCBA0093136C /* ngv.png in Resources */ = {isa = PBXBuildFile; fileRef = DB8E3CBD1F26FCBA0093136C /* ngv.png */; };
+		DB8E3CC71F26FCBA0093136C /* so91.png in Resources */ = {isa = PBXBuildFile; fileRef = DB8E3CBE1F26FCBA0093136C /* so91.png */; };
+		DB8E3CC81F26FCBA0093136C /* so95.png in Resources */ = {isa = PBXBuildFile; fileRef = DB8E3CBF1F26FCBA0093136C /* so95.png */; };
 		DBB4D9161EF8FF4D007E7243 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB4D9151EF8FF4D007E7243 /* AppDelegate.swift */; };
 		DBB4D9181EF8FF4D007E7243 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB4D9171EF8FF4D007E7243 /* HomeViewController.swift */; };
 		DBB4D91A1EF8FF4D007E7243 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB4D9191EF8FF4D007E7243 /* ScoreViewController.swift */; };
@@ -110,6 +120,7 @@
 		DB1CD46F1EFB8DE1001A8CCF /* UtilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilViewController.swift; sourceTree = "<group>"; };
 		DB3B33CE1EFD1F180097BD3C /* NewsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		DB3B33D01EFD20900097BD3C /* ZoomPicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomPicViewController.swift; sourceTree = "<group>"; };
+		DB3EA3CE1F395FAF0073AF60 /* jquery-3.2.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.2.1.min.js"; sourceTree = "<group>"; };
 		DB483BF31F0E143C005C2C0D /* Main67.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main67.storyboard; sourceTree = "<group>"; };
 		DB483BF51F0E145D005C2C0D /* Main67Plus.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main67Plus.storyboard; sourceTree = "<group>"; };
 		DB621CE81F14787E00E4D901 /* newhtml.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = newhtml.html; sourceTree = "<group>"; };
@@ -118,6 +129,15 @@
 		DB7FB6831F01020100DDD40A /* qr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qr.png; sourceTree = "<group>"; };
 		DB7FB6851F01225700DDD40A /* SharedInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedInfo.swift; sourceTree = "<group>"; };
 		DB83EE141F0BAC9F00AFB556 /* OneTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTextViewController.swift; sourceTree = "<group>"; };
+		DB8E3CB71F26FCBA0093136C /* _95.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _95.png; sourceTree = "<group>"; };
+		DB8E3CB81F26FCBA0093136C /* diesel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diesel.png; sourceTree = "<group>"; };
+		DB8E3CB91F26FCBA0093136C /* e20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = e20.png; sourceTree = "<group>"; };
+		DB8E3CBA1F26FCBA0093136C /* e85.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = e85.png; sourceTree = "<group>"; };
+		DB8E3CBB1F26FCBA0093136C /* log_out03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = log_out03.png; sourceTree = "<group>"; };
+		DB8E3CBC1F26FCBA0093136C /* lpg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lpg.png; sourceTree = "<group>"; };
+		DB8E3CBD1F26FCBA0093136C /* ngv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ngv.png; sourceTree = "<group>"; };
+		DB8E3CBE1F26FCBA0093136C /* so91.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = so91.png; sourceTree = "<group>"; };
+		DB8E3CBF1F26FCBA0093136C /* so95.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = so95.png; sourceTree = "<group>"; };
 		DBB4D9121EF8FF4D007E7243 /* Susco Smart Member.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Susco Smart Member.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB4D9151EF8FF4D007E7243 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBB4D9171EF8FF4D007E7243 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -222,6 +242,7 @@
 		DB621CE71F14780900E4D901 /* html */ = {
 			isa = PBXGroup;
 			children = (
+				DB3EA3CE1F395FAF0073AF60 /* jquery-3.2.1.min.js */,
 				DB621CEA1F14791500E4D901 /* images */,
 				DB621CE81F14787E00E4D901 /* newhtml.html */,
 			);
@@ -301,6 +322,15 @@
 		DBB4DA1E1EFA7564007E7243 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				DB8E3CB71F26FCBA0093136C /* _95.png */,
+				DB8E3CB81F26FCBA0093136C /* diesel.png */,
+				DB8E3CB91F26FCBA0093136C /* e20.png */,
+				DB8E3CBA1F26FCBA0093136C /* e85.png */,
+				DB8E3CBB1F26FCBA0093136C /* log_out03.png */,
+				DB8E3CBC1F26FCBA0093136C /* lpg.png */,
+				DB8E3CBD1F26FCBA0093136C /* ngv.png */,
+				DB8E3CBE1F26FCBA0093136C /* so91.png */,
+				DB8E3CBF1F26FCBA0093136C /* so95.png */,
 				DB7FB6831F01020100DDD40A /* qr.png */,
 				DBB4D9B41EFA7558007E7243 /* banner_news_500px_214px_01.png */,
 				DBB4D9B51EFA7558007E7243 /* banner_news_500px_214px_02.png */,
@@ -470,10 +500,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBB4DA141EFA7558007E7243 /* promotion_567px_300px_02.png in Resources */,
+				DB8E3CC51F26FCBA0093136C /* lpg.png in Resources */,
+				DB8E3CC21F26FCBA0093136C /* e20.png in Resources */,
 				DBB4D9EF1EFA7558007E7243 /* close_64.png in Resources */,
 				DBB4D9F61EFA7558007E7243 /* home_gray_32.png in Resources */,
 				DBB4DA0B1EFA7558007E7243 /* padlock64.png in Resources */,
 				DBB4D9F81EFA7558007E7243 /* home32.png in Resources */,
+				DB8E3CC41F26FCBA0093136C /* log_out03.png in Resources */,
 				DBB4DA091EFA7558007E7243 /* member_card_64.png in Resources */,
 				DBB4DA151EFA7558007E7243 /* ssmslogo.png in Resources */,
 				DBB4D9221EF8FF4D007E7243 /* LaunchScreen.storyboard in Resources */,
@@ -486,6 +519,8 @@
 				DB483BF61F0E145D005C2C0D /* Main67Plus.storyboard in Resources */,
 				DBB4DA001EFA7558007E7243 /* medal_gray_32.png in Resources */,
 				DBB4D9FB1EFA7558007E7243 /* icon.png in Resources */,
+				DB8E3CC71F26FCBA0093136C /* so91.png in Resources */,
+				DB8E3CC81F26FCBA0093136C /* so95.png in Resources */,
 				DBB4DA171EFA7558007E7243 /* susco_banner_02_400px_200px.png in Resources */,
 				DBB4D9F71EFA7558007E7243 /* home_gray_64.png in Resources */,
 				DBB4D9FC1EFA7558007E7243 /* left_arrow_64.png in Resources */,
@@ -495,7 +530,9 @@
 				DBB4DA1A1EFA7558007E7243 /* user_gray_32.png in Resources */,
 				DBB4D9EA1EFA7558007E7243 /* banner_news_500px_214px_02.png in Resources */,
 				DBB4DA121EFA7558007E7243 /* placeholder64.png in Resources */,
+				DB8E3CC61F26FCBA0093136C /* ngv.png in Resources */,
 				DBB4D9F91EFA7558007E7243 /* home64.png in Resources */,
+				DB8E3CC11F26FCBA0093136C /* diesel.png in Resources */,
 				DB7FB6841F01020100DDD40A /* qr.png in Resources */,
 				DBB4D9E91EFA7558007E7243 /* banner_news_500px_214px_01.png in Resources */,
 				DBB4DA041EFA7558007E7243 /* megaphon_gray_32.png in Resources */,
@@ -515,11 +552,14 @@
 				DBB4D9ED1EFA7558007E7243 /* banner_score_and_name_800px_400px.png in Resources */,
 				DBB4DA1C1EFA7558007E7243 /* user32.png in Resources */,
 				DBB4DA161EFA7558007E7243 /* susco_banner_01.png in Resources */,
+				DB3EA3CF1F395FAF0073AF60 /* jquery-3.2.1.min.js in Resources */,
 				DBB4DA0A1EFA7558007E7243 /* member_card_600px_1050px.png in Resources */,
 				DBB4D9FF1EFA7558007E7243 /* mail64.png in Resources */,
 				DBB4D91D1EF8FF4D007E7243 /* Main.storyboard in Resources */,
 				DBB4DA021EFA7558007E7243 /* medal32.png in Resources */,
+				DB8E3CC31F26FCBA0093136C /* e85.png in Resources */,
 				DBB4DA181EFA7558007E7243 /* susco_banner_03_1000px_500px.png in Resources */,
+				DB8E3CC01F26FCBA0093136C /* _95.png in Resources */,
 				DBB4D9F21EFA7558007E7243 /* gas_station.png in Resources */,
 				DBB4DA011EFA7558007E7243 /* medal_gray_64.png in Resources */,
 				DBB4D9FA1EFA7558007E7243 /* ic_pump.png in Resources */,

@@ -35,10 +35,24 @@ class LoginController:  UIViewController,UITextViewDelegate {
     var loadingDialog:UIAlertController!
     
     
+    func phoneNumberOnly(value: String) -> Bool {
+        let PHONE_REGEX = "^\\d{10}"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let result =  phoneTest.evaluate(with: value)
+        return result
+    }
+    
+//    func isValidEmail(testStr:String) -> Bool {
+//        print("validate emilId: \(testStr)")
+//        let emailRegEx = "^(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?(?:(?:(?:[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+(?:\\.[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+)*)|(?:\"(?:(?:(?:(?: )*(?:(?:[!#-Z^-~]|\\[|\\])|(?:\\\\(?:\\t|[ -~]))))+(?: )*)|(?: )+)\"))(?:@)(?:(?:(?:[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)(?:\\.[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)*)|(?:\\[(?:(?:(?:(?:(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))\\.){3}(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))))|(?:(?:(?: )*[!-Z^-~])*(?: )*)|(?:[Vv][0-9A-Fa-f]+\\.[-A-Za-z0-9._~!$&'()*+,;=:]+))\\])))(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?$"
+//        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+//        let result = emailTest.evaluate(with: testStr)
+//        return result
+//    }
     
     func validRegisterField() -> Bool{
         var b:Bool = true
-        if txtPhone.text == "" {
+        if phoneNumberOnly(value: txtPhone.text!) != true {
             let alert = BuildAlertDialog("แจ้งเตือน", "โปรดระบุหมายเลขโทรศัพท์", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler: nil))
             
             b = false
@@ -62,13 +76,7 @@ class LoginController:  UIViewController,UITextViewDelegate {
             return b
         }
         
-        if txtEmail.text == "" {
-            let alert = BuildAlertDialog("แจ้งเตือน", "โปรดระบุอีเมล์", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler: nil))
-            
-            b = false
-            self.present(alert, animated:true, completion:nil)
-            return b
-        }
+       
         
         if isValidEmail(testStr: txtEmail.text!) != true {
             let alert = BuildAlertDialog("แจ้งเตือน", "โปรดระบุอีเมล์", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler: nil))
@@ -115,31 +123,16 @@ class LoginController:  UIViewController,UITextViewDelegate {
     // -- on Press button Register
     @IBAction func doRegister(_ sender: Any) {
         // @todo: need to validate require field
-        
-       
-        
-        
-        
-        
         if validRegisterField() {
-            
             present(self.loadingDialog, animated: true, completion: nil)
-
-            
             doSubmitRegister()
         }
-
     }
-    
-    
-    
-    
+
     // -- on press button Login
     @IBAction func doLogin(_ sender: Any) {
         
-       
         present(self.loadingDialog, animated: true, completion: nil)
-        
         if validLoginField() {
             doSubmitLogin()
         }
@@ -177,15 +170,18 @@ class LoginController:  UIViewController,UITextViewDelegate {
                         guard let data = data else { return }
                         guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
                         
+                        self.txtU.text = ""
+                        self.txtP.text = ""
                         
                         if json["msg"] as! String == "Success" {
                             // assign result from
                             SharedInfo.getInstance.json = json;
                             
-                            
                             let defaults = UserDefaults.standard
                             
                             defaults.set(json, forKey: "jsonLogin")
+                            defaults.set(self.txtP.text, forKey: "pw")
+                            //defaults.string(forKey: "pw")
                             
                             // prepare to set home view controller
                             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "home_tabview")
@@ -193,7 +189,8 @@ class LoginController:  UIViewController,UITextViewDelegate {
                             //self.dismiss(animated: true, completion: nil)
                             
                         }else{
-                            let alert = self.BuildAlertDialog("แจ้งเตือน", "ไม่พบผู้ใช้งานที่ระบุ", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler: { Void in
+                            
+                            let alert = self.BuildAlertDialog("ลงชื่อเข้าใช้งาน", "การลงชื่อเข้าใช้งานไม่สำเร็จ กรุณาตรวจสอบ ชื่อผู้ใช้งาน และรหัสผ่านอีกครั้ง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler: { Void in
                                 self.dismiss(animated: true, completion: nil)
                             }))
                             
@@ -202,11 +199,13 @@ class LoginController:  UIViewController,UITextViewDelegate {
                         }
                         
                         
-                        
-                        
-                        
                     } catch {
                         print("error:", error)
+                        let alert = self.BuildAlertDialog("ลงชื่อเข้าใช้งาน", "การลงชื่อเข้าใช้งานไม่สำเร็จ กรุณาตรวจสอบ ชื่อผู้ใช้งาน และรหัสผ่านอีกครั้ง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler: { Void in
+                            self.dismiss(animated: true, completion: nil)
+                        }))
+                        
+                        self.present(alert, animated:true, completion:nil)
                     }
                 } // end let task
                     
@@ -263,6 +262,13 @@ class LoginController:  UIViewController,UITextViewDelegate {
                 do {
                     guard let data = data else { return }
                     guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
+                    
+                    self.txtName.text = ""
+                    self.txtPass.text = ""
+                    self.txtRePass.text = ""
+                    self.txtEmail.text = ""
+                    self.txtPhone.text  = ""
+                    self.txtSurname.text = ""
                     
                     if json["msg"] as! String == "success" {
                         let alert = self.BuildAlertDialog("ลงทะเบียนใหม่", "ลงทะเบียนเรียบร้อยแล้ว โปรดลงชื่อเข้าใช้งานเพื่อเข้าสู่ระบบ", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:{ action in
@@ -328,8 +334,6 @@ class LoginController:  UIViewController,UITextViewDelegate {
         // add an action (button)
         alert.addAction(btnAction)
         
-        
-        
         return alert
         
     }
@@ -348,16 +352,11 @@ class LoginController:  UIViewController,UITextViewDelegate {
         return alert
     }
 
-    
-    
-    
-    
     // -- on press switch bar and detect state to switch view login and regiter
     
     @IBAction func doSwitchView(_ sender: Any) {
         
         updateSwitchView()
-        
         
     }
     
@@ -377,8 +376,8 @@ class LoginController:  UIViewController,UITextViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        txtU.text = "0831356653"
-        txtP.text = "6653"
+        //txtU.text = "0831356653"
+        //txtP.text = "6653"
         
 //        let defaults = UserDefaults.standard
 //        do{

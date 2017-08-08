@@ -13,6 +13,7 @@ class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var lblWording: UILabel!
     @IBOutlet weak var lblCaption: UILabel!
     @IBOutlet weak var imgIcon: UIImageView!
+    @IBOutlet weak var imgIcon2: UIImageView!
     
     
     override func awakeFromNib() {

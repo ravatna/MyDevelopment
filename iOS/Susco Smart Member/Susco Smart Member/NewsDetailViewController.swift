@@ -16,6 +16,8 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
     @IBOutlet weak var btnBack: UIButton!
     
     @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var lblDate: UILabel!
+    
     
     
     @IBOutlet weak var pageControl: UIPageControl!
@@ -150,6 +152,7 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate {
         
         
         lblTitle.text = item["news_head"] as! String
+        lblDate.text = item["news_date"] as! String
         wbvDetail.loadHTMLString(item["news_text"] as! String, baseURL: nil);
         
         self.scrImg.contentSize = CGSize(width:(self.scrImg.frame.width * CGFloat(itemCounter)), height:self.scrImg.frame.height)

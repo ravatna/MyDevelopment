@@ -122,13 +122,13 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             cell.lblWording!.text = "ประวัติการทำรายการ"
         }
-        
+        cell.imgIcon2!.isHidden = true
         if self.animals[indexPath.row] == "logout" {
             //cell.imgIcon!.isHidden = false
             //cell.lblCaption!.isHidden = true
             //cell.imgIcon!.image = UIImage(named: "document_64")
             cell.lblCaption!.text = ""
-            
+            cell.imgIcon2!.isHidden = false
             cell.lblWording!.text = "ลงชื่อออก"
         }
         
@@ -291,7 +291,9 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
             }
             
-            let cancelAction = UIAlertAction(title: "ไม่ใช่", style: .default) { (alert: UIAlertAction!) -> Void in
+            let cancelAction = UIAlertAction(title: "ไม่ใช่", style: .default)
+            {
+                (alert: UIAlertAction!) -> Void in
                 //print("You pressed Cancel")
             }
             

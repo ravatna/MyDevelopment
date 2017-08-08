@@ -17,6 +17,7 @@ class CardViewController: UIViewController {
     @IBOutlet weak var imgQR: UIImageView!
     
     @IBOutlet weak var vweCard: UIView!
+    @IBOutlet weak var vweTitleCard: UIView!
     var qrcodeImage: CIImage!
     
     
@@ -28,6 +29,8 @@ class CardViewController: UIViewController {
         let angle:CGFloat = (270.0 * 3.14/180.0) as CGFloat
         let rotation = CGAffineTransform(rotationAngle: angle)
         vweCard.transform = rotation
+        vweTitleCard.transform = rotation
+        
         
     }
 
