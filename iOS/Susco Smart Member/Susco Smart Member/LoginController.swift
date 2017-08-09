@@ -170,8 +170,7 @@ class LoginController:  UIViewController,UITextViewDelegate {
                         guard let data = data else { return }
                         guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
                         
-                        self.txtU.text = ""
-                        self.txtP.text = ""
+                        
                         
                         if json["msg"] as! String == "Success" {
                             // assign result from
@@ -179,8 +178,8 @@ class LoginController:  UIViewController,UITextViewDelegate {
                             
                             let defaults = UserDefaults.standard
                             
-                            defaults.set(json, forKey: "jsonLogin")
-                            defaults.set(self.txtP.text, forKey: "pw")
+                            defaults.setValue(json, forKey: "jsonLogin")
+                            defaults.setValue(self.txtP.text, forKey: "pw")
                             //defaults.string(forKey: "pw")
                             
                             // prepare to set home view controller
@@ -197,6 +196,9 @@ class LoginController:  UIViewController,UITextViewDelegate {
                             self.present(alert, animated:true, completion:nil)
                             
                         }
+                        
+                        self.txtU.text = ""
+                        self.txtP.text = ""
                         
                         
                     } catch {

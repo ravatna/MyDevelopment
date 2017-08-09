@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OneTextViewController: UIViewController {
+class OneTextViewController: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnInput: UIButton!
@@ -98,35 +98,40 @@ class OneTextViewController: UIViewController {
             
             let oldPass = defaults.string(forKey: "pw")
             
-//            if txtInput3.text! != oldPass {
-//                let alert = self.BuildAlertDialog("แจ้งเตือน", "รหัสผ่านเดิมไม่ถูกต้อง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:nil))
-//                
-//                self.present(alert, animated:true, completion:nil)
-//                
-//                return b;
-//            }
             
-            if txtInput.text! == "" || txtInput2.text! == "" {
+            //print(oldPass! + " " + txtInput.text!)
+            
+            if txtInput.text! != oldPass {
+                let alert = self.BuildAlertDialog("แจ้งเตือน", "รหัสผ่านเดิมไม่ถูกต้อง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:nil))
+                
+                self.present(alert, animated:true, completion:nil)
+                
+                return b;
+            }
+            
+            if txtInput2.text! == "" || txtInput3.text! == "" {
                 
                 //@todo: alert message.
-                let alert = self.BuildAlertDialog("แจ้งเตือน", "รหัสผ่านไหม่ไม่ถูกต้อง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:nil))
+                let alert = self.BuildAlertDialog("แจ้งเตือน", "รหัสผ่านใหม่ไม่ถูกต้อง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:nil))
                 
                 self.present(alert, animated:true, completion:nil)
                 
                 return b
             }
             
-            if txtInput.text! != txtInput2.text!  {
+            if txtInput2.text! != txtInput3.text!  {
                 
                 //@todo: alert message.
-                let alert = self.BuildAlertDialog("แจ้งเตือน", "รหัสผ่านไหม่ไม่ถูกต้อง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:nil))
+                let alert = self.BuildAlertDialog("แจ้งเตือน", "รหัสผ่านใหม่ไม่ถูกต้อง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:nil))
                 
                 self.present(alert, animated:true, completion:nil)
                 
                 return b
             }
             
-            strPassword = txtInput.text!
+            
+            
+            strPassword = txtInput2.text!
             break
             
         case 3:
@@ -167,42 +172,123 @@ class OneTextViewController: UIViewController {
         
         txtInput.isSecureTextEntry = false
         txtInput2.isSecureTextEntry = false
+        txtInput3.isSecureTextEntry = false
         
-        var f:CGRect = vweContent.frame
         
-        f.size.width = vweContent.frame.size.width  // new width
-        f.size.height = vweContent.frame.size.height - 40 // new height
-        
-        vweContent.frame = f
         
         switch process {
         case 1:
            lblCaption.text = "แก้ไขเลขประจำตัวประชาชน"
-            
+            txtInput.placeholder = "ระบุเลขประจำตัวประชาชน..."
+           txtInput.tag = 99
+           txtInput.delegate = self
+           
+           var f:CGRect = vweContent.frame
+           
+           f.size.width = vweContent.frame.size.width  // new width
+           f.size.height = vweContent.frame.size.height - 40 // new height
+           
+           // move button
+           var b1:CGRect = btnInput.frame
+           var b2:CGRect = btnCancel.frame
+           
+           txtInput3.isHidden = true
+           txtInput2.isHidden = true
+           
+           b1.origin.x = b1.origin.x
+           b1.origin.y = b1.origin.y - 40
+           btnInput.frame = b1
+           
+           b2.origin.x = b2.origin.x
+           b2.origin.y = b2.origin.y - 40
+           btnCancel.frame = b2
+           
+           
+           vweContent.frame = f
+           
+           
             break
         case 2:
             lblCaption.text = "แก้ไขรหัสผ่าน"
             txtInput2.isHidden = false
             txtInput3.isHidden = false
+            
             txtInput.isSecureTextEntry = true
             txtInput2.isSecureTextEntry = true
             txtInput3.isSecureTextEntry = true
             
-            
+            txtInput.placeholder = "ระบุรหัสผ่านเดิม..."
+            txtInput2.placeholder = "ระบุรหัสผ่านใหม่..."
+            txtInput3.placeholder = "ระบยืนยันรหัสผ่านใหม่..."
             
             break
         case 3:
             lblCaption.text = "แก้ไขอีเมล์"
+            txtInput.placeholder = "ระบุอีเมล์..."
+            
+            txtInput3.isHidden = true
+            txtInput2.isHidden = true
+            var f:CGRect = vweContent.frame
+            
+            f.size.width = vweContent.frame.size.width  // new width
+            f.size.height = vweContent.frame.size.height - 40 // new height
+            
+            // move button
+            var b1:CGRect = btnInput.frame
+            var b2:CGRect = btnCancel.frame
+            
+            b1.origin.x = b1.origin.x
+            b1.origin.y = b1.origin.y - 40
+            btnInput.frame = b1
+            
+            b2.origin.x = b2.origin.x
+            b2.origin.y = b2.origin.y - 40
+            btnCancel.frame = b2
+            
+            
+            vweContent.frame = f
+            
             break
+            
         case 0:
             lblCaption.text = "แก้ไขเบอร์ติดต่อ"
+            txtInput.placeholder = "ระบุเบอร์ติดต่อ..."
+            txtInput.tag = 98
+            txtInput.delegate = self
+            txtInput3.isHidden = true
+            txtInput2.isHidden = true
+            var f:CGRect = vweContent.frame
+            
+            f.size.width = vweContent.frame.size.width  // new width
+            f.size.height = vweContent.frame.size.height - 40 // new height
+            
+            // move button
+            var b1:CGRect = btnInput.frame
+            var b2:CGRect = btnCancel.frame
+            
+            b1.origin.x = b1.origin.x
+            b1.origin.y = b1.origin.y - 40
+            btnInput.frame = b1
+            
+            b2.origin.x = b2.origin.x
+            b2.origin.y = b2.origin.y - 40
+            btnCancel.frame = b2
+            
+            
+            vweContent.frame = f
+            
             break
+            
         default:
             break
         }
         
         
     }
+    
+    
+    
+    
     
     
     func showAnimate()
@@ -229,6 +315,32 @@ class OneTextViewController: UIViewController {
             }
         });
     }
+    
+    
+    //max Length
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        
+        if textField.tag == 98 {
+            
+            let maxLength = 10
+            let currentString: NSString = textField.text! as NSString
+            let newString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
+            return newString.length <= maxLength
+            
+        }else if textField.tag == 99 {
+            
+            let maxLength = 13
+            let currentString: NSString = textField.text! as NSString
+            let newString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
+            return newString.length <= maxLength
+            
+        }else{
+            
+            return false
+        }
+    } // .End
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -303,6 +415,7 @@ class OneTextViewController: UIViewController {
             (data, response, error) in
             
             
+            // set process without waiting.
             DispatchQueue.main.async(execute: {
             // dismiss alert view
             self.loadingDialog.dismiss(animated: true, completion: { Void in
@@ -317,6 +430,12 @@ class OneTextViewController: UIViewController {
                     guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
                     
                     if json["success"] as! Bool == true {
+                        
+                        if self.strPassword != "" {
+                            let defaults = UserDefaults.standard
+                            defaults.setValue(self.strPassword, forKey: "pw")
+                        }
+                        
                         let alert = self.BuildAlertDialog("ปรับปรุงข้อมูล", "ปรับปรุงข้อมูลเรียบร้อยแล้ว\n กรุณาออกจากระบบและเข้าสู่ระบบใหม่อีกครั้ง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:{ action in
                         self.removeAnimate()
                         }))

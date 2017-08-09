@@ -13,6 +13,9 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var imgMember: UIImageView!
     @IBOutlet weak var tblUserMenu: UITableView!
     
+   
+    
+    
     // Data model: These strings will be the data for the table view cells
     let animals: [String] = ["เบอร์โทรศัพท์", "เลขประจำตัวประชาชน :", "รหัสผ่าน", "อีเมล์", "member_card","member_transaction","logout"]
     
@@ -79,10 +82,25 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
             var phone = customer[0]["mobile"] as! String
             var email = customer[0]["email"] as! String
             var cid_card = customer[0]["cid_card"] as! String
-            
-            
-         
-
+            var cid_card_pic = customer[0]["cid_card_pic"] as! String
+        
+        
+        if cid_card_pic != "" {
+            /////////////////////////////////
+            // set image to imageView
+            let iconString:String = cid_card_pic
+        
+            let decodedData:Data = Data(base64Encoded: iconString)!
+            let img:UIImage = UIImage(data:decodedData)!
+        
+            imgMember.image = img
+        
+            /////////////////////////////////
+        
+        } //. End check use has image from service.
+        else{
+            imgMember.image = UIImage(named: "susco_banner_01")
+        }
         
         // set the text from the data model
         cell.imgIcon.isHidden = true
@@ -94,8 +112,13 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         }
         if indexPath.row == 1 {
-            cell.lblWording.text = cid_card
             
+            
+            if cid_card != "" {
+                cell.lblWording.text = cid_card
+            }else{
+                cell.lblWording.text = "* แตะที่นี่เพื่อแก้ไข *"
+            }
         }
         if indexPath.row == 2 {
             cell.lblWording.text = "******"

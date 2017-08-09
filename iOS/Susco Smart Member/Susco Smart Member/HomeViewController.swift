@@ -43,7 +43,7 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         // validLoginState()
         
         if SharedInfo.getInstance.currentDevice == "45" {
-            yy =   365
+            yy =   689 // 365
         }
         else if SharedInfo.getInstance.currentDevice == "67"
         {
@@ -211,7 +211,7 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                 
                 var w:Int = 304
                 var h:Int = 235
-                
+                yy =  685
                 if SharedInfo.getInstance.currentDevice == "67"
                 {
                     w = 360
