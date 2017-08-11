@@ -360,11 +360,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/LoginController.swift"
-            timestampString = "523946472.140221"
+            timestampString = "524028130.720677"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "380"
-            endingLineNumber = "380"
+            startingLineNumber = "386"
+            endingLineNumber = "386"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -376,11 +376,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/LoginController.swift"
-            timestampString = "523946472.140221"
+            timestampString = "524028130.720677"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "376"
-            endingLineNumber = "376"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
             landmarkName = "LoginController"
             landmarkType = "3">
          </BreakpointContent>
@@ -392,11 +392,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/LoginController.swift"
-            timestampString = "523946472.140221"
+            timestampString = "524028130.720677"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
             landmarkName = "doSubmitRegister()"
             landmarkType = "7">
          </BreakpointContent>

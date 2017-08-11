@@ -176,9 +176,13 @@ class LoginController:  UIViewController,UITextViewDelegate {
                             // assign result from
                             SharedInfo.getInstance.json = json;
                             
+                            
+                            let customer = SharedInfo.getInstance.json!["customer_detail"] as! [AnyObject]
+                            
+                            
                             let defaults = UserDefaults.standard
                             
-                            defaults.setValue(json, forKey: "jsonLogin")
+                            defaults.setValue(customer, forKey: "jsonLogin")
                             defaults.setValue(self.txtP.text, forKey: "pw")
                             //defaults.string(forKey: "pw")
                             
@@ -265,6 +269,8 @@ class LoginController:  UIViewController,UITextViewDelegate {
                     guard let data = data else { return }
                     guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
                     
+                    self.txtU.text = ""
+                    self.txtP.text = ""
                     self.txtName.text = ""
                     self.txtPass.text = ""
                     self.txtRePass.text = ""
@@ -380,6 +386,9 @@ class LoginController:  UIViewController,UITextViewDelegate {
         
         //txtU.text = "0831356653"
         //txtP.text = "6653"
+        
+        txtU.text = "0815505881"
+        txtP.text = "5881"
         
 //        let defaults = UserDefaults.standard
 //        do{

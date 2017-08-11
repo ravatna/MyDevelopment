@@ -296,7 +296,6 @@ class ScoreViewController: UIViewController {
                 itemView.layer.shadowOffset = CGSize.zero
                 itemView.layer.shadowRadius = 1
                 
-                
                 let lblTitle:UILabel = UILabel(frame:CGRect(x:8,y:(boxHeight-35),width:(boxWidth-8),height:21))
                 
                 lblTitle.text = item["redeem_item_desc"] as! String
