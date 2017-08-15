@@ -114,15 +114,15 @@ public class NewsDetailActivity extends AppCompatActivity {
             if(App.getInstance().objNews.getString("pic3_id").length() > 0){
                 NUM_ITEMS++;
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
         //////////////////////////////////////////////////////
 
-
         try {
 
-             txvTitle.setText(App.getInstance().objNews.getString("news_head"));// not yet to use title.
+            txvTitle.setText(App.getInstance().objNews.getString("news_head"));// not yet to use title.
             txvNewsDate.setText(App.getInstance().objNews.getString("news_date"));
 
             WebSettings settings = txvDesc.getSettings();
@@ -134,10 +134,7 @@ public class NewsDetailActivity extends AppCompatActivity {
             finish();
         }
 
-
         decodedImage = new Bitmap[NUM_ITEMS];
-
-
 
     try {
         if(!App.getInstance().objNews.getString("pic1_id").equals("")) {

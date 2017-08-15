@@ -123,7 +123,7 @@ public class HomeFragment extends Fragment {
 
         try {
 
-            txvMyName.setText(App.getInstance().customerMember.getString("fname") + " " + App.getInstance().customerMember.getString("lname"));
+            txvMyName.setText(App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("\r","").replace("\n",""));
             txvMyScore.setText(App.getInstance().customerMember.getString("point_summary"));
             txvMyNumber.setText(App.getInstance().customerMember.getString("mobile"));
         } catch (Exception e) {
@@ -133,9 +133,10 @@ public class HomeFragment extends Fragment {
         m_formToken = App.getInstance().formToken.toString();
         doPriceOil();
         doBanner();
+        doNews();
         doMemberTransection();
 
-        init();
+
 
         overrideFonts(getActivity(),rootView );
         return rootView;
@@ -157,7 +158,7 @@ public class HomeFragment extends Fragment {
         }
     } // end method
 
-    private void init() {
+    private void initNews() {
         LayoutInflater inflater = LayoutInflater.from(getContext());
 
         lnrPromotion.removeAllViews();
@@ -438,6 +439,88 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+
+///////////////// news ///////////////////////
+private void doNews() {
+    new News().execute();
+}
+    private class News extends AsyncTask<Void, Void, String> {
+        String strJson,postUrl;
+        ProgressDialog pd;
+        String _mcode = "";
+
+        @Override
+        protected void onPreExecute() {
+            try {
+                _mcode = App.getInstance().customerMember.getString("member_code");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            // Create Show ProgressBar
+            strJson = "{'membercode':'" + _mcode  + "','formToken':'" + m_formToken  + "','cookieToken':'" + m_cookieToken  + "'}";
+            postUrl  = App.getInstance().m_server + "/News/getNews";
+            //            pd = new ProgressDialog(getActivity() );
+            //            pd.setMessage("กำลังดำเนินการ...");
+            //            pd.setCancelable(false);
+            //            pd.show();
+
+        }
+
+        protected String doInBackground(Void... urls)   {
+
+            String result = null;
+            try {
+
+                /////////////////////////////
+                RequestBody body = RequestBody.create(JSON, strJson);
+                Request request = new Request.Builder()
+                        .url(postUrl)
+                        .addHeader("formToken",m_formToken)
+                        .addHeader("cookieToken",m_cookieToken)
+                        .post(body)
+                        .build();
+
+
+                Response response = client.newCall(request).execute();
+                result = response.body().string();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        protected void onPostExecute(String result)  {
+
+            //            if(pd.isShowing()){
+            //                pd.dismiss();
+            //                pd = null;
+            //            }
+            JSONObject jsonObj = null;
+            try {
+                jsonObj = new JSONObject(result);
+                App.getInstance().selectNews = jsonObj.getJSONArray("select_news");
+
+                initNews();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+
+
+            //  parseResultNews(result);
+
+        }
+
+        public  final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+        OkHttpClient client = new OkHttpClient();
+
+    }// .End task news
+
 
     /////////////////////////////////////
 

@@ -13,6 +13,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -112,7 +113,7 @@ import static com.tyche.mobile.susco.R.id.edtPassword;
 
         try {
 
-            txvMyName.setText(App.getInstance().customerMember.getString("fname") + " " + App.getInstance().customerMember.getString("lname"));
+            txvMyName.setText(App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("\r","").replace("\n",""));
             txvEmail.setText(App.getInstance().customerMember.getString("email"));
             txvPhoneNo.setText(App.getInstance().customerMember.getString("mobile"));
 
@@ -520,6 +521,14 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
         });
 
 
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            imgProfile.setImageDrawable(getActivity().getDrawable(R.drawable.user));
+//        } else {
+//            imgProfile.setImageDrawable(getActivity().getDrawable(R.drawable.user,getContext().getTheme()));
+//        }
+
+
+
         // if imgProfile == null then do assign value image from base64 string.
         if(App.getInstance().imgProfile == null) {
             String imageString = "";
@@ -534,12 +543,15 @@ txvPhone.setOnClickListener(new View.OnClickListener() {
                 imageBytes = Base64.decode(imageString, Base64.DEFAULT);
                 Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
                 App.getInstance().imgProfile = decodedImage;
-
+                imgProfile.setImageBitmap(App.getInstance().imgProfile);
             } // .End if !imageString == ""
 
         }// .End if imgProfile != null
+else {
+            imgProfile.setImageBitmap(App.getInstance().imgProfile);
+        }
 
-        imgProfile.setImageBitmap(App.getInstance().imgProfile);
+
 
         imgProfile.setOnClickListener(new View.OnClickListener() {
             @Override

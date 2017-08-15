@@ -101,8 +101,8 @@ public class LoginActivity extends AppCompatActivity {
 
         edtUsername = (EditText)findViewById(R.id.edtUsername);
         edtPassword = (EditText)findViewById(R.id.edtPassword);
-//        edtUsername.setText("0831356653");
-//        edtPassword.setText("6653");
+        //edtUsername.setText("0831356653");
+        //edtPassword.setText("6653");
 
 
         edtRegistPassword = (EditText)findViewById(R.id.edtRegistPassword);
@@ -176,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                     if (edtRegistPassword.getText().toString().length() <= 0) {
-                        edtEmail.setError("ระบุรหัสผ่าน");
+                        edtRegistPassword.setError("ระบุรหัสผ่าน");
                         b = false;
                     }
 
@@ -400,7 +400,8 @@ public class LoginActivity extends AppCompatActivity {
                 App.getInstance().cookieToken = jsonObj.getString("cookieToken");
 
                 App.getInstance().customerMember = arr.getJSONObject(0);
-                App.getInstance().selectNews = jsonObj.getJSONArray("select_news");
+
+                //App.getInstance().selectNews = jsonObj.getJSONArray("select_news");
 
                 byte[] imageBytes;
                 String imageString = "";
@@ -418,7 +419,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 } // .End if !imageString == ""
 
-
+                else
+                {
+                    App.getInstance().imgProfile = null;
+                }
 
 
                 // when logoin state valid next load dialy transaction

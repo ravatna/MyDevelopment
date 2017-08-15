@@ -92,12 +92,27 @@ android:visibility="gone"
         android:id="@+id/txvHeader"
         />
 
+    <TextView
+        android:layout_below="@+id/txvHeader"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+
+        android:textSize="14sp"
+        android:layout_margin ="6dp"
+
+        android:gravity="center_horizontal|center_vertical"
+
+        android:text="ข้อมูลประจำเดือน "
+
+        android:id="@+id/txvDataDate"
+        />
+
     <TabHost
         android:id="@+id/tabhost"
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/txvHeader">
+        android:layout_below="@+id/txvDataDate">
 
         <LinearLayout
             android:layout_width="match_parent"

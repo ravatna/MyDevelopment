@@ -109,9 +109,7 @@ android:visibility="gone"
                 android:maxWidth="480dp"
                 android:maxHeight="280dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/member_card_600px_1050px"
-
-                />
+                android:src="@drawable/member_card_600px_1050px" />
 
             <TextView
                 android:id="@+id/txvCode"

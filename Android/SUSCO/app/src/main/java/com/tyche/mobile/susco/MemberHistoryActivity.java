@@ -20,6 +20,10 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 import static com.tyche.mobile.susco.R.id.btnSuscoOnline;
 import static com.tyche.mobile.susco.R.id.lnrContentHistory;
 
@@ -31,10 +35,8 @@ public class MemberHistoryActivity extends AppCompatActivity {
     private LocalActivityManager mLocalActivityManager;
 
 
-
-
-
-
+    String[] aMonths;
+    private TextView txvDataDate;
 
 
     @Override
@@ -78,6 +80,8 @@ public class MemberHistoryActivity extends AppCompatActivity {
 
         txvTitle.setTextColor(Color.parseColor("#FFFFFF"));
         txvTitle2.setTextColor(Color.parseColor("#FF008080"));
+        txvDataDate = (TextView)findViewById(R.id.txvDataDate);
+
 
         final TabHost.TabSpec tabSpec = tabHost.newTabSpec("tab1") .setIndicator(vi).setContent(R.id.tab1);
         tabHost.addTab(tabSpec);
@@ -91,6 +95,34 @@ public class MemberHistoryActivity extends AppCompatActivity {
         tabHost.addTab(tabSpec2);
 
         init();
+
+
+        Calendar c = Calendar.getInstance();
+
+        Locale lc = new Locale("th","TH");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm",lc);
+        SimpleDateFormat tf = new SimpleDateFormat("kk:mm",lc);
+
+        String formattedDate = df.format(c.getTime());
+        String formattedTime = tf.format(c.getTime());
+
+        int year=0,month=0,day=0,hh=0,mm=0;
+
+        // Date date = new Date();
+
+        //c.setTime(date);
+
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DATE);
+        hh = c.get(Calendar.HOUR);
+        mm = c.get(Calendar.MINUTE);
+
+        aMonths = new String[] {"มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"};
+
+        String d =   "ข้อมูลประจำเดือน " + aMonths[month] + " " + (year+543) ;
+
+txvDataDate.setText(d);
 
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
@@ -110,8 +142,6 @@ public class MemberHistoryActivity extends AppCompatActivity {
         });
 
         overrideFonts(this,findViewById(R.id.contentView) );
-
-
 
 
     }

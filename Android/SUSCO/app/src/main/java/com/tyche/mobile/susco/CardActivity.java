@@ -56,11 +56,10 @@ public class CardActivity extends AppCompatActivity {
         txvMyName = (TextView) findViewById(R.id.txvName);
         txvMyNumber = (TextView) findViewById(R.id.txvCode);
         txvMyDateExpire = (TextView)findViewById(R.id.txvDate);
-         p  = (ProgressBar) findViewById(R.id.progressBar);
-
+        p  = (ProgressBar) findViewById(R.id.progressBar);
 
         try {
-            txvMyName.setText(App.getInstance().customerMember.getString("fname") + " " + App.getInstance().customerMember.getString("lname"));
+            txvMyName.setText(App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("\r","").replace("\n",""));
             txvMyDateExpire.setText(App.getInstance().customerMember.getString("createdate"));
             txvMyNumber.setText(App.getInstance().customerMember.getString("member_code"));
         } catch (JSONException e) {
