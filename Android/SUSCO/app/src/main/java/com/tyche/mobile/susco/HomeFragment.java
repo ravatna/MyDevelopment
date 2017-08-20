@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,6 +75,8 @@ public class HomeFragment extends Fragment {
     private  int NUM_PAGES = 0;
     private   ArrayList<Bitmap> IMAGES= new ArrayList<>();
     private ArrayList<Bitmap> ImagesArray = new ArrayList<>();
+    private ScrollView sclMain;
+    private SwipeRefreshLayout swipeContainer;
 
 
     public HomeFragment() {
@@ -102,7 +106,7 @@ public class HomeFragment extends Fragment {
         //        bannerSlider.addBanner(new DrawableBanner(R.drawable.susco_banner_01));
         //        bannerSlider.addBanner(new DrawableBanner(R.drawable.banner_news_500px_214px_01));
         //        bannerSlider.addBanner(new DrawableBanner(R.drawable.banner_news_500px_214px_02));
-
+sclMain = (ScrollView) rootView.findViewById(R.id.sclMain);
         mPager = (ViewPager) rootView.findViewById(R.id.pager);
         indicator = (CirclePageIndicator)
                 rootView.findViewById(R.id.indicator);
@@ -131,6 +135,38 @@ public class HomeFragment extends Fragment {
         }
         m_cookieToken = App.getInstance().cookieToken.toString();
         m_formToken = App.getInstance().formToken.toString();
+
+
+
+
+        ///////////////////////////////////////////////
+
+        // Lookup the swipe container view
+        swipeContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                //fetchTimelineAsync(0);
+
+                doPriceOil();
+                doBanner();
+                doNews();
+                doMemberTransection();
+
+
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        /////////////////////////////////////////////////
         doPriceOil();
         doBanner();
         doNews();
@@ -139,8 +175,19 @@ public class HomeFragment extends Fragment {
 
 
         overrideFonts(getActivity(),rootView );
+
+
+
+
+
+
+
         return rootView;
     }
+
+
+
+
 
     private void overrideFonts(final Context context, final View v) {
         try {
@@ -246,6 +293,8 @@ public class HomeFragment extends Fragment {
         }
 
         protected void onPostExecute(String result)  {
+// Now we call setRefreshing(false) to signal refresh has finished
+            swipeContainer.setRefreshing(false);
 
             if(pd.isShowing()){
                 pd.dismiss();

@@ -1,12 +1,15 @@
 package com.tyche.mobile.susco;
 
 import android.app.LocalActivityManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,9 +20,17 @@ import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.lang.reflect.Member;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -33,10 +44,11 @@ public class MemberHistoryActivity extends AppCompatActivity {
     private Button btnBack,btnSuscoOnline;
     LinearLayout lnrContentHistory,lnrContentHistory2;
     private LocalActivityManager mLocalActivityManager;
-
+    private String m_formToken,m_cookieToken;
 
     String[] aMonths;
     private TextView txvDataDate;
+    private SwipeRefreshLayout swipeContainer;
 
 
     @Override
@@ -44,6 +56,9 @@ public class MemberHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mLocalActivityManager = new LocalActivityManager(this, false);
         mLocalActivityManager.dispatchCreate(savedInstanceState);
+        m_cookieToken = App.getInstance().cookieToken.toString();
+        m_formToken = App.getInstance().formToken.toString();
+
 
         setContentView(R.layout.activity_member_history);
         lnrContentHistory = (LinearLayout) findViewById(R.id.lnrContentHistory);
@@ -96,33 +111,22 @@ public class MemberHistoryActivity extends AppCompatActivity {
 
         init();
 
-
         Calendar c = Calendar.getInstance();
 
         Locale lc = new Locale("th","TH");
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm",lc);
         SimpleDateFormat tf = new SimpleDateFormat("kk:mm",lc);
 
-        String formattedDate = df.format(c.getTime());
-        String formattedTime = tf.format(c.getTime());
-
-        int year=0,month=0,day=0,hh=0,mm=0;
-
-        // Date date = new Date();
-
-        //c.setTime(date);
+        int year=0,month=0;
 
         year = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
-        day = c.get(Calendar.DATE);
-        hh = c.get(Calendar.HOUR);
-        mm = c.get(Calendar.MINUTE);
 
         aMonths = new String[] {"มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"};
 
         String d =   "ข้อมูลประจำเดือน " + aMonths[month] + " " + (year+543) ;
 
-txvDataDate.setText(d);
+        txvDataDate.setText(d);
 
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
@@ -144,7 +148,122 @@ txvDataDate.setText(d);
         overrideFonts(this,findViewById(R.id.contentView) );
 
 
+        ///////////////////////////////////////////////
+
+        // Lookup the swipe container view
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+
+                doMemberTransection();
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        /////////////////////////////////////////////////
+
     }
+
+    private void doMemberTransection() {
+
+        new MemberTransection().execute();
+    }
+
+    private class MemberTransection extends AsyncTask<Void, Void, String> {
+        String strJson,postUrl;
+        ProgressDialog pd;
+        String _mcode = "";
+
+        @Override
+        protected void onPreExecute() {
+            try {
+                _mcode = App.getInstance().customerMember.getString("member_code");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            // Create Show ProgressBar
+            strJson = "{'membercode':'" + _mcode  + "','formToken':'" + m_formToken  + "','cookieToken':'" + m_cookieToken  + "'}";
+            postUrl  = App.getInstance().m_server + "/ListTransactionCustomer/GetTransactionByMember";
+            pd = new ProgressDialog(MemberHistoryActivity.this);
+            pd.setMessage("กำลังดำเนินการ...");
+            pd.setCancelable(false);
+            pd.show();
+
+        }
+
+        protected String doInBackground(Void... urls)   {
+
+            String result = null;
+            try {
+
+                /////////////////////////////
+                RequestBody body = RequestBody.create(JSON, strJson);
+                Request request = new Request.Builder()
+                        .url(postUrl)
+                        .addHeader("formToken",m_formToken)
+                        .addHeader("cookieToken",m_cookieToken)
+                        .post(body)
+                        .build();
+
+
+                Response response = client.newCall(request).execute();
+                result = response.body().string();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        protected void onPostExecute(String result)  {
+            // Now we call setRefreshing(false) to signal refresh has finished
+            swipeContainer.setRefreshing(false);
+
+            if(pd.isShowing()){
+                pd.dismiss();
+                pd = null;
+            }
+
+            parseResultMemberTransection(result);
+        }
+
+        public  final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        OkHttpClient client = new OkHttpClient();
+    }
+
+    private void parseResultMemberTransection(String result) {
+
+        swipeContainer.setRefreshing(false);
+
+
+        if(result == null)
+            return ;
+
+        ////////////////////////////////
+        try {
+            JSONObject jsonObj = new JSONObject(result);
+            App.getInstance().loginObject = jsonObj;
+
+            // keep transaction on json array object.
+            App.getInstance().transactionDialies = jsonObj.getJSONArray("transaction_daily");
+            App.getInstance().redeemTransactions = jsonObj.getJSONArray("get_redeem_request");
+            init(); // initial list item on transaction datatable.
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /////////////////////////////////////
 
     private void overrideFonts(final Context context, final View v) {
         try {
@@ -167,22 +286,17 @@ txvDataDate.setText(d);
 
         lnrContentHistory.removeAllViews();
         lnrContentHistory2.removeAllViews();
-        for(int i = 0; i <   App.getInstance().transactionDialies.length(); i ++){
 
+        for(int i = 0; i <   App.getInstance().transactionDialies.length(); i ++){
             try {
                 JSONObject jsonObj = App.getInstance().transactionDialies.getJSONObject(i);
-
                 View giftView = inflater.inflate(R.layout._item_history,null);
-
                 ((TextView)giftView.findViewById(R.id.txvCol1)).setText(jsonObj.getString("service_date"));
                 ((TextView)giftView.findViewById(R.id.txvCol2)).setText(jsonObj.getString("branch_code"));
                 ((TextView)giftView.findViewById(R.id.txvCol3)).setText(jsonObj.getString("point_earn"));
-
-
                 if(i%2==0){
                     giftView.setBackgroundColor(Color.parseColor("#ffffff"));
                 }
-
                 lnrContentHistory.addView(giftView);
 
             } catch (JSONException e) {

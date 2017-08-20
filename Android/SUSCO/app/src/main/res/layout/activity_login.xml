@@ -183,6 +183,7 @@
                     android:textColorHint="#0476B9"
                     android:hint="เบอร์โทรศัพท์"
                     android:gravity="left"
+                    android:maxLength="10"
                     android:textColor="#0476B9" />
             </LinearLayout>
             <LinearLayout
@@ -260,6 +261,7 @@
                     android:textColorHint="#0476B9"
                     android:hint="อีเมล"
                     android:gravity="left"
+                    android:maxLength="32"
                     android:textColor="#0476B9"
                     android:inputType="textEmailAddress" />
             </LinearLayout>

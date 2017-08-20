@@ -152,10 +152,12 @@ public class LoginActivity extends AppCompatActivity {
 
                 } else {
 
-
                     boolean b = true;
                     //@todo : validate user input data.
-                    if (edtPhone.getText().toString().length() != 10) {
+
+
+                    if(!App.getInstance().validMobilePhone(edtPhone.getText().toString())){
+
                         edtPhone.setError("ระบุหมายเลขโทรศัพท์");
                         b = false;
                     }
@@ -170,7 +172,8 @@ public class LoginActivity extends AppCompatActivity {
                         b = false;
                     }
 
-                    if (edtEmail.getText().toString().length() < 4) {
+                   // if (edtEmail.getText().toString().length() < 4) {
+                    if(!App.getInstance().validEmail(edtEmail.getText().toString())){
                         edtEmail.setError("อีเมล์ไม่ถูกต้อง");
                         b = false;
                     }
