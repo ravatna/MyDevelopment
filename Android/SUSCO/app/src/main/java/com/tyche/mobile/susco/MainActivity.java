@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     UserInfoFragment userInfoFragment;
     Button btnSuscoOnline,btnUserInfo;
 
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -195,6 +196,8 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+
+
         btnSuscoOnline = (Button) findViewById(R.id.btnSuscoOnline);
         btnSuscoOnline.setVisibility(View.INVISIBLE);
         btnSuscoOnline.setOnClickListener(new View.OnClickListener() {
@@ -217,6 +220,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         btnUserInfo.setVisibility(View.INVISIBLE);
+
+
         int[] tabIcons = new int[3];
 
         tabLayout.getTabAt(0).setIcon(R.drawable.home32);
@@ -224,12 +229,32 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(R.drawable.medal_gray_32);
         tabLayout.getTabAt(2).setIcon(R.drawable.placeholder_gray_32);
         tabLayout.getTabAt(3).setIcon(R.drawable.user_gray_64);
+    }
 
 
+    @Override
+    public void onBackPressed() {
 
 
+              AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("ยืนยัน");
+            alert.setMessage("ต้องการปิด SUSCO Smart Member ใช่หรือไม่?");
 
+            alert.setNeutralButton( "ใช่",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    });
 
+            alert.setNegativeButton( "ไม่ใช่",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alert.show();
     }
 
     @Override
@@ -251,15 +276,6 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-//            fragment.onActivityResult(requestCode, resultCode, data);
-//        }
-//    }
 
     void selectPage(TabLayout tabLayout, ViewPager viewPager, int pageIndex){
         tabLayout.setScrollPosition(pageIndex,0f,true);
@@ -321,6 +337,8 @@ public class MainActivity extends AppCompatActivity {
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
+
+
     }
 
 
@@ -377,29 +395,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
 
-
-
         }
-
-
-//
-//@Override
-//public CharSequence getPageTitle(int position) {
-//
-//
-//    int icon[] = new int[4];
-//    icon[0] = R.drawable.ic_user_selector;
-//    icon[1] = R.drawable.ic_user_selector;
-//    icon[2] = R.drawable.ic_user_selector;
-//    icon[3] = R.drawable.ic_user_selector;
-//
-//    Drawable drawable = getApplicationContext().getResources().getDrawable(R.drawable.home64);
-//    drawable.setBounds(0,0,48,48);
-//    ImageSpan imageSpan = new ImageSpan(drawable);
-//    SpannableString spannableString = new SpannableString(" ");
-//    spannableString.setSpan(imageSpan, 0,spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//    return spannableString;
-//}
-
     }
 }

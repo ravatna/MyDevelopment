@@ -62,6 +62,29 @@
                     app:fillColor="#ff0099"
                     app:pageColor="#FF0000"
                     app:snap="false" />
+
+                <Button
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="0dp"
+                    android:id="@+id/btnPageRight"
+                    android:layout_width="40dp"
+                    android:textColor="#fefefe"
+                    android:background="#20000088"
+                    android:textSize="18sp"
+                    android:layout_height="70dp"
+                    android:text="&gt;" />
+                <Button
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="0dp"
+                    android:id="@+id/btnPageLeft"
+                    android:layout_width="40dp"
+                    android:textColor="#fefefe"
+                    android:background="#20000088"
+                    android:textSize="18sp"
+                    android:layout_height="70dp"
+                    android:text="&lt;" />
+
             </RelativeLayout>
 
 

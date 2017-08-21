@@ -43,7 +43,6 @@ public class NewsAdapter extends BaseAdapter {
         try {
             return App.getInstance().selectNews.getJSONObject(position);
         } catch (JSONException e) {
-
             return new JSONObject();
         }
     }
@@ -66,6 +65,7 @@ public class NewsAdapter extends BaseAdapter {
             newsObj  = App.getInstance().selectNews.getJSONObject(position);
             txvTitle.setText(newsObj.getString("news_head"));
             String imageString = newsObj.getString("pic1_id");
+
             //decode base64 string to image
             byte[] imageBytes = Base64.decode(imageString, Base64.DEFAULT);
             Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
@@ -73,7 +73,6 @@ public class NewsAdapter extends BaseAdapter {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
         return vi;
     }

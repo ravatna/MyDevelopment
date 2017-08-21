@@ -90,21 +90,17 @@ public class MemberHistoryActivity extends AppCompatActivity {
 
         TabHost tabHost = (TabHost)findViewById(R.id.tabhost);
         tabHost.setup(mLocalActivityManager);
-        txvTitle.setText("ประวัติสะสมแต้ม");
+        txvTitle.setText("ประวัติสะสมคะแนน");
         txvTitle.setBackgroundColor(Color.parseColor("#FF008080"));
 
         txvTitle.setTextColor(Color.parseColor("#FFFFFF"));
         txvTitle2.setTextColor(Color.parseColor("#FF008080"));
         txvDataDate = (TextView)findViewById(R.id.txvDataDate);
 
-
         final TabHost.TabSpec tabSpec = tabHost.newTabSpec("tab1") .setIndicator(vi).setContent(R.id.tab1);
         tabHost.addTab(tabSpec);
 
-
-
-
-        txvTitle2.setText("ประวัติแลกแต้ม");
+        txvTitle2.setText("ประวัติแลกคะแนน");
         txvTitle2.setBackgroundColor(Color.parseColor("#FFFFD92E"));
         TabHost.TabSpec tabSpec2 = tabHost.newTabSpec("tab2") .setIndicator(vi2).setContent(R.id.tab2);
         tabHost.addTab(tabSpec2);

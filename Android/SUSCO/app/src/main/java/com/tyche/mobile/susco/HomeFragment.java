@@ -1,19 +1,17 @@
 package com.tyche.mobile.susco;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Base64;
@@ -21,11 +19,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
@@ -39,14 +37,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 /**
@@ -64,7 +58,7 @@ public class HomeFragment extends Fragment {
     private TextView txvMyScore;
 
     private TextView txvDateUpdate,txtTitle1,txtTitle2,txtTitle3,txtTitle4,txtTitle5,txtTitle6,txtTitle7,txtTitle8;
-
+    private Button btnPageLeft,btnPageRight;
 
     LinearLayout lnrPromotion;
     private String m_formToken,m_cookieToken;
@@ -73,11 +67,13 @@ public class HomeFragment extends Fragment {
     private  ViewPager mPager;
     private  int currentPage = 0;
     private  int NUM_PAGES = 0;
-    private   ArrayList<Bitmap> IMAGES= new ArrayList<>();
-    private ArrayList<Bitmap> ImagesArray = new ArrayList<>();
+
     private ScrollView sclMain;
     private SwipeRefreshLayout swipeContainer;
 
+    static Bitmap[] decodedImage;
+
+    ImageFragmentPagerAdapter imageFragmentPagerAdapter;
 
     public HomeFragment() {
     }
@@ -98,18 +94,15 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main_home, container, false);
 
+        sclMain = (ScrollView) rootView.findViewById(R.id.sclMain);
 
-        //bannerSlider = (BannerSlider) rootView.findViewById(R.id.banner_slider1);
-        //        //add banner using image url
-        //       //  bannerSlider.addBanner(new RemoteBanner("Put banner image url here ..."));
-        //        //add banner using resource drawable
-        //        bannerSlider.addBanner(new DrawableBanner(R.drawable.susco_banner_01));
-        //        bannerSlider.addBanner(new DrawableBanner(R.drawable.banner_news_500px_214px_01));
-        //        bannerSlider.addBanner(new DrawableBanner(R.drawable.banner_news_500px_214px_02));
-sclMain = (ScrollView) rootView.findViewById(R.id.sclMain);
+        imageFragmentPagerAdapter = new ImageFragmentPagerAdapter(getChildFragmentManager());
         mPager = (ViewPager) rootView.findViewById(R.id.pager);
-        indicator = (CirclePageIndicator)
-                rootView.findViewById(R.id.indicator);
+
+        indicator = (CirclePageIndicator) rootView.findViewById(R.id.indicator);
+
+        btnPageLeft = (Button)rootView.findViewById(R.id.btnPageLeft);
+        btnPageRight = (Button)rootView.findViewById(R.id.btnPageRight);
 
         txvDateUpdate = (TextView)rootView.findViewById(R.id.txvDateUpdate);
         lnrPromotion = (LinearLayout)rootView.findViewById(R.id.lnrPromotion);
@@ -126,20 +119,52 @@ sclMain = (ScrollView) rootView.findViewById(R.id.sclMain);
         txtTitle8 = (TextView)rootView.findViewById(R.id.txtTitle8);
 
         try {
-
             txvMyName.setText(App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("\r","").replace("\n",""));
             txvMyScore.setText(App.getInstance().customerMember.getString("point_summary"));
             txvMyNumber.setText(App.getInstance().customerMember.getString("mobile"));
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         m_cookieToken = App.getInstance().cookieToken.toString();
         m_formToken = App.getInstance().formToken.toString();
 
+//////////////////////////////////////////////////////
 
+        btnPageLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    int current = mPager.getCurrentItem();
 
+                    if( (current-1) < 0 ){
+                        mPager.setCurrentItem(0);
+                    }else{
+                        mPager.setCurrentItem(mPager.getCurrentItem()-1);
+                    }
 
-        ///////////////////////////////////////////////
+                }catch (Exception ex){ }
+            }
+        });
+
+        btnPageRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    int current = mPager.getCurrentItem() ;
+
+                    if( (current + 1) > mPager.getAdapter().getCount() ){
+                        mPager.setCurrentItem(mPager.getAdapter().getCount());
+                    }else{
+                        mPager.setCurrentItem(mPager.getCurrentItem()+1);
+                    }
+
+                }catch (Exception ex){ }
+
+            }
+        });
+
+        //////////////////////////////////////////////////////
 
         // Lookup the swipe container view
         swipeContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeContainer);
@@ -172,21 +197,10 @@ sclMain = (ScrollView) rootView.findViewById(R.id.sclMain);
         doNews();
         doMemberTransection();
 
-
-
         overrideFonts(getActivity(),rootView );
-
-
-
-
-
-
 
         return rootView;
     }
-
-
-
 
 
     private void overrideFonts(final Context context, final View v) {
@@ -241,7 +255,6 @@ sclMain = (ScrollView) rootView.findViewById(R.id.sclMain);
     } // end init
 
     private void doMemberTransection() {
-
         new MemberTransection().execute();
     }
 
@@ -281,7 +294,6 @@ sclMain = (ScrollView) rootView.findViewById(R.id.sclMain);
                         .post(body)
                         .build();
 
-
                 Response response = client.newCall(request).execute();
                 result = response.body().string();
 
@@ -293,7 +305,7 @@ sclMain = (ScrollView) rootView.findViewById(R.id.sclMain);
         }
 
         protected void onPostExecute(String result)  {
-// Now we call setRefreshing(false) to signal refresh has finished
+            // Now we call setRefreshing(false) to signal refresh has finished
             swipeContainer.setRefreshing(false);
 
             if(pd.isShowing()){
@@ -415,20 +427,15 @@ sclMain = (ScrollView) rootView.findViewById(R.id.sclMain);
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm",lc);
             SimpleDateFormat tf = new SimpleDateFormat("kk:mm",lc);
 
-            String formattedDate = df.format(c.getTime());
+
             String formattedTime = tf.format(c.getTime());
 
             int year=0,month=0,day=0,hh=0,mm=0;
 
-               // Date date = new Date();
-
-                //c.setTime(date);
-
                 year = c.get(Calendar.YEAR);
                 month = c.get(Calendar.MONTH);
                 day = c.get(Calendar.DATE);
-                hh = c.get(Calendar.HOUR);
-                mm = c.get(Calendar.MINUTE);
+
 
 
             String d =   day + "/" + (month+1) + "/" + (year+543) ;
@@ -480,15 +487,11 @@ sclMain = (ScrollView) rootView.findViewById(R.id.sclMain);
 
                     txtTitle8.setText(item.getString("set_price") + " บาท/กก.");
                 }
-
             }
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
 
 ///////////////// news ///////////////////////
 private void doNews() {
@@ -520,7 +523,6 @@ private void doNews() {
 
             String result = null;
             try {
-
                 /////////////////////////////
                 RequestBody body = RequestBody.create(JSON, strJson);
                 Request request = new Request.Builder()
@@ -529,8 +531,6 @@ private void doNews() {
                         .addHeader("cookieToken",m_cookieToken)
                         .post(body)
                         .build();
-
-
                 Response response = client.newCall(request).execute();
                 result = response.body().string();
 
@@ -556,21 +556,13 @@ private void doNews() {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
-
-
             //  parseResultNews(result);
-
         }
 
         public  final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-
         OkHttpClient client = new OkHttpClient();
 
     }// .End task news
-
-
     /////////////////////////////////////
 
     private void doBanner() {
@@ -639,9 +631,7 @@ private void doNews() {
 
         OkHttpClient client = new OkHttpClient();
 
-    }
-
-
+    }// .End Banner
 
     private void parseResultBanner(String result) {
         if(result == null)
@@ -652,144 +642,175 @@ private void doNews() {
             JSONObject jsonObj = new JSONObject(result);
             App.getInstance().objBanner = jsonObj;
             JSONArray jsonArray = jsonObj.getJSONArray("banner");
-ImagesArray = new ArrayList<>();
-            Log.i("JSON Banner",result);
+
+            //Log.i("JSON Banner",result);
+            decodedImage = new Bitmap[jsonArray.length()];
             for(int i =0; i < jsonArray.length(); i++){
                 final JSONObject item = jsonArray.getJSONObject(i);
 
                 String imageString = item.getString("image");
                 //decode base64 string to image
                 byte[] imageBytes = Base64.decode(imageString, Base64.DEFAULT);
-                Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                // img.setImageBitmap(decodedImage);
-
-                ImagesArray.add(decodedImage);
+                 decodedImage[i] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
 
             } // end for
 
-
-            mPager.setAdapter(new SlidingImage_Adapter(getActivity(),ImagesArray));
-
-
-
+            mPager.setAdapter(imageFragmentPagerAdapter);
             indicator.setViewPager(mPager);
             final float density = getResources().getDisplayMetrics().density;
 
-            //Set circle indicator radius
-            indicator.setRadius(5 * density);
-
-            NUM_PAGES =IMAGES.size();
-
-            // Auto start of viewpager
-            final Handler handler = new Handler();
-            final Runnable Update = new Runnable() {
-                public void run() {
-                    if (currentPage == NUM_PAGES) {
-                        currentPage = 0;
-                    }
-                    mPager.setCurrentItem(currentPage++, true);
-                }
-            };
-            Timer swipeTimer = new Timer();
-            swipeTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    handler.post(Update);
-                }
-            }, 3000, 3000);
-
-            // Pager listener over indicator
-            indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-                @Override
-                public void onPageSelected(int position) {
-                    currentPage = position;
-
-
-
-
-
-
-
-
-
-                }
-
-                @Override
-                public void onPageScrolled(int pos, float arg1, int arg2) {
-
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int pos) {
-
-                }
-            });
-
+            NUM_PAGES =decodedImage.length;
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }// .End parseBannerResult
+
+
+// private void parseResultBanner(String result) {
+//        if(result == null)
+//            return ;
+//
+//        ////////////////////////////////
+//        try {
+//            JSONObject jsonObj = new JSONObject(result);
+//            App.getInstance().objBanner = jsonObj;
+//            JSONArray jsonArray = jsonObj.getJSONArray("banner");
+//            ImagesArray = new ArrayList<>();
+//            //Log.i("JSON Banner",result);
+//            decodedImage = new Bitmap[jsonArray.length()];
+//            for(int i =0; i < jsonArray.length(); i++){
+//                final JSONObject item = jsonArray.getJSONObject(i);
+//
+//                String imageString = item.getString("image");
+//                //decode base64 string to image
+//                byte[] imageBytes = Base64.decode(imageString, Base64.DEFAULT);
+//                 decodedImage[i] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+//
+//                //-----------------ImagesArray.add(decodedImage);
+//            } // end for
+//
+//           // ---------------- mPager.setAdapter(new SlidingImage_Adapter(getActivity(),ImagesArray));
+//
+//            indicator.setViewPager(mPager);
+//            final float density = getResources().getDisplayMetrics().density;
+//
+//            //Set circle indicator radius
+//            indicator.setRadius(5 * density);
+//
+//            NUM_PAGES =IMAGES.size();
+//
+//            // Auto start of viewpager
+//            final Handler handler = new Handler();
+//            final Runnable Update = new Runnable() {
+//                public void run() {
+//                    if (currentPage == NUM_PAGES) {
+//                        currentPage = 0;
+//                    }
+//                    mPager.setCurrentItem(currentPage++, true);
+//                }
+//            };
+//            Timer swipeTimer = new Timer();
+//            swipeTimer.schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    handler.post(Update);
+//                }
+//            }, 3000, 3000);
+//
+//            // Pager listener over indicator
+//            indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//
+//                @Override
+//                public void onPageSelected(int position) {
+//                    currentPage = position;
+//
+//                }
+//
+//                @Override
+//                public void onPageScrolled(int pos, float arg1, int arg2) {
+//
+//                }
+//
+//                @Override
+//                public void onPageScrollStateChanged(int pos) {
+//
+//                }
+//            });
+//
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//    }// .End parseBannerResult
+
+    public static class ImageFragmentPagerAdapter extends FragmentPagerAdapter {
+        public ImageFragmentPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public int getCount() {
+            return decodedImage.length;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            SwipeFragment fragment = new SwipeFragment();
+            return SwipeFragment.newInstance(position);
+        }
     }
 
+    public static class SwipeFragment extends Fragment {
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View swipeView = inflater.inflate(R.layout.swipe_fragment, container, false);
+            ImageView imageView = (ImageView) swipeView.findViewById(R.id.imageView);
+            Bundle bundle = getArguments();
+            final int position = bundle.getInt("position");
 
+            imageView.setImageBitmap(decodedImage[position]);
 
-    //    private void initSlideBanner() {
-    //        for(int i=0;i<IMAGES.length;i++)
-    //            ImagesArray.add(IMAGES[i]);
-    //
-    //
-    //        mPager.setAdapter(new SlidingImage_Adapter(getActivity(),ImagesArray));
-    //
-    //
-    //
-    //        indicator.setViewPager(mPager);
-    //
-    //        final float density = getResources().getDisplayMetrics().density;
-    //
-    ////Set circle indicator radius
-    //        indicator.setRadius(5 * density);
-    //
-    //        NUM_PAGES =IMAGES.length;
-    //
-    //        // Auto start of viewpager
-    //        final Handler handler = new Handler();
-    //        final Runnable Update = new Runnable() {
-    //            public void run() {
-    //                if (currentPage == NUM_PAGES) {
-    //                    currentPage = 0;
-    //                }
-    //                mPager.setCurrentItem(currentPage++, true);
-    //            }
-    //        };
-    //        Timer swipeTimer = new Timer();
-    //        swipeTimer.schedule(new TimerTask() {
-    //            @Override
-    //            public void run() {
-    //                handler.post(Update);
-    //            }
-    //        }, 3000, 3000);
-    //
-    //        // Pager listener over indicator
-    //        indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-    //
-    //            @Override
-    //            public void onPageSelected(int position) {
-    //                currentPage = position;
-    //
-    //            }
-    //
-    //            @Override
-    //            public void onPageScrolled(int pos, float arg1, int arg2) {
-    //
-    //            }
-    //
-    //            @Override
-    //            public void onPageScrollStateChanged(int pos) {
-    //
-    //            }
-    //        });
-    //
-    //    }
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    JSONArray jsonArray = null;
+                    try {
+                        jsonArray = App.getInstance().objBanner.getJSONArray("banner");
+                        final JSONObject item = jsonArray.getJSONObject(position);
+
+                        if(!item.getString("banner_url").equals("")) {
+                            if(!item.getString("banner_url").contains("http://") && !item.getString("banner_url").contains("https://")) {
+                                Uri webpage = Uri.parse("http://" + item.getString("banner_url"));
+                                Intent myIntent = new Intent(Intent.ACTION_VIEW, webpage);
+                                getActivity().startActivity(myIntent);
+                            }else{
+                                Uri webpage = Uri.parse(item.getString("banner_url"));
+                                Intent myIntent = new Intent(Intent.ACTION_VIEW, webpage);
+                                getActivity().startActivity(myIntent);
+                            }
+
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            return swipeView;
+        }
+
+        static SwipeFragment newInstance(int position) {
+            SwipeFragment swipeFragment = new SwipeFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("position", position);
+            swipeFragment.setArguments(bundle);
+            return swipeFragment;
+        }
+    }
+
 
 }

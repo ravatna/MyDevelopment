@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     private LinearLayout lnrRegister;
     private EditText edtUsername;
     private EditText edtPassword;
-    private EditText edtRegistUsername;
+
     private EditText edtRegistPassword;
     private EditText edtRePassword;
     private EditText edtFname;
@@ -78,8 +78,6 @@ public class LoginActivity extends AppCompatActivity {
 
         initView();
 
-
-
     }// .End onCreate
 
     public  boolean isCanOnline() {
@@ -103,7 +101,6 @@ public class LoginActivity extends AppCompatActivity {
         edtPassword = (EditText)findViewById(R.id.edtPassword);
         //edtUsername.setText("0831356653");
         //edtPassword.setText("6653");
-
 
         edtRegistPassword = (EditText)findViewById(R.id.edtRegistPassword);
         edtRePassword = (EditText)findViewById(R.id.edtRePassword);
@@ -232,7 +229,6 @@ public class LoginActivity extends AppCompatActivity {
                                     })
                             .show();
 
-
                 } else {
 
                     boolean b = true;
@@ -311,6 +307,15 @@ public class LoginActivity extends AppCompatActivity {
         btnSwitchRegister.setTextColor(Color.parseColor("#0476B9"));
         btnSwitchRegister.setBackgroundResource(R.drawable.button_right_radius_white);
 
+        edtUsername.setText("");
+        edtPassword.setText("");
+        edtPhone.setText("");
+        edtFname.setText("");
+        edtLname.setText("");
+        edtEmail.setText("");
+        // edtRegistUsername.setText("");
+        edtRegistPassword.setText("");
+        edtRePassword.setText("");
     }
 
     private void LoginToRegisterView() {
@@ -322,6 +327,16 @@ public class LoginActivity extends AppCompatActivity {
 
         btnSwitchRegister.setTextColor(Color.WHITE);
         btnSwitchRegister.setBackgroundResource(R.drawable.button_right_radius_blue);
+
+        edtUsername.setText("");
+        edtPassword.setText("");
+        edtPhone.setText("");
+        edtFname.setText("");
+        edtLname.setText("");
+        edtEmail.setText("");
+        //edtRegistUsername.setText("");
+        edtRegistPassword.setText("");
+        edtRePassword.setText("");
     }
 
 

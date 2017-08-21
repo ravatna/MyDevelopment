@@ -74,6 +74,7 @@ public class NewsDetailActivity extends AppCompatActivity {
         TextView txvTitle = (TextView)findViewById(R.id.txtTitle);
         TextView txvNewsDate = (TextView)findViewById(R.id.txtNewsDate);
         WebView txvDesc = (WebView)findViewById(R.id.txtDesc);
+
         imgPicture1 = (ImageView)findViewById(R.id.imgBanner1);
         imgPicture2 = (ImageView)findViewById(R.id.imgBanner2);
         imgPicture3 = (ImageView)findViewById(R.id.imgBanner3);
@@ -127,8 +128,11 @@ public class NewsDetailActivity extends AppCompatActivity {
 
             WebSettings settings = txvDesc.getSettings();
             settings.setDefaultTextEncodingName("utf-8");
-            txvDesc.loadData(App.getInstance().objNews.getString("news_text"), "text/html; charset=utf-8",null);
 
+            txvDesc.loadData(App.getInstance().objNews.getString("news_text"), "text/html; charset=utf-8",null);
+            txvDesc.getSettings().setJavaScriptEnabled(true);
+            txvDesc.getSettings().setGeolocationEnabled(true);
+            txvDesc.getSettings().setAllowContentAccess(true);
         } catch (JSONException e) {
             e.printStackTrace();
             finish();
@@ -238,10 +242,6 @@ public class NewsDetailActivity extends AppCompatActivity {
             ImageView imageView = (ImageView) swipeView.findViewById(R.id.imageView);
             Bundle bundle = getArguments();
             final int position = bundle.getInt("position");
-//            String imageFileName = IMAGE_NAME[position];
-//            int imgResId = getResources().getIdentifier(imageFileName, "drawable", "com.javapapers.android.swipeimageslider");
-//            imageView.setImageResource(imgResId);
-
 
             imageView.setImageBitmap(decodedImage[position]);
 
@@ -262,16 +262,12 @@ public class NewsDetailActivity extends AppCompatActivity {
 
                     ImageView x = (ImageView)settingsDialog.findViewById(R.id.imageView);
 
-
                     x.setImageBitmap(decodedImage[position]);
-
 
                     settingsDialog.setCancelable(true);
                     settingsDialog.show();
-
                 }
             });
-
 
             return swipeView;
         }

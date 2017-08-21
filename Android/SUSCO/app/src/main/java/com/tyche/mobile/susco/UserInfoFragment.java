@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -26,6 +27,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -61,7 +63,7 @@ import static com.tyche.mobile.susco.R.id.edtPassword;
     public static int SELECT_PHOTO = -1;
     static UserInfoFragment fragment;
 
-
+    private Button btnPageLeft,btnPageRight;
     private TextView txvMyName;
     private TextView txvPhoneNo;
     private TextView txvEmail,txvIdCard;
@@ -75,10 +77,13 @@ import static com.tyche.mobile.susco.R.id.edtPassword;
     private static final String MY_PREFS = "susco_tyche";
     private String _mobile = "";
     private String tmpIdCard = "";
+    private String tmpEmail = "";
 
-private LinearLayout lnrPhoneNo,lnrIdCard,lnrPassword,lnrEmail,lnrCard,lnrHistory,lnrLogout;
+    private LinearLayout lnrPhoneNo,lnrIdCard,lnrPassword,lnrEmail,lnrCard,lnrHistory,lnrLogout;
+    private LinearLayout lnrMyName;
+
     public UserInfoFragment() {
-    }
+        }
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -106,6 +111,7 @@ private LinearLayout lnrPhoneNo,lnrIdCard,lnrPassword,lnrEmail,lnrCard,lnrHistor
         m_formToken = App.getInstance().formToken.toString();
 
 
+        lnrMyName = (LinearLayout) rootView.findViewById(R.id.lnrMyName);
         lnrIdCard = (LinearLayout) rootView.findViewById(R.id.lnrIdCard);
         lnrPhoneNo = (LinearLayout) rootView.findViewById(R.id.lnrPhoneNo);
         lnrPassword = (LinearLayout) rootView.findViewById(R.id.lnrPassword);
@@ -113,7 +119,6 @@ private LinearLayout lnrPhoneNo,lnrIdCard,lnrPassword,lnrEmail,lnrCard,lnrHistor
         lnrCard = (LinearLayout) rootView.findViewById(R.id.lnrCard);
         lnrHistory = (LinearLayout) rootView.findViewById(R.id.lnrHistory);
         lnrLogout = (LinearLayout) rootView.findViewById(R.id.lnrLogout);
-
 
         txvIdCard = (TextView) rootView.findViewById(R.id.txvIdCard);
         txvMyName = (TextView) rootView.findViewById(R.id.txvMyName);
@@ -124,14 +129,30 @@ private LinearLayout lnrPhoneNo,lnrIdCard,lnrPassword,lnrEmail,lnrCard,lnrHistor
 
         try {
 
-            txvMyName.setText(App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("\r","").replace("\n",""));
-            txvEmail.setText(App.getInstance().customerMember.getString("email"));
             txvPhoneNo.setText(App.getInstance().customerMember.getString("mobile"));
+
+            // @todo debug
+            if(!App.getInstance().customerMember.getString("fname").equals("") && !App.getInstance().customerMember.getString("lname").equals("")) {
+                txvMyName.setText(App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("\r","").replace("\n",""));
+            }else{
+                txvMyName.setText("* แตะที่นี่เพื่อแก้ไข *");
+            }
+
+
+            // @todo debug
+            if(!App.getInstance().customerMember.getString("email").equals("")) {
+
+                txvEmail.setText(App.getInstance().customerMember.getString("email").replace("\r","").replace("\n",""));
+                tmpEmail = App.getInstance().customerMember.getString("email").replace("\r","").replace("\n","");
+            }else{
+                txvEmail.setText("* แตะที่นี่เพื่อแก้ไข *");
+            }
+
 
             if(!App.getInstance().customerMember.getString("cid_card").equals("")) {
 
-                txvIdCard.setText(App.getInstance().customerMember.getString("cid_card"));
-                tmpIdCard = App.getInstance().customerMember.getString("cid_card");
+                txvIdCard.setText(App.getInstance().customerMember.getString("cid_card").replace("\r","").replace("\n",""));
+                tmpIdCard = App.getInstance().customerMember.getString("cid_card").replace("\r","").replace("\n","");
             }else{
                 txvIdCard.setText("* แตะที่นี่เพื่อแก้ไข *");
             }
@@ -139,21 +160,18 @@ private LinearLayout lnrPhoneNo,lnrIdCard,lnrPassword,lnrEmail,lnrCard,lnrHistor
             e.printStackTrace();
         }
 
-        TextView txvEmail = (TextView)rootView.findViewById(R.id.txvEmail);
-        TextView txvPhone = (TextView)rootView.findViewById(R.id.txvPhoneNo);
-        TextView txvPassword = (TextView)rootView.findViewById(R.id.txvPassword);
+//        TextView txvEmail = (TextView)rootView.findViewById(R.id.txvEmail);
+//        TextView txvPhone = (TextView)rootView.findViewById(R.id.txvPhoneNo);
+//        TextView txvPassword = (TextView)rootView.findViewById(R.id.txvPassword);
 
 ///////////////////////////////////////////////////////////////////////
-        txvMyName.setOnClickListener(new View.OnClickListener() {
+        lnrMyName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder pDialog = new AlertDialog.Builder(getActivity());
                 pDialog.setTitle("แก้ไข ชื่อ-สกุล");
                 final EditText fname = new EditText(getActivity());
                 final EditText lname = new EditText(getActivity());
-
-                fname.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                lname.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
                 fname.setHint("ระบุชื่อ");
                 lname.setHint("ระบุสกุล");
@@ -201,11 +219,6 @@ private LinearLayout lnrPhoneNo,lnrIdCard,lnrPassword,lnrEmail,lnrCard,lnrHistor
                                         });
                                         ad.show();
                                     }
-
-
-
-
-
 
                             }
 
@@ -355,7 +368,7 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
             if(!App.getInstance().customerMember.getString("mobile").equals("")){
                 AlertDialog.Builder aaDialog = new AlertDialog.Builder(getActivity());
                 aaDialog.setTitle("แก้ไขเบอร์ติดต่อ");
-                aaDialog.setMessage("โปรดติดต่อสำนักงาน SUSCO เพื่อขอแก้ไขข้อมูล");
+                aaDialog.setMessage(getResources().getString(R.string.msg_contact));
                 aaDialog.setNegativeButton("ปิด",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -428,13 +441,15 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
                             }
                         });
 
-                AlertDialog alert11 = alertDialog.create();
-//alert11.show();
+                AlertDialog alert11 = alertDialog.create(); // init alert before update
+
                 try {
+
                     if(!App.getInstance().customerMember.getString("email").equals("")){
+
                         AlertDialog.Builder aaDialog = new AlertDialog.Builder(getActivity());
                         aaDialog.setTitle("แก้ไขอีเมล์");
-                        aaDialog.setMessage("โปรดติดต่อสำนักงาน SUSCO เพื่อขอแก้ไขข้อมูล");
+                        aaDialog.setMessage(getResources().getString(R.string.msg_contact));
                         aaDialog.setNegativeButton("ปิด",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
@@ -447,6 +462,7 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
                     }else {
                         alert11.show();
                     }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                     alert11.show();
@@ -527,11 +543,12 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
                 AlertDialog alert11 = alertDialog.create();
 
 
+
                     // ถ้ามีข้อมูล เดิมอยู่แล้ว หรือ มีข้อมูลที่ได้จากการกรอกสำเร็จ ให้ป้องกันการแก้ไขทันท่ี
                     if(!tmpIdCard.equals("")){
                         AlertDialog.Builder aaDialog = new AlertDialog.Builder(getActivity());
                         aaDialog.setTitle("แก้ไขเลขบัตรประจำตัวประชาชน");
-                        aaDialog.setMessage("โปรดติดต่อสำนักงาน SUSCO เพื่อขอแก้ไขข้อมูล");
+                        aaDialog.setMessage(getResources().getString(R.string.msg_contact));
                         aaDialog.setNegativeButton("ปิด",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {

@@ -8,4 +8,7 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_change_picture_profile">ChangePictureProfileActivity</string>
+    <string name="msg_contact">โปรดติดต่อ SUSCO Call Center 02-4280029 ต่อ 234,235 เพื่อขอแก้ไขข้อมูล</string>
+
+
 </resources>
