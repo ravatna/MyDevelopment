@@ -63,7 +63,6 @@ import static com.tyche.mobile.susco.R.id.edtPassword;
     public static int SELECT_PHOTO = -1;
     static UserInfoFragment fragment;
 
-    private Button btnPageLeft,btnPageRight;
     private TextView txvMyName;
     private TextView txvPhoneNo;
     private TextView txvEmail,txvIdCard;
@@ -78,6 +77,7 @@ import static com.tyche.mobile.susco.R.id.edtPassword;
     private String _mobile = "";
     private String tmpIdCard = "";
     private String tmpEmail = "";
+    private String tmpMyName = "";
 
     private LinearLayout lnrPhoneNo,lnrIdCard,lnrPassword,lnrEmail,lnrCard,lnrHistory,lnrLogout;
     private LinearLayout lnrMyName;
@@ -127,49 +127,15 @@ import static com.tyche.mobile.susco.R.id.edtPassword;
         imgProfile = (ImageView)rootView.findViewById(R.id.imgProfile);
         imgFrameProfile = (ImageView)rootView.findViewById(R.id.imgFrameProfile);
 
-        try {
+       initView();
 
-            txvPhoneNo.setText(App.getInstance().customerMember.getString("mobile"));
-
-            // @todo debug
-            if(!App.getInstance().customerMember.getString("fname").equals("") && !App.getInstance().customerMember.getString("lname").equals("")) {
-                txvMyName.setText(App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("\r","").replace("\n",""));
-            }else{
-                txvMyName.setText("* แตะที่นี่เพื่อแก้ไข *");
-            }
-
-
-            // @todo debug
-            if(!App.getInstance().customerMember.getString("email").equals("")) {
-
-                txvEmail.setText(App.getInstance().customerMember.getString("email").replace("\r","").replace("\n",""));
-                tmpEmail = App.getInstance().customerMember.getString("email").replace("\r","").replace("\n","");
-            }else{
-                txvEmail.setText("* แตะที่นี่เพื่อแก้ไข *");
-            }
-
-
-            if(!App.getInstance().customerMember.getString("cid_card").equals("")) {
-
-                txvIdCard.setText(App.getInstance().customerMember.getString("cid_card").replace("\r","").replace("\n",""));
-                tmpIdCard = App.getInstance().customerMember.getString("cid_card").replace("\r","").replace("\n","");
-            }else{
-                txvIdCard.setText("* แตะที่นี่เพื่อแก้ไข *");
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-//        TextView txvEmail = (TextView)rootView.findViewById(R.id.txvEmail);
-//        TextView txvPhone = (TextView)rootView.findViewById(R.id.txvPhoneNo);
-//        TextView txvPassword = (TextView)rootView.findViewById(R.id.txvPassword);
 
 ///////////////////////////////////////////////////////////////////////
         lnrMyName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder pDialog = new AlertDialog.Builder(getActivity());
-                pDialog.setTitle("แก้ไข ชื่อ-สกุล");
+                AlertDialog.Builder ppDialog = new AlertDialog.Builder(getActivity());
+                ppDialog.setTitle("แก้ไข ชื่อ-สกุล");
                 final EditText fname = new EditText(getActivity());
                 final EditText lname = new EditText(getActivity());
 
@@ -180,12 +146,11 @@ import static com.tyche.mobile.susco.R.id.edtPassword;
 
                 ll.addView(fname);
                 ll.addView(lname);
-                pDialog.setView(ll);
-                pDialog.setPositiveButton("ปรับปรุง",
+                ppDialog.setView(ll);
+                ppDialog.setPositiveButton("ปรับปรุง",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
-                                boolean _b = false;
                                     if(fname.getText().toString().length() > 0 ){
                                         _fname = fname.getText().toString();
                                         dialog.dismiss();
@@ -230,11 +195,28 @@ import static com.tyche.mobile.susco.R.id.edtPassword;
                             }
                         });
 
-                AlertDialog alert111 = pDialog.create();
-                alert111.show();
+                    AlertDialog alert1111 = ppDialog.create();
+
+                    if(!tmpMyName.equals("")){
+                        AlertDialog.Builder aaaDialog = new AlertDialog.Builder(getActivity());
+                        aaaDialog.setTitle("แก้ไข ชื่อ-สกุล");
+                        aaaDialog.setMessage(getResources().getString(R.string.msg_contact));
+                        aaaDialog.setNegativeButton("ปิด",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog bb = aaaDialog.create();
+                        bb.show();
+                    }else {
+                        alert1111.show();
+                    }
+
             }
         });
-///////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////
 
         ///////////////////////////////////////////////////////////////////////
         lnrPassword.setOnClickListener(new View.OnClickListener() {
@@ -333,9 +315,8 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
         alertDialog.setPositiveButton("ปรับปรุง",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                     //   if(edtPassword.getText().toString().length() >= 9) {
-                            if(!App.getInstance().validMobilePhone(edtPassword.getText().toString())){
 
+                        if(!App.getInstance().validMobilePhone(edtPassword.getText().toString())){
                             _mobile = "";
                             dialog.dismiss();
                             doUpdateInfo();
@@ -363,7 +344,7 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
                 });
 
         AlertDialog alert11 = alertDialog.create();
-//alert11.show();
+
         try {
             if(!App.getInstance().customerMember.getString("mobile").equals("")){
                 AlertDialog.Builder aaDialog = new AlertDialog.Builder(getActivity());
@@ -389,7 +370,8 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
         }
     }
 });
-///////////////////////////////////////////////////////////////////////
+
+        ///////////////////////////////////////////////////////////////////////
         lnrEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -410,8 +392,7 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
                 alertDialog.setPositiveButton("ปรับปรุง",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                if(!App.getInstance().validEmail(edtPassword.getText().toString())){
-//                                if(edtPassword.getText().toString().length() >= 5) {
+                                if(App.getInstance().validEmail(edtPassword.getText().toString())){
 
                                     _email = edtPassword.getText().toString();
                                     dialog.dismiss();
@@ -442,10 +423,11 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
                         });
 
                 AlertDialog alert11 = alertDialog.create(); // init alert before update
+//                alert11.show(); // debug
 
                 try {
 
-                    if(!App.getInstance().customerMember.getString("email").equals("")){
+                    if(!App.getInstance().customerMember.getString("email").equals("") && !App.getInstance().customerMember.getString("email").equals("null")){
 
                         AlertDialog.Builder aaDialog = new AlertDialog.Builder(getActivity());
                         aaDialog.setTitle("แก้ไขอีเมล์");
@@ -542,8 +524,6 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
 
                 AlertDialog alert11 = alertDialog.create();
 
-
-
                     // ถ้ามีข้อมูล เดิมอยู่แล้ว หรือ มีข้อมูลที่ได้จากการกรอกสำเร็จ ให้ป้องกันการแก้ไขทันท่ี
                     if(!tmpIdCard.equals("")){
                         AlertDialog.Builder aaDialog = new AlertDialog.Builder(getActivity());
@@ -561,11 +541,10 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
                     }else {
                         alert11.show();
                     }
-
             }
         });
 ///////////////////////////////////////////////////////////////////////
-        TextView txvMemberCard = (TextView)rootView.findViewById(R.id.txvCard);
+
         lnrCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -577,8 +556,7 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
             }
         });
 
-//////////////////////////////////////////////////////////////////////
-        TextView txvMemberHistory = (TextView)rootView.findViewById(R.id.txvHistory);
+        //////////////////////////////////////////////////////////////////////
         lnrHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -589,7 +567,6 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
 
             }
         });
-
 
         TextView txvLogout = (TextView)rootView.findViewById(R.id.txvLogout);
         txvLogout.setOnClickListener(new View.OnClickListener() {
@@ -621,11 +598,8 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog,
                                                         int which) {
-
                                     }
                                 }).show();
-
-
             }
         });
 
@@ -637,14 +611,11 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
             }
         });
 
-
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            imgProfile.setImageDrawable(getActivity().getDrawable(R.drawable.user));
 //        } else {
 //            imgProfile.setImageDrawable(getActivity().getDrawable(R.drawable.user,getContext().getTheme()));
 //        }
-
-
 
         // if imgProfile == null then do assign value image from base64 string.
         if(App.getInstance().imgProfile == null) {
@@ -683,14 +654,45 @@ else {
         return rootView;
     }
 
-    /////////////////////////////////////////////////////////////////////////////////
 
-    public final static boolean isValidEmail(CharSequence target) {
-        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    private void initView() {
+        try {
+            txvPhoneNo.setText(App.getInstance().customerMember.getString("mobile"));
+
+            // @todo debug
+            if(!App.getInstance().customerMember.getString("fname").equals("") && !App.getInstance().customerMember.getString("lname").equals("")) {
+                txvMyName.setText(App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("\r","").replace("\n",""));
+                tmpMyName = App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("\r","").replace("\n","");
+            }else{
+                txvMyName.setText("* แตะที่นี่เพื่อแก้ไข *");
+                tmpMyName = "";
+            }
+
+            // @check email for test is empty or
+            if(!App.getInstance().customerMember.getString("email").equals("") && !App.getInstance().customerMember.getString("email").equals("null") ) {
+                txvEmail.setText(App.getInstance().customerMember.getString("email").replace("\r","").replace("\n",""));
+                tmpEmail = App.getInstance().customerMember.getString("email").replace("\r","").replace("\n","");
+            }else{
+                txvEmail.setText("* แตะที่นี่เพื่อแก้ไข *");
+                tmpEmail = "";
+            }
+
+            if(!App.getInstance().customerMember.getString("cid_card").equals("")) {
+                txvIdCard.setText(App.getInstance().customerMember.getString("cid_card").replace("\r","").replace("\n",""));
+                tmpIdCard = App.getInstance().customerMember.getString("cid_card").replace("\r","").replace("\n","");
+            }else{
+                txvIdCard.setText("* แตะที่นี่เพื่อแก้ไข *");
+                tmpIdCard = "";
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
-    /////////////////////////////////////////////////////////////////////////////////
 
+    /////////////////////////////////////////////////////////////////////////////////
 
     private void overrideFonts(final Context context, final View v) {
         try {
@@ -802,7 +804,6 @@ else {
 
 
     }
-
     private class UpdateInfo extends AsyncTask<Void, Void, String> {
         String strJson,postUrl;
         ProgressDialog pd;
@@ -832,7 +833,9 @@ else {
             pd = new ProgressDialog(getActivity());
             pd.setMessage("กำลังดำเนินการ...");
             pd.setCancelable(false);
+
             pd.show();
+
         }
 
         protected String doInBackground(Void... urls)   {
@@ -842,8 +845,6 @@ else {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            // blah blah
 
             return result;
         }
@@ -874,7 +875,6 @@ else {
         }
 
     }
-
 
     /**
      * Task for update image profile of user.
@@ -908,7 +908,8 @@ else {
             pd = new ProgressDialog(getActivity());
             pd.setMessage("กำลังดำเนินการ...");
             pd.setCancelable(false);
-            pd.show();
+             pd.show();
+
         }
 
         protected String doInBackground(Void... urls)   {
@@ -950,7 +951,6 @@ else {
         }
 
     }// .End update image
-
     private void parseResultUpdateInfo(String result) {
         // clear need update image and clear temp image
         clearTempProfileProcess();
@@ -975,8 +975,10 @@ else {
                                                         int which) {
                                         if(!_cid_card.isEmpty()){
                                             tmpIdCard = _cid_card;
-                                            txvIdCard.setText(_cid_card);
                                             _cid_card = "";
+                                            txvIdCard.setText(_cid_card);
+                                        }else{
+
                                         }
 
                                         _mobile = "";
@@ -985,6 +987,7 @@ else {
                                         _password = "";
                                         _fname = "";
                                         _lname="";
+
                                         dialog.dismiss();
                                         new ReLogin().execute();
                                     }
@@ -1042,23 +1045,17 @@ else {
 
 
     }
-
     /**
      * Parse content from json string.
      * @param result
      */
     private void parseResultUpdateInfoImage(String result) {
-
-
-
         clearTempProfileProcess();
-
 
         if(result == null)
             return ;
 
         ////////////////////////////////
-
         try {
             JSONObject jsonObj = new JSONObject(result);
             if(jsonObj.getString("success").equals("true")) {
@@ -1082,7 +1079,10 @@ else {
                                         _fname = "";
                                         _lname="";
                                         dialog.dismiss();
-                                        new ReLogin().execute();
+
+                                        new GetUserInfo().execute();
+
+                                        //new ReLogin().execute();
                                     }
                                 })
                         .show();
@@ -1135,7 +1135,9 @@ else {
             _lname="";
         }
 
-        new ReLogin().execute();
+//        new ReLogin().execute();
+
+        new GetUserInfo().execute();
 
     }// End
 
@@ -1183,7 +1185,9 @@ else {
             pd = new ProgressDialog(getActivity());
             pd.setMessage("กำลังดำเนินการ...");
             pd.setCancelable(false);
-            pd.show();
+            if(App.getInstance().showProgressDialog) {
+                pd.show();
+            }
 
         }
 
@@ -1271,4 +1275,98 @@ else {
 
     }// .End parseResult
 
+
+
+private void doGetInfo(){
+    new GetUserInfo().execute();
+}
+
+    private class GetUserInfo extends AsyncTask<Void, Void, String> {
+        String strJson,postUrl;
+        ProgressDialog pd;
+        String _mcode = "";
+        @Override
+        protected void onPreExecute() {
+            try {
+                _mcode = App.getInstance().customerMember.getString("member_code");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            // Create Show ProgressBar
+            strJson = "{'membercode':'" + _mcode  + "','formToken':'" + m_formToken  + "','cookieToken':'" + m_cookieToken  + "'}";
+            postUrl  = App.getInstance().m_server + "/GetInfo/Customer";
+            pd = new ProgressDialog(getActivity());
+            pd.setMessage("กำลังดำเนินการ...");
+            pd.setCancelable(false);
+            //  pd.show();
+
+        }
+
+        protected String doInBackground(Void... urls)   {
+
+            String result = null;
+            try {
+                result = post(postUrl, strJson);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        protected void onPostExecute(String result)  {
+
+            if(pd.isShowing()){
+                pd.dismiss();
+                pd = null;
+            }
+
+            parseResultGetUserInfo(result);
+
+        }
+
+        public  final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+        OkHttpClient client = new OkHttpClient();
+
+        String post(String url, String json) throws IOException,OutOfMemoryError {
+            RequestBody body = RequestBody.create(JSON, json);
+            try {
+                Request request = new Request.Builder()
+                        .url(url)
+                        .addHeader("formToken", m_formToken)
+                        .addHeader("cookieToken", m_cookieToken)
+                        .post(body)
+                        .build();
+                Response response = client.newCall(request).execute();
+                return response.body().string();
+            } catch ( Exception e){
+                return "{}";
+            }
+        }
     }
+
+    private void parseResultGetUserInfo(String result) {
+        try {
+            JSONObject jsonObj = new JSONObject(result);
+            App.getInstance().loginObject = jsonObj;
+            editor.putString("login_json",jsonObj.toString());
+            editor.commit();
+            if(jsonObj.getBoolean("success"))
+            {
+                JSONArray arr = jsonObj.getJSONArray("customer_detail");
+                App.getInstance().customerMember = arr.getJSONObject(0);
+
+
+
+                initView();
+
+            } // .End if
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }// .End parseResult
+
+}

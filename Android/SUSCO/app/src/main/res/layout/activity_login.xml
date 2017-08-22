@@ -208,6 +208,8 @@
                     android:background="@drawable/text_box_right_radius_white"
                     android:textColorHint="#0476B9"
                     android:hint="ชื่อ"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
                     android:gravity="left"
                     android:textColor="#0476B9" />
             </LinearLayout>
@@ -234,6 +236,8 @@
                     android:background="@drawable/text_box_right_radius_white"
                     android:textColorHint="#0476B9"
                     android:hint="นามสกุล"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
                     android:gravity="left"
                     android:textColor="#0476B9" />
             </LinearLayout>

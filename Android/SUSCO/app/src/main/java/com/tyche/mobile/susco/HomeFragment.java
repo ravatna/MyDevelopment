@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -41,6 +42,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -138,7 +141,7 @@ public class HomeFragment extends Fragment {
                     int current = mPager.getCurrentItem();
 
                     if( (current-1) < 0 ){
-                        mPager.setCurrentItem(0);
+                        mPager.setCurrentItem(mPager.getAdapter().getCount());
                     }else{
                         mPager.setCurrentItem(mPager.getCurrentItem()-1);
                     }
@@ -152,9 +155,8 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 try{
                     int current = mPager.getCurrentItem() ;
-
-                    if( (current + 1) > mPager.getAdapter().getCount() ){
-                        mPager.setCurrentItem(mPager.getAdapter().getCount());
+                    if( (current + 1) >= mPager.getAdapter().getCount() ){
+                        mPager.setCurrentItem(0);
                     }else{
                         mPager.setCurrentItem(mPager.getCurrentItem()+1);
                     }
@@ -276,7 +278,9 @@ public class HomeFragment extends Fragment {
             pd = new ProgressDialog(getActivity() );
             pd.setMessage("กำลังดำเนินการ...");
             pd.setCancelable(false);
-            pd.show();
+            if(App.getInstance().showProgressDialog) {
+                pd.show();
+            }
 
         }
 
@@ -336,6 +340,8 @@ public class HomeFragment extends Fragment {
             App.getInstance().transactionDialies = jsonObj.getJSONArray("transaction_daily");
             App.getInstance().redeemTransactions = jsonObj.getJSONArray("get_redeem_request");
 
+
+            App.getInstance().showProgressDialog = false;
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -582,7 +588,9 @@ private void doNews() {
                 e.printStackTrace();
             }
             // Create Show ProgressBar
-            strJson = "{'membercode':'" + _mcode  + "','formToken':'" + m_formToken  + "','cookieToken':'" + m_cookieToken  + "'}";
+            strJson = "{'membercode':'" + _mcode  + "','image_width':'" + 512 + "','image_height':'" + 256+ "','formToken':'" + m_formToken  + "','cookieToken':'" + m_cookieToken  + "'}";
+
+           Log.i("XXXX",strJson);
             postUrl  = App.getInstance().m_server + "/Banner/GetBanner";
             //            pd = new ProgressDialog(getActivity() );
             //            pd.setMessage("กำลังดำเนินการ...");
@@ -660,6 +668,25 @@ private void doNews() {
             final float density = getResources().getDisplayMetrics().density;
 
             NUM_PAGES =decodedImage.length;
+
+            // Auto start of viewpager
+            final Handler handler = new Handler();
+            final Runnable Update = new Runnable() {
+                public void run() {
+                    if (currentPage == NUM_PAGES) {
+                        currentPage = 0;
+                    }
+                    mPager.setCurrentItem(currentPage++, true);
+                }
+            };
+
+            Timer swipeTimer = new Timer();
+            swipeTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    handler.post(Update);
+                }
+            }, 5000, 5000);
 
         } catch (JSONException e) {
             e.printStackTrace();

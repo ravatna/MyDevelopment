@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -108,6 +109,38 @@ public class LoginActivity extends AppCompatActivity {
         edtLname = (EditText)findViewById(R.id.edtLname);
         edtPhone = (EditText)findViewById(R.id.edtPhone);
         edtEmail = (EditText)findViewById(R.id.edtEmail);
+
+
+        edtFname.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                int asciiKey = -1;
+                  if (keyCode==KeyEvent.KEYCODE_ENTER) {
+                    asciiKey = 13;
+                    edtLname.requestFocus();
+                    return true;
+                }
+                //Loin.println("k "+asciiKey);
+                //return super.onKeyDown(keyCode, event);
+                return false;
+            }
+        });
+
+        edtLname.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                int asciiKey = -1;
+                if (keyCode==KeyEvent.KEYCODE_ENTER) {
+                    asciiKey = 13;
+                    edtEmail.requestFocus();
+                    return true;
+                }
+                //Loin.println("k "+asciiKey);
+                //return super.onKeyDown(keyCode, event);
+                return false;
+            }
+        });
+
 
 
 //        edtPhone.setText("0831356653");

@@ -192,7 +192,9 @@ public class MemberHistoryActivity extends AppCompatActivity {
             pd = new ProgressDialog(MemberHistoryActivity.this);
             pd.setMessage("กำลังดำเนินการ...");
             pd.setCancelable(false);
-            pd.show();
+            if(App.getInstance().showProgressDialog) {
+                pd.show();
+            }
 
         }
 
@@ -322,9 +324,9 @@ public class MemberHistoryActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
-
         }
-    }
+
+        overrideFonts(this,findViewById(R.id.contentView) );
+    }// .End init()
 
 }

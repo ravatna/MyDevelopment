@@ -29,10 +29,11 @@ public class App {
     String cookieToken,formToken;
     Bitmap imgProfile = null;
     Bitmap imgTempProfile = null;
+    Boolean showProgressDialog = true;
 
     String m_server = "http://suscoapidev-iCRM.atlasicloud.com/V2";// "http://192.168.88.197/SUSCOAPI/";  //
     public boolean needUpdateImageProfile = false;
-//    String m_server =  "http://192.168.88.196/SUSCOAPIV2/";  //
+    //String m_server =  "http://192.168.88.174/SUSCOAPIV2/";  //
 
     static public App getInstance(){
         if(object == null){

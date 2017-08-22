@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mCaptionTitle;
     private ImageView mImgHeader;
 
+
     public  boolean isCanOnline() {
         ConnectivityManager
                 cm = (ConnectivityManager) MainActivity.this.getApplicationContext()
@@ -195,8 +196,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
-
 
         btnSuscoOnline = (Button) findViewById(R.id.btnSuscoOnline);
         btnSuscoOnline.setVisibility(View.INVISIBLE);
@@ -338,9 +337,7 @@ public class MainActivity extends AppCompatActivity {
             return rootView;
         }
 
-
     }
-
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

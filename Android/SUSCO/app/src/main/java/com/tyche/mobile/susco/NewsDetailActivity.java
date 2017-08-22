@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,9 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import ss.com.bannerslider.banners.Banner;
 import ss.com.bannerslider.banners.DrawableBanner;
 import ss.com.bannerslider.banners.RemoteBanner;
@@ -45,8 +49,9 @@ public class NewsDetailActivity extends AppCompatActivity {
     private ImageView imgPicture1,imgPicture2,imgPicture3;
     private byte[] imageBytes;
     static public Bitmap[] decodedImage;
+    private  int currentPage = 0;
 
-    static  int NUM_ITEMS = 0;
+    private  int NUM_ITEMS = 0;
     ImageFragmentPagerAdapter imageFragmentPagerAdapter;
     ViewPager viewPager;
     public static final String[] IMAGE_NAME = {"eagle", "horse", "bonobo", "wolf", "owl", "bear",};
@@ -85,10 +90,15 @@ public class NewsDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try{
-                    viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
-                }catch (Exception ex){
+                    int current = viewPager.getCurrentItem();
 
-                }
+                    if( (current-1) < 0 ){
+                        viewPager.setCurrentItem(viewPager.getAdapter().getCount());
+                    }else{
+                        viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
+                    }
+
+                }catch (Exception ex){ }
             }
         });
 
@@ -96,10 +106,14 @@ public class NewsDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try{
-                    viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
-                }catch (Exception ex){
+                    int current = viewPager.getCurrentItem() ;
+                    if( (current + 1) >= viewPager.getAdapter().getCount() ){
+                        viewPager.setCurrentItem(0);
+                    }else{
+                        viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+                    }
 
-                }
+                }catch (Exception ex){ }
             }
         });
 
@@ -139,6 +153,9 @@ public class NewsDetailActivity extends AppCompatActivity {
         }
 
         decodedImage = new Bitmap[NUM_ITEMS];
+
+
+
 
     try {
         if(!App.getInstance().objNews.getString("pic1_id").equals("")) {
@@ -198,6 +215,27 @@ public class NewsDetailActivity extends AppCompatActivity {
         viewPager.setAdapter(imageFragmentPagerAdapter);
 
         overrideFonts(this,findViewById(R.id.main_content) );
+
+        // Auto start of viewpager
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+
+                if (currentPage == NUM_ITEMS) {
+                    currentPage = 0;
+                }
+
+                viewPager.setCurrentItem(currentPage++, true);
+            }
+        };
+
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 5000, 5000);
 
     }
 
