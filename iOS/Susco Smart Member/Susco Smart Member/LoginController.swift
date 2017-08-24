@@ -8,7 +8,20 @@
 
 import UIKit
 
-class LoginController:  UIViewController,UITextViewDelegate {
+extension NSRange {
+    func range(for str: String) -> Range<String.Index>? {
+        guard location != NSNotFound else { return nil }
+        
+        guard let fromUTFIndex = str.utf16.index(str.utf16.startIndex, offsetBy: location, limitedBy: str.utf16.endIndex) else { return nil }
+        guard let toUTFIndex = str.utf16.index(fromUTFIndex, offsetBy: length, limitedBy: str.utf16.endIndex) else { return nil }
+        guard let fromIndex = String.Index(fromUTFIndex, within: str) else { return nil }
+        guard let toIndex = String.Index(toUTFIndex, within: str) else { return nil }
+        
+        return fromIndex ..< toIndex
+    }
+}
+
+class LoginController:  UIViewController,UITextViewDelegate,UITextFieldDelegate {
     
     @IBOutlet weak var swtLoginRegister: UISegmentedControl!
     
@@ -34,21 +47,16 @@ class LoginController:  UIViewController,UITextViewDelegate {
     
     var loadingDialog:UIAlertController!
     
-    
+    // -- test value is number only for 10 digits
     func phoneNumberOnly(value: String) -> Bool {
-        let PHONE_REGEX = "^\\d{10}"
+        let PHONE_REGEX = "^08\\d{8}"
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
         let result =  phoneTest.evaluate(with: value)
         return result
     }
     
-//    func isValidEmail(testStr:String) -> Bool {
-//        print("validate emilId: \(testStr)")
-//        let emailRegEx = "^(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?(?:(?:(?:[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+(?:\\.[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+)*)|(?:\"(?:(?:(?:(?: )*(?:(?:[!#-Z^-~]|\\[|\\])|(?:\\\\(?:\\t|[ -~]))))+(?: )*)|(?: )+)\"))(?:@)(?:(?:(?:[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)(?:\\.[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)*)|(?:\\[(?:(?:(?:(?:(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))\\.){3}(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))))|(?:(?:(?: )*[!-Z^-~])*(?: )*)|(?:[Vv][0-9A-Fa-f]+\\.[-A-Za-z0-9._~!$&'()*+,;=:]+))\\])))(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?$"
-//        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-//        let result = emailTest.evaluate(with: testStr)
-//        return result
-//    }
+ 
+    // -- validRegisterField()
     
     func validRegisterField() -> Bool{
         var b:Bool = true
@@ -107,6 +115,7 @@ class LoginController:  UIViewController,UITextViewDelegate {
         
         return b
     }
+    
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         txtU.resignFirstResponder()
@@ -120,29 +129,82 @@ class LoginController:  UIViewController,UITextViewDelegate {
         
     }
     
+    
+    
     // -- on Press button Register
     @IBAction func doRegister(_ sender: Any) {
+        
         // @todo: need to validate require field
+        
         if validRegisterField() {
+            // present loading
+            
             present(self.loadingDialog, animated: true, completion: nil)
+            
+            // submit content to server
             doSubmitRegister()
         }
-    }
+    }// .End doRegister()
 
+    
     // -- on press button Login
     @IBAction func doLogin(_ sender: Any) {
         
-        present(self.loadingDialog, animated: true, completion: nil)
-        if validLoginField() {
+        
+        if validLoginField() == true {
+            
             doSubmitLogin()
         }
 
+    }// .End doLogin()
+    
+    
+    // -- set
+    
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        // detect for mobile number need 10 lenght only
+        if(textField.tag==1000){
+            let currentText = textField.text ?? ""
+            guard let stringRange = range.range(for: currentText) else { return false }
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+            return updatedText.characters.count <= 10
+        }
+        
+        return true
+        
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
+        
+        
+        
+        if textField.tag == 1000 {
+            txtName.becomeFirstResponder()
+        }else if textField.tag == 1001 {
+            txtSurname.becomeFirstResponder()
+        }else if textField.tag == 1002 {
+            txtEmail.becomeFirstResponder()
+        }else if textField.tag == 1003 {
+            txtPass.becomeFirstResponder()
+        }else if textField.tag == 1004 {
+            txtRePass.becomeFirstResponder()
+        }
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    
+    
     
     // -- make connection to server
     func doSubmitLogin(){
     
-    
+        present(self.loadingDialog, animated: true, completion: nil)
+
+        
         // create post request
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/Security/login_customer_susco")!
@@ -173,23 +235,30 @@ class LoginController:  UIViewController,UITextViewDelegate {
                         
                         
                         if json["msg"] as! String == "Success" {
+                            
                             // assign result from
                             SharedInfo.getInstance.json = json;
                             
-                            
                             let customer = SharedInfo.getInstance.json!["customer_detail"] as! [AnyObject]
+                            let formToken:String = SharedInfo.getInstance.json!["formToken"] as! String
+                            let cookieToken:String = SharedInfo.getInstance.json!["cookieToken"] as! String
                             
+                            SharedInfo.getInstance.jsonCustomer = customer
+                            SharedInfo.getInstance.formToken = formToken
+                            SharedInfo.getInstance.cookieToken = cookieToken
                             
                             let defaults = UserDefaults.standard
-                            
-                            defaults.setValue(customer, forKey: "jsonLogin")
+                            //print(customer)
+                            defaults.setValue(customer, forKey: "customer_detail")
+                            defaults.setValue(formToken, forKey: "formToken")
+                            defaults.setValue(cookieToken, forKey: "cookieToken")
                             defaults.setValue(self.txtP.text, forKey: "pw")
-                            //defaults.string(forKey: "pw")
+ 
                             
                             // prepare to set home view controller
                             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "home_tabview")
                             self.present(viewController!, animated:true,completion:nil);
-                            //self.dismiss(animated: true, completion: nil)
+                            
                             
                         }else{
                             
@@ -203,6 +272,12 @@ class LoginController:  UIViewController,UITextViewDelegate {
                         
                         self.txtU.text = ""
                         self.txtP.text = ""
+                        self.txtName.text = ""
+                        self.txtPass.text = ""
+                        self.txtRePass.text = ""
+                        self.txtEmail.text = ""
+                        self.txtPhone.text  = ""
+                        self.txtSurname.text = ""
                         
                         
                     } catch {
@@ -310,6 +385,8 @@ class LoginController:  UIViewController,UITextViewDelegate {
         
     }// end func
     
+   
+
     
     func validLoginField() -> Bool{
         var b:Bool = true
@@ -319,7 +396,7 @@ class LoginController:  UIViewController,UITextViewDelegate {
             b = false
             self.present(alert, animated:true, completion:nil)
             
-        }
+        } // .End if txtU.text == ""
         
         
         if txtP.text == "" {
@@ -331,7 +408,7 @@ class LoginController:  UIViewController,UITextViewDelegate {
         }
         
         return b
-    }
+    } // .End validLoginField()
     
     
         
@@ -344,7 +421,8 @@ class LoginController:  UIViewController,UITextViewDelegate {
         
         return alert
         
-    }
+    } // .End BuildAlertDialog()
+    
     
     func BuildAlertDialog(_ t:String, m:String,  btnAction:UIAlertAction, btnAction2:UIAlertAction) -> UIAlertController {
         
@@ -369,6 +447,16 @@ class LoginController:  UIViewController,UITextViewDelegate {
     }
     
     func updateSwitchView(){
+        
+        self.txtU.text = ""
+        self.txtP.text = ""
+        self.txtName.text = ""
+        self.txtPass.text = ""
+        self.txtRePass.text = ""
+        self.txtEmail.text = ""
+        self.txtPhone.text  = ""
+        self.txtSurname.text = ""
+        
         if swtLoginRegister.selectedSegmentIndex == 0 {
             vweLogin.isHidden = false
             vweRegister.isHidden = true
@@ -387,22 +475,10 @@ class LoginController:  UIViewController,UITextViewDelegate {
         //txtU.text = "0831356653"
         //txtP.text = "6653"
         
-        txtU.text = "0815505881"
-        txtP.text = "5881"
+        //txtU.text = "0815505881"
+        //txtP.text = "5881"
         
-//        let defaults = UserDefaults.standard
-//        do{
-//            SharedInfo.getInstance.json = defaults.object(forKey: "jsonLogin") as! [String : AnyObject]
-//            
-//            if SharedInfo.getInstance.json != nil {
-//                // prepare to set home view controller
-//                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "login_view")
-//                self.present(viewController!, animated:true,completion:nil);
-//                
-//            }
-//        }catch {
-//            
-//        }
+        txtPhone.delegate = self
         
         
         loadingDialog = UIAlertController(title: nil, message: "โปรดรอสักครู่...", preferredStyle: .alert)
@@ -414,11 +490,58 @@ class LoginController:  UIViewController,UITextViewDelegate {
         
         self.loadingDialog.view.addSubview(loadingIndicator)
         
+        
+        // check login status
+        
+//        self.txtU.delegate = self
+//        self.txtP.delegate = self
+        self.txtName.delegate = self
+        self.txtPass.delegate = self
+        self.txtRePass.delegate = self
+        self.txtEmail.delegate = self
+        self.txtPhone.delegate = self
+        self.txtSurname.delegate = self
+        
     }
     
-    
-    
-    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        
+        let defaults = UserDefaults.standard
+              
+        
+        do{
+            
+            
+            
+            //print(SharedInfo.getInstance.formToken )
+            //print(SharedInfo.getInstance.cookieToken )
+            
+            let f = defaults.string(forKey: "formToken")
+            let c = defaults.string(forKey: "cookieToken")
+            
+            if f != nil && c != nil {
+                
+                SharedInfo.getInstance.jsonCustomer = defaults.object(forKey: "customer_detail") as! [AnyObject]
+                
+               
+                
+                SharedInfo.getInstance.formToken = f!
+                SharedInfo.getInstance.cookieToken = c!
+
+                
+                // prepare to set home view controller
+                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "home_tabview")
+                self.present(viewController!, animated:true,completion:nil);
+                
+                
+            }
+        }catch {
+            
+        }
+        
+    }
+  
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

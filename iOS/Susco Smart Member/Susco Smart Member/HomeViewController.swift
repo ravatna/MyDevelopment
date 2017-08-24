@@ -26,6 +26,10 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     @IBOutlet weak var lblText7: UILabel!
     @IBOutlet weak var lblText8: UILabel!
     
+    @IBOutlet weak var btnLeft: UIButton!
+    @IBOutlet weak var btnRight: UIButton!
+    
+    var refreshControl:UIRefreshControl!
     
     var isFirst = true
     var yy:Int = 405
@@ -34,6 +38,32 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     var loadingDialog:UIAlertController!
     
     
+    @IBAction func doMoveRight(_ sender: Any) {
+        moveToNextPageTwoSecond()
+        
+    }
+    
+    
+    @IBAction func doMoveLeft(_ sender: Any) {
+        moveToBackPage()
+        
+    }
+    
+    
+    func handleRefresh(_ refreshControl: UIRefreshControl) {
+        // Do some reloading of data and update the table view's data source
+        // Fetch more objects from a web service, for example...
+        
+        // Simply adding an object to the data source for this example
+        
+        SharedInfo.getInstance.showProgressDialog = false
+        self.doGetListBanner()
+        self.doLoadTransaction()
+        self.doPriceOil()
+        self.doGetNews()
+        
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +71,19 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         
         
         // validLoginState()
+        
+        
+        refreshControl = UIRefreshControl()
+        
+        refreshControl.backgroundColor = UIColor.white
+        refreshControl.tintColor = UIColor.darkGray
+        refreshControl?.addTarget(self, action: #selector(handleRefresh), for: UIControlEvents.valueChanged)
+        
+        
+        scrMain.addSubview(refreshControl)
+        
+        scrMain.contentSize.height = UIScreen.main.bounds.height
+        
         
         if SharedInfo.getInstance.currentDevice == "45" {
             yy =   689 // 365
@@ -58,16 +101,28 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.moveToNextPageTwoSecond), userInfo: nil, repeats: true)
     }
     
+    
     func moveToNextPageTwoSecond (){
-        
-        
         if currentPage >= (pageControl.numberOfPages - 1) {
             currentPage = 0
         }else{
-        currentPage += 1
-            }
+            currentPage += 1
+        }
         scrollToPage(currentPage)
-    }
+        pageControl.currentPage = currentPage
+    }// .End moveToNextPageTwoSecond
+    
+    
+    func moveToBackPage (){
+        if currentPage <= 0  {
+            currentPage = (pageControl.numberOfPages - 1)
+        }else{
+            currentPage -= 1
+        }
+        scrollToPage(currentPage)
+        pageControl.currentPage = currentPage
+    }// .End moveToBackPage
+    
     
     func initView() {
         // กำหนดค่าการทำงานให้กับ pageControl
@@ -85,9 +140,10 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
             self.doGetListBanner()
             self.doLoadTransaction()
             self.doPriceOil()
+            self.doGetNews()
         
         
-    }
+    }// .End
     
     
     //
@@ -96,7 +152,7 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         let selectNews:[AnyObject]
         
         do{
-            customer = SharedInfo.getInstance.json!["customer_detail"] as! [AnyObject]
+            customer = SharedInfo.getInstance.jsonCustomer!
             
             var fname = customer[0]["fname"] as! String
             var lname = customer[0]["lname"] as! String
@@ -109,7 +165,7 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
            // lblScore.text = score
            
             
-            selectNews = SharedInfo.getInstance.json!["select_news"] as! [AnyObject]
+            selectNews = SharedInfo.getInstance.selectNews!["select_news"] as! [AnyObject]
             var view_tag = 1000
             var btn_tag = 0
             
@@ -135,7 +191,8 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                 let iconString:String = item["pic1_id"] as! String
                 
                 let decodedData:Data = Data(base64Encoded: iconString)!
-                buttonConnect.setImage(UIImage(data:decodedData), for: UIControlState.normal)
+                
+                buttonConnect.setBackgroundImage(UIImage(data:decodedData), for: UIControlState.normal)
                 
                 buttonConnect.addTarget(self, action: #selector(doOpenNewsDetail), for:.touchUpInside)
                 
@@ -204,32 +261,32 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
        
-            // call update screen by first time only
-            if isFirst == true{
-                isFirst = false
-                
-                
-                var w:Int = 304
-                var h:Int = 235
-                yy =  685
-                if SharedInfo.getInstance.currentDevice == "67"
-                {
-                    w = 360
-                    h = 250
-                    yy =  762
-                }
-                else if SharedInfo.getInstance.currentDevice == "67+"
-                {
-                    w = 398
-                    h = 280
-                    yy = 762
-                }
-                
-                self.updateNewsSection(boxWidth:w,boxHeight:h)
-
-                updateScrollViewForHeight()
-                
-            }
+//            // call update screen by first time only
+//            if isFirst == true{
+//                isFirst = false
+//                
+//                
+//                var w:Int = 304
+//                var h:Int = 235
+//                yy =  685
+//                if SharedInfo.getInstance.currentDevice == "67"
+//                {
+//                    w = 360
+//                    h = 250
+//                    yy =  762
+//                }
+//                else if SharedInfo.getInstance.currentDevice == "67+"
+//                {
+//                    w = 398
+//                    h = 280
+//                    yy = 762
+//                }
+//                
+//                self.updateNewsSection(boxWidth:w,boxHeight:h)
+//
+//                updateScrollViewForHeight()
+//                
+//            }
 
     }
     
@@ -287,17 +344,19 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         
         let customer:[AnyObject]
         
-        customer = SharedInfo.getInstance.json!["customer_detail"] as! [AnyObject]
+        customer = SharedInfo.getInstance.jsonCustomer!
         
         let membercode = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.json!["formToken"] as! String
-        let cookieToken:String = SharedInfo.getInstance.json!["cookieToken"] as! String
+        let formToken:String = SharedInfo.getInstance.formToken
+        let cookieToken:String = SharedInfo.getInstance.cookieToken
       
      
         // create post request
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/Banner/GetBanner")!
         let jsonDict = [ "membercode": membercode
+            ,"image_width": "512"
+            ,"image_height": "256"
             ,"formToken": formToken
             ,"cookieToken": cookieToken ]
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
@@ -362,11 +421,11 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         
         let customer:[AnyObject]
         
-        customer = SharedInfo.getInstance.json!["customer_detail"] as! [AnyObject]
+        customer = SharedInfo.getInstance.jsonCustomer!
         
         let membercode = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.json!["formToken"] as! String
-        let cookieToken:String = SharedInfo.getInstance.json!["cookieToken"] as! String
+        let formToken:String = SharedInfo.getInstance.formToken
+        let cookieToken:String = SharedInfo.getInstance.cookieToken
         
         
         // create post request
@@ -411,9 +470,102 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         
     } // end func
 
+    ////////////////////////////////////////////////
+    func doGetNews(){
+        
+        
+        let customer:[AnyObject]
+        
+        customer = SharedInfo.getInstance.jsonCustomer!
+        
+        let membercode = customer[0]["member_code"] as! String
+        let formToken:String = SharedInfo.getInstance.formToken
+        let cookieToken:String = SharedInfo.getInstance.cookieToken
+        
+        
+        // create post request
+        
+        let url = URL(string: SharedInfo.getInstance.serviceUrl + "/News/getNews")!
+        let jsonDict = [ "membercode": membercode
+            
+            ,"formToken": formToken
+            ,"cookieToken": cookieToken ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "post"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            
+            
+            if let error = error {
+                print("error:", error)
+                return
+            }
+            
+            do {
+                guard let data = data else { return }
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
+                
+                
+                // assign result from
+                SharedInfo.getInstance.selectNews = json;
+                
+                DispatchQueue.main.async(execute: {
+                  
+                    
+                    // call update screen by first time only
+                    
+                        
+                        
+                        var w:Int = 304
+                        var h:Int = 235
+                        self.yy =  685
+                        if SharedInfo.getInstance.currentDevice == "67"
+                        {
+                            w = 360
+                            h = 250
+                            self.yy =  762
+                        }
+                        else if SharedInfo.getInstance.currentDevice == "67+"
+                        {
+                            w = 398
+                            h = 280
+                            self.yy = 762
+                        }
+                        
+                        self.updateNewsSection(boxWidth:w,boxHeight:h)
+                    
+                    
+                    
+                        self.updateScrollViewForHeight()
+                        
+                     
+self.refreshControl.endRefreshing()
+                    
+                })
+                
+            } catch {
+                print("error:", error)
+            }
+        }
+        
+        task.resume()
+        
+    } // end func
+    
     
     
     /////////////////////////////////////////////////////////////////////////////////
+
+    
+    /////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
     
     
     // 320x180 = 45s, 67,399x190 = 67Plus
@@ -436,7 +588,6 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         lblUpdatedate.text = s
         
         for priceOil in priceOils {
-            
             
             
             if priceOil["product_desc"] as! String == "เบนซิน" {
@@ -541,12 +692,11 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         
         let customer:[AnyObject]
         
-        customer = SharedInfo.getInstance.json!["customer_detail"] as! [AnyObject]
+        customer = SharedInfo.getInstance.jsonCustomer!
         
         let membercode = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.json!["formToken"] as! String
-        let cookieToken:String = SharedInfo.getInstance.json!["cookieToken"] as! String
-        
+        let formToken:String = SharedInfo.getInstance.formToken
+        let cookieToken:String = SharedInfo.getInstance.cookieToken
         
         // create post request
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/ListTransactionCustomer/GetTransactionByMember")!

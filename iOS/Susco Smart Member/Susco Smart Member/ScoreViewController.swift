@@ -19,6 +19,8 @@ class ScoreViewController: UIViewController {
     @IBOutlet weak var lblDiscountNotReady: UILabel!
     @IBOutlet weak var lblGiftNotReady: UILabel!
     
+    var refreshControl:UIRefreshControl!
+    
     
     var isFirst = true
     var yy:Int = 260
@@ -27,7 +29,7 @@ class ScoreViewController: UIViewController {
     func updateInfo() {
         let customer:[AnyObject]
         do{
-            customer = SharedInfo.getInstance.json!["customer_detail"] as! [AnyObject]
+            customer = SharedInfo.getInstance.jsonCustomer!
             
            
             var fname = customer[0]["fname"] as! String
@@ -36,33 +38,30 @@ class ScoreViewController: UIViewController {
             var score = customer[0]["point_summary"] as! String
             var phone = customer[0]["mobile"] as! String
             
-            lblName.text = fname + " " + lname
+            lblName.text = fname.replacingOccurrences(of: "\n", with: "") + " " + lname.replacingOccurrences(of: "\n", with: "")
             lblPhone.text = phone
             lblScore.text = score
-            
-            
-            
             
         }catch {
             
         }
-        
-        
-        
-        
-        
-        
+
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        
-        
-        
-        
-        //updateScrollViewForHeight()
-    }
 
+    func handleRefresh(_ refreshControl: UIRefreshControl) {
+        // Do some reloading of data and update the table view's data source
+        // Fetch more objects from a web service, for example...
+        
+        // Simply adding an object to the data source for this example
+        
+        ScoreForMember()
+        doLoadGift() // load content from servder
+
+        
+        //refreshControl.endRefreshing()
+    }
+    
     
     
     override func viewDidLoad() {
@@ -70,6 +69,22 @@ class ScoreViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         
+        
+        refreshControl = UIRefreshControl()
+        
+        refreshControl.backgroundColor = UIColor.white
+        refreshControl.tintColor = UIColor.darkGray
+        refreshControl?.addTarget(self, action: #selector(handleRefresh), for: UIControlEvents.valueChanged)
+        
+        
+        scrMain.addSubview(refreshControl)
+        
+        
+        
+        
+        
+        scrMain.contentSize.height = UIScreen.main.bounds.height
+        //print(scrMain.contentSize.height)
         
         if SharedInfo.getInstance.currentDevice == "45" {
             yy =   220
@@ -89,8 +104,6 @@ class ScoreViewController: UIViewController {
         self.updateInfo() // update user data
         
         doLoadGift() // load content from servder
-        
-        
         
     }
     
@@ -114,8 +127,6 @@ class ScoreViewController: UIViewController {
             var loop = 0
             
             for item in catalogs {
-                
-                
                 
                 // ให้สร้างรายการเฉพาะส่วนลด = 0
                 if item["check"] as! String == "1" {
@@ -337,15 +348,16 @@ class ScoreViewController: UIViewController {
                 itemView.invalidateIntrinsicContentSize()
                 
             }
-            
-            
-            
+
         }catch {
             
         }
         
         scrMain.invalidateIntrinsicContentSize()
         updateScrollViewForHeight()
+        
+        
+        self.refreshControl.endRefreshing()
         
     }// end func
     
@@ -371,11 +383,11 @@ class ScoreViewController: UIViewController {
         
         let customer:[AnyObject]
         
-        customer = SharedInfo.getInstance.json!["customer_detail"] as! [AnyObject]
+        customer = SharedInfo.getInstance.jsonCustomer!
         
         let phone = customer[0]["mobile"] as! String
-        let formToken:String = SharedInfo.getInstance.json!["formToken"] as! String
-        let cookieToken:String = SharedInfo.getInstance.json!["cookieToken"] as! String
+        let formToken:String = SharedInfo.getInstance.formToken
+        let cookieToken:String = SharedInfo.getInstance.cookieToken
         
         
         // create post request
@@ -416,6 +428,7 @@ class ScoreViewController: UIViewController {
                 if json["msg"] as! String != "ลูกค้ายังมีคะแนนไม่สะสม" {
                     // assign result from
                     SharedInfo.getInstance.jsonGift = json;
+                    
                     DispatchQueue.main.async(){
                         
                         self.lblGiftNotReady.isHidden = false;
@@ -428,20 +441,19 @@ class ScoreViewController: UIViewController {
                             w = 145
                             h = 165
                         }
+                            
                         else if SharedInfo.getInstance.currentDevice == "67"
                         {
                             w = 170
                             h = 200
                         }
-                            
+
                         else if SharedInfo.getInstance.currentDevice == "67+"
                         {
                             w = 195
                             h = 220
                         }
 
-                        
-                        
                         self.updateCatalogDiscount(boxWidth: w,boxHeight: h) // update discount block
                         self.updateCatalogGift(boxWidth: w,boxHeight: h) // update gift block
                     }
@@ -465,5 +477,89 @@ class ScoreViewController: UIViewController {
         
         task.resume()
         
-    }
+    }// .End doLoadGif
+    
+    
+    
+    
+    func ScoreForMember(){
+        
+        let customer:[AnyObject]
+        
+        customer = SharedInfo.getInstance.jsonCustomer!
+        
+        let phone = customer[0]["member_code"] as! String
+        let formToken:String = SharedInfo.getInstance.formToken
+        let cookieToken:String = SharedInfo.getInstance.cookieToken
+        
+        
+        // create post request
+        
+        let url = URL(string: SharedInfo.getInstance.serviceUrl + "/RefreshPoint/Member")!
+        
+        let jsonDict = [
+            "member_code": phone
+            ,"formToken": formToken
+            ,"cookieToken": cookieToken ]
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "post"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            
+            // dismiss alert view
+            //  self.loadingDialog.dismiss(animated: true, completion: nil)
+            
+            
+            if let error = error {
+                print("error:", error)
+                return
+            }
+            
+            do {
+                guard let data = data else { return }
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
+                
+                
+                
+                if json["msg"] as! String != "ลูกค้ายังมีคะแนนไม่สะสม" {
+                    // assign result from
+                    SharedInfo.getInstance.jsonGift = json;
+                    DispatchQueue.main.async(){
+                        
+                        self.lblGiftNotReady.isHidden = false;
+                        self.lblDiscountNotReady.isHidden = false;
+                        
+                        var w:Int = 145
+                        var h:Int = 165
+                        
+                    }
+                    
+                    
+                }
+                else
+                {
+                    self.vweGIft.isHidden = true;
+                    self.lblGiftNotReady.isHidden = true;
+                    self.lblDiscountNotReady.isHidden = true;
+                }
+
+                
+            } catch {
+                print("error:", error)
+            }
+            
+        }
+        
+        task.resume()
+        
+    } // .End GetScore()
+
 }

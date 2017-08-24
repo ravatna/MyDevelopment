@@ -29,6 +29,8 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
     var strCidCard:String = ""
     var strImgBase64:String = ""
     var strMobile:String = ""
+    var strFname : String = ""
+    var strLname : String = ""
     
     var caseProcess:Int!
     
@@ -47,6 +49,8 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
         strCidCard = ""
         strPassword = ""
         strImgBase64 = ""
+        strFname = ""
+        strLname = ""
         
     }
     @IBAction func doSave(_ sender: Any) {
@@ -66,6 +70,14 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: testStr)
+    }
+    
+    // -- test value is number only for 10 digits
+    func phoneNumberOnly(value: String) -> Bool {
+        let PHONE_REGEX = "^08\\d{8}"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let result =  phoneTest.evaluate(with: value)
+        return result
     }
     
     
@@ -91,6 +103,29 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
             
             break
         case 2:
+            
+            
+            // -- @todo: add check old password here.
+            
+            
+            
+            
+            if txtInput.text! == "" || txtInput2.text! == "" {
+                
+                //@todo: alert message.
+                let alert = self.BuildAlertDialog("แจ้งเตือน", "โปรดระบุ ชื่อ - สกุล", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:nil))
+                
+                self.present(alert, animated:true, completion:nil)
+                
+                return b
+            }
+            
+           
+            strFname = txtInput.text!
+            strLname = txtInput.text!
+            break
+            
+        case 3:
             
             
             // -- @todo: add check old password here.
@@ -133,8 +168,11 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
             
             strPassword = txtInput2.text!
             break
+
             
-        case 3:
+        case 4:
+            
+            // - test email
             if isValidEmail(testStr: txtInput.text!) != true {
                 
                 let alert = self.BuildAlertDialog("แจ้งเตือน", "อีเมล์ไม่ถูกต้อง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:nil))
@@ -144,14 +182,27 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
                 
                 return b
             }
+            
             strEmail = txtInput.text!
+            
             break
             
+            
+            
         case 0:
-            if txtInput.text! == "" {
+            
+            if phoneNumberOnly(value: txtInput.text!)  != true {
+                
+                let alert = self.BuildAlertDialog("แจ้งเตือน", "หมายเลขโทรศัพท์ไม่ถูกต้อง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:nil))
+                
+                self.present(alert, animated:true, completion:nil)
+                
+                
                 return b
             }
+            
             strMobile = txtInput.text!
+            
             break
             
         default:
@@ -183,6 +234,8 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
            txtInput.tag = 99
            txtInput.delegate = self
            
+           txtInput.keyboardType = .numberPad
+           
            var f:CGRect = vweContent.frame
            
            f.size.width = vweContent.frame.size.width  // new width
@@ -208,7 +261,23 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
            
            
             break
+            
         case 2:
+            lblCaption.text = "แก้ไข ชื่อ - สกุล"
+            txtInput2.isHidden = false
+            txtInput3.isHidden = true
+            
+            txtInput.isSecureTextEntry = false
+            txtInput2.isSecureTextEntry = false
+            //txtInput3.isSecureTextEntry = true
+            
+            txtInput.placeholder = "ระบุชื่อ..."
+            txtInput2.placeholder = "ระบุสกุล..."
+            //txtInput3.placeholder = "ระบยืนยันรหัสผ่านใหม่..."
+            
+            break
+            
+        case 3:
             lblCaption.text = "แก้ไขรหัสผ่าน"
             txtInput2.isHidden = false
             txtInput3.isHidden = false
@@ -222,7 +291,7 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
             txtInput3.placeholder = "ระบยืนยันรหัสผ่านใหม่..."
             
             break
-        case 3:
+        case 4:
             lblCaption.text = "แก้ไขอีเมล์"
             txtInput.placeholder = "ระบุอีเมล์..."
             
@@ -279,17 +348,49 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
             
             break
             
+        case 5:
+            lblCaption.text = "แก้ไข ชื่อ-สกุล"
+            txtInput2.isHidden = false
+            txtInput3.isHidden = true
+            
+            txtInput.isSecureTextEntry = false
+            txtInput2.isSecureTextEntry = false
+            txtInput3.isSecureTextEntry = false
+            
+            txtInput.placeholder = "ระบุชื่อ..."
+            txtInput2.placeholder = "ระบุสกุล..."
+            txtInput3.placeholder = ""
+            
+            var f:CGRect = vweContent.frame
+            
+            f.size.width = vweContent.frame.size.width  // new width
+            f.size.height = vweContent.frame.size.height - 40 // new height
+            
+            // move button
+            var b1:CGRect = btnInput.frame
+            var b2:CGRect = btnCancel.frame
+            
+            b1.origin.x = b1.origin.x
+            b1.origin.y = b1.origin.y - 40
+            btnInput.frame = b1
+            
+            b2.origin.x = b2.origin.x
+            b2.origin.y = b2.origin.y - 40
+            btnCancel.frame = b2
+            
+            
+            vweContent.frame = f
+
+            
+            break
+
+            
         default:
             break
         }
         
         
     }
-    
-    
-    
-    
-    
     
     func showAnimate()
     {
@@ -390,15 +491,17 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
         
         let customer:[AnyObject]
         
-        customer = SharedInfo.getInstance.json!["customer_detail"] as! [AnyObject]
+        customer = SharedInfo.getInstance.jsonCustomer!
         let code = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.json!["formToken"] as! String
-        let cookieToken:String = SharedInfo.getInstance.json!["cookieToken"] as! String
+        let formToken:String = SharedInfo.getInstance.formToken
+        let cookieToken:String = SharedInfo.getInstance.cookieToken
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/UpdateDetailCustomer/UpdateDetail")!
         let jsonDict = [ "member_code": code
             , "password": strPassword
             , "email": strEmail
+            , "frist_name": strFname
+            , "last_name": strLname
             , "cid_card": strCidCard
             , "imagebase64": strImgBase64
         , "formToken": formToken
@@ -431,10 +534,13 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
                     
                     if json["success"] as! Bool == true {
                         
+                        // case edit password app will keep new password now
                         if self.strPassword != "" {
                             let defaults = UserDefaults.standard
                             defaults.setValue(self.strPassword, forKey: "pw")
                         }
+                        
+                        
                         
                         let alert = self.BuildAlertDialog("ปรับปรุงข้อมูล", "ปรับปรุงข้อมูลเรียบร้อยแล้ว\n กรุณาออกจากระบบและเข้าสู่ระบบใหม่อีกครั้ง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:{ action in
                         self.removeAnimate()
@@ -496,5 +602,7 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
         
         return alert
     }
+    
+    
 
 }

@@ -29,7 +29,7 @@ class CardViewController: UIViewController {
         let angle:CGFloat = (270.0 * 3.14/180.0) as CGFloat
         let rotation = CGAffineTransform(rotationAngle: angle)
         vweCard.transform = rotation
-        vweTitleCard.transform = rotation
+        //vweTitleCard.transform = rotation
         
         
     }
@@ -39,15 +39,18 @@ class CardViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
     @IBAction func doBack(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         let customer:[AnyObject]
         
-        customer = SharedInfo.getInstance.json!["customer_detail"] as! [AnyObject]
-        
+        customer = SharedInfo.getInstance.jsonCustomer!
         //print(customer[0])
         var fname = customer[0]["fname"] as! String
         var lname = customer[0]["lname"] as! String
@@ -72,7 +75,7 @@ class CardViewController: UIViewController {
         
     }
     
-
+    
     /*
     // MARK: - Navigation
 
