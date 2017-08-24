@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Vinit on 24/5/2560.
@@ -27,10 +29,11 @@ public class App {
     String cookieToken,formToken;
     Bitmap imgProfile = null;
     Bitmap imgTempProfile = null;
+    Boolean showProgressDialog = true;
 
     String m_server = "http://suscoapidev-iCRM.atlasicloud.com/V2";// "http://192.168.88.197/SUSCOAPI/";  //
     public boolean needUpdateImageProfile = false;
-//    String m_server =  "http://192.168.88.196/SUSCOAPIV2/";  //
+    //String m_server =  "http://192.168.88.174/SUSCOAPIV2/";  //
 
     static public App getInstance(){
         if(object == null){
@@ -69,4 +72,44 @@ public class App {
         //System.out.println("Check bit is " + checkbit); //แสดงค่า checkbit ที่ได้
         return (cc == checkbit);
     }
+
+
+
+    /**
+     * Validate hex with regular expression
+     *
+     * @param s
+     *            hex for validation
+     * @return true valid hex, false invalid hex
+     */
+    public boolean validEmail( String s) {
+         Pattern pattern;
+         Matcher matcher;
+        String EMAIL_PATTERN =
+                "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        pattern = Pattern.compile(EMAIL_PATTERN);
+
+        matcher = pattern.matcher(s);
+        return matcher.matches();
+
+    }
+
+    /**
+     * Validate hex with regular expression
+     *
+     * @param s
+     *            hex for validation
+     * @return true valid hex, false invalid hex
+     */
+    public boolean validMobilePhone( String s) {
+        Pattern pattern;
+        Matcher matcher;
+        String PATTERN = "^(0)[0-9]{9}";
+        pattern = Pattern.compile(PATTERN);
+
+        matcher = pattern.matcher(s);
+        return matcher.matches();
+    }
+
 }

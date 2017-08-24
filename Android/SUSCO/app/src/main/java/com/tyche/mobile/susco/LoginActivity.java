@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -49,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     private LinearLayout lnrRegister;
     private EditText edtUsername;
     private EditText edtPassword;
-    private EditText edtRegistUsername;
+
     private EditText edtRegistPassword;
     private EditText edtRePassword;
     private EditText edtFname;
@@ -78,8 +79,6 @@ public class LoginActivity extends AppCompatActivity {
 
         initView();
 
-
-
     }// .End onCreate
 
     public  boolean isCanOnline() {
@@ -104,13 +103,44 @@ public class LoginActivity extends AppCompatActivity {
         //edtUsername.setText("0831356653");
         //edtPassword.setText("6653");
 
-
         edtRegistPassword = (EditText)findViewById(R.id.edtRegistPassword);
         edtRePassword = (EditText)findViewById(R.id.edtRePassword);
         edtFname = (EditText)findViewById(R.id.edtFname);
         edtLname = (EditText)findViewById(R.id.edtLname);
         edtPhone = (EditText)findViewById(R.id.edtPhone);
         edtEmail = (EditText)findViewById(R.id.edtEmail);
+
+
+        edtFname.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                int asciiKey = -1;
+                  if (keyCode==KeyEvent.KEYCODE_ENTER) {
+                    asciiKey = 13;
+                    edtLname.requestFocus();
+                    return true;
+                }
+                //Loin.println("k "+asciiKey);
+                //return super.onKeyDown(keyCode, event);
+                return false;
+            }
+        });
+
+        edtLname.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                int asciiKey = -1;
+                if (keyCode==KeyEvent.KEYCODE_ENTER) {
+                    asciiKey = 13;
+                    edtEmail.requestFocus();
+                    return true;
+                }
+                //Loin.println("k "+asciiKey);
+                //return super.onKeyDown(keyCode, event);
+                return false;
+            }
+        });
+
 
 
 //        edtPhone.setText("0831356653");
@@ -152,10 +182,12 @@ public class LoginActivity extends AppCompatActivity {
 
                 } else {
 
-
                     boolean b = true;
                     //@todo : validate user input data.
-                    if (edtPhone.getText().toString().length() != 10) {
+
+
+                    if(!App.getInstance().validMobilePhone(edtPhone.getText().toString())){
+
                         edtPhone.setError("ระบุหมายเลขโทรศัพท์");
                         b = false;
                     }
@@ -170,7 +202,8 @@ public class LoginActivity extends AppCompatActivity {
                         b = false;
                     }
 
-                    if (edtEmail.getText().toString().length() < 4) {
+                   // if (edtEmail.getText().toString().length() < 4) {
+                    if(!App.getInstance().validEmail(edtEmail.getText().toString())){
                         edtEmail.setError("อีเมล์ไม่ถูกต้อง");
                         b = false;
                     }
@@ -228,7 +261,6 @@ public class LoginActivity extends AppCompatActivity {
                                         }
                                     })
                             .show();
-
 
                 } else {
 
@@ -308,6 +340,15 @@ public class LoginActivity extends AppCompatActivity {
         btnSwitchRegister.setTextColor(Color.parseColor("#0476B9"));
         btnSwitchRegister.setBackgroundResource(R.drawable.button_right_radius_white);
 
+        edtUsername.setText("");
+        edtPassword.setText("");
+        edtPhone.setText("");
+        edtFname.setText("");
+        edtLname.setText("");
+        edtEmail.setText("");
+        // edtRegistUsername.setText("");
+        edtRegistPassword.setText("");
+        edtRePassword.setText("");
     }
 
     private void LoginToRegisterView() {
@@ -319,6 +360,16 @@ public class LoginActivity extends AppCompatActivity {
 
         btnSwitchRegister.setTextColor(Color.WHITE);
         btnSwitchRegister.setBackgroundResource(R.drawable.button_right_radius_blue);
+
+        edtUsername.setText("");
+        edtPassword.setText("");
+        edtPhone.setText("");
+        edtFname.setText("");
+        edtLname.setText("");
+        edtEmail.setText("");
+        //edtRegistUsername.setText("");
+        edtRegistPassword.setText("");
+        edtRePassword.setText("");
     }
 
 

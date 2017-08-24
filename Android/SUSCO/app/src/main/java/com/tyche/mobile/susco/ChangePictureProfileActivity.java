@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,10 +22,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.tyche.mobile.susco.R.id.imageView;
 
 public class ChangePictureProfileActivity extends AppCompatActivity {
 
@@ -34,6 +40,7 @@ public class ChangePictureProfileActivity extends AppCompatActivity {
     private int PICK_IMAGE_REQUEST = 1,PICK_IMAGE_KITKAT_REQUEST = 2;
     private Bitmap bmpPic1;
     private ImageView imgPic1;
+    private byte[] imgData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,17 +57,7 @@ public class ChangePictureProfileActivity extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
 
-       // if (Build.VERSION.SDK_INT <19){
-            //Intent intent = new Intent();
-            //intent.setType("image/jpeg");
-            //intent.setAction(Intent.ACTION_GET_CONTENT);
-            //startActivityForResult(Intent.createChooser(intent, "Select Picture"),PICK_IMAGE_REQUEST);
-       // } else {
-//            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-//            intent.addCategory(Intent.CATEGORY_OPENABLE);
-//            intent.setType("image/jpeg");
-//            startActivityForResult(intent, PICK_IMAGE_KITKAT_REQUEST);
-        //}
+
 
     }
 
@@ -135,10 +132,10 @@ public class ChangePictureProfileActivity extends AppCompatActivity {
     }
 
 
-    private void setPic(ImageView mImageView) {
+    private Bitmap setPic(int W, int H,String currentPhotoPath) {
         // Get the dimensions of the View
-        int targetW = mImageView.getWidth();
-        int targetH = mImageView.getHeight();
+        int targetW = W; //mImageView.getWidth();
+        int targetH = H; //mImageView.getHeight();
 
         // Get the dimensions of the bitmap
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
@@ -155,8 +152,8 @@ public class ChangePictureProfileActivity extends AppCompatActivity {
         bmOptions.inSampleSize = scaleFactor;
         bmOptions.inPurgeable = true;
 
-        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-        mImageView.setImageBitmap(bitmap);
+        Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
+        return bitmap;
     }
 
 
@@ -170,35 +167,35 @@ public class ChangePictureProfileActivity extends AppCompatActivity {
                 Uri uri = data.getData();
 
                 try {
-
-                    
                         bmpPic1 = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                       // imgPic1.setImageBitmap(bmpPic1);
-
-
-                    App.getInstance().imgTempProfile = bmpPic1;
+                    App.getInstance().imgTempProfile = this.getResizedBitmap(bmpPic1,200,200);
                     App.getInstance().needUpdateImageProfile = true;
-
-//                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-//                            realPath1 = getRealPathFromURI_API19(ChangePictureProfileActivity.this,uri);
-//                        }else{
-//                            realPath1 = getRealPathFromURI_API11to18(ChangePictureProfileActivity.this,uri);
-//                        }
-//
-//                        file1= new File(realPath1);
-                    
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }else{
-                
                     bmpPic1 = null;
-                
- 
             } //
 
             finish();
         }
     }// .End onActivityForResult
+
+    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(
+                bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        return resizedBitmap;
+    }
 }

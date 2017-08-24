@@ -60,7 +60,7 @@ public class SlidingImage_Adapter extends PagerAdapter {
                 try {
                     jsonArray = App.getInstance().objBanner.getJSONArray("banner");
                     final JSONObject item = jsonArray.getJSONObject(position);
-Log.i("JSON Banner url",item.getString("image"));
+
                     if(!item.getString("banner_url").equals("")) {
 
 

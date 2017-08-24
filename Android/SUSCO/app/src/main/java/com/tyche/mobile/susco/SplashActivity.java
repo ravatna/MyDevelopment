@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +25,8 @@ public class SplashActivity extends AppCompatActivity {
 
         sharedPreferences = getApplicationContext().getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
 
+        //Log.i("xxxxx",sharedPreferences.getString("login_json","{}"));
+
         if(!sharedPreferences.getString("login_json","{}").equals("{}")){
             JSONObject jsonObj = null;
             try {
@@ -36,7 +39,7 @@ public class SplashActivity extends AppCompatActivity {
                 App.getInstance().cookieToken = jsonObj.getString("cookieToken");
 
                 App.getInstance().customerMember = arr.getJSONObject(0);
-                App.getInstance().selectNews = jsonObj.getJSONArray("select_news");
+                //App.getInstance().selectNews = jsonObj.getJSONArray("select_news");
 
                 // when logoin state valid next load dialy transaction
                 Intent intent = new Intent(SplashActivity.this,MainActivity.class);
@@ -69,9 +72,6 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }).start();
         }
-
-
-
 
     } // end onCreate
 

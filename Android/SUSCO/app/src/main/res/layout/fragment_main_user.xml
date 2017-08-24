@@ -60,16 +60,16 @@
 
                 </FrameLayout>
 
-                <TextView
-                    android:layout_marginBottom="10dp"
-                    android:id="@+id/txvMyName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="เจรฟฟี่ เลอโบสะกี้"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#444444"
-                    android:textSize="18sp" />
+                <!--<TextView-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:id="@+id/txvMyName"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="เจรฟฟี่ เลอโบสะกี้"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                    <!--android:textColor="#444444"-->
+                    <!--android:textSize="18sp" />-->
 
 
             </LinearLayout>
@@ -92,7 +92,7 @@ android:background="@color/colorMain"
                        android:paddingBottom="10dp"
                        android:layout_width="match_parent"
                        android:layout_height="match_parent"
-
+                       android:id="@+id/lnrPhoneNo"
                        android:orientation="horizontal" >
                        <TextView
 
@@ -126,7 +126,7 @@ android:background="@color/colorMain"
                        android:paddingBottom="10dp"
                        android:layout_width="match_parent"
                        android:layout_height="match_parent"
-
+                       android:id="@+id/lnrIdCard"
                        android:orientation="horizontal" >
                        <TextView
 
@@ -152,12 +152,51 @@ android:background="@color/colorMain"
 
 
                    </LinearLayout>
+
+                   <LinearLayout
+                       android:divider="@drawable/ic_pump"
+                       android:background="#ffffff"
+                       android:layout_marginBottom="1dp"
+                       android:paddingTop="10dp"
+                       android:paddingBottom="10dp"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:id="@+id/lnrMyName"
+                       android:orientation="horizontal" >
+
+                       <TextView
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1.2"
+                           android:gravity="left"
+                           android:text="ชื่อ - สกุล :"
+                           android:textColor="#444444"
+                           android:textSize="16sp"  />
+
+
+                       <TextView
+                           android:id="@+id/txvMyName"
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_weight="1"
+                           android:gravity="right"
+                           android:text=""
+                           android:textAppearance="?android:attr/textAppearanceMedium"
+
+                           android:textColor="#444444"
+                           android:textSize="16sp" />
+
+
+
+                   </LinearLayout>
+
                    <LinearLayout
                        android:paddingTop="10dp"
                        android:paddingBottom="10dp"
                        android:layout_width="match_parent"
                        android:layout_height="match_parent"
                        android:background="#ffffff"
+                       android:id="@+id/lnrPassword"
                        android:layout_marginBottom="1dp"
                        android:orientation="horizontal" >
                        <TextView
@@ -190,6 +229,7 @@ android:background="@color/colorMain"
                        android:layout_width="match_parent"
                        android:layout_height="match_parent"
                        android:background="#ffffff"
+                       android:id="@+id/lnrEmail"
                        android:layout_marginBottom="1dp"
                        android:orientation="horizontal" >
                        <TextView
@@ -223,6 +263,7 @@ android:background="@color/colorMain"
                        android:layout_width="match_parent"
                        android:layout_height="match_parent"
                        android:background="#ffffff"
+                       android:id="@+id/lnrCard"
                        android:layout_marginBottom="1dp"
                        android:orientation="horizontal" >
                        <TextView
@@ -259,6 +300,7 @@ android:background="@color/colorMain"
                        android:layout_height="match_parent"
                        android:background="#ffffff"
                        android:layout_marginBottom="1dp"
+                       android:id="@+id/lnrHistory"
                        android:orientation="horizontal" >
                        <TextView
 
@@ -291,6 +333,7 @@ android:background="@color/colorMain"
                        android:paddingBottom="10dp"
                        android:layout_width="match_parent"
                        android:layout_height="match_parent"
+                       android:id="@+id/lnrLogout"
                        android:background="#ffffff"
 
                        android:orientation="horizontal" >
