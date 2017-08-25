@@ -87,6 +87,8 @@ public class MemberHistoryActivity extends AppCompatActivity {
         View vi2 = inflater.inflate(R.layout._custom_tab_widget, null);
         final TextView txvTitle= (TextView)vi.findViewById(R.id.tabTitle);
         final TextView txvTitle2= (TextView)vi2.findViewById(R.id.tabTitle);
+        overrideFonts(this,txvTitle);
+        overrideFonts(this,txvTitle2);
 
         TabHost tabHost = (TabHost)findViewById(R.id.tabhost);
         tabHost.setup(mLocalActivityManager);
@@ -106,23 +108,8 @@ public class MemberHistoryActivity extends AppCompatActivity {
         tabHost.addTab(tabSpec2);
 
         init();
+        labelMonth();
 
-        Calendar c = Calendar.getInstance();
-
-        Locale lc = new Locale("th","TH");
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm",lc);
-        SimpleDateFormat tf = new SimpleDateFormat("kk:mm",lc);
-
-        int year=0,month=0;
-
-        year = c.get(Calendar.YEAR);
-        month = c.get(Calendar.MONTH);
-
-        aMonths = new String[] {"มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"};
-
-        String d =   "ข้อมูลประจำเดือน " + aMonths[month] + " " + (year+543) ;
-
-        txvDataDate.setText(d);
 
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
@@ -143,9 +130,7 @@ public class MemberHistoryActivity extends AppCompatActivity {
 
         overrideFonts(this,findViewById(R.id.contentView) );
 
-
         ///////////////////////////////////////////////
-
         // Lookup the swipe container view
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         // Setup refresh listener which triggers new data loading
@@ -166,11 +151,9 @@ public class MemberHistoryActivity extends AppCompatActivity {
                 android.R.color.holo_red_light);
 
         /////////////////////////////////////////////////
-
     }
 
     private void doMemberTransection() {
-
         new MemberTransection().execute();
     }
 
@@ -279,6 +262,25 @@ public class MemberHistoryActivity extends AppCompatActivity {
         }
     } // end method
 
+    private void labelMonth(){
+        Calendar c = Calendar.getInstance();
+
+        Locale lc = new Locale("th","TH");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm",lc);
+        SimpleDateFormat tf = new SimpleDateFormat("kk:mm",lc);
+
+        int year=0,month=0;
+
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+
+        aMonths = new String[] {"มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"};
+
+        String d =   "ข้อมูลประจำเดือน " + aMonths[month] + " " + (year+543) ;
+
+        txvDataDate.setText(d);
+    }
+
     private void init() {
         LayoutInflater inflater = LayoutInflater.from(this);
 
@@ -312,7 +314,6 @@ public class MemberHistoryActivity extends AppCompatActivity {
                 ((TextView)giftView.findViewById(R.id.txvCol1)).setText(jsonObj.getString("service_date"));
                 ((TextView)giftView.findViewById(R.id.txvCol2)).setText(jsonObj.getString("branch_code") + " " + jsonObj.getString("item_qty") + " ชิ้น " + " " + jsonObj.getString("item_point") + " คะแนน" );
                 ((TextView)giftView.findViewById(R.id.txvCol3)).setText( jsonObj.getString("member_point"));
-
 
                 if(i%2==0){
                     giftView.setBackgroundColor(Color.parseColor("#ffffff"));

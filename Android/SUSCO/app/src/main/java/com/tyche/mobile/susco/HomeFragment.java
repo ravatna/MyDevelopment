@@ -45,6 +45,8 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.tyche.mobile.susco.NewsDetailActivity.codeImage;
+
 
 /**
  * Created by Vinit on 24/5/2560.
@@ -75,6 +77,8 @@ public class HomeFragment extends Fragment {
     private SwipeRefreshLayout swipeContainer;
 
     static Bitmap[] decodedImage;
+    static String [] codeImage;
+    static String _member_code;
 
     ImageFragmentPagerAdapter imageFragmentPagerAdapter;
 
@@ -122,6 +126,7 @@ public class HomeFragment extends Fragment {
         txtTitle8 = (TextView)rootView.findViewById(R.id.txtTitle8);
 
         try {
+            _member_code = App.getInstance().customerMember.getString("member_code");
             txvMyName.setText(App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("\r","").replace("\n",""));
             txvMyScore.setText(App.getInstance().customerMember.getString("point_summary"));
             txvMyNumber.setText(App.getInstance().customerMember.getString("mobile"));
@@ -199,11 +204,12 @@ public class HomeFragment extends Fragment {
         doNews();
         doMemberTransection();
 
+
+
         overrideFonts(getActivity(),rootView );
 
         return rootView;
     }
-
 
     private void overrideFonts(final Context context, final View v) {
         try {
@@ -249,11 +255,27 @@ public class HomeFragment extends Fragment {
                     }
                 });
                 lnrPromotion.addView(giftView);
+
+
+                GetImageBase64 img64 = new GetImageBase64();
+                img64.imgView = ((ImageView)giftView.findViewById(R.id.imgPic));
+                img64.imagecode = j.getString("code_image1");
+                img64.m_cookieToken = App.getInstance().cookieToken;
+                img64.m_formToken = App.getInstance().formToken;
+                img64.Width = "1024";
+                img64.Height = "400";
+                img64._mcode = App.getInstance().customerMember.getString("member_code");
+                img64.checkWidth = "0";
+                img64.CustomWidthHeight = "1";
+                img64.execute();
+
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
         }
+        overrideFonts(getActivity(),lnrPromotion );
     } // end init
 
     private void doMemberTransection() {
@@ -449,7 +471,7 @@ public class HomeFragment extends Fragment {
 
             txvDateUpdate.setText(String.format("ณ วันที่ %s %s น.",d ,formattedTime));
 
-            Log.i("JSON",result);
+            //Log.i("JSON",result);
             for(int i =0; i < jsonArray.length(); i++){
                 JSONObject item = jsonArray.getJSONObject(i);
 
@@ -498,6 +520,10 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+
+
+    ///////////////////////////////////////////
 
 ///////////////// news ///////////////////////
 private void doNews() {
@@ -590,7 +616,7 @@ private void doNews() {
             // Create Show ProgressBar
             strJson = "{'membercode':'" + _mcode  + "','image_width':'" + 512 + "','image_height':'" + 256+ "','formToken':'" + m_formToken  + "','cookieToken':'" + m_cookieToken  + "'}";
 
-           Log.i("XXXX",strJson);
+           //Log.i("XXXX",strJson);
             postUrl  = App.getInstance().m_server + "/Banner/GetBanner";
             //            pd = new ProgressDialog(getActivity() );
             //            pd.setMessage("กำลังดำเนินการ...");
@@ -651,15 +677,21 @@ private void doNews() {
             App.getInstance().objBanner = jsonObj;
             JSONArray jsonArray = jsonObj.getJSONArray("banner");
 
-            //Log.i("JSON Banner",result);
+
             decodedImage = new Bitmap[jsonArray.length()];
+            codeImage = new String[jsonArray.length()];
+
             for(int i =0; i < jsonArray.length(); i++){
                 final JSONObject item = jsonArray.getJSONObject(i);
 
                 String imageString = item.getString("image");
                 //decode base64 string to image
                 byte[] imageBytes = Base64.decode(imageString, Base64.DEFAULT);
-                 decodedImage[i] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                decodedImage[i] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                codeImage[i] = item.getString("code_image");
+
+
+
 
             } // end for
 
@@ -694,82 +726,6 @@ private void doNews() {
     }// .End parseBannerResult
 
 
-// private void parseResultBanner(String result) {
-//        if(result == null)
-//            return ;
-//
-//        ////////////////////////////////
-//        try {
-//            JSONObject jsonObj = new JSONObject(result);
-//            App.getInstance().objBanner = jsonObj;
-//            JSONArray jsonArray = jsonObj.getJSONArray("banner");
-//            ImagesArray = new ArrayList<>();
-//            //Log.i("JSON Banner",result);
-//            decodedImage = new Bitmap[jsonArray.length()];
-//            for(int i =0; i < jsonArray.length(); i++){
-//                final JSONObject item = jsonArray.getJSONObject(i);
-//
-//                String imageString = item.getString("image");
-//                //decode base64 string to image
-//                byte[] imageBytes = Base64.decode(imageString, Base64.DEFAULT);
-//                 decodedImage[i] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-//
-//                //-----------------ImagesArray.add(decodedImage);
-//            } // end for
-//
-//           // ---------------- mPager.setAdapter(new SlidingImage_Adapter(getActivity(),ImagesArray));
-//
-//            indicator.setViewPager(mPager);
-//            final float density = getResources().getDisplayMetrics().density;
-//
-//            //Set circle indicator radius
-//            indicator.setRadius(5 * density);
-//
-//            NUM_PAGES =IMAGES.size();
-//
-//            // Auto start of viewpager
-//            final Handler handler = new Handler();
-//            final Runnable Update = new Runnable() {
-//                public void run() {
-//                    if (currentPage == NUM_PAGES) {
-//                        currentPage = 0;
-//                    }
-//                    mPager.setCurrentItem(currentPage++, true);
-//                }
-//            };
-//            Timer swipeTimer = new Timer();
-//            swipeTimer.schedule(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    handler.post(Update);
-//                }
-//            }, 3000, 3000);
-//
-//            // Pager listener over indicator
-//            indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//
-//                @Override
-//                public void onPageSelected(int position) {
-//                    currentPage = position;
-//
-//                }
-//
-//                @Override
-//                public void onPageScrolled(int pos, float arg1, int arg2) {
-//
-//                }
-//
-//                @Override
-//                public void onPageScrollStateChanged(int pos) {
-//
-//                }
-//            });
-//
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//    }// .End parseBannerResult
 
     public static class ImageFragmentPagerAdapter extends FragmentPagerAdapter {
         public ImageFragmentPagerAdapter(FragmentManager fm) {
@@ -798,6 +754,20 @@ private void doNews() {
             final int position = bundle.getInt("position");
 
             imageView.setImageBitmap(decodedImage[position]);
+
+
+            GetImageBase64_type2 img64 = new GetImageBase64_type2();
+            img64.imgView = imageView;
+            img64.imagecode = codeImage[position];
+            img64.i = position;
+            img64.m_cookieToken = App.getInstance().cookieToken;
+            img64.m_formToken = App.getInstance().formToken;
+            img64.Width = "2048";
+            img64.Height = "400";
+            img64._mcode = _member_code;
+            img64.checkWidth = "0";
+            img64.CustomWidthHeight = "1";
+            img64.execute();
 
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -838,6 +808,194 @@ private void doNews() {
             return swipeFragment;
         }
     }
+
+    private class GetImageBase64 extends AsyncTask<Void, Void, String> {
+        ImageView imgView = null;
+        String strJson,postUrl;
+        ProgressDialog pd;
+        String m_formToken = "";
+        String m_cookieToken = "";
+        String _mcode = "";
+        String imagecode = "";
+        String Width = "";
+        String Height = "";
+        String checkWidth = "0";
+        String CustomWidthHeight = "0"; // 0 get by set width height, 1 get by checkWidth;
+
+
+        @Override
+        protected void onPreExecute() {
+            try {
+                _mcode = App.getInstance().customerMember.getString("member_code");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            // Create Show ProgressBar
+            strJson = "{\"member_code\":\"" + _mcode
+                    + "\",\"imagecode\":\"" + imagecode
+                    + "\",\"Width\":" + Width
+                    + ",\"Height\":" + Height
+                    + ",\"checkWidth\":" + checkWidth // for fix width ,1 for fix height
+                    + ",\"CustomWidthHigth\":" + CustomWidthHeight // for fix width ,1 for fix height
+                    + ",\"formToken\":\"" + m_formToken
+                    + "\",\"cookieToken\":\"" + m_cookieToken  + "\"}";
+            postUrl  = App.getInstance().m_server + "/GetPicture/getimagebase64";
+Log.i("xxxxxxxxx",strJson);
+
+        }
+
+        protected String doInBackground(Void... urls)   {
+
+            String result = null;
+            try {
+
+                /////////////////////////////
+                RequestBody body = RequestBody.create(JSON, strJson);
+                Request request = new Request.Builder()
+                        .url(postUrl)
+                        .addHeader("formToken",m_formToken)
+                        .addHeader("cookieToken",m_cookieToken)
+                        .post(body)
+                        .build();
+
+
+                Response response = client.newCall(request).execute();
+                result = response.body().string();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        protected void onPostExecute(String result)  {
+
+
+            if(result == null)
+                return ;
+
+            Log.i("xxxxxxxb",result);
+            ////////////////////////////////
+            try {
+                JSONObject jsonObj = new JSONObject(result);
+
+                if(jsonObj.getBoolean("success")){
+
+
+                    //decode base64 string to image
+
+                    byte[] imageBytes = Base64.decode(jsonObj.getString("imagebase64"), Base64.DEFAULT);
+                    Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                    imgView.setImageBitmap(decodedImage);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        public  final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+        OkHttpClient client = new OkHttpClient();
+
+    }
+
+
+    private static class GetImageBase64_type2 extends AsyncTask<Void, Void, String> {
+        int i = 0;
+        ImageView imgView = null;
+        String strJson,postUrl;
+        ProgressDialog pd;
+        String m_formToken = "";
+        String m_cookieToken = "";
+        String _mcode = "";
+        String imagecode = "";
+        String Width = "";
+        String Height = "";
+        String checkWidth = "0";
+        String CustomWidthHeight = "0"; // 0 get by set width height, 1 get by checkWidth;
+
+
+        @Override
+        protected void onPreExecute() {
+            try {
+                _mcode = App.getInstance().customerMember.getString("member_code");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            // Create Show ProgressBar
+            strJson = "{\"member_code\":\"" + _mcode
+                    + "\",\"imagecode\":\"" + imagecode
+                    + "\",\"Width\":" + Width
+                    + ",\"Height\":" + Height
+                    + ",\"checkWidth\":" + checkWidth // for fix width ,1 for fix height
+                    + ",\"CustomWidthHigth\":" + CustomWidthHeight // for fix width ,1 for fix height
+                    + ",\"formToken\":\"" + m_formToken
+                    + "\",\"cookieToken\":\"" + m_cookieToken  + "\"}";
+            postUrl  = App.getInstance().m_server + "/GetPicture/getimagebase64";
+            Log.i("xxxxxxxxx",strJson);
+
+        }
+
+        protected String doInBackground(Void... urls)   {
+
+            String result = null;
+            try {
+
+                /////////////////////////////
+                RequestBody body = RequestBody.create(JSON, strJson);
+                Request request = new Request.Builder()
+                        .url(postUrl)
+                        .addHeader("formToken",m_formToken)
+                        .addHeader("cookieToken",m_cookieToken)
+                        .post(body)
+                        .build();
+
+
+                Response response = client.newCall(request).execute();
+                result = response.body().string();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        protected void onPostExecute(String result)  {
+
+
+            if(result == null)
+                return ;
+
+            ////////////////////////////////
+            try {
+                JSONObject jsonObj = new JSONObject(result);
+
+                if(jsonObj.getBoolean("success")){
+
+
+                    //decode base64 string to image
+
+                    byte[] imageBytes = Base64.decode(jsonObj.getString("imagebase64"), Base64.DEFAULT);
+                    Bitmap di = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                    imgView.setImageBitmap(di);
+                    decodedImage[i] = di;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        public  final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+        OkHttpClient client = new OkHttpClient();
+
+    }
+
+
 
 
 }

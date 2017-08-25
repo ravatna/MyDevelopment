@@ -1,10 +1,13 @@
 package com.tyche.mobile.susco;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -27,8 +30,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.json.JSONException;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -49,8 +60,9 @@ public class NewsDetailActivity extends AppCompatActivity {
     private ImageView imgPicture1,imgPicture2,imgPicture3;
     private byte[] imageBytes;
     static public Bitmap[] decodedImage;
+    static public String[] codeImage;
     private  int currentPage = 0;
-
+    private String tmpImg1,tmpImg2,tmpImg3;
     private  int NUM_ITEMS = 0;
     ImageFragmentPagerAdapter imageFragmentPagerAdapter;
     ViewPager viewPager;
@@ -59,6 +71,7 @@ public class NewsDetailActivity extends AppCompatActivity {
     String imgB2 = "";
     String imgB3 = "";
 
+    static String mcode = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +92,10 @@ public class NewsDetailActivity extends AppCompatActivity {
         TextView txvTitle = (TextView)findViewById(R.id.txtTitle);
         TextView txvNewsDate = (TextView)findViewById(R.id.txtNewsDate);
         WebView txvDesc = (WebView)findViewById(R.id.txtDesc);
+
+        txvDesc.getSettings().setJavaScriptEnabled(true);
+        txvDesc.getSettings().setGeolocationEnabled(true);
+        txvDesc.getSettings().setAllowContentAccess(true);
 
         imgPicture1 = (ImageView)findViewById(R.id.imgBanner1);
         imgPicture2 = (ImageView)findViewById(R.id.imgBanner2);
@@ -118,6 +135,7 @@ public class NewsDetailActivity extends AppCompatActivity {
         });
 
         try {
+            mcode = App.getInstance().customerMember.getString("member_code");
             if(App.getInstance().objNews.getString("pic1_id").length() > 0){
                 NUM_ITEMS++;
             }
@@ -143,36 +161,51 @@ public class NewsDetailActivity extends AppCompatActivity {
             WebSettings settings = txvDesc.getSettings();
             settings.setDefaultTextEncodingName("utf-8");
 
-            txvDesc.loadData(App.getInstance().objNews.getString("news_text"), "text/html; charset=utf-8",null);
-            txvDesc.getSettings().setJavaScriptEnabled(true);
-            txvDesc.getSettings().setGeolocationEnabled(true);
-            txvDesc.getSettings().setAllowContentAccess(true);
+             String styleSheet =  "\n<style>\n" +
+                    "\n" +
+"@font-face {\n" +
+                     "    font-family: MyFont;\n" +
+                     "    src: url(\"fonts/Kanit-Regular.ttf\")\n" +
+                     "}" +
+                    "body {\n" +
+                    "    font-family: MyFont;\n" +
+                    "\n" +
+                    "}\n" +
+                    " </style>";
+
+            txvDesc.loadDataWithBaseURL("file:///android_asset/",
+                    styleSheet + App.getInstance().objNews.getString("news_text"), "text/html", "UTF-8", null);
+
+//            txvDesc.loadDataWithBaseURL(
+//                    "file:///android_asset/"
+//                    ,styleSheet + App.getInstance().objNews.getString("news_text")
+//                    ,"text/html; charset=utf-8"
+//                    ,null
+//            );
+
+
         } catch (JSONException e) {
             e.printStackTrace();
             finish();
         }
 
         decodedImage = new Bitmap[NUM_ITEMS];
+        codeImage = new String[NUM_ITEMS];
 
 
 
 
     try {
         if(!App.getInstance().objNews.getString("pic1_id").equals("")) {
-        //Log.i("JSON News", App.getInstance().objNews.toString());
+            imgB1 = App.getInstance().objNews.getString("pic1_id");
 
+            //decode base64 string to image
+            imageBytes = Base64.decode(imgB1, Base64.DEFAULT);
 
-        imgB1 = App.getInstance().objNews.getString("pic1_id");
-        //decode base64 string to image
-        imageBytes = Base64.decode(imgB1, Base64.DEFAULT);
+            decodedImage[0] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            codeImage[0] = App.getInstance().objNews.getString("code_image1");
 
-        decodedImage[0] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-        //imgPicture1.setImageBitmap(decodedImage);
-        //imgPicture1.setVisibility(View.VISIBLE);
-
-        //NUM_ITEMS++;
-
-    }
+        }
     } catch (JSONException e) {
         e.printStackTrace();
     }
@@ -188,9 +221,7 @@ public class NewsDetailActivity extends AppCompatActivity {
                 //decode base64 string to image
                 imageBytes = Base64.decode(imgB2, Base64.DEFAULT);
                 decodedImage[1] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                //imgPicture2.setImageBitmap(decodedImage);
-                //imgPicture2.setVisibility(View.VISIBLE);
-                //NUM_ITEMS++;
+                codeImage[1] = App.getInstance().objNews.getString("code_image2");
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -202,9 +233,7 @@ public class NewsDetailActivity extends AppCompatActivity {
                 //decode base64 string to image
                 imageBytes = Base64.decode(imgB3, Base64.DEFAULT);
                 decodedImage[2] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                //imgPicture3.setImageBitmap(decodedImage);
-                //imgPicture3.setVisibility(View.VISIBLE);
-                //NUM_ITEMS++;
+                codeImage[2] = App.getInstance().objNews.getString("code_image3");
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -273,6 +302,8 @@ public class NewsDetailActivity extends AppCompatActivity {
     }
 
     public static class SwipeFragment extends Fragment {
+
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -282,12 +313,24 @@ public class NewsDetailActivity extends AppCompatActivity {
             final int position = bundle.getInt("position");
 
             imageView.setImageBitmap(decodedImage[position]);
+            GetImageBase64 img64_1 = new GetImageBase64();
+            img64_1.imgView = imageView;
+            img64_1.i = position;
+            img64_1.imagecode = codeImage[position];
+            img64_1.m_cookieToken = App.getInstance().cookieToken;
+            img64_1.m_formToken = App.getInstance().formToken;
+            img64_1.Width = "1024";
+            img64_1.Height = "400";
+            img64_1._mcode = mcode;
+            img64_1.checkWidth = "0";
+            img64_1.CustomWidthHeight = "1";
+            img64_1.execute();
 
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    final Dialog settingsDialog = new Dialog(getActivity());
+                    final Dialog settingsDialog = new Dialog(getActivity(),android.R.style.Theme_Black_NoTitleBar_Fullscreen);
                     settingsDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
                     settingsDialog.setContentView(getActivity().getLayoutInflater().inflate(R.layout.dialog_popup_image, null));
 
@@ -307,6 +350,8 @@ public class NewsDetailActivity extends AppCompatActivity {
                 }
             });
 
+
+
             return swipeView;
         }
 
@@ -318,5 +363,97 @@ public class NewsDetailActivity extends AppCompatActivity {
             return swipeFragment;
         }
     }
+    private static class GetImageBase64 extends AsyncTask<Void, Void, String> {
+        int i = 0;
+        ImageView imgView = null;
+        String strJson,postUrl;
+        ProgressDialog pd;
+        String m_formToken = "";
+        String m_cookieToken = "";
+        String _mcode = "";
+        String imagecode = "";
+        String Width = "";
+        String Height = "";
+        String checkWidth = "0";
+        String CustomWidthHeight = "0"; // 0 get by set width height, 1 get by checkWidth;
 
+
+        @Override
+        protected void onPreExecute() {
+            try {
+                _mcode = App.getInstance().customerMember.getString("member_code");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            // Create Show ProgressBar
+            strJson = "{\"member_code\":\"" + _mcode
+                    + "\",\"imagecode\":\"" + imagecode
+                    + "\",\"Width\":" + Width
+                    + ",\"Height\":" + Height
+                    + ",\"checkWidth\":" + checkWidth // for fix width ,1 for fix height
+                    + ",\"CustomWidthHigth\":" + CustomWidthHeight // for fix width ,1 for fix height
+                    + ",\"formToken\":\"" + m_formToken
+                    + "\",\"cookieToken\":\"" + m_cookieToken  + "\"}";
+            postUrl  = App.getInstance().m_server + "/GetPicture/getimagebase64";
+            Log.i("xxxxxxxxx",strJson);
+
+        }
+
+        protected String doInBackground(Void... urls)   {
+
+            String result = null;
+            try {
+
+                /////////////////////////////
+                RequestBody body = RequestBody.create(JSON, strJson);
+                Request request = new Request.Builder()
+                        .url(postUrl)
+                        .addHeader("formToken",m_formToken)
+                        .addHeader("cookieToken",m_cookieToken)
+                        .post(body)
+                        .build();
+
+
+                Response response = client.newCall(request).execute();
+                result = response.body().string();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        protected void onPostExecute(String result)  {
+
+
+            if(result == null)
+                return ;
+
+            Log.i("xxxxxxxb",result);
+            ////////////////////////////////
+            try {
+                JSONObject jsonObj = new JSONObject(result);
+
+                if(jsonObj.getBoolean("success")){
+
+
+                    //decode base64 string to image
+
+                    byte[] imageBytes = Base64.decode(jsonObj.getString("imagebase64"), Base64.DEFAULT);
+                    Bitmap di = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                    imgView.setImageBitmap(di);
+                    decodedImage[i] = di;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        public  final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+        OkHttpClient client = new OkHttpClient();
+
+    }
 }

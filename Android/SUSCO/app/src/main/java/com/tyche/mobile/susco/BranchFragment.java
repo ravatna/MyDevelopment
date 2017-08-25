@@ -1,8 +1,11 @@
 package com.tyche.mobile.susco;
 
+import android.content.Context;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,8 +61,24 @@ import android.widget.TextView;
         //myWebView.loadUrl("https://www.google.com/maps/d/viewer?mid=1Y0VSBNMlw9Q2r4Wpk5NkPrUbn9s&ll=14.305836340137358%2C102.16185804805923&z=6");
 
         myWebView.loadUrl("file:///android_asset/newhtml.html");
-
+        overrideFonts(getActivity(),rootView );
         return rootView;
     }
+
+    private void overrideFonts(final Context context, final View v) {
+        try {
+            if (v instanceof ViewGroup) {
+                ViewGroup vg = (ViewGroup) v;
+                for (int i = 0; i < vg.getChildCount(); i++) {
+                    View child = vg.getChildAt(i);
+                    overrideFonts(context, child);
+                }
+            } else if (v instanceof TextView ) {
+                ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/Kanit-Regular.ttf"));
+            }
+        } catch (Exception e) {
+            Log.e("UpdateFontface",e.getMessage());
+        }
+    } // end method
 
 }

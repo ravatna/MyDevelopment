@@ -10,8 +10,8 @@
     <android.support.v4.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -232,7 +232,7 @@ android:visibility="gone"
 
 
 
-                    <ScrollView
+                    <android.support.v4.widget.NestedScrollView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <LinearLayout
@@ -246,7 +246,7 @@ android:visibility="gone"
 
                             </LinearLayout>
                         </LinearLayout>
-                    </ScrollView>
+                    </android.support.v4.widget.NestedScrollView>
 
 
 
@@ -360,9 +360,10 @@ android:visibility="gone"
 
 
     </TabHost>
-</LinearLayout>
-        </android.support.v4.widget.SwipeRefreshLayout>
 
+</LinearLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 </RelativeLayout>

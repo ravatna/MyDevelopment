@@ -84,8 +84,6 @@ import java.util.ArrayList;
         sharedPreferences = getActivity().getApplicationContext().getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-
-
         lnrGiftBox = (LinearLayout)rootView.findViewById(R.id.lnrGift);
         lnrVoucher = (LinearLayout)rootView.findViewById(R.id.lnrVoucher);
         txvMyName = (TextView) rootView.findViewById(R.id.txvMyName);
@@ -140,10 +138,9 @@ import java.util.ArrayList;
 
         /////////////////////////////////////////////////
 
-
-
         overrideFonts(getActivity(),rootView );
         return rootView;
+
     }
 
     private void overrideFonts(final Context context, final View v) {

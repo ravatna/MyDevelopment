@@ -81,6 +81,7 @@ import static com.tyche.mobile.susco.R.id.edtPassword;
 
     private LinearLayout lnrPhoneNo,lnrIdCard,lnrPassword,lnrEmail,lnrCard,lnrHistory,lnrLogout;
     private LinearLayout lnrMyName;
+    private String tmpLname = "", tmpFname="";
 
     public UserInfoFragment() {
         }
@@ -981,6 +982,24 @@ else {
 
                                         }
 
+                                        if(!_email.isEmpty()){
+                                            tmpEmail = _email;
+                                            _email = "";
+                                            txvEmail.setText(_email);
+                                        }else{
+
+                                        }
+
+                                        if(!_fname.isEmpty() && !_lname.isEmpty()){
+                                            tmpFname = _fname;
+                                            tmpLname = _lname;
+                                            _fname = "";
+                                            _lname = "";
+                                            txvMyName.setText(_fname + " " + _lname);
+                                        }else{
+
+                                        }
+
                                         _mobile = "";
                                         _email = "";
                                         _imagebase64 = "";
@@ -989,7 +1008,8 @@ else {
                                         _lname="";
 
                                         dialog.dismiss();
-                                        new ReLogin().execute();
+                                        //new ReLogin().execute();
+                                        doGetInfo();
                                     }
                                 })
                         .show();
@@ -1079,10 +1099,7 @@ else {
                                         _fname = "";
                                         _lname="";
                                         dialog.dismiss();
-
-                                        new GetUserInfo().execute();
-
-                                        //new ReLogin().execute();
+                                        doGetInfo();
                                     }
                                 })
                         .show();
@@ -1167,113 +1184,113 @@ else {
     }
 
 
-    private class ReLogin extends AsyncTask<Void, Void, String> {
-        String strJson,postUrl;
-        ProgressDialog pd;
-        String u = "",p = "";
-        @Override
-        protected void onPreExecute() {
-            try {
-                u = App.getInstance().customerMember.getString("mobile");
-                p = sharedPreferences.getString("pw","");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            // Create Show ProgressBar
-            strJson = "{'mobile_customer':'" + u  + "','pass_customer':'" + p + "'}";
-            postUrl  = App.getInstance().m_server + "/Security/login_customer_susco";
-            pd = new ProgressDialog(getActivity());
-            pd.setMessage("กำลังดำเนินการ...");
-            pd.setCancelable(false);
-            if(App.getInstance().showProgressDialog) {
-                pd.show();
-            }
-
-        }
-
-        protected String doInBackground(Void... urls)   {
-
-            String result = null;
-            try {
-                result = post(postUrl, strJson);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return result;
-        }
-
-        protected void onPostExecute(String result)  {
-
-            if(pd.isShowing()){
-                pd.dismiss();
-                pd = null;
-            }
-
-            parseResultLogin(result);
-
-        }
-
-
-        public  final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-
-        OkHttpClient client = new OkHttpClient();
-
-        String post(String url, String json) throws IOException {
-            RequestBody body = RequestBody.create(JSON, json);
-            Request request = new Request.Builder()
-                    .url(url)
-                    .post(body)
-                    .build();
-            Response response = client.newCall(request).execute();
-            return response.body().string();
-        }
-
-    }
-
-    private void parseResultLogin(String result) {
-
-        try {
-            JSONObject jsonObj = new JSONObject(result);
-            App.getInstance().loginObject = jsonObj;
-
-            editor.putString("login_json",jsonObj.toString());
-            editor.commit();
-
-            if(jsonObj.getBoolean("success"))
-            {
-
-                JSONArray arr = jsonObj.getJSONArray("customer_detail");
-
-                App.getInstance().formToken = jsonObj.getString("formToken");
-                App.getInstance().cookieToken = jsonObj.getString("cookieToken");
-
-                App.getInstance().customerMember = arr.getJSONObject(0);
-                //App.getInstance().selectNews = jsonObj.getJSONArray("select_news");
-
-                byte[] imageBytes;
-                String imageString = "";
-                try {
-                    imageString = App.getInstance().customerMember.getString("cid_card_pic");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                if (!imageString.equals("")) {
-                    //decode base64 string to image
-                    imageBytes = Base64.decode(imageString, Base64.DEFAULT);
-                    Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                    App.getInstance().imgProfile = decodedImage;
-
-                } // .End if !imageString == ""
-            } // .End if
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }// .End parseResult
+//    private class ReLogin extends AsyncTask<Void, Void, String> {
+//        String strJson,postUrl;
+//        ProgressDialog pd;
+//        String u = "",p = "";
+//        @Override
+//        protected void onPreExecute() {
+//            try {
+//                u = App.getInstance().customerMember.getString("mobile");
+//                p = sharedPreferences.getString("pw","");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//            // Create Show ProgressBar
+//            strJson = "{'mobile_customer':'" + u  + "','pass_customer':'" + p + "'}";
+//            postUrl  = App.getInstance().m_server + "/Security/login_customer_susco";
+//            pd = new ProgressDialog(getActivity());
+//            pd.setMessage("กำลังดำเนินการ...");
+//            pd.setCancelable(false);
+//            if(App.getInstance().showProgressDialog) {
+//                pd.show();
+//            }
+//
+//        }
+//
+//        protected String doInBackground(Void... urls)   {
+//
+//            String result = null;
+//            try {
+//                result = post(postUrl, strJson);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            return result;
+//        }
+//
+//        protected void onPostExecute(String result)  {
+//
+//            if(pd.isShowing()){
+//                pd.dismiss();
+//                pd = null;
+//            }
+//
+//            parseResultLogin(result);
+//
+//        }
+//
+//
+//        public  final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+//
+//        OkHttpClient client = new OkHttpClient();
+//
+//        String post(String url, String json) throws IOException {
+//            RequestBody body = RequestBody.create(JSON, json);
+//            Request request = new Request.Builder()
+//                    .url(url)
+//                    .post(body)
+//                    .build();
+//            Response response = client.newCall(request).execute();
+//            return response.body().string();
+//        }
+//
+//    }
+//
+//    private void parseResultLogin(String result) {
+//
+//        try {
+//            JSONObject jsonObj = new JSONObject(result);
+//            App.getInstance().loginObject = jsonObj;
+//
+//            editor.putString("login_json",jsonObj.toString());
+//            editor.commit();
+//
+//            if(jsonObj.getBoolean("success"))
+//            {
+//
+//                JSONArray arr = jsonObj.getJSONArray("customer_detail");
+//
+//                App.getInstance().formToken = jsonObj.getString("formToken");
+//                App.getInstance().cookieToken = jsonObj.getString("cookieToken");
+//
+//                App.getInstance().customerMember = arr.getJSONObject(0);
+//                //App.getInstance().selectNews = jsonObj.getJSONArray("select_news");
+//
+//                byte[] imageBytes;
+//                String imageString = "";
+//                try {
+//                    imageString = App.getInstance().customerMember.getString("cid_card_pic");
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                if (!imageString.equals("")) {
+//                    //decode base64 string to image
+//                    imageBytes = Base64.decode(imageString, Base64.DEFAULT);
+//                    Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+//                    App.getInstance().imgProfile = decodedImage;
+//
+//                } // .End if !imageString == ""
+//            } // .End if
+//
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }// .End parseResult
 
 
 

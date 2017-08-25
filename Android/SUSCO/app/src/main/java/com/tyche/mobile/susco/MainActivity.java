@@ -6,10 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +24,7 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private ScrollDisabledViewPager mViewPager;
     private TextView mCaptionTitle;
     private ImageView mImgHeader;
-
+    private CoordinatorLayout mainView;
 
     public  boolean isCanOnline() {
         ConnectivityManager
@@ -105,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         // * news detail use like banner and touch to big picture
         // set font to sukhumvit
         // * add id card line on user profile below mobile
-
+ mainView = (CoordinatorLayout)findViewById(R.id.main_content);
         mCaptionTitle = (TextView)findViewById(R.id.toolbar_save);
         mImgHeader = (ImageView)findViewById(R.id.imgHeader);
 
@@ -126,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
 
                 if(tabLayout.getSelectedTabPosition() == 0){
-
                     tabLayout.getTabAt(0).setIcon(R.drawable.home_gray_32);
                     //tabLayout.getTabAt(4).setIcon(R.drawable.megaphon_gray_32);
                     tabLayout.getTabAt(1).setIcon(R.drawable.medal_gray_32);
@@ -181,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
                     mCaptionTitle.setText("ข้อมูลสมาชิก");
                     tab.setIcon(R.drawable.user64);
                 }
+
+                changeTabsFont(tabLayout);
             }
 
             @Override
@@ -228,6 +232,32 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(R.drawable.medal_gray_32);
         tabLayout.getTabAt(2).setIcon(R.drawable.placeholder_gray_32);
         tabLayout.getTabAt(3).setIcon(R.drawable.user_gray_64);
+
+        changeTabsFont(tabLayout);
+
+
+
+    }
+
+
+
+
+    private void changeTabsFont(ViewGroup viewGroup) {
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Kanit-Regular.ttf");
+        ViewGroup vg = (ViewGroup) viewGroup.getChildAt(0);
+        int tabsCount = vg.getChildCount();
+        for (int j = 0; j < tabsCount; j++) {
+            ViewGroup vgTab = (ViewGroup) vg.getChildAt(j);
+            int tabChildsCount = vgTab.getChildCount();
+            for (int i = 0; i < tabChildsCount; i++) {
+                View tabViewChild = vgTab.getChildAt(i);
+                if (tabViewChild instanceof TextView) {
+                    ((TextView) tabViewChild).setTypeface(font);
+                    ((TextView) tabViewChild).setTextSize(19);
+
+                }
+            }
+        }
     }
 
 
@@ -274,7 +304,6 @@ public class MainActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
     void selectPage(TabLayout tabLayout, ViewPager viewPager, int pageIndex){
         tabLayout.setScrollPosition(pageIndex,0f,true);
@@ -349,6 +378,8 @@ public class MainActivity extends AppCompatActivity {
             super(fm);
         }
 
+
+
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
@@ -369,6 +400,8 @@ public class MainActivity extends AppCompatActivity {
             return HomeFragment.newInstance(0);
             //return PlaceholderFragment.newInstance(position + 1);
         }
+
+
 
         @Override
         public int getCount() {
