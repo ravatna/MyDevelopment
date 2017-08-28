@@ -14,6 +14,7 @@
 		DB3EA3CF1F395FAF0073AF60 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = DB3EA3CE1F395FAF0073AF60 /* jquery-3.2.1.min.js */; };
 		DB483BF41F0E143C005C2C0D /* Main67.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB483BF31F0E143C005C2C0D /* Main67.storyboard */; };
 		DB483BF61F0E145D005C2C0D /* Main67Plus.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB483BF51F0E145D005C2C0D /* Main67Plus.storyboard */; };
+		DB51F7951F50022B0023BC96 /* Kanit-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB51F7941F50022B0023BC96 /* Kanit-Regular.ttf */; };
 		DB621CE91F14787E00E4D901 /* newhtml.html in Resources */ = {isa = PBXBuildFile; fileRef = DB621CE81F14787E00E4D901 /* newhtml.html */; };
 		DB621CEB1F14791500E4D901 /* images in Resources */ = {isa = PBXBuildFile; fileRef = DB621CEA1F14791500E4D901 /* images */; };
 		DB6E96C01F4567B0008A3B97 /* user_info.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6E96BF1F4567B0008A3B97 /* user_info.png */; };
@@ -126,6 +127,7 @@
 		DB3EA3CE1F395FAF0073AF60 /* jquery-3.2.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.2.1.min.js"; sourceTree = "<group>"; };
 		DB483BF31F0E143C005C2C0D /* Main67.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main67.storyboard; sourceTree = "<group>"; };
 		DB483BF51F0E145D005C2C0D /* Main67Plus.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main67Plus.storyboard; sourceTree = "<group>"; };
+		DB51F7941F50022B0023BC96 /* Kanit-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-Regular.ttf"; sourceTree = "<group>"; };
 		DB621CE81F14787E00E4D901 /* newhtml.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = newhtml.html; sourceTree = "<group>"; };
 		DB621CEA1F14791500E4D901 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		DB6E96BF1F4567B0008A3B97 /* user_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_info.png; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 		DBB4DA1E1EFA7564007E7243 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				DB51F7941F50022B0023BC96 /* Kanit-Regular.ttf */,
 				DB6E96C11F45A095008A3B97 /* left_arrow.png */,
 				DB6E96C21F45A095008A3B97 /* right_arrow.png */,
 				DB6E96BF1F4567B0008A3B97 /* user_info.png */,
@@ -558,6 +561,7 @@
 				DBB4D9FE1EFA7558007E7243 /* logo_susco_500.png in Resources */,
 				DBB4DA061EFA7558007E7243 /* megaphon32.png in Resources */,
 				DBB4D9EC1EFA7558007E7243 /* banner_score_and_name_500px_214px.png in Resources */,
+				DB51F7951F50022B0023BC96 /* Kanit-Regular.ttf in Resources */,
 				DBB4DA191EFA7558007E7243 /* susco_bg01.png in Resources */,
 				DBB4DA0E1EFA7558007E7243 /* placeholder_gray_32.png in Resources */,
 				DB6E96C01F4567B0008A3B97 /* user_info.png in Resources */,

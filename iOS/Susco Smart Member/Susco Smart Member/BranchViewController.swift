@@ -22,6 +22,7 @@ class BranchViewControlller : UIViewController, UIWebViewDelegate{
         
         loadMap()
         wvwBarnch.delegate = self
+        
     }
     
     override func didReceiveMemoryWarning() {

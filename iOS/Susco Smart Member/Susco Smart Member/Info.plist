@@ -15,9 +15,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.983</string>
+	<string>1.0.989</string>
 	<key>CFBundleVersion</key>
-	<string>13</string>
+	<string>16</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -27,6 +29,10 @@
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Susco Smart Member</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Kanit-Regular.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

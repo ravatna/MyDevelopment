@@ -55,6 +55,19 @@ class ScoreViewController: UIViewController {
         
         // Simply adding an object to the data source for this example
         
+        if SharedInfo.getInstance.currentDevice == "45" {
+            yy =   220
+        }
+        else if SharedInfo.getInstance.currentDevice == "67"
+        {
+            yy =  265
+        }
+            
+        else if SharedInfo.getInstance.currentDevice == "67+"
+        {
+            yy =  320
+        }
+        
         ScoreForMember()
         doLoadGift() // load content from servder
 
@@ -62,6 +75,81 @@ class ScoreViewController: UIViewController {
         //refreshControl.endRefreshing()
     }
     
+    
+    ////////////////////////////////////////////////
+    func GetImageBase64_News(_ button:UIButton,_ imageCode:String){
+        
+        
+        let customer:[AnyObject]
+        
+        customer = SharedInfo.getInstance.jsonCustomer!
+        
+        let membercode = customer[0]["member_code"] as! String
+        let formToken:String = SharedInfo.getInstance.formToken
+        let cookieToken:String = SharedInfo.getInstance.cookieToken
+        
+        
+        // create post request
+        
+        let url = URL(string: SharedInfo.getInstance.serviceUrl + "/GetPicture/getimagebase64")!
+        let jsonDict = [
+            "member_code": membercode
+            ,"imagecode": imageCode
+            ,"Width": "1024"
+            ,"Height": "400"
+            ,"checkWidth": "0"
+            ,"CustomWidthHigth": "1"
+            ,"formToken": formToken
+            ,"cookieToken": cookieToken
+        ]
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "post"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            
+            
+            if let error = error {
+                print("error:", error)
+                return
+            }
+            
+            do {
+                guard let data = data else { return }
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
+                
+                DispatchQueue.main.async(execute: {
+                    
+                    // call update screen by first time only
+                    
+                    if json["success"] as! Bool == true{
+                        
+                        var iconString:String
+                        var decodedData:Data
+                        
+                        // ตรวจสอบข้อมูลว่าเป็นค่าที่ว่างหรือไม่
+                        iconString = json["imagebase64"] as! String
+                        
+                        if iconString != "" {
+                            decodedData = Data(base64Encoded: iconString)!
+                            button.setBackgroundImage(UIImage(data:decodedData), for: UIControlState.normal)
+                            button.layoutIfNeeded()
+                        } // end if
+                    }
+                })
+            } catch {
+                print("error:", error)
+            }
+        }
+        
+        task.resume()
+        
+    } // end func
     
     
     override func viewDidLoad() {
@@ -79,10 +167,6 @@ class ScoreViewController: UIViewController {
         
         scrMain.addSubview(refreshControl)
         
-        
-        
-        
-        
         scrMain.contentSize.height = UIScreen.main.bounds.height
         //print(scrMain.contentSize.height)
         
@@ -91,20 +175,17 @@ class ScoreViewController: UIViewController {
         }
         else if SharedInfo.getInstance.currentDevice == "67"
         {
-            yy =  255
+            yy =  265
         }
             
         else if SharedInfo.getInstance.currentDevice == "67+"
         {
-            yy =  300
+            yy =  320
         }
-        
-        
         
         self.updateInfo() // update user data
         
         doLoadGift() // load content from servder
-        
     }
     
     
@@ -148,17 +229,17 @@ class ScoreViewController: UIViewController {
                 }
                 else if SharedInfo.getInstance.currentDevice == "67"
                 {
-                    xx = 10
+                    xx = 40
                     if (btn_tag + 1) % 2 == 0 {
-                        xx = 195
+                        xx = 205
                     }
                 }
                     
                 else if SharedInfo.getInstance.currentDevice == "67+"
                 {
-                    xx = 10
+                    xx = 40
                     if (btn_tag + 1) % 2 == 0 {
-                        xx = 210
+                        xx = 220
                     }
                 }
 
@@ -173,11 +254,11 @@ class ScoreViewController: UIViewController {
                 itemView.layer.shadowOffset = CGSize.zero
                 itemView.layer.shadowRadius = 1
                 
-                let lblTitle:UILabel = UILabel(frame:CGRect(x:8,y:(boxHeight-35),width:(boxWidth-8),height:21))
+                let lblTitle:UILabel = UILabel(frame:CGRect(x:8, y:(boxHeight-35), width:(boxWidth-8), height:21))
                 
                 lblTitle.text = item["redeem_item_desc"] as! String
-                
-                let buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-60) ))
+                lblTitle.font  = UIFont (name: "Kanit-Regular", size :17)
+                let buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-70) ))
                 buttonConnect.tag = btn_tag
                 
                 let iconString:String = item["picture"] as! String
@@ -222,8 +303,8 @@ class ScoreViewController: UIViewController {
             
         }
         
-        scrMain.invalidateIntrinsicContentSize()
-        updateScrollViewForHeight()
+//        scrMain.invalidateIntrinsicContentSize()
+//        updateScrollViewForHeight()
         
     }
     
@@ -246,6 +327,7 @@ class ScoreViewController: UIViewController {
             
             vweGIft.isHidden = false
             
+            
  
             var f:CGRect = vweGIft.frame;
             f.origin.x = 0; // new x
@@ -254,7 +336,7 @@ class ScoreViewController: UIViewController {
            
             
             
-            yy2 += 35
+            yy2 += 55
             
 //             f = lblGiftNotReady.frame;
 //            f.origin.x = 0; // new x
@@ -282,17 +364,17 @@ class ScoreViewController: UIViewController {
                 }
                 else if SharedInfo.getInstance.currentDevice == "67"
                 {
-                    xx = 10
+                    xx = 40
                     if (btn_tag + 1) % 2 == 0 {
-                        xx = 185
+                        xx = 205
                     }
                 }
                     
                 else if SharedInfo.getInstance.currentDevice == "67+"
                 {
-                    xx = 10
+                    xx = 40
                     if (btn_tag + 1) % 2 == 0 {
-                        xx = 210
+                        xx = 220
                     }
                 }
                 
@@ -310,8 +392,9 @@ class ScoreViewController: UIViewController {
                 let lblTitle:UILabel = UILabel(frame:CGRect(x:8,y:(boxHeight-35),width:(boxWidth-8),height:21))
                 
                 lblTitle.text = item["redeem_item_desc"] as! String
+                lblTitle.font  = UIFont (name: "Kanit-Regular", size :17)
                 
-                let buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height:boxHeight))
+                let buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height:boxHeight-70))
                 buttonConnect.tag = btn_tag
                 
                 let iconString:String = item["picture"] as! String
@@ -328,16 +411,16 @@ class ScoreViewController: UIViewController {
                     
                     
                     if SharedInfo.getInstance.currentDevice == "45" {
-                        yy +=   175
+                        yy2 +=   175
                     }
                     else if SharedInfo.getInstance.currentDevice == "67"
                     {
-                        yy +=  225
+                        yy2 +=  225
                     }
                         
                     else if SharedInfo.getInstance.currentDevice == "67+"
                     {
-                        yy +=  240
+                        yy2 +=  240
                     }
                     
                 }
@@ -431,26 +514,26 @@ class ScoreViewController: UIViewController {
                     
                     DispatchQueue.main.async(){
                         
-                        self.lblGiftNotReady.isHidden = false;
-                        self.lblDiscountNotReady.isHidden = false;
+                        self.lblGiftNotReady.isHidden = true;
+                        self.lblDiscountNotReady.isHidden = true;
                         
-                        var w:Int = 145
+                        var w:Int = 135
                         var h:Int = 165
                         
                         if SharedInfo.getInstance.currentDevice == "45" {
-                            w = 145
+                            w = 105
                             h = 165
                         }
                             
                         else if SharedInfo.getInstance.currentDevice == "67"
                         {
-                            w = 170
+                            w = 130
                             h = 200
                         }
 
                         else if SharedInfo.getInstance.currentDevice == "67+"
                         {
-                            w = 195
+                            w = 160
                             h = 220
                         }
 
@@ -462,9 +545,10 @@ class ScoreViewController: UIViewController {
                 }
                 else
                 {
-                    self.vweGIft.isHidden = true;
-                    self.lblGiftNotReady.isHidden = true;
-                    self.lblDiscountNotReady.isHidden = true;
+                    // case not have any item
+                    self.vweGIft.isHidden = false;
+                    self.lblGiftNotReady.isHidden = false;
+                    self.lblDiscountNotReady.isHidden = false;
                 }
                 
              
@@ -498,7 +582,7 @@ class ScoreViewController: UIViewController {
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/RefreshPoint/Member")!
         
         let jsonDict = [
-            "member_code": phone
+            "membercode": phone
             ,"formToken": formToken
             ,"cookieToken": cookieToken ]
         

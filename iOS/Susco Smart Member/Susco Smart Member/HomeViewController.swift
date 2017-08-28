@@ -99,6 +99,18 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         }
         initView()
         Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.moveToNextPageTwoSecond), userInfo: nil, repeats: true)
+        
+        
+        
+//        for family: String in UIFont.familyNames
+//        {
+//            print("\(family)")
+//            for names: String in UIFont.fontNames(forFamilyName: family)
+//            {
+//                print("== \(names)")
+//            }
+//        }
+        
     }
     
     
@@ -163,8 +175,7 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
            // lblName.text = fname + " " + lname
            // lblPhone.text = phone
            // lblScore.text = score
-           
-            
+        
             selectNews = SharedInfo.getInstance.selectNews!["select_news"] as! [AnyObject]
             var view_tag = 1000
             var btn_tag = 0
@@ -184,6 +195,8 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                 
                 let lblNewsHead:UILabel = UILabel(frame:CGRect(x:8,y:(boxHeight-26) ,width:(boxWidth-20) ,height:21))
                 lblNewsHead.text = item["news_head"] as! String
+                lblNewsHead.font  = UIFont (name: "Kanit-Regular", size :17)
+                //label.font = UIFont(name: "QuicksandDash-Regular", size: 35)
                 
                 let buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-30) ) )
                 buttonConnect.tag = btn_tag
@@ -195,6 +208,10 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                 buttonConnect.setBackgroundImage(UIImage(data:decodedData), for: UIControlState.normal)
                 
                 buttonConnect.addTarget(self, action: #selector(doOpenNewsDetail), for:.touchUpInside)
+                
+                
+                // load picture for best result item by item
+                GetImageBase64_News(buttonConnect, item["code_image1"] as! String)
                 
                 
                 itemView.addSubview(buttonConnect)
@@ -355,8 +372,8 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/Banner/GetBanner")!
         let jsonDict = [ "membercode": membercode
-            ,"image_width": "512"
-            ,"image_height": "256"
+            ,"image_width": "1024"
+            ,"image_height": "400"
             ,"formToken": formToken
             ,"cookieToken": cookieToken ]
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
@@ -548,6 +565,83 @@ self.refreshControl.endRefreshing()
                     
                 })
                 
+            } catch {
+                print("error:", error)
+            }
+        }
+        
+        task.resume()
+        
+    } // end func
+    
+    
+    
+    ////////////////////////////////////////////////
+    func GetImageBase64_News(_ button:UIButton,_ imageCode:String){
+        
+        
+        let customer:[AnyObject]
+        
+        customer = SharedInfo.getInstance.jsonCustomer!
+        
+        let membercode = customer[0]["member_code"] as! String
+        let formToken:String = SharedInfo.getInstance.formToken
+        let cookieToken:String = SharedInfo.getInstance.cookieToken
+        
+        
+        // create post request
+        
+        let url = URL(string: SharedInfo.getInstance.serviceUrl + "/GetPicture/getimagebase64")!
+        let jsonDict = [
+             "member_code": membercode
+             ,"imagecode": imageCode
+             ,"Width": "1024"
+             ,"Height": "400"
+             ,"checkWidth": "0"
+             ,"CustomWidthHigth": "1"
+             ,"formToken": formToken
+            ,"cookieToken": cookieToken
+        ]
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "post"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            
+            
+            if let error = error {
+                print("error:", error)
+                return
+            }
+            
+            do {
+                guard let data = data else { return }
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
+                
+                DispatchQueue.main.async(execute: {
+                    
+                    // call update screen by first time only
+                    
+                    if json["success"] as! Bool == true{
+                        
+                        var iconString:String
+                        var decodedData:Data
+                        
+                        // ตรวจสอบข้อมูลว่าเป็นค่าที่ว่างหรือไม่
+                         iconString = json["imagebase64"] as! String
+
+                        if iconString != "" {
+                            decodedData = Data(base64Encoded: iconString)!
+                            button.setBackgroundImage(UIImage(data:decodedData), for: UIControlState.normal)
+                            button.layoutIfNeeded()
+                        } // end if
+                    }
+                })
             } catch {
                 print("error:", error)
             }

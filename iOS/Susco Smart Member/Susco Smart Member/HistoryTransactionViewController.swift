@@ -90,6 +90,11 @@ UIViewController, UITableViewDelegate, UITableViewDataSource {
         refreshControl?.addTarget(self, action: #selector(handleRefresh), for: UIControlEvents.valueChanged)
         
         
+        
+        let font:UIFont = UIFont (name: "Kanit-Regular", size :16)!
+        swtView.setTitleTextAttributes([NSFontAttributeName: font], for: .normal)
+        
+        
         scrMain.addSubview(refreshControl)
         
         scrMain.contentSize.height = UIScreen.main.bounds.height
@@ -111,7 +116,15 @@ UIViewController, UITableViewDelegate, UITableViewDataSource {
         let iYear: Int = Int(y)!
         
         let mm = months[iMonth-1]
-        let yy = String(describing: (iYear+543))
+        
+        // user setting self iphone to use default local
+        var yy = String(describing: (iYear+543))
+        
+        // need display for thai local
+        if (iYear+543) > 3000 {
+            yy = String(describing: (iYear))
+        }
+        
         
         lblMonthLy.text = "ข้อมูลประจำเดือน " + mm + " " + yy
 

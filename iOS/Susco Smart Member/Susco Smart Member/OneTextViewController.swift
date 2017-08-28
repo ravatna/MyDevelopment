@@ -29,8 +29,8 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
     var strCidCard:String = ""
     var strImgBase64:String = ""
     var strMobile:String = ""
-    var strFname : String = ""
-    var strLname : String = ""
+    var strFname:String = ""
+    var strLname:String = ""
     
     var caseProcess:Int!
     
@@ -59,7 +59,7 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
         saveProcess(self.caseProcess)
         
         // call submit data to server
-        doSubmitInfo()
+        //doSubmitInfo()
         
     }
     
@@ -99,7 +99,9 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
                 return b
             }
             
-            strCidCard = txtInput.text!
+            
+            CheckPID(txtInput.text!)
+            
             
             break
         case 2:
@@ -123,6 +125,7 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
            
             strFname = txtInput.text!
             strLname = txtInput.text!
+            doSubmitInfo()
             break
             
         case 3:
@@ -167,6 +170,7 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
             
             
             strPassword = txtInput2.text!
+            doSubmitInfo()
             break
 
             
@@ -184,7 +188,7 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
             }
             
             strEmail = txtInput.text!
-            
+            doSubmitInfo()
             break
             
             
@@ -202,7 +206,7 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
             }
             
             strMobile = txtInput.text!
-            
+            doSubmitInfo()
             break
             
         default:
@@ -539,6 +543,23 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
                             let defaults = UserDefaults.standard
                             defaults.setValue(self.strPassword, forKey: "pw")
                         }
+
+                        if self.strCidCard != "" {
+                            SharedInfo.getInstance.tmp_id_card = self.strCidCard
+                            print(SharedInfo.getInstance.tmp_id_card)
+                        }
+                        
+                        if self.strEmail != "" {
+                            SharedInfo.getInstance.tmp_email = self.strEmail
+                        }
+                        
+                        if self.strFname != "" {
+                            SharedInfo.getInstance.tmp_fname = self.strFname
+                            SharedInfo.getInstance.tmp_lname = self.strLname
+                        }
+
+                        
+                       // self.GetUserInfo()
                         
                         
                         
@@ -574,6 +595,86 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
         task.resume()
         
     }// end func
+    
+    
+    
+    func CheckPID(_ pid:String){
+        
+        present(self.loadingDialog, animated: true, completion: nil)
+        
+        let customer:[AnyObject]
+        
+        customer = SharedInfo.getInstance.jsonCustomer!
+        let mobile = customer[0]["mobile"] as! String
+        let formToken:String = SharedInfo.getInstance.formToken
+        let cookieToken:String = SharedInfo.getInstance.cookieToken
+        
+        let url = URL(string: SharedInfo.getInstance.serviceUrl + "/CheckFormatID/CheckPID")!
+        let jsonDict = [ "mobile": mobile
+            ,"cid_card":pid
+            , "formToken": formToken
+            , "cookieToken": cookieToken ]
+        
+        print(jsonDict)
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "post"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            
+            
+            // set process without waiting.
+            DispatchQueue.main.async(execute: {
+                // dismiss alert view
+                self.loadingDialog.dismiss(animated: true, completion: { Void in
+                    
+                    if let error = error {
+                        print("error:", error)
+                        return
+                    }
+                    
+                    do {
+                        guard let data = data else { return }
+                        guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
+                        
+                        
+                        if json["success"] as! Bool == true {
+                            self.strCidCard = self.txtInput.text!
+                            self.doSubmitInfo() // when check ID card is valid then do submit on
+                            
+                        }else{
+                            
+                            let alert = self.BuildAlertDialog("แจ้งเตือน", "เลขบัตรประชาชนไม่ถูกต้อง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:nil))
+                            
+                            self.present(alert, animated:true, completion:nil)
+                        }
+                        
+                        //self.tblUserMenu.reloadData()
+                    } catch {
+                        print("error:", error)
+                    }
+                    
+                    
+                    
+                    
+                })
+                
+            }) // end DispatchQueue
+            
+            
+        }
+        
+        task.resume()
+        
+    }// end func CheckPID()
+    
+    
+    
 
     
     func BuildAlertDialog(_ t:String, _ m:String, btnAction:UIAlertAction) -> UIAlertController {
