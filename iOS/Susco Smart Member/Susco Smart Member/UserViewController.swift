@@ -14,7 +14,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var tblUserMenu: UITableView!
     @IBOutlet weak var txtName: UILabel!
     @IBOutlet weak var btnDialogName: UIButton!
-     let picker  = UIImagePickerController()
+    let picker  = UIImagePickerController()
    
     @IBOutlet weak var btnPickerDialog: UIButton!
     
@@ -25,6 +25,11 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     var strMobile:String = ""
     var strFname : String = ""
     var strLname : String = ""
+    
+    var tmp_id_card:String = ""
+    var tmp_name:String = ""
+    var tmp_email:String = ""
+   
     
     
     var loadingDialog:UIAlertController!
@@ -65,12 +70,24 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         resetImageProfile()
         
        
-        
-        
-        
-        
-        
     }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+       
+        UIGraphicsBeginImageContext(CGSize(width:newWidth,height: newHeight))
+        
+        image.draw(in: CGRect(x:0, y:0, width:newWidth, height:newHeight))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
+    
     
     func resetImageProfile(){
     
@@ -154,19 +171,107 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
                         print(json)
                         if json["success"] as! Bool == true {
                             
-                            
-                            
                             let alert = self.BuildAlertDialog("ปรับปรุงข้อมูล", "ปรับปรุงข้อมูลเรียบร้อยแล้ว\n กรุณาออกจากระบบและเข้าสู่ระบบใหม่อีกครั้ง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler:{ action in
-                            
+                                
+                                
                             }))
                             
                             self.present(alert, animated:true, completion:nil)
+                            
+                            
+                            
+                            if self.strCidCard != "" {
+                                SharedInfo.getInstance.tmp_id_card = self.strCidCard
+                            }
+                            
+                            if self.strEmail != "" {
+                                SharedInfo.getInstance.tmp_email = self.strEmail
+                            }
+                            
+                            if self.strFname != "" {
+                                SharedInfo.getInstance.tmp_fname = self.strFname
+                                SharedInfo.getInstance.tmp_lname = self.strLname
+                            }
+                            
+                            
+                            self.GetUserInfo()
                         }else{
                             let alert = self.BuildAlertDialog("ปรับปรุงข้อมูล", "ไม่สามารถแก้ไขข้อมูลขณะนี้ โปรดทำรายการใหม่ภายหลัง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler: {action in
                                                             }))
-                            
-                            
                             self.present(alert, animated:true, completion:nil)
+                        }
+                        
+                        
+                    } catch {
+                        print("error:", error)
+                    }
+
+                })
+                
+            }) // end DispatchQueue
+            
+            
+        }
+        
+        task.resume()
+        
+    }// end func
+
+    
+    func GetUserInfo(){
+        
+        //present(self.loadingDialog, animated: true, completion: nil)
+        
+        let customer:[AnyObject]
+        
+        customer = SharedInfo.getInstance.jsonCustomer!
+        let code = customer[0]["member_code"] as! String
+        let formToken:String = SharedInfo.getInstance.formToken
+        let cookieToken:String = SharedInfo.getInstance.cookieToken
+        
+        let url = URL(string: SharedInfo.getInstance.serviceUrl + "/GetInfo/Customer")!
+        let jsonDict = [ "membercode": code
+           
+            , "formToken": formToken
+            , "cookieToken": cookieToken ]
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "post"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            
+            
+            // set process without waiting.
+            DispatchQueue.main.async(execute: {
+                // dismiss alert view
+                self.loadingDialog.dismiss(animated: true, completion: { Void in
+                    
+                    if let error = error {
+                        print("error:", error)
+                        return
+                    }
+                    
+                    do {
+                        guard let data = data else { return }
+                        guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
+                        print(json)
+                        if json["success"] as! Bool == true {
+                            
+                           
+                            let customer = json["customer_detail"] as! [AnyObject]
+                            
+                            SharedInfo.getInstance.jsonCustomer = customer
+                            
+                            let defaults = UserDefaults.standard
+                            //print(customer)
+                            defaults.setValue(customer, forKey: "customer_detail")
+                            
+                            
                         }
                         
                         
@@ -187,6 +292,10 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         task.resume()
         
     }// end func
+    
+    
+    
+    
 
     
     
@@ -195,12 +304,16 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     {
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
         //imgMember.contentMode = .scaleAspectFit //3
-        imgMember.image = chosenImage //4
+        
+        let resizedImage = resizeImage(image: chosenImage, newWidth: 200)
+        
+        imgMember.image = resizedImage //4
+        
         dismiss(animated:true, completion: nil) //5
         
        
-        let jpegCompressionQuality: CGFloat = 0.9 // Set this to whatever suits your purpose
-        if let base64String = UIImageJPEGRepresentation(chosenImage, jpegCompressionQuality)?.base64EncodedString() {
+        let jpegCompressionQuality: CGFloat = 0.8 // Set this to whatever suits your purpose
+        if let base64String = UIImageJPEGRepresentation(resizedImage, jpegCompressionQuality)?.base64EncodedString() {
             // Upload base64String to your database
             
             
@@ -255,11 +368,11 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
      
         
         
-        if  fname == "" && lname == "" {
-            txtName.text = "* แตะที่นี่เพื่อแก้ไข *"
-        }else{
-            txtName.text = fname + " " + lname
-        }
+//        if  fname == "" && lname == "" {
+//            txtName.text = "* แตะที่นี่เพื่อแก้ไข *"
+//        }else{
+//            txtName.text = fname + " " + lname
+//        }
      
         resetImageProfile()
         
@@ -322,7 +435,14 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         
             let tmp_name = fname + " " + lname
         
-
+        
+        
+        
+        SharedInfo.getInstance.tmp_email = email
+        SharedInfo.getInstance.tmp_fname = fname
+        SharedInfo.getInstance.tmp_lname = lname
+        SharedInfo.getInstance.tmp_id_card = cid_card
+        
         
         // set the text from the data model
         cell.imgIcon.isHidden = true
@@ -331,14 +451,12 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if indexPath.row == 0 {
             cell.lblWording.text = phone
-        
         }
         
         if indexPath.row == 1 {
             
-            
             if cid_card != "" {
-                cell.lblWording.text = cid_card
+                cell.lblWording.text = SharedInfo.getInstance.tmp_id_card
             }else{
                 cell.lblWording.text = "* แตะที่นี่เพื่อแก้ไข *"
             }
@@ -347,7 +465,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         if indexPath.row == 2 {
             
             
-            if fname  != "" || lname != "" {
+            if SharedInfo.getInstance.tmp_fname  != "" || SharedInfo.getInstance.tmp_lname != "" {
                 cell.lblWording.text = tmp_name
             }else{
                 cell.lblWording.text = "* แตะที่นี่เพื่อแก้ไข *"
@@ -361,8 +479,8 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if indexPath.row == 4 {
             
-            if cid_card != "" {
-                cell.lblWording.text = email
+            if SharedInfo.getInstance.tmp_email != "" {
+                cell.lblWording.text = SharedInfo.getInstance.tmp_email
             }else{
                 cell.lblWording.text = "* แตะที่นี่เพื่อแก้ไข *"
             }
@@ -389,9 +507,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.imgIcon2!.isHidden = true
         
         if self.animals[indexPath.row] == "logout" {
-            //cell.imgIcon!.isHidden = false
-            //cell.lblCaption!.isHidden = true
-            //cell.imgIcon!.image = UIImage(named: "document_64")
+
             cell.lblCaption!.text = ""
             cell.imgIcon2!.isHidden = false
             cell.lblWording!.text = "ลงชื่อออก"
@@ -419,7 +535,12 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
             let email = customer[0]["email"] as! String
             let cid_card = customer[0]["cid_card"] as! String
             
-
+            
+//            SharedInfo.getInstance.tmp_email = email
+//            SharedInfo.getInstance.tmp_fname = fname
+//            SharedInfo.getInstance.tmp_lname = lname
+//            SharedInfo.getInstance.tmp_id_card = cid_card
+            
             if  indexPath.row == 0 {
                 
                 if phone == ""
@@ -433,7 +554,6 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
                     viewController.view.frame = self.view.frame
                     self.view.addSubview(viewController.view)
                     viewController.didMove(toParentViewController: self)
-
                 }
                 else
                 {
@@ -452,8 +572,8 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 
             }else if indexPath.row == 1 {
-                
-                if cid_card == ""
+                print(SharedInfo.getInstance.tmp_id_card)
+                if SharedInfo.getInstance.tmp_id_card == ""
                 {
                     // prepare to set home view controller
                     let viewController = self.storyboard?.instantiateViewController(withIdentifier: "popup_input_view") as! OneTextViewController
@@ -482,8 +602,8 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 
             }
             else if indexPath.row == 2 {
-                
-                if fname  == "" && lname == ""
+                print(SharedInfo.getInstance.tmp_fname + " " + SharedInfo.getInstance.tmp_lname)
+                if SharedInfo.getInstance.tmp_fname   == "" || SharedInfo.getInstance.tmp_lname == ""
                 {
                     // prepare to set home view controller
                     let viewController = self.storyboard?.instantiateViewController(withIdentifier: "popup_input_view") as! OneTextViewController
@@ -528,7 +648,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             else if indexPath.row == 4
             {
-                if email == ""
+                if SharedInfo.getInstance.tmp_email == ""
                 {
                     // prepare to set home view controller
                     let viewController = self.storyboard?.instantiateViewController(withIdentifier: "popup_input_view") as! OneTextViewController
@@ -577,7 +697,27 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // if press logout
         if indexPath.row == 7 {
+            
+            
+            let myString  = "ลงชื่อออก"
+            var myMutableString = NSMutableAttributedString()
+            myMutableString = NSMutableAttributedString(string: myString as String, attributes: [NSFontAttributeName:UIFont(name: "Kanit-Regular", size: 16.0)!])
+            
+            // Change Message With Color and Font
+            
+            let message  = "ต้องการออกจากระบบ SUSCO Smart Member ใช่หรือไม่ ?"
+            var messageMutableString = NSMutableAttributedString()
+            messageMutableString = NSMutableAttributedString(string: message as String, attributes: [NSFontAttributeName:UIFont(name: "Kanit-Regular", size: 16.0)!])
+          //  messageMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.greenColor(), range: NSRange(location:0,length:message.characters.count))
+           // alertController.setValue(messageMutableString, forKey: "attributedMessage")
+
+            
+            
+            
+            
             let alert = UIAlertController(title: "ลงชื่อออก", message: "ต้องการออกจากระบบ SUSCO Smart Member ใช่หรือไม่ ?", preferredStyle: UIAlertControllerStyle.alert)
+            //alert.setValue(myMutableString, forKey: "attributedTitle")
+
             let clearAction = UIAlertAction(title: "ใช่", style: .destructive) { (alert: UIAlertAction!) -> Void in
                 SharedInfo.getInstance.clear()
                 
@@ -596,6 +736,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 
                 
             }
+            
             
             let cancelAction = UIAlertAction(title: "ไม่ใช่", style: .default)
             {

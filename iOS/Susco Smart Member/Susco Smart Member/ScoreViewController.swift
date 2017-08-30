@@ -26,6 +26,9 @@ class ScoreViewController: UIViewController {
     var yy:Int = 260
     var yy2:Int = 0
     
+    var a_itemView = Array<UIView>()
+    
+    
     func updateInfo() {
         let customer:[AnyObject]
         do{
@@ -49,20 +52,110 @@ class ScoreViewController: UIViewController {
     }
     
 
+    
+    
+    ////////////////////////////////////////////////
+    func GetImageBase64_News(_ button:UIButton,_ imageCode:String){
+        
+        
+        let customer:[AnyObject]
+        
+        customer = SharedInfo.getInstance.jsonCustomer!
+        
+        let membercode = customer[0]["member_code"] as! String
+        let formToken:String = SharedInfo.getInstance.formToken
+        let cookieToken:String = SharedInfo.getInstance.cookieToken
+        
+        
+        // create post request
+        
+        let url = URL(string: SharedInfo.getInstance.serviceUrl + "/GetPicture/getimagebase64")!
+        let jsonDict = [
+            "member_code": membercode
+            ,"imagecode": imageCode
+            ,"Width": "1024"
+            ,"Height": "400"
+            ,"checkWidth": "0"
+            ,"CustomWidthHigth": "1"
+            ,"formToken": formToken
+            ,"cookieToken": cookieToken
+        ]
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "post"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            
+            
+            if let error = error {
+                print("error:", error)
+                return
+            }
+            
+            do {
+                guard let data = data else { return }
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
+                
+                DispatchQueue.main.async(execute: {
+                    
+                    // call update screen by first time only
+                    
+                    if json["success"] as! Bool == true{
+                        
+                        var iconString:String
+                        var decodedData:Data
+                        
+                        // ตรวจสอบข้อมูลว่าเป็นค่าที่ว่างหรือไม่
+                        iconString = json["imagebase64"] as! String
+                        
+                        if iconString != "" {
+                            decodedData = Data(base64Encoded: iconString)!
+                            button.setBackgroundImage(UIImage(data:decodedData), for: UIControlState.normal)
+                            button.layoutIfNeeded()
+                        } // end if
+                    }
+                })
+            } catch {
+                print("error:", error)
+            }
+        }
+        
+        task.resume()
+        
+    } // end func
+    
+    
     func handleRefresh(_ refreshControl: UIRefreshControl) {
         // Do some reloading of data and update the table view's data source
         // Fetch more objects from a web service, for example...
         
         // Simply adding an object to the data source for this example
         
+        if SharedInfo.getInstance.currentDevice == "45" {
+            yy =   280
+        }
+        else if SharedInfo.getInstance.currentDevice == "67"
+        {
+            yy =  265
+        }
+            
+        else if SharedInfo.getInstance.currentDevice == "67+"
+        {
+            yy =  320
+        }
+        
         ScoreForMember()
         doLoadGift() // load content from servder
-
+        
         
         //refreshControl.endRefreshing()
     }
-    
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,32 +172,25 @@ class ScoreViewController: UIViewController {
         
         scrMain.addSubview(refreshControl)
         
-        
-        
-        
-        
         scrMain.contentSize.height = UIScreen.main.bounds.height
         //print(scrMain.contentSize.height)
         
         if SharedInfo.getInstance.currentDevice == "45" {
-            yy =   220
+            yy =   280
         }
         else if SharedInfo.getInstance.currentDevice == "67"
         {
-            yy =  255
+            yy =  265
         }
             
         else if SharedInfo.getInstance.currentDevice == "67+"
         {
-            yy =  300
+            yy =  320
         }
-        
-        
         
         self.updateInfo() // update user data
         
         doLoadGift() // load content from servder
-        
     }
     
     
@@ -115,6 +201,17 @@ class ScoreViewController: UIViewController {
     }
     
     var bit: Int = 0 // 0 = left, 1 = right
+    
+    
+    
+    func removeItemFromView(){
+        for view in a_itemView {
+            view.removeFromSuperview()
+            
+        }
+        a_itemView.removeAll()
+    
+    } // .End view
     
     func updateCatalogDiscount(boxWidth:Int,boxHeight:Int) {
         let catalogs:[AnyObject]
@@ -141,30 +238,54 @@ class ScoreViewController: UIViewController {
                 
                 
                 if SharedInfo.getInstance.currentDevice == "45" {
-                    xx = 10
+                    xx = 25
                     if (btn_tag + 1) % 2 == 0 {
                         xx = 165
                     }
                 }
                 else if SharedInfo.getInstance.currentDevice == "67"
                 {
-                    xx = 10
+                    xx = 40
                     if (btn_tag + 1) % 2 == 0 {
-                        xx = 195
+                        xx = 205
                     }
                 }
                     
                 else if SharedInfo.getInstance.currentDevice == "67+"
                 {
-                    xx = 10
+                    xx = 40
                     if (btn_tag + 1) % 2 == 0 {
-                        xx = 210
+                        xx = 220
                     }
                 }
 
                 
                 // view group
-                let itemView:UIView = UIView (frame: CGRect(x:xx,y:yy, width:boxWidth,height:boxHeight))
+                var itemView:UIView = UIView (frame: CGRect(x:xx,y:yy, width:boxWidth,height:boxHeight))
+                var lblTitle:UILabel = UILabel(frame:CGRect(x:8, y:(boxHeight-35), width:(boxWidth-8), height:21))
+                var buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-60) ))
+                
+                if SharedInfo.getInstance.currentDevice == "45" {
+                    itemView = UIView (frame: CGRect(x:xx,y:yy, width:boxWidth+25,height:boxHeight))
+                    
+                    
+                    buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth + 25, height: (boxHeight-40) ))
+                    lblTitle.font  = UIFont (name: "Kanit-Regular", size :12)
+                     lblTitle = UILabel(frame:CGRect(x:8, y:(boxHeight-35), width:(boxWidth+17), height:21))
+                }
+                else if SharedInfo.getInstance.currentDevice == "67"
+                {
+                   buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-70) ))
+                    lblTitle.font  = UIFont (name: "Kanit-Regular", size :14)
+                }
+                    
+                else if SharedInfo.getInstance.currentDevice == "67+"
+                {
+                    buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-80) ))
+                    lblTitle.font  = UIFont (name: "Kanit-Regular", size :14)
+                }
+
+                
                 itemView.tag = view_tag
                 itemView.autoresizingMask = [.flexibleTopMargin]
                 itemView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
@@ -173,11 +294,8 @@ class ScoreViewController: UIViewController {
                 itemView.layer.shadowOffset = CGSize.zero
                 itemView.layer.shadowRadius = 1
                 
-                let lblTitle:UILabel = UILabel(frame:CGRect(x:8,y:(boxHeight-35),width:(boxWidth-8),height:21))
-                
                 lblTitle.text = item["redeem_item_desc"] as! String
                 
-                let buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-60) ))
                 buttonConnect.tag = btn_tag
                 
                 let iconString:String = item["picture"] as! String
@@ -187,6 +305,10 @@ class ScoreViewController: UIViewController {
 
                 itemView.addSubview(buttonConnect)
                 itemView.addSubview(lblTitle)
+                
+                
+                a_itemView.append(itemView)
+                
                 
                 self.scrMain.addSubview(itemView)
                 
@@ -222,8 +344,8 @@ class ScoreViewController: UIViewController {
             
         }
         
-        scrMain.invalidateIntrinsicContentSize()
-        updateScrollViewForHeight()
+//        scrMain.invalidateIntrinsicContentSize()
+//        updateScrollViewForHeight()
         
     }
     
@@ -246,6 +368,7 @@ class ScoreViewController: UIViewController {
             
             vweGIft.isHidden = false
             
+            
  
             var f:CGRect = vweGIft.frame;
             f.origin.x = 0; // new x
@@ -254,50 +377,107 @@ class ScoreViewController: UIViewController {
            
             
             
-            yy2 += 35
+            yy2 += 40
             
-//             f = lblGiftNotReady.frame;
-//            f.origin.x = 0; // new x
-//            f.origin.y = CGFloat(yy2) // new y
-//            lblGiftNotReady.frame = f
-//            
-//            yy2 += 45
+ 
             
-            
+            var iCheck = 1
+            var iHaveItem = 0
             for item in catalogs {
                 
                 // ให้สร้างรายการเฉพาะของแลก = 1
                 if item["check"] as! String == "0" {
+                    iHaveItem += 1
+                    
                     continue
+                    
                 }
                 
                 
                 lblGiftNotReady.isHidden = true
                 
                 if SharedInfo.getInstance.currentDevice == "45" {
-                    xx = 10
+                    xx = 25
                     if (btn_tag + 1) % 2 == 0 {
                         xx = 165
                     }
                 }
                 else if SharedInfo.getInstance.currentDevice == "67"
                 {
-                    xx = 10
+                    xx = 40
                     if (btn_tag + 1) % 2 == 0 {
-                        xx = 185
+                        xx = 205
                     }
                 }
                     
                 else if SharedInfo.getInstance.currentDevice == "67+"
                 {
-                    xx = 10
+                    xx = 40
                     if (btn_tag + 1) % 2 == 0 {
-                        xx = 210
+                        xx = 220
                     }
                 }
                 
                 // view group
-                let itemView:UIView = UIView (frame: CGRect(x:xx,y:yy2, width:boxWidth,height:boxHeight))
+                var itemView:UIView = UIView (frame: CGRect(x:xx,y:yy2, width:boxWidth,height:boxHeight))
+                var buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height:boxHeight-70))
+                var lblTitle:UILabel = UILabel(frame:CGRect(x:8,y:(boxHeight-35),width:(boxWidth-8),height:21))
+                
+
+                if SharedInfo.getInstance.currentDevice == "45" {
+ 
+                    // check current is last item or not.
+                    if iCheck+1 == (catalogs.count - (iHaveItem-1)) {
+                        // display last item on center screen
+                         itemView = UIView (frame: CGRect(x:95 ,y:yy2, width:boxWidth+25,height:boxHeight))
+                    }else{
+                        // display current left and right
+                         itemView = UIView (frame: CGRect(x:xx,y:yy2, width:boxWidth+25,height:boxHeight))
+                    }
+                    
+                    buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth + 25, height: (boxHeight-40) ))
+                    lblTitle.font  = UIFont (name: "Kanit-Regular", size :12)
+                    lblTitle = UILabel(frame:CGRect(x:8, y:(boxHeight-35), width:(boxWidth+17), height:21))
+
+                    
+                    
+                    
+                    
+                }
+                else if SharedInfo.getInstance.currentDevice == "67"
+                {
+                    
+                    
+                    if iCheck+1 == (catalogs.count - (iHaveItem-1)) {
+                        // display last item on center screen
+                        itemView = UIView (frame: CGRect(x:123 ,y:yy2, width:boxWidth,height:boxHeight))
+                    }else{
+                        // display current left and right
+                        itemView = UIView (frame: CGRect(x:xx,y:yy2, width:boxWidth,height:boxHeight))
+                    }
+                    
+                    buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-70) ))
+                    lblTitle.font  = UIFont (name: "Kanit-Regular", size :14)
+                }
+                    
+                else if SharedInfo.getInstance.currentDevice == "67+"
+                {
+                    
+                    if iCheck+1 == (catalogs.count - (iHaveItem-1)) {
+                        // display last item on center screen
+                        itemView = UIView (frame: CGRect(x:123 ,y:yy2, width:boxWidth,height:boxHeight))
+                    }else{
+                        // display current left and right
+                        itemView = UIView (frame: CGRect(x:xx,y:yy2, width:boxWidth,height:boxHeight))
+                    }
+                    
+                    buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-80) ))
+                    lblTitle.font  = UIFont (name: "Kanit-Regular", size :14)
+                }
+                
+                
+                
+                ///////////////////////////////////////////////////
                 itemView.tag = view_tag
                 itemView.autoresizingMask = [.flexibleTopMargin]
                 
@@ -307,11 +487,12 @@ class ScoreViewController: UIViewController {
                 itemView.layer.shadowOffset = CGSize.zero
                 itemView.layer.shadowRadius = 1
                 
-                let lblTitle:UILabel = UILabel(frame:CGRect(x:8,y:(boxHeight-35),width:(boxWidth-8),height:21))
+                
                 
                 lblTitle.text = item["redeem_item_desc"] as! String
+                // lblTitle.font  = UIFont (name: "Kanit-Regular", size :17)
                 
-                let buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height:boxHeight))
+                
                 buttonConnect.tag = btn_tag
                 
                 let iconString:String = item["picture"] as! String
@@ -322,22 +503,25 @@ class ScoreViewController: UIViewController {
                 itemView.addSubview(buttonConnect)
                 itemView.addSubview(lblTitle)
                 
+                // add list item to array list for remove next time
+                a_itemView.append(itemView)
+                
                 self.scrMain.addSubview(itemView)
                 
                 if (btn_tag + 1) % 2 == 0 {
                     
                     
                     if SharedInfo.getInstance.currentDevice == "45" {
-                        yy +=   175
+                        yy2 +=   175
                     }
                     else if SharedInfo.getInstance.currentDevice == "67"
                     {
-                        yy +=  225
+                        yy2 +=  225
                     }
                         
                     else if SharedInfo.getInstance.currentDevice == "67+"
                     {
-                        yy +=  240
+                        yy2 +=  240
                     }
                     
                 }
@@ -347,7 +531,11 @@ class ScoreViewController: UIViewController {
                 
                 itemView.invalidateIntrinsicContentSize()
                 
-            }
+                
+                
+                iCheck += 1
+                
+            }// .Een for
 
         }catch {
             
@@ -431,40 +619,51 @@ class ScoreViewController: UIViewController {
                     
                     DispatchQueue.main.async(){
                         
-                        self.lblGiftNotReady.isHidden = false;
-                        self.lblDiscountNotReady.isHidden = false;
+                        self.lblGiftNotReady.isHidden = true;
+                        self.lblDiscountNotReady.isHidden = true;
                         
-                        var w:Int = 145
+                        var w:Int = 135
                         var h:Int = 165
                         
                         if SharedInfo.getInstance.currentDevice == "45" {
-                            w = 145
+                            w = 105
                             h = 165
                         }
                             
                         else if SharedInfo.getInstance.currentDevice == "67"
                         {
-                            w = 170
+                            w = 130
                             h = 200
                         }
 
                         else if SharedInfo.getInstance.currentDevice == "67+"
                         {
-                            w = 195
+                            w = 160
                             h = 220
                         }
 
-                        self.updateCatalogDiscount(boxWidth: w,boxHeight: h) // update discount block
-                        self.updateCatalogGift(boxWidth: w,boxHeight: h) // update gift block
+                        
+                        
+                        // call remove catgory item discount and gift first
+                        // before show next item set
+                        if self.a_itemView.count > 0 {
+                            self.removeItemFromView()
+                            
+                        }
+                            self.updateCatalogDiscount(boxWidth: w,boxHeight: h) // update discount block
+                            self.updateCatalogGift(boxWidth: w,boxHeight: h) // update gift block
+                        
+                        
+                        
                     }
                     
-                    //print(json)
                 }
                 else
                 {
-                    self.vweGIft.isHidden = true;
-                    self.lblGiftNotReady.isHidden = true;
-                    self.lblDiscountNotReady.isHidden = true;
+                    // case not have any item
+                    self.vweGIft.isHidden = false;
+                    self.lblGiftNotReady.isHidden = false;
+                    self.lblDiscountNotReady.isHidden = false;
                 }
                 
              
@@ -498,7 +697,7 @@ class ScoreViewController: UIViewController {
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/RefreshPoint/Member")!
         
         let jsonDict = [
-            "member_code": phone
+            "membercode": phone
             ,"formToken": formToken
             ,"cookieToken": cookieToken ]
         

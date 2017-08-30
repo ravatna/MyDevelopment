@@ -38,6 +38,9 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     var loadingDialog:UIAlertController!
     
     
+    var a_itemView = Array<UIView>()
+    
+    
     @IBAction func doMoveRight(_ sender: Any) {
         moveToNextPageTwoSecond()
         
@@ -81,10 +84,7 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         
         
         scrMain.addSubview(refreshControl)
-        
-        scrMain.contentSize.height = UIScreen.main.bounds.height
-        
-        
+                 
         if SharedInfo.getInstance.currentDevice == "45" {
             yy =   689 // 365
         }
@@ -99,6 +99,9 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         }
         initView()
         Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.moveToNextPageTwoSecond), userInfo: nil, repeats: true)
+        
+ 
+        
     }
     
     
@@ -160,11 +163,6 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
             var score = customer[0]["point_summary"] as! String
             var phone = customer[0]["mobile"] as! String
             
-           // lblName.text = fname + " " + lname
-           // lblPhone.text = phone
-           // lblScore.text = score
-           
-            
             selectNews = SharedInfo.getInstance.selectNews!["select_news"] as! [AnyObject]
             var view_tag = 1000
             var btn_tag = 0
@@ -184,6 +182,8 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                 
                 let lblNewsHead:UILabel = UILabel(frame:CGRect(x:8,y:(boxHeight-26) ,width:(boxWidth-20) ,height:21))
                 lblNewsHead.text = item["news_head"] as! String
+                lblNewsHead.font  = UIFont (name: "Kanit-Regular", size :17)
+                //label.font = UIFont(name: "QuicksandDash-Regular", size: 35)
                 
                 let buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-30) ) )
                 buttonConnect.tag = btn_tag
@@ -197,13 +197,21 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                 buttonConnect.addTarget(self, action: #selector(doOpenNewsDetail), for:.touchUpInside)
                 
                 
+                // load picture for best result item by item
+                GetImageBase64_News(buttonConnect, item["code_image1"] as! String)
+                
+                
                 itemView.addSubview(buttonConnect)
                 itemView.addSubview(lblNewsHead)
+                itemView.invalidateIntrinsicContentSize()
+                itemView.layoutIfNeeded()
+                
+                a_itemView.append(itemView)
                 
                 self.scrMain.addSubview(itemView)
 
                 if SharedInfo.getInstance.currentDevice == "45" {
-                    yy +=   255
+                    yy +=   240
                 }
                 else if SharedInfo.getInstance.currentDevice == "67"
                 {
@@ -219,7 +227,10 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                 btn_tag = btn_tag + 1
                 
                 
-            }
+                // update content height
+                self.updateScrollViewForHeight()
+                
+            } // .End for
 
         }catch {
             
@@ -260,35 +271,19 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     
     
     override func viewDidAppear(_ animated: Bool) {
-       
-//            // call update screen by first time only
-//            if isFirst == true{
-//                isFirst = false
-//                
-//                
-//                var w:Int = 304
-//                var h:Int = 235
-//                yy =  685
-//                if SharedInfo.getInstance.currentDevice == "67"
-//                {
-//                    w = 360
-//                    h = 250
-//                    yy =  762
-//                }
-//                else if SharedInfo.getInstance.currentDevice == "67+"
-//                {
-//                    w = 398
-//                    h = 280
-//                    yy = 762
-//                }
-//                
-//                self.updateNewsSection(boxWidth:w,boxHeight:h)
-//
-//                updateScrollViewForHeight()
-//                
-//            }
+        
 
     }
+    
+    func removeItemFromView(){
+        for view in a_itemView {
+            view.removeFromSuperview()
+            
+        }
+        
+        a_itemView.removeAll()
+        
+    } // .End view
     
     
 
@@ -301,14 +296,17 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     // -- update scroll view about height
     func updateScrollViewForHeight(){
         let lastView : UIView! = scrMain.subviews.last
-       // print(lastView.tag)
         let height:Float = Float(lastView.frame.size.height)
-
         let pos:Float = Float(lastView.frame.origin.y)
-        let sizeOfContent = height + pos + 10
-    
+        var sizeOfContent = height + pos + 10
+        
+        if SharedInfo.getInstance.currentDevice == "45" {
+            sizeOfContent = height + pos+450
+        }
         
         scrMain.contentSize.height = CGFloat(sizeOfContent)
+        
+     
     }
 
     
@@ -355,8 +353,8 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/Banner/GetBanner")!
         let jsonDict = [ "membercode": membercode
-            ,"image_width": "512"
-            ,"image_height": "256"
+            ,"image_width": "1024"
+            ,"image_height": "400"
             ,"formToken": formToken
             ,"cookieToken": cookieToken ]
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
@@ -521,9 +519,9 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                     
                         
                         
-                        var w:Int = 304
+                        var w:Int = 300
                         var h:Int = 235
-                        self.yy =  685
+                        self.yy =  700
                         if SharedInfo.getInstance.currentDevice == "67"
                         {
                             w = 360
@@ -538,16 +536,91 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                         }
                         
                         self.updateNewsSection(boxWidth:w,boxHeight:h)
-                    
-                    
-                    
+
                         self.updateScrollViewForHeight()
                         
                      
-self.refreshControl.endRefreshing()
+                        self.refreshControl.endRefreshing()
                     
                 })
                 
+            } catch {
+                print("error:", error)
+            }
+        }
+        
+        task.resume()
+        
+    } // end func
+    
+    
+    
+    ////////////////////////////////////////////////
+    func GetImageBase64_News(_ button:UIButton,_ imageCode:String){
+        
+        
+        let customer:[AnyObject]
+        
+        customer = SharedInfo.getInstance.jsonCustomer!
+        
+        let membercode = customer[0]["member_code"] as! String
+        let formToken:String = SharedInfo.getInstance.formToken
+        let cookieToken:String = SharedInfo.getInstance.cookieToken
+        
+        
+        // create post request
+        
+        let url = URL(string: SharedInfo.getInstance.serviceUrl + "/GetPicture/getimagebase64")!
+        let jsonDict = [
+             "member_code": membercode
+             ,"imagecode": imageCode
+             ,"Width": "1024"
+             ,"Height": "400"
+             ,"checkWidth": "0"
+             ,"CustomWidthHigth": "1"
+             ,"formToken": formToken
+            ,"cookieToken": cookieToken
+        ]
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "post"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            
+            
+            if let error = error {
+                print("error:", error)
+                return
+            }
+            
+            do {
+                guard let data = data else { return }
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
+                
+                DispatchQueue.main.async(execute: {
+                    
+                    // call update screen by first time only
+                    
+                    if json["success"] as! Bool == true{
+                        
+                        var iconString:String
+                        var decodedData:Data
+                        
+                        // ตรวจสอบข้อมูลว่าเป็นค่าที่ว่างหรือไม่
+                         iconString = json["imagebase64"] as! String
+
+                        if iconString != "" {
+                            decodedData = Data(base64Encoded: iconString)!
+                            button.setBackgroundImage(UIImage(data:decodedData), for: UIControlState.normal)
+                            button.layoutIfNeeded()
+                        } // end if
+                    }
+                })
             } catch {
                 print("error:", error)
             }

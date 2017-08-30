@@ -63,7 +63,13 @@ class CardViewController: UIViewController {
         
         lblCode.text = code
         lblName.text = fname + " " + lname
-        lblDate.text = createdate
+        
+        
+        let index = createdate.index(createdate.endIndex, offsetBy: -7)
+        lblDate.text = createdate.substring(from: index)  // Hello
+        
+        
+         
     
         
         let data = customer[0]["member_code"] as! String

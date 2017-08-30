@@ -18,11 +18,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        let font:UIFont = UIFont (name: "Kanit-Regular", size :14)!
+           // UITabBarItem.appearance().setTitleTextAttributes(<#T##attributes: [String : Any]?##[String : Any]?#>, for: <#T##UIControlState#>)
+         UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: font], for: .normal)
+        //UISegmentedControlSegment.setTitleTextAttributes([NSFontAttributeName: font])
         // dynamic use story board
         let storyBoard:UIStoryboard = self.grabStoryBoard()
         self.window?.rootViewController = storyBoard.instantiateInitialViewController()
         self.window?.makeKeyAndVisible()
         /// end dynamic use story board
+        
+       
+        
         
         return true
     }

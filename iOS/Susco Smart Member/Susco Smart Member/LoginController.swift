@@ -202,6 +202,17 @@ class LoginController:  UIViewController,UITextViewDelegate,UITextFieldDelegate 
     // -- make connection to server
     func doSubmitLogin(){
     
+        //// clear state textField keyboard
+        txtU.resignFirstResponder()
+        txtP.resignFirstResponder()
+        txtPhone.resignFirstResponder()
+        txtName.resignFirstResponder()
+        txtSurname.resignFirstResponder()
+        txtPass.resignFirstResponder()
+        txtRePass.resignFirstResponder()
+        txtEmail.resignFirstResponder()
+        ///////////////////////////////////
+        
         present(self.loadingDialog, animated: true, completion: nil)
 
         
@@ -264,6 +275,11 @@ class LoginController:  UIViewController,UITextViewDelegate,UITextFieldDelegate 
                             
                             let alert = self.BuildAlertDialog("ลงชื่อเข้าใช้งาน", "การลงชื่อเข้าใช้งานไม่สำเร็จ กรุณาตรวจสอบ ชื่อผู้ใช้งาน และรหัสผ่านอีกครั้ง", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler: { Void in
                                 self.dismiss(animated: true, completion: nil)
+                                
+                               
+                                    self.txtU.becomeFirstResponder()
+                                    
+                                
                             }))
                             
                             self.present(alert, animated:true, completion:nil)
@@ -315,6 +331,17 @@ class LoginController:  UIViewController,UITextViewDelegate,UITextFieldDelegate 
     // -- make connection to server for register new member
     func doSubmitRegister(){
         
+        //// clear keyboard state
+        txtU.resignFirstResponder()
+        txtP.resignFirstResponder()
+        txtPhone.resignFirstResponder()
+        txtName.resignFirstResponder()
+        txtSurname.resignFirstResponder()
+        txtPass.resignFirstResponder()
+        txtRePass.resignFirstResponder()
+        txtEmail.resignFirstResponder()
+        /////////////////////////////////
+        
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/RegisterCustomerSusco/RegisterMember")!
         let jsonDict = [ "mobile": txtPhone.text
             , "fname": txtName.text
@@ -363,7 +390,11 @@ class LoginController:  UIViewController,UITextViewDelegate,UITextFieldDelegate 
                         
                         self.present(alert, animated:true, completion:nil)
                     }else{
-                        let alert = self.BuildAlertDialog("ลงทะเบียนใหม่", "ลงทะเบียนไม่สำเร็จ โปรดทำรายการใหม่ภายหลัง\nเนื่องจาก \(json["msg"] as! String)", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler: nil))
+                        let alert = self.BuildAlertDialog("ลงทะเบียนใหม่", "ลงทะเบียนไม่สำเร็จ โปรดทำรายการใหม่ภายหลัง\nเนื่องจาก \(json["msg"] as! String)", btnAction: UIAlertAction(title: "ปิด", style: UIAlertActionStyle.default, handler: { action in
+                        
+                            //self.txtU.becomeFirstResponder()
+                        
+                        }))
                         
                         
                         self.present(alert, animated:true, completion:nil)
@@ -480,6 +511,8 @@ class LoginController:  UIViewController,UITextViewDelegate,UITextFieldDelegate 
         
         txtPhone.delegate = self
         
+        let font:UIFont = UIFont (name: "Kanit-Regular", size :16)!
+         swtLoginRegister.setTitleTextAttributes([NSFontAttributeName: font], for: .normal)
         
         loadingDialog = UIAlertController(title: nil, message: "โปรดรอสักครู่...", preferredStyle: .alert)
         
@@ -513,9 +546,6 @@ class LoginController:  UIViewController,UITextViewDelegate,UITextFieldDelegate 
         do{
             
             
-            
-            //print(SharedInfo.getInstance.formToken )
-            //print(SharedInfo.getInstance.cookieToken )
             
             let f = defaults.string(forKey: "formToken")
             let c = defaults.string(forKey: "cookieToken")

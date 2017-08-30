@@ -19,16 +19,26 @@ class SharedInfo: NSObject {
     var jsonPriceOil:[String:AnyObject]?
     var currentDevice : String = "45" // 67, 67+
     var imgBase64:String = ""
+    var imgBase64_1:String = ""
+    var imgBase64_2:String = ""
+    var imgBase64_3:String = ""
     var imgMemberData:AnyObject?
     
     var formToken:String = ""
     var cookieToken:String = ""
-    let strContact: String = "โปรดติดต่อ SUSCO Call Center 02-428-0029 ต่อ 234,235 เพื่อขอแก้ไขข้อมูล"
+    let strContact: String = "โปรดติดต่อ SUSCO Call Center 02-428-0029 ต่อ 234,235 \nเพื่อขอแก้ไขข้อมูล"
     var showProgressDialog = true
+    
+    var tmp_email:String = ""
+    var tmp_id_card:String = ""
+    var tmp_fname:String = ""
+    var tmp_lname:String = ""
     
     // let url = URL(string: "http://suscoapidev-iCRM.atlasicloud.com/V2/Security/login_customer_susco");
     //let url = URL(string: "http://192.168.88.196/SUSCOAPIV2/Security/login_customer_susco");
+    //let url = URL(string: "http://192.168.88.196/SUSCOAPIV2/Security/login_customer_susco");
 
+//    var serviceUrl:String = "http://192.168.88.194/SUSCOAPIV2/";
     var serviceUrl:String = "http://suscoapidev-iCRM.atlasicloud.com/V2/";
     
     static var getInstance = SharedInfo()

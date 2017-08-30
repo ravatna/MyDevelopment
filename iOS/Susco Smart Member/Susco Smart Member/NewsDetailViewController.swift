@@ -51,7 +51,6 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate,UIWebViewD
    
     
     func moveToNextPageTwoSecond (){
-        print(pageControl.numberOfPages)
         if currentPage >= (pageControl.numberOfPages - 1) {
             currentPage = 0
         }else{
@@ -74,10 +73,170 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate,UIWebViewD
     }// .End moveToBackPage
     
     
+    ////////////////////////////////////////////////
+    func GetImageBase64_News(_ button:UIButton,_ imageCode:String, _ i:Int){
+        
+        
+        let customer:[AnyObject]
+        
+        customer = SharedInfo.getInstance.jsonCustomer!
+        
+        let membercode = customer[0]["member_code"] as! String
+        let formToken:String = SharedInfo.getInstance.formToken
+        let cookieToken:String = SharedInfo.getInstance.cookieToken
+        
+        
+        // create post request
+        
+        let url = URL(string: SharedInfo.getInstance.serviceUrl + "/GetPicture/getimagebase64")!
+        let jsonDict = [
+            "member_code": membercode
+            ,"imagecode": imageCode
+            ,"Width": "1024"
+            ,"Height": "400"
+            ,"checkWidth": "0"
+            ,"CustomWidthHigth": "1"
+            ,"formToken": formToken
+            ,"cookieToken": cookieToken
+        ]
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "post"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            
+            
+            if let error = error {
+                print("error:", error)
+                return
+            }
+            
+            do {
+                guard let data = data else { return }
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
+                
+                DispatchQueue.main.async(execute: {
+                    
+                    // call update screen by first time only
+                    
+                    if json["success"] as! Bool == true{
+                        
+                        var iconString:String
+                        var decodedData:Data
+                        
+                        // ตรวจสอบข้อมูลว่าเป็นค่าที่ว่างหรือไม่
+                        iconString = json["imagebase64"] as! String
+                        
+                        
+                        
+                        
+                        if(i == 1){
+                            SharedInfo.getInstance.imgBase64_1 = iconString
+                        }else if(i == 2){
+                            SharedInfo.getInstance.imgBase64_2 = iconString
+                        }else if(i == 3){
+                            SharedInfo.getInstance.imgBase64_3 = iconString
+                        }
+                        
+                        
+                        if iconString != "" {
+                            decodedData = Data(base64Encoded: iconString)!
+                            button.setBackgroundImage(UIImage(data:decodedData), for: UIControlState.normal)
+                            button.layoutIfNeeded()
+                        } // end if
+                    }
+                })
+            } catch {
+                print("error:", error)
+            }
+        }
+        
+        task.resume()
+        
+    } // end func
+    
+    
+    ////////////////////////////////////////////////
+    func GetImageBase64_View(_ imageCode:String){
+        
+        
+        let customer:[AnyObject]
+        
+        customer = SharedInfo.getInstance.jsonCustomer!
+        
+        let membercode = customer[0]["member_code"] as! String
+        let formToken:String = SharedInfo.getInstance.formToken
+        let cookieToken:String = SharedInfo.getInstance.cookieToken
+        
+        
+        // create post request
+        
+        let url = URL(string: SharedInfo.getInstance.serviceUrl + "/GetPicture/getimagebase64")!
+        let jsonDict = [
+            "member_code": membercode
+            ,"imagecode": imageCode
+            ,"Width": "1024"
+            ,"Height": "400"
+            ,"checkWidth": "0"
+            ,"CustomWidthHigth": "1"
+            ,"formToken": formToken
+            ,"cookieToken": cookieToken
+        ]
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "post"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            
+            
+            if let error = error {
+                print("error:", error)
+                return
+            }
+            
+            do {
+                guard let data = data else { return }
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
+                
+                DispatchQueue.main.async(execute: {
+                    
+                    // call update screen by first time only
+                    
+                    if json["success"] as! Bool == true{
+                        
+                        
+                        
+                        // ตรวจสอบข้อมูลว่าเป็นค่าที่ว่างหรือไม่
+                        SharedInfo.getInstance.imgBase64 = json["imagebase64"] as! String
+                        
+                        
+                    }
+                })
+            } catch {
+                print("error:", error)
+            }
+        }
+        
+        task.resume()
+        
+    } // end func
+
     
     override func viewDidLoad() {
         wbvDetail.delegate = self
         super.viewDidLoad()
+        //[wbvDetail setFont(UIFont fontWithName:@"Kanit-Regular" size:16)
+//        wbvDetail.setValue(<#T##value: Any?##Any?#>, forKey: <#T##String#>)
         // Do any additional setup after loading the view.
         
         var w:Int = 320
@@ -110,18 +269,20 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate,UIWebViewD
         }
     }
     
-    
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
 
         if navigationType == UIWebViewNavigationType.linkClicked {
             UIApplication.shared.openURL(request.url!)
             return false
         }
+        
         return true
         
     }
     
-    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        webView.stringByEvaluatingJavaScript(from: "document.getElementsByTagName('body')[0].style.fontFamily =\"Kanit-Regular\"")
+    }
     
     /**
      * ปรับปรุงข้อมูล ให้แสดงผลบนหน้าจอ
@@ -158,6 +319,8 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate,UIWebViewD
             pic.tag = 1
             pic.addTarget(self, action: #selector(self.doOpenZoom(sender:)), for: UIControlEvents.touchUpInside)
             self.scrImg.addSubview(pic)
+            
+            GetImageBase64_News(pic,item["code_image1"] as! String,1)
         } // end if
         
         iconString = item["pic2_id"] as! String
@@ -176,6 +339,7 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate,UIWebViewD
             itemCounter +=   1
             pic.tag = 2
             self.scrImg.addSubview(pic)
+            GetImageBase64_News(pic,item["code_image2"] as! String,2)
         } // end if
         
         iconString = item["pic3_id"] as! String
@@ -195,6 +359,7 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate,UIWebViewD
             
             itemCounter +=  1
             self.scrImg.addSubview(pic)
+            GetImageBase64_News(pic,item["code_image3"] as! String,3)
         } // end if
         
         
@@ -221,24 +386,34 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate,UIWebViewD
         wbvDetail.loadHTMLString(item["news_text"] as! String, baseURL: nil);
         
         self.scrImg.contentSize = CGSize(width:(self.scrImg.frame.width * CGFloat(itemCounter)), height:self.scrImg.frame.height)
-        
-        //scrImg.delegate = self
-        //self.pageControl.currentPage = 0
-        print(wbvDetail.scrollView.contentSize.height)
-        
-
-            updateScrollMainHeight()
+      
+        updateScrollMainHeight()
     }
     
     func  updateScrollMainHeight(){
+        var hhhh : CGFloat = 300
+        
+        if SharedInfo.getInstance.currentDevice == "45" {
+            hhhh =   400
+        }
+        else if SharedInfo.getInstance.currentDevice == "67"
+        {
+            hhhh =  300
+        }
+            
+        else if SharedInfo.getInstance.currentDevice == "67+"
+        {
+            hhhh =  150
+        }
+        
+        
         
         wbvDetail.scrollView.isScrollEnabled = false
-       print( wbvDetail.scrollView.contentSize.height+wbvDetail.frame.origin.y)
         
         var yHeight :CGRect = wbvDetail.frame
-        yHeight.size.height = wbvDetail.scrollView.contentSize.height+wbvDetail.frame.origin.y
+        yHeight.size.height = ((wbvDetail.scrollView.contentSize.height + hhhh) + wbvDetail.frame.origin.y)
         wbvDetail.frame = yHeight
-        scrMain.contentSize.height = wbvDetail.scrollView.contentSize.height+wbvDetail.frame.origin.y + 20
+        scrMain.contentSize.height = wbvDetail.scrollView.contentSize.height+wbvDetail.frame.origin.y
         
         
     }
@@ -271,13 +446,12 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate,UIWebViewD
         
         if sender.tag == 1 {
         
-        SharedInfo.getInstance.imgBase64 =  item["pic1_id"] as! String
+            SharedInfo.getInstance.imgBase64 =  SharedInfo.getInstance.imgBase64_1
         }else if sender.tag == 2 {
-            
-            SharedInfo.getInstance.imgBase64 =  item["pic2_id"] as! String
+            SharedInfo.getInstance.imgBase64 =  SharedInfo.getInstance.imgBase64_2
         }else if sender.tag == 3 {
             
-            SharedInfo.getInstance.imgBase64 =  item["pic3_id"] as! String
+            SharedInfo.getInstance.imgBase64 =  SharedInfo.getInstance.imgBase64_3
         }
 
         
