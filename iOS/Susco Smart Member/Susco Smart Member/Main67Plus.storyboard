@@ -213,30 +213,6 @@
                                                     </label>
                                                 </subviews>
                                             </view>
-                                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TfR-ju-vFg">
-                                                <rect key="frame" x="8" y="782" width="398" height="200"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="seh-3y-SXb">
-                                                        <rect key="frame" x="0.0" y="0.0" width="399" height="160"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" backgroundImage="banner_news_500px_214px_01.png"/>
-                                                        <connections>
-                                                            <segue destination="0om-e4-pQ2" kind="showDetail" id="8Td-Y2-q5z">
-                                                                <nil key="action"/>
-                                                            </segue>
-                                                        </connections>
-                                                    </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="คะแนนสะสม" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duk-AY-n0N">
-                                                        <rect key="frame" x="8" y="175" width="388" height="21"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
                                         </subviews>
                                     </scrollView>
                                 </subviews>
@@ -879,7 +855,7 @@
                                         <rect key="frame" x="0.0" y="28" width="404" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JsP-U3-akD" id="5R1-Z1-3Zg">
-                                            <rect key="frame" x="0.0" y="0.0" width="404" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="404" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRq-uo-nzj">
@@ -1074,7 +1050,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="404" height="65"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RZQ-aO-OrU" id="YUQ-Do-hjO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="404" height="64"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="404" height="64.666666666666671"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXl-OY-t9Q">
@@ -1121,7 +1097,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="404" height="65"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2dD-rV-dOu" id="4Jg-uB-opL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="404" height="64"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="404" height="64.666666666666671"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="สถานีน้ำมัน" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceb-9k-soh">
@@ -1213,20 +1189,20 @@
                         <viewControllerLayoutGuide type="top" id="41c-AG-XJj"/>
                         <viewControllerLayoutGuide type="bottom" id="f8M-Xj-kSV"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="D8q-Cp-hNx">
+                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="D8q-Cp-hNx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3fY-DH-Fh2">
-                                <rect key="frame" x="-20" y="160" width="543" height="384"/>
+                            <view autoresizesSubviews="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3fY-DH-Fh2">
+                                <rect key="frame" x="-42" y="250" width="500" height="300"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="member_card_600px_1050px.png" translatesAutoresizingMaskIntoConstraints="NO" id="gSz-Wu-GZL">
-                                        <rect key="frame" x="0.0" y="-3" width="495" height="295"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="495" height="295"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="qr.png" translatesAutoresizingMaskIntoConstraints="NO" id="3Ov-Wr-RiM">
-                                        <rect key="frame" x="363" y="32" width="91" height="91"/>
+                                        <rect key="frame" x="368" y="40" width="85" height="85"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name Surname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcD-Sl-4zr">
@@ -1380,7 +1356,6 @@
     </scenes>
     <resources>
         <image name="_95.png" width="660" height="294"/>
-        <image name="banner_news_500px_214px_01.png" width="500" height="214"/>
         <image name="banner_score_and_name_500px_214px.png" width="500" height="214"/>
         <image name="diesel.png" width="660" height="294"/>
         <image name="e20.png" width="660" height="294"/>

@@ -536,10 +536,10 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cid_card = customer[0]["cid_card"] as! String
             
             
-            SharedInfo.getInstance.tmp_email = email
-            SharedInfo.getInstance.tmp_fname = fname
-            SharedInfo.getInstance.tmp_lname = lname
-            SharedInfo.getInstance.tmp_id_card = cid_card
+//            SharedInfo.getInstance.tmp_email = email
+//            SharedInfo.getInstance.tmp_fname = fname
+//            SharedInfo.getInstance.tmp_lname = lname
+//            SharedInfo.getInstance.tmp_id_card = cid_card
             
             if  indexPath.row == 0 {
                 
@@ -602,7 +602,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 
             }
             else if indexPath.row == 2 {
-                
+                print(SharedInfo.getInstance.tmp_fname + " " + SharedInfo.getInstance.tmp_lname)
                 if SharedInfo.getInstance.tmp_fname   == "" || SharedInfo.getInstance.tmp_lname == ""
                 {
                     // prepare to set home view controller

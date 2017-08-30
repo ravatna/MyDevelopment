@@ -26,6 +26,9 @@ class ScoreViewController: UIViewController {
     var yy:Int = 260
     var yy2:Int = 0
     
+    var a_itemView = Array<UIView>()
+    
+    
     func updateInfo() {
         let customer:[AnyObject]
         do{
@@ -49,31 +52,6 @@ class ScoreViewController: UIViewController {
     }
     
 
-    func handleRefresh(_ refreshControl: UIRefreshControl) {
-        // Do some reloading of data and update the table view's data source
-        // Fetch more objects from a web service, for example...
-        
-        // Simply adding an object to the data source for this example
-        
-        if SharedInfo.getInstance.currentDevice == "45" {
-            yy =   220
-        }
-        else if SharedInfo.getInstance.currentDevice == "67"
-        {
-            yy =  265
-        }
-            
-        else if SharedInfo.getInstance.currentDevice == "67+"
-        {
-            yy =  320
-        }
-        
-        ScoreForMember()
-        doLoadGift() // load content from servder
-
-        
-        //refreshControl.endRefreshing()
-    }
     
     
     ////////////////////////////////////////////////
@@ -152,6 +130,33 @@ class ScoreViewController: UIViewController {
     } // end func
     
     
+    func handleRefresh(_ refreshControl: UIRefreshControl) {
+        // Do some reloading of data and update the table view's data source
+        // Fetch more objects from a web service, for example...
+        
+        // Simply adding an object to the data source for this example
+        
+        if SharedInfo.getInstance.currentDevice == "45" {
+            yy =   280
+        }
+        else if SharedInfo.getInstance.currentDevice == "67"
+        {
+            yy =  265
+        }
+            
+        else if SharedInfo.getInstance.currentDevice == "67+"
+        {
+            yy =  320
+        }
+        
+        ScoreForMember()
+        doLoadGift() // load content from servder
+        
+        
+        //refreshControl.endRefreshing()
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -171,7 +176,7 @@ class ScoreViewController: UIViewController {
         //print(scrMain.contentSize.height)
         
         if SharedInfo.getInstance.currentDevice == "45" {
-            yy =   220
+            yy =   280
         }
         else if SharedInfo.getInstance.currentDevice == "67"
         {
@@ -196,6 +201,17 @@ class ScoreViewController: UIViewController {
     }
     
     var bit: Int = 0 // 0 = left, 1 = right
+    
+    
+    
+    func removeItemFromView(){
+        for view in a_itemView {
+            view.removeFromSuperview()
+            
+        }
+        a_itemView.removeAll()
+    
+    } // .End view
     
     func updateCatalogDiscount(boxWidth:Int,boxHeight:Int) {
         let catalogs:[AnyObject]
@@ -222,7 +238,7 @@ class ScoreViewController: UIViewController {
                 
                 
                 if SharedInfo.getInstance.currentDevice == "45" {
-                    xx = 10
+                    xx = 25
                     if (btn_tag + 1) % 2 == 0 {
                         xx = 165
                     }
@@ -245,7 +261,31 @@ class ScoreViewController: UIViewController {
 
                 
                 // view group
-                let itemView:UIView = UIView (frame: CGRect(x:xx,y:yy, width:boxWidth,height:boxHeight))
+                var itemView:UIView = UIView (frame: CGRect(x:xx,y:yy, width:boxWidth,height:boxHeight))
+                var lblTitle:UILabel = UILabel(frame:CGRect(x:8, y:(boxHeight-35), width:(boxWidth-8), height:21))
+                var buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-60) ))
+                
+                if SharedInfo.getInstance.currentDevice == "45" {
+                    itemView = UIView (frame: CGRect(x:xx,y:yy, width:boxWidth+25,height:boxHeight))
+                    
+                    
+                    buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth + 25, height: (boxHeight-40) ))
+                    lblTitle.font  = UIFont (name: "Kanit-Regular", size :12)
+                     lblTitle = UILabel(frame:CGRect(x:8, y:(boxHeight-35), width:(boxWidth+17), height:21))
+                }
+                else if SharedInfo.getInstance.currentDevice == "67"
+                {
+                   buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-70) ))
+                    lblTitle.font  = UIFont (name: "Kanit-Regular", size :14)
+                }
+                    
+                else if SharedInfo.getInstance.currentDevice == "67+"
+                {
+                    buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-80) ))
+                    lblTitle.font  = UIFont (name: "Kanit-Regular", size :14)
+                }
+
+                
                 itemView.tag = view_tag
                 itemView.autoresizingMask = [.flexibleTopMargin]
                 itemView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
@@ -254,11 +294,8 @@ class ScoreViewController: UIViewController {
                 itemView.layer.shadowOffset = CGSize.zero
                 itemView.layer.shadowRadius = 1
                 
-                let lblTitle:UILabel = UILabel(frame:CGRect(x:8, y:(boxHeight-35), width:(boxWidth-8), height:21))
-                
                 lblTitle.text = item["redeem_item_desc"] as! String
-                lblTitle.font  = UIFont (name: "Kanit-Regular", size :17)
-                let buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-70) ))
+                
                 buttonConnect.tag = btn_tag
                 
                 let iconString:String = item["picture"] as! String
@@ -268,6 +305,10 @@ class ScoreViewController: UIViewController {
 
                 itemView.addSubview(buttonConnect)
                 itemView.addSubview(lblTitle)
+                
+                
+                a_itemView.append(itemView)
+                
                 
                 self.scrMain.addSubview(itemView)
                 
@@ -336,28 +377,27 @@ class ScoreViewController: UIViewController {
            
             
             
-            yy2 += 55
+            yy2 += 40
             
-//             f = lblGiftNotReady.frame;
-//            f.origin.x = 0; // new x
-//            f.origin.y = CGFloat(yy2) // new y
-//            lblGiftNotReady.frame = f
-//            
-//            yy2 += 45
+ 
             
-            
+            var iCheck = 1
+            var iHaveItem = 0
             for item in catalogs {
                 
                 // ให้สร้างรายการเฉพาะของแลก = 1
                 if item["check"] as! String == "0" {
+                    iHaveItem += 1
+                    
                     continue
+                    
                 }
                 
                 
                 lblGiftNotReady.isHidden = true
                 
                 if SharedInfo.getInstance.currentDevice == "45" {
-                    xx = 10
+                    xx = 25
                     if (btn_tag + 1) % 2 == 0 {
                         xx = 165
                     }
@@ -379,7 +419,65 @@ class ScoreViewController: UIViewController {
                 }
                 
                 // view group
-                let itemView:UIView = UIView (frame: CGRect(x:xx,y:yy2, width:boxWidth,height:boxHeight))
+                var itemView:UIView = UIView (frame: CGRect(x:xx,y:yy2, width:boxWidth,height:boxHeight))
+                var buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height:boxHeight-70))
+                var lblTitle:UILabel = UILabel(frame:CGRect(x:8,y:(boxHeight-35),width:(boxWidth-8),height:21))
+                
+
+                if SharedInfo.getInstance.currentDevice == "45" {
+ 
+                    // check current is last item or not.
+                    if iCheck+1 == (catalogs.count - (iHaveItem-1)) {
+                        // display last item on center screen
+                         itemView = UIView (frame: CGRect(x:95 ,y:yy2, width:boxWidth+25,height:boxHeight))
+                    }else{
+                        // display current left and right
+                         itemView = UIView (frame: CGRect(x:xx,y:yy2, width:boxWidth+25,height:boxHeight))
+                    }
+                    
+                    buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth + 25, height: (boxHeight-40) ))
+                    lblTitle.font  = UIFont (name: "Kanit-Regular", size :12)
+                    lblTitle = UILabel(frame:CGRect(x:8, y:(boxHeight-35), width:(boxWidth+17), height:21))
+
+                    
+                    
+                    
+                    
+                }
+                else if SharedInfo.getInstance.currentDevice == "67"
+                {
+                    
+                    
+                    if iCheck+1 == (catalogs.count - (iHaveItem-1)) {
+                        // display last item on center screen
+                        itemView = UIView (frame: CGRect(x:123 ,y:yy2, width:boxWidth,height:boxHeight))
+                    }else{
+                        // display current left and right
+                        itemView = UIView (frame: CGRect(x:xx,y:yy2, width:boxWidth,height:boxHeight))
+                    }
+                    
+                    buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-70) ))
+                    lblTitle.font  = UIFont (name: "Kanit-Regular", size :14)
+                }
+                    
+                else if SharedInfo.getInstance.currentDevice == "67+"
+                {
+                    
+                    if iCheck+1 == (catalogs.count - (iHaveItem-1)) {
+                        // display last item on center screen
+                        itemView = UIView (frame: CGRect(x:123 ,y:yy2, width:boxWidth,height:boxHeight))
+                    }else{
+                        // display current left and right
+                        itemView = UIView (frame: CGRect(x:xx,y:yy2, width:boxWidth,height:boxHeight))
+                    }
+                    
+                    buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-80) ))
+                    lblTitle.font  = UIFont (name: "Kanit-Regular", size :14)
+                }
+                
+                
+                
+                ///////////////////////////////////////////////////
                 itemView.tag = view_tag
                 itemView.autoresizingMask = [.flexibleTopMargin]
                 
@@ -389,12 +487,12 @@ class ScoreViewController: UIViewController {
                 itemView.layer.shadowOffset = CGSize.zero
                 itemView.layer.shadowRadius = 1
                 
-                let lblTitle:UILabel = UILabel(frame:CGRect(x:8,y:(boxHeight-35),width:(boxWidth-8),height:21))
+                
                 
                 lblTitle.text = item["redeem_item_desc"] as! String
-                lblTitle.font  = UIFont (name: "Kanit-Regular", size :17)
+                // lblTitle.font  = UIFont (name: "Kanit-Regular", size :17)
                 
-                let buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height:boxHeight-70))
+                
                 buttonConnect.tag = btn_tag
                 
                 let iconString:String = item["picture"] as! String
@@ -404,6 +502,9 @@ class ScoreViewController: UIViewController {
                 
                 itemView.addSubview(buttonConnect)
                 itemView.addSubview(lblTitle)
+                
+                // add list item to array list for remove next time
+                a_itemView.append(itemView)
                 
                 self.scrMain.addSubview(itemView)
                 
@@ -430,7 +531,11 @@ class ScoreViewController: UIViewController {
                 
                 itemView.invalidateIntrinsicContentSize()
                 
-            }
+                
+                
+                iCheck += 1
+                
+            }// .Een for
 
         }catch {
             
@@ -537,11 +642,21 @@ class ScoreViewController: UIViewController {
                             h = 220
                         }
 
-                        self.updateCatalogDiscount(boxWidth: w,boxHeight: h) // update discount block
-                        self.updateCatalogGift(boxWidth: w,boxHeight: h) // update gift block
+                        
+                        
+                        // call remove catgory item discount and gift first
+                        // before show next item set
+                        if self.a_itemView.count > 0 {
+                            self.removeItemFromView()
+                            
+                        }
+                            self.updateCatalogDiscount(boxWidth: w,boxHeight: h) // update discount block
+                            self.updateCatalogGift(boxWidth: w,boxHeight: h) // update gift block
+                        
+                        
+                        
                     }
                     
-                    //print(json)
                 }
                 else
                 {

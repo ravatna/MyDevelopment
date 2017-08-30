@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "331"
-            endingLineNumber = "331"
+            startingLineNumber = "312"
+            endingLineNumber = "312"
             landmarkName = "HomeViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525341122.662507"
+            timestampString = "525764696.573246"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "updateNewsSection(boxWidth:boxHeight:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525341122.662507"
+            timestampString = "525764696.573246"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "updateNewsSection(boxWidth:boxHeight:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525341351.43932"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "updateNewsSection(boxWidth:boxHeight:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525341351.43932"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "updateNewsSection(boxWidth:boxHeight:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,7 +186,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/NewsDetailViewController.swift"
-            timestampString = "525602005.841897"
+            timestampString = "525781709.96875"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "315"
+            endingLineNumber = "315"
+            landmarkName = "updateInfo(boxWidth:boxHeight:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Susco Smart Member/NewsDetailViewController.swift"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "316"
@@ -202,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/NewsDetailViewController.swift"
-            timestampString = "525602005.841897"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
             landmarkName = "updateInfo(boxWidth:boxHeight:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,27 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/NewsDetailViewController.swift"
-            timestampString = "525602005.841897"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
-            landmarkName = "updateInfo(boxWidth:boxHeight:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Susco Smart Member/NewsDetailViewController.swift"
-            timestampString = "525602005.841897"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "308"
-            endingLineNumber = "308"
+            startingLineNumber = "307"
+            endingLineNumber = "307"
             landmarkName = "updateInfo(boxWidth:boxHeight:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "402"
-            endingLineNumber = "402"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
             landmarkName = "doGetListBanner()"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525597217.764139"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "842"
-            endingLineNumber = "842">
+            startingLineNumber = "821"
+            endingLineNumber = "821">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -280,11 +280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "407"
-            endingLineNumber = "407"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
             landmarkName = "doGetListBanner()"
             landmarkType = "7">
          </BreakpointContent>
@@ -312,11 +312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/ScoreViewController.swift"
-            timestampString = "525601383.314843"
+            timestampString = "525762535.802122"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "486"
-            endingLineNumber = "486"
+            startingLineNumber = "591"
+            endingLineNumber = "591"
             landmarkName = "doLoadGift()"
             landmarkType = "7">
          </BreakpointContent>
@@ -328,11 +328,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/ScoreViewController.swift"
-            timestampString = "525601383.314843"
+            timestampString = "525762535.802122"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "512"
-            endingLineNumber = "512"
+            startingLineNumber = "617"
+            endingLineNumber = "617"
             landmarkName = "doLoadGift()"
             landmarkType = "7">
          </BreakpointContent>
@@ -344,11 +344,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/ScoreViewController.swift"
-            timestampString = "525601383.314843"
+            timestampString = "525762535.802122"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "updateCatalogGift(boxWidth:boxHeight:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -472,11 +472,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "524740013.201818"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "saveProcess(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -488,11 +488,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "saveProcess(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -504,11 +504,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "524740013.201818"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "doSave(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -520,11 +520,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "524740013.201818"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "doSave(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -536,11 +536,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "540"
-            endingLineNumber = "540"
+            startingLineNumber = "555"
+            endingLineNumber = "555"
             landmarkName = "doSubmitInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -552,11 +552,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "521"
-            endingLineNumber = "521"
+            startingLineNumber = "536"
+            endingLineNumber = "536"
             landmarkName = "doSubmitInfo()"
             landmarkType = "7">
             <Locations>
@@ -600,11 +600,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "528"
-            endingLineNumber = "528"
+            startingLineNumber = "543"
+            endingLineNumber = "543"
             landmarkName = "doSubmitInfo()"
             landmarkType = "7">
             <Locations>
@@ -648,11 +648,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
+            startingLineNumber = "548"
+            endingLineNumber = "548"
             landmarkName = "doSubmitInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -664,11 +664,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "532"
-            endingLineNumber = "532"
+            startingLineNumber = "547"
+            endingLineNumber = "547"
             landmarkName = "doSubmitInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -680,11 +680,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "595"
-            endingLineNumber = "595"
+            startingLineNumber = "610"
+            endingLineNumber = "610"
             landmarkName = "doSubmitInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -696,11 +696,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "429"
-            endingLineNumber = "429"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
             landmarkName = "doGetListBanner()"
             landmarkType = "7">
             <Locations>
@@ -744,11 +744,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525597217.764139"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "718"
-            endingLineNumber = "718"
+            startingLineNumber = "697"
+            endingLineNumber = "697"
             landmarkName = "updatePriceOil()"
             landmarkType = "7">
          </BreakpointContent>
@@ -760,11 +760,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525597217.764139"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "779"
-            endingLineNumber = "779"
+            startingLineNumber = "758"
+            endingLineNumber = "758"
             landmarkName = "HomeViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -840,11 +840,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "viewDidAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -856,75 +856,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "305"
-            endingLineNumber = "305"
-            landmarkName = "viewDidAppear(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
-            landmarkName = "viewDidAppear(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
-            landmarkName = "viewDidAppear(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "294"
-            endingLineNumber = "294"
-            landmarkName = "viewDidAppear(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "doGotoURL(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -936,11 +872,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "HomeViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -952,11 +888,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/NewsDetailViewController.swift"
-            timestampString = "525602005.841897"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -968,11 +904,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/ScoreViewController.swift"
-            timestampString = "525601383.314843"
+            timestampString = "525762535.802122"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
             landmarkName = "updateCatalogDiscount(boxWidth:boxHeight:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1016,11 +952,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/NewsDetailViewController.swift"
-            timestampString = "525609250.208649"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "465"
-            endingLineNumber = "465"
+            startingLineNumber = "458"
+            endingLineNumber = "458"
             landmarkName = "doOpenZoom(sender:)"
             landmarkType = "7">
             <Locations>
@@ -1064,11 +1000,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525341122.662507"
+            timestampString = "525764696.573246"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "moveToNextPageTwoSecond()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1080,11 +1016,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
             landmarkName = "doGotoURL(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1096,11 +1032,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525597217.764139"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "677"
-            endingLineNumber = "677"
+            startingLineNumber = "656"
+            endingLineNumber = "656"
             landmarkName = "updatePriceOil()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1112,11 +1048,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "355"
-            endingLineNumber = "355"
+            startingLineNumber = "336"
+            endingLineNumber = "336"
             landmarkName = "scrollViewDidEndDecelerating(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1128,11 +1064,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
             landmarkName = "changePage(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1144,11 +1080,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525597217.764139"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "756"
-            endingLineNumber = "756"
+            startingLineNumber = "735"
+            endingLineNumber = "735"
             landmarkName = "updateBanner(boxWidth:boxHeight:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1160,11 +1096,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "429"
-            endingLineNumber = "429"
+            startingLineNumber = "436"
+            endingLineNumber = "436"
             landmarkName = "textField(_:shouldChangeCharactersIn:replacementString:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1176,11 +1112,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525597217.764139"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "670"
-            endingLineNumber = "670"
+            startingLineNumber = "649"
+            endingLineNumber = "649"
             landmarkName = "updatePriceOil()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1368,11 +1304,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/LoginController.swift"
-            timestampString = "525583213.23144"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "560"
-            endingLineNumber = "560"
+            startingLineNumber = "557"
+            endingLineNumber = "557"
             landmarkName = "viewDidAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1400,11 +1336,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "401"
-            endingLineNumber = "401"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
             landmarkName = "doGetListBanner()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1416,11 +1352,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
             landmarkName = "doGetListBanner()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1432,11 +1368,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "379"
-            endingLineNumber = "379"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
             landmarkName = "doGetListBanner()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1448,11 +1384,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/LoginController.swift"
-            timestampString = "525583213.23144"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "567"
-            endingLineNumber = "567"
+            startingLineNumber = "564"
+            endingLineNumber = "564"
             landmarkName = "viewDidAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1464,11 +1400,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/LoginController.swift"
-            timestampString = "525583213.23144"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "556"
-            endingLineNumber = "556"
+            startingLineNumber = "553"
+            endingLineNumber = "553"
             landmarkName = "viewDidAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1480,11 +1416,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525597217.764139"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "743"
-            endingLineNumber = "743"
+            startingLineNumber = "722"
+            endingLineNumber = "722"
             landmarkName = "updateBanner(boxWidth:boxHeight:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1528,28 +1464,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/NewsDetailViewController.swift"
-            timestampString = "525602005.841897"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "381"
-            endingLineNumber = "381"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
             landmarkName = "updateInfo(boxWidth:boxHeight:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Susco Smart Member/ScoreViewController.swift"
-            timestampString = "525600709.3833"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "handleRefresh(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1640,11 +1560,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "saveProcess(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1736,11 +1656,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525344221.515216"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "564"
-            endingLineNumber = "564"
+            startingLineNumber = "543"
+            endingLineNumber = "543"
             landmarkName = "doGetNews()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1752,11 +1672,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/ScoreViewController.swift"
-            timestampString = "525601383.314843"
+            timestampString = "525763492.832046"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "625"
-            endingLineNumber = "625"
+            startingLineNumber = "740"
+            endingLineNumber = "740"
             landmarkName = "ScoreForMember()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1768,11 +1688,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/ScoreViewController.swift"
-            timestampString = "525601383.314843"
+            timestampString = "525762535.802122"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "443"
-            endingLineNumber = "443"
+            startingLineNumber = "548"
+            endingLineNumber = "548"
             landmarkName = "updateCatalogGift(boxWidth:boxHeight:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1864,11 +1784,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "562"
-            endingLineNumber = "562"
+            startingLineNumber = "577"
+            endingLineNumber = "577"
             landmarkName = "doSubmitInfo()"
             landmarkType = "7">
             <Locations>
@@ -1960,11 +1880,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/HomeViewController.swift"
-            timestampString = "525596946.961438"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "638"
-            endingLineNumber = "638"
+            startingLineNumber = "617"
+            endingLineNumber = "617"
             landmarkName = "GetImageBase64_News(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1976,11 +1896,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/ScoreViewController.swift"
-            timestampString = "525601383.314843"
+            timestampString = "525762535.802122"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "440"
-            endingLineNumber = "440"
+            startingLineNumber = "545"
+            endingLineNumber = "545"
             landmarkName = "updateCatalogGift(boxWidth:boxHeight:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1992,11 +1912,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/ScoreViewController.swift"
-            timestampString = "525601383.314843"
+            timestampString = "525762535.802122"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "421"
-            endingLineNumber = "421"
+            startingLineNumber = "522"
+            endingLineNumber = "522"
             landmarkName = "updateCatalogGift(boxWidth:boxHeight:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2008,11 +1928,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/ScoreViewController.swift"
-            timestampString = "525601383.314843"
+            timestampString = "525762535.802122"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "423"
-            endingLineNumber = "423"
+            startingLineNumber = "524"
+            endingLineNumber = "524"
             landmarkName = "updateCatalogGift(boxWidth:boxHeight:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2024,11 +1944,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/ScoreViewController.swift"
-            timestampString = "525601383.314843"
+            timestampString = "525762535.802122"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "410"
-            endingLineNumber = "410"
+            startingLineNumber = "511"
+            endingLineNumber = "511"
             landmarkName = "updateCatalogGift(boxWidth:boxHeight:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2036,7 +1956,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/UserViewController.swift"
@@ -2052,7 +1972,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/UserViewController.swift"
@@ -2088,11 +2008,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "547"
-            endingLineNumber = "547"
+            startingLineNumber = "562"
+            endingLineNumber = "562"
             landmarkName = "doSubmitInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2104,11 +2024,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "548"
-            endingLineNumber = "548"
+            startingLineNumber = "563"
+            endingLineNumber = "563"
             landmarkName = "doSubmitInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2120,11 +2040,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607606.770887"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "648"
-            endingLineNumber = "648"
+            startingLineNumber = "663"
+            endingLineNumber = "663"
             landmarkName = "CheckPID(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2136,11 +2056,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607606.770887"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "646"
-            endingLineNumber = "646"
+            startingLineNumber = "661"
+            endingLineNumber = "661"
             landmarkName = "CheckPID(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2152,11 +2072,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "643"
-            endingLineNumber = "643"
+            startingLineNumber = "658"
+            endingLineNumber = "658"
             landmarkName = "CheckPID(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2168,11 +2088,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "642"
-            endingLineNumber = "642"
+            startingLineNumber = "657"
+            endingLineNumber = "657"
             landmarkName = "CheckPID(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2184,11 +2104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "632"
-            endingLineNumber = "632"
+            startingLineNumber = "647"
+            endingLineNumber = "647"
             landmarkName = "CheckPID(_:)"
             landmarkType = "7">
             <Locations>
@@ -2232,11 +2152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607485.156559"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "620"
-            endingLineNumber = "620"
+            startingLineNumber = "635"
+            endingLineNumber = "635"
             landmarkName = "CheckPID(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2248,12 +2168,220 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Susco Smart Member/OneTextViewController.swift"
-            timestampString = "525607530.860753"
+            timestampString = "525781709.96875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "saveProcess(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Susco Smart Member/UserViewController.swift"
+            timestampString = "525610718.920083"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "539"
+            endingLineNumber = "539"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Susco Smart Member/HomeViewController.swift"
+            timestampString = "525781709.96875"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
+            landmarkName = "updateScrollViewForHeight()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Susco Smart Member/ScoreViewController.swift"
+            timestampString = "525762535.802122"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "435"
+            endingLineNumber = "435"
+            landmarkName = "updateCatalogGift(boxWidth:boxHeight:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Susco Smart Member/ScoreViewController.swift"
+            timestampString = "525762535.802122"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "430"
+            endingLineNumber = "430"
+            landmarkName = "updateCatalogGift(boxWidth:boxHeight:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Susco Smart Member/ScoreViewController.swift"
+            timestampString = "525762535.802122"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "433"
+            endingLineNumber = "433"
+            landmarkName = "updateCatalogGift(boxWidth:boxHeight:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Susco Smart Member/ScoreViewController.swift"
+            timestampString = "525762535.802122"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "431"
+            endingLineNumber = "431"
+            landmarkName = "updateCatalogGift(boxWidth:boxHeight:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Susco Smart Member/ScoreViewController.swift"
+            timestampString = "525762535.802122"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "432"
+            endingLineNumber = "432"
+            landmarkName = "updateCatalogGift(boxWidth:boxHeight:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Susco Smart Member/ScoreViewController.swift"
+            timestampString = "525762535.802122"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "429"
+            endingLineNumber = "429"
+            landmarkName = "updateCatalogGift(boxWidth:boxHeight:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Susco Smart Member/ScoreViewController.swift"
+            timestampString = "525763492.832046"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "657"
+            endingLineNumber = "657"
+            landmarkName = "doLoadGift()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Susco Smart Member/ScoreViewController.swift"
+            timestampString = "525763321.91541"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "651"
+            endingLineNumber = "651"
+            landmarkName = "doLoadGift()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Susco Smart Member/ScoreViewController.swift"
+            timestampString = "525763365.361118"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "650"
+            endingLineNumber = "650"
+            landmarkName = "doLoadGift()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Susco Smart Member/HomeViewController.swift"
+            timestampString = "525781709.96875"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "updateNewsSection(boxWidth:boxHeight:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Susco Smart Member/OneTextViewController.swift"
+            timestampString = "525781673.731305"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "touchesBegan(_:with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

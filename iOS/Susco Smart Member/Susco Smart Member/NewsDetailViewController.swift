@@ -51,7 +51,6 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate,UIWebViewD
    
     
     func moveToNextPageTwoSecond (){
-        print(pageControl.numberOfPages)
         if currentPage >= (pageControl.numberOfPages - 1) {
             currentPage = 0
         }else{
@@ -387,13 +386,8 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate,UIWebViewD
         wbvDetail.loadHTMLString(item["news_text"] as! String, baseURL: nil);
         
         self.scrImg.contentSize = CGSize(width:(self.scrImg.frame.width * CGFloat(itemCounter)), height:self.scrImg.frame.height)
-        
-        //scrImg.delegate = self
-        //self.pageControl.currentPage = 0
-        print(wbvDetail.scrollView.contentSize.height)
-        
-
-            updateScrollMainHeight()
+      
+        updateScrollMainHeight()
     }
     
     func  updateScrollMainHeight(){
@@ -415,7 +409,6 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate,UIWebViewD
         
         
         wbvDetail.scrollView.isScrollEnabled = false
-       print( wbvDetail.scrollView.contentSize.height+wbvDetail.frame.origin.y)
         
         var yHeight :CGRect = wbvDetail.frame
         yHeight.size.height = ((wbvDetail.scrollView.contentSize.height + hhhh) + wbvDetail.frame.origin.y)

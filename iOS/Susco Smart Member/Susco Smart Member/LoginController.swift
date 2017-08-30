@@ -547,9 +547,6 @@ class LoginController:  UIViewController,UITextViewDelegate,UITextFieldDelegate 
             
             
             
-            //print(SharedInfo.getInstance.formToken )
-            //print(SharedInfo.getInstance.cookieToken )
-            
             let f = defaults.string(forKey: "formToken")
             let c = defaults.string(forKey: "cookieToken")
             

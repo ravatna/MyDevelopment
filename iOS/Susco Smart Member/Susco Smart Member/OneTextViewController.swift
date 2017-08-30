@@ -34,6 +34,13 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
     
     var caseProcess:Int!
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        txtInput.resignFirstResponder()
+        txtInput2.resignFirstResponder()
+        txtInput3.resignFirstResponder()
+       
+        
+    }
     
     @IBAction func doCancel(_ sender: Any) {
         // self.view.removeFromSuperview()
@@ -450,6 +457,14 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        
+        
+        txtInput.delegate = self
+        txtInput2.delegate = self
+        txtInput3.delegate = self
+        
+        
         
         self.updateLabel(self.caseProcess)
         

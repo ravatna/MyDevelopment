@@ -38,6 +38,9 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     var loadingDialog:UIAlertController!
     
     
+    var a_itemView = Array<UIView>()
+    
+    
     @IBAction func doMoveRight(_ sender: Any) {
         moveToNextPageTwoSecond()
         
@@ -81,10 +84,7 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         
         
         scrMain.addSubview(refreshControl)
-        
-        scrMain.contentSize.height = UIScreen.main.bounds.height
-        
-        
+                 
         if SharedInfo.getInstance.currentDevice == "45" {
             yy =   689 // 365
         }
@@ -100,16 +100,7 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
         initView()
         Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.moveToNextPageTwoSecond), userInfo: nil, repeats: true)
         
-        
-        
-//        for family: String in UIFont.familyNames
-//        {
-//            print("\(family)")
-//            for names: String in UIFont.fontNames(forFamilyName: family)
-//            {
-//                print("== \(names)")
-//            }
-//        }
+ 
         
     }
     
@@ -172,10 +163,6 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
             var score = customer[0]["point_summary"] as! String
             var phone = customer[0]["mobile"] as! String
             
-           // lblName.text = fname + " " + lname
-           // lblPhone.text = phone
-           // lblScore.text = score
-        
             selectNews = SharedInfo.getInstance.selectNews!["select_news"] as! [AnyObject]
             var view_tag = 1000
             var btn_tag = 0
@@ -216,11 +203,15 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                 
                 itemView.addSubview(buttonConnect)
                 itemView.addSubview(lblNewsHead)
+                itemView.invalidateIntrinsicContentSize()
+                itemView.layoutIfNeeded()
+                
+                a_itemView.append(itemView)
                 
                 self.scrMain.addSubview(itemView)
 
                 if SharedInfo.getInstance.currentDevice == "45" {
-                    yy +=   255
+                    yy +=   240
                 }
                 else if SharedInfo.getInstance.currentDevice == "67"
                 {
@@ -236,7 +227,10 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                 btn_tag = btn_tag + 1
                 
                 
-            }
+                // update content height
+                self.updateScrollViewForHeight()
+                
+            } // .End for
 
         }catch {
             
@@ -277,35 +271,19 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     
     
     override func viewDidAppear(_ animated: Bool) {
-       
-//            // call update screen by first time only
-//            if isFirst == true{
-//                isFirst = false
-//                
-//                
-//                var w:Int = 304
-//                var h:Int = 235
-//                yy =  685
-//                if SharedInfo.getInstance.currentDevice == "67"
-//                {
-//                    w = 360
-//                    h = 250
-//                    yy =  762
-//                }
-//                else if SharedInfo.getInstance.currentDevice == "67+"
-//                {
-//                    w = 398
-//                    h = 280
-//                    yy = 762
-//                }
-//                
-//                self.updateNewsSection(boxWidth:w,boxHeight:h)
-//
-//                updateScrollViewForHeight()
-//                
-//            }
+        
 
     }
+    
+    func removeItemFromView(){
+        for view in a_itemView {
+            view.removeFromSuperview()
+            
+        }
+        
+        a_itemView.removeAll()
+        
+    } // .End view
     
     
 
@@ -318,14 +296,17 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     // -- update scroll view about height
     func updateScrollViewForHeight(){
         let lastView : UIView! = scrMain.subviews.last
-       // print(lastView.tag)
         let height:Float = Float(lastView.frame.size.height)
-
         let pos:Float = Float(lastView.frame.origin.y)
-        let sizeOfContent = height + pos + 10
-    
+        var sizeOfContent = height + pos + 10
+        
+        if SharedInfo.getInstance.currentDevice == "45" {
+            sizeOfContent = height + pos+450
+        }
         
         scrMain.contentSize.height = CGFloat(sizeOfContent)
+        
+     
     }
 
     
@@ -538,9 +519,9 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                     
                         
                         
-                        var w:Int = 304
+                        var w:Int = 300
                         var h:Int = 235
-                        self.yy =  685
+                        self.yy =  700
                         if SharedInfo.getInstance.currentDevice == "67"
                         {
                             w = 360
@@ -555,13 +536,11 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                         }
                         
                         self.updateNewsSection(boxWidth:w,boxHeight:h)
-                    
-                    
-                    
+
                         self.updateScrollViewForHeight()
                         
                      
-self.refreshControl.endRefreshing()
+                        self.refreshControl.endRefreshing()
                     
                 })
                 

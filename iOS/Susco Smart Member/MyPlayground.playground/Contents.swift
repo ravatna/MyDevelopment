@@ -1,9 +1,9 @@
  import UIKit
 
 
- var testStr = "0000000000"
+ var str = "02/03/2560"
  
- let PHONE_REGEX = "^(08)d{8}"
- let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
- let result =  phoneTest.evaluate(with: testStr)
-print (result)
+
+
+ let index = str.index(str.endIndex, offsetBy: -7)
+ str.substring(from: index)  // Hello
