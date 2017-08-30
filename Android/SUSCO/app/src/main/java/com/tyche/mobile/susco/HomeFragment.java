@@ -78,6 +78,7 @@ public class HomeFragment extends Fragment {
 
     static Bitmap[] decodedImage;
     static String [] codeImage;
+    static Boolean [] loaded;
     static String _member_code;
 
     ImageFragmentPagerAdapter imageFragmentPagerAdapter;
@@ -105,7 +106,7 @@ public class HomeFragment extends Fragment {
 
         imageFragmentPagerAdapter = new ImageFragmentPagerAdapter(getChildFragmentManager());
         mPager = (ViewPager) rootView.findViewById(R.id.pager);
-
+        mPager.setOffscreenPageLimit(10);
         indicator = (CirclePageIndicator) rootView.findViewById(R.id.indicator);
 
         btnPageLeft = (Button)rootView.findViewById(R.id.btnPageLeft);
@@ -137,8 +138,7 @@ public class HomeFragment extends Fragment {
         m_cookieToken = App.getInstance().cookieToken.toString();
         m_formToken = App.getInstance().formToken.toString();
 
-//////////////////////////////////////////////////////
-
+        //////////////////////////////////////////////////////
         btnPageLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -268,7 +268,6 @@ public class HomeFragment extends Fragment {
                 img64.checkWidth = "0";
                 img64.CustomWidthHeight = "1";
                 img64.execute();
-
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -614,9 +613,13 @@ private void doNews() {
                 e.printStackTrace();
             }
             // Create Show ProgressBar
-            strJson = "{'membercode':'" + _mcode  + "','image_width':'" + 512 + "','image_height':'" + 256+ "','formToken':'" + m_formToken  + "','cookieToken':'" + m_cookieToken  + "'}";
+            strJson = "{'membercode':'" + _mcode
+                    + "','image_width':'" + 1024
+                    + "','image_height':'" + 512
+                    + "','formToken':'" + m_formToken
+                    + "','cookieToken':'" + m_cookieToken  + "'}";
 
-           //Log.i("XXXX",strJson);
+           //Log.i("cccccccc",strJson);
             postUrl  = App.getInstance().m_server + "/Banner/GetBanner";
             //            pd = new ProgressDialog(getActivity() );
             //            pd.setMessage("กำลังดำเนินการ...");
@@ -680,6 +683,7 @@ private void doNews() {
 
             decodedImage = new Bitmap[jsonArray.length()];
             codeImage = new String[jsonArray.length()];
+            loaded = new Boolean[jsonArray.length()];
 
             for(int i =0; i < jsonArray.length(); i++){
                 final JSONObject item = jsonArray.getJSONObject(i);
@@ -689,6 +693,7 @@ private void doNews() {
                 byte[] imageBytes = Base64.decode(imageString, Base64.DEFAULT);
                 decodedImage[i] = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
                 codeImage[i] = item.getString("code_image");
+                loaded[i] = false;
 
 
 
@@ -755,20 +760,20 @@ private void doNews() {
 
             imageView.setImageBitmap(decodedImage[position]);
 
-
-            GetImageBase64_type2 img64 = new GetImageBase64_type2();
-            img64.imgView = imageView;
-            img64.imagecode = codeImage[position];
-            img64.i = position;
-            img64.m_cookieToken = App.getInstance().cookieToken;
-            img64.m_formToken = App.getInstance().formToken;
-            img64.Width = "2048";
-            img64.Height = "400";
-            img64._mcode = _member_code;
-            img64.checkWidth = "0";
-            img64.CustomWidthHeight = "1";
-            img64.execute();
-
+if(loaded[position] == false) {
+    GetImageBase64_type2 img64 = new GetImageBase64_type2();
+    img64.imgView = imageView;
+    img64.imagecode = codeImage[position];
+    img64.i = position;
+    img64.m_cookieToken = App.getInstance().cookieToken;
+    img64.m_formToken = App.getInstance().formToken;
+    img64.Width = "2666";
+    img64.Height = "1048";
+    img64._mcode = _member_code;
+    img64.checkWidth = "0";
+    img64.CustomWidthHeight = "1";
+    img64.execute();
+}
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -982,6 +987,7 @@ Log.i("xxxxxxxxx",strJson);
                     Bitmap di = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
                     imgView.setImageBitmap(di);
                     decodedImage[i] = di;
+                    loaded[i] = true;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

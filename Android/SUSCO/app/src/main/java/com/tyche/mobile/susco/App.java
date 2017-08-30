@@ -54,6 +54,7 @@ public class App {
 
     public  boolean validThaiIDCard(long v) {
         long id = v;
+        if (Long.toString(v).equals("1111111111111")) return false;
         String c = Long.toString(v).substring(Long.toString(v).length()-1);
 
         long base = 100000000000l; //สร้างตัวแปร เพื่อสำหรับให้หารเพื่อเอาหลักที่ต้องการ

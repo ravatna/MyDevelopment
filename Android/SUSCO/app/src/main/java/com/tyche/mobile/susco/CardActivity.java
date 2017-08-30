@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
@@ -39,6 +40,8 @@ public class CardActivity extends AppCompatActivity {
     private TextView txvMyDateExpire;
     private ImageView imgQr;
     ProgressBar p;
+    private RelativeLayout cardLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,15 +55,23 @@ public class CardActivity extends AppCompatActivity {
             }
         });
 
+        cardLayout = (RelativeLayout)findViewById(R.id.cardLayout);
         imgQr = (ImageView)findViewById(R.id.imgQr);
         txvMyName = (TextView) findViewById(R.id.txvName);
         txvMyNumber = (TextView) findViewById(R.id.txvCode);
         txvMyDateExpire = (TextView)findViewById(R.id.txvDate);
         p  = (ProgressBar) findViewById(R.id.progressBar);
 
+        cardLayout.setRotation(-90f);
+
         try {
             txvMyName.setText(App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("\r","").replace("\n",""));
-            txvMyDateExpire.setText(App.getInstance().customerMember.getString("createdate"));
+//            txvMyDateExpire.setText(App.getInstance().customerMember.getString("createdate"));
+
+            String m = App.getInstance().customerMember.getString("createdate");
+            m  = m.substring(m.length()-1, -7);
+            txvMyDateExpire.setText(m);
+
             txvMyNumber.setText(App.getInstance().customerMember.getString("member_code"));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -108,15 +119,10 @@ public class CardActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(Bitmap result)  {
-p.setEnabled(false);
-
+            p.setEnabled(false);
             p.setVisibility(View.GONE);
             ((ImageView) findViewById(R.id.imgQr)).setImageBitmap(result);
-
-
         }
-
-
     }
 
     private void overrideFonts(final Context context, final View v) {
@@ -134,5 +140,4 @@ p.setEnabled(false);
             Log.e("UpdateFontface",e.getMessage());
         }
     } // end method
-
 }

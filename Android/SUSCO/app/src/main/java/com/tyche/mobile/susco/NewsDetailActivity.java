@@ -28,6 +28,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.squareup.okhttp.MediaType;
@@ -43,15 +44,6 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import ss.com.bannerslider.banners.Banner;
-import ss.com.bannerslider.banners.DrawableBanner;
-import ss.com.bannerslider.banners.RemoteBanner;
-import ss.com.bannerslider.views.BannerSlider;
-
-import static com.tyche.mobile.susco.R.id.btnPageLeft;
-import static com.tyche.mobile.susco.R.id.btnPageRight;
-import static com.tyche.mobile.susco.R.id.imgPic;
-import static com.tyche.mobile.susco.R.id.imgProfile;
 
 public class NewsDetailActivity extends AppCompatActivity {
 
@@ -70,7 +62,7 @@ public class NewsDetailActivity extends AppCompatActivity {
     String imgB1 = "";
     String imgB2 = "";
     String imgB3 = "";
-
+    static ScrollView scrMain;
     static String mcode = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +81,7 @@ public class NewsDetailActivity extends AppCompatActivity {
             }
         });
 
+         scrMain = (ScrollView)findViewById(R.id.scrMain);
         TextView txvTitle = (TextView)findViewById(R.id.txtTitle);
         TextView txvNewsDate = (TextView)findViewById(R.id.txtNewsDate);
         WebView txvDesc = (WebView)findViewById(R.id.txtDesc);
@@ -338,6 +331,8 @@ public class NewsDetailActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             settingsDialog.dismiss();
+                            scrMain.scrollTo(0,0);
+
                         }
                     });
 

@@ -830,6 +830,7 @@ else {
                     + ",'formToken':'" + m_formToken + "'"
                     + ",'cookieToken':'" + m_cookieToken
                     + "'}";
+            Log.i("XXXXXXXXXXXXXXXXXX", strJson);
             postUrl  = App.getInstance().m_server + "/UpdateDetailCustomer/UpdateDetail";
             pd = new ProgressDialog(getActivity());
             pd.setMessage("กำลังดำเนินการ...");
