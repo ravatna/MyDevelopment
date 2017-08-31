@@ -30,24 +30,13 @@ class ScoreViewController: UIViewController {
     
     
     func updateInfo() {
-        let customer:[AnyObject]
-        do{
-            customer = SharedInfo.getInstance.jsonCustomer!
+        
             
-           
-            var fname = customer[0]["fname"] as! String
-            var lname = customer[0]["lname"] as! String
-            var code = customer[0]["member_code"] as! String
-            var score = customer[0]["point_summary"] as! String
-            var phone = customer[0]["mobile"] as! String
+            lblName.text = SharedInfo.getInstance.fname.replacingOccurrences(of: "\n", with: "") + " " + SharedInfo.getInstance.lname.replacingOccurrences(of: "\n", with: "")
+            lblPhone.text = SharedInfo.getInstance.mobile
+            lblScore.text = SharedInfo.getInstance.point_summary
             
-            lblName.text = fname.replacingOccurrences(of: "\n", with: "") + " " + lname.replacingOccurrences(of: "\n", with: "")
-            lblPhone.text = phone
-            lblScore.text = score
-            
-        }catch {
-            
-        }
+       
 
     }
     
@@ -58,27 +47,20 @@ class ScoreViewController: UIViewController {
     func GetImageBase64_News(_ button:UIButton,_ imageCode:String){
         
         
-        let customer:[AnyObject]
-        
-        customer = SharedInfo.getInstance.jsonCustomer!
-        
-        let membercode = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.formToken
-        let cookieToken:String = SharedInfo.getInstance.cookieToken
         
         
         // create post request
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/GetPicture/getimagebase64")!
         let jsonDict = [
-            "member_code": membercode
+            "member_code": SharedInfo.getInstance.member_code
             ,"imagecode": imageCode
             ,"Width": "1024"
             ,"Height": "400"
             ,"checkWidth": "0"
             ,"CustomWidthHigth": "1"
-            ,"formToken": formToken
-            ,"cookieToken": cookieToken
+            ,"formToken": SharedInfo.getInstance.formToken
+            ,"cookieToken": SharedInfo.getInstance.cookieToken
         ]
         
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
@@ -569,23 +551,14 @@ class ScoreViewController: UIViewController {
     // mark: -- make connection to server
     func doLoadGift(){
         
-        let customer:[AnyObject]
-        
-        customer = SharedInfo.getInstance.jsonCustomer!
-        
-        let phone = customer[0]["mobile"] as! String
-        let formToken:String = SharedInfo.getInstance.formToken
-        let cookieToken:String = SharedInfo.getInstance.cookieToken
-        
-        
         // create post request
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/GetCatalogForMember/catalog_for_member_mobile")!
         
         let jsonDict = [
-            "mobile": phone
-            ,"formToken": formToken
-            ,"cookieToken": cookieToken ]
+            "mobile": SharedInfo.getInstance.mobile
+            ,"formToken": SharedInfo.getInstance.formToken
+            ,"cookieToken": SharedInfo.getInstance.cookieToken ]
         
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
         
@@ -609,6 +582,9 @@ class ScoreViewController: UIViewController {
             }
             
             do {
+                
+                self.refreshControl.endRefreshing()
+                
                 guard let data = data else { return }
                 guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
                 
@@ -682,24 +658,15 @@ class ScoreViewController: UIViewController {
     
     
     func ScoreForMember(){
-        
-        let customer:[AnyObject]
-        
-        customer = SharedInfo.getInstance.jsonCustomer!
-        
-        let phone = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.formToken
-        let cookieToken:String = SharedInfo.getInstance.cookieToken
-        
-        
+       
         // create post request
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/RefreshPoint/Member")!
         
         let jsonDict = [
-            "membercode": phone
-            ,"formToken": formToken
-            ,"cookieToken": cookieToken ]
+            "membercode": SharedInfo.getInstance.member_code
+            ,"formToken": SharedInfo.getInstance.formToken
+            ,"cookieToken": SharedInfo.getInstance.cookieToken ]
         
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
         

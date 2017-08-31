@@ -658,7 +658,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="Kanit-Regular" family="Kanit" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mail64.png" translatesAutoresizingMaskIntoConstraints="NO" id="CEH-K8-cdM" userLabel="icon_mail">
                                                 <rect key="frame" x="14" y="113" width="24" height="24"/>
@@ -844,7 +844,7 @@
                                     </label>
                                 </subviews>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="susco_banner_01.png" translatesAutoresizingMaskIntoConstraints="NO" id="07d-g4-1hz" userLabel="pic_member">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="user_info.png" translatesAutoresizingMaskIntoConstraints="NO" id="07d-g4-1hz" userLabel="pic_member">
                                 <rect key="frame" x="112" y="116" width="96" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -1283,15 +1283,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RRD-qj-eKQ">
-                                <rect key="frame" x="-50" y="195" width="420" height="247"/>
+                                <rect key="frame" x="-65" y="190" width="450" height="265"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="member_card_600px_1050px.png" translatesAutoresizingMaskIntoConstraints="NO" id="DbD-No-nLe">
-                                        <rect key="frame" x="0.0" y="0.0" width="420" height="242"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="qr.png" translatesAutoresizingMaskIntoConstraints="NO" id="x5M-gr-Gyd">
-                                        <rect key="frame" x="330" y="35" width="60" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="450" height="265"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name Surface" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IrY-lD-rFr">
@@ -1315,6 +1311,10 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="qr.png" translatesAutoresizingMaskIntoConstraints="NO" id="x5M-gr-Gyd">
+                                        <rect key="frame" x="355" y="35" width="60" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -1382,8 +1382,8 @@
         <image name="so91.png" width="660" height="294"/>
         <image name="so95.png" width="660" height="294"/>
         <image name="ssmslogo.png" width="567" height="149"/>
-        <image name="susco_banner_01.png" width="500" height="200"/>
         <image name="user" width="25" height="25"/>
         <image name="user64.png" width="64" height="64"/>
+        <image name="user_info.png" width="129" height="129"/>
     </resources>
 </document>

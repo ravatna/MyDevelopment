@@ -151,17 +151,11 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     
     //
     func updateNewsSection(boxWidth:Int,boxHeight:Int) {
-        let customer:[AnyObject]
+      
         let selectNews:[AnyObject]
         
         do{
-            customer = SharedInfo.getInstance.jsonCustomer!
-            
-            var fname = customer[0]["fname"] as! String
-            var lname = customer[0]["lname"] as! String
-            var code = customer[0]["member_code"] as! String
-            var score = customer[0]["point_summary"] as! String
-            var phone = customer[0]["mobile"] as! String
+
             
             selectNews = SharedInfo.getInstance.selectNews!["select_news"] as! [AnyObject]
             var view_tag = 1000
@@ -183,8 +177,7 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
                 let lblNewsHead:UILabel = UILabel(frame:CGRect(x:8,y:(boxHeight-26) ,width:(boxWidth-20) ,height:21))
                 lblNewsHead.text = item["news_head"] as! String
                 lblNewsHead.font  = UIFont (name: "Kanit-Regular", size :17)
-                //label.font = UIFont(name: "QuicksandDash-Regular", size: 35)
-                
+               
                 let buttonConnect = UIButton(frame: CGRect(x:0, y: 0, width:boxWidth, height: (boxHeight-30) ) )
                 buttonConnect.tag = btn_tag
                 
@@ -255,7 +248,7 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     func doGotoURL (sender:UIButton!)
     {
         var banners = SharedInfo.getInstance.jsonBanner!["banner"] as! [AnyObject]
-        var banner = banners[sender.tag]
+        let banner = banners[sender.tag]
         
         do{
             if let requestUrl = URL( string:banner["banner_url"] as! String) {
@@ -340,23 +333,16 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     // mark: -- make connection to server
     func doGetListBanner(){
         
-        let customer:[AnyObject]
-        
-        customer = SharedInfo.getInstance.jsonCustomer!
-        
-        let membercode = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.formToken
-        let cookieToken:String = SharedInfo.getInstance.cookieToken
-      
+     
      
         // create post request
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/Banner/GetBanner")!
-        let jsonDict = [ "membercode": membercode
+        let jsonDict = [ "membercode": SharedInfo.getInstance.member_code
             ,"image_width": "1024"
             ,"image_height": "400"
-            ,"formToken": formToken
-            ,"cookieToken": cookieToken ]
+            ,"formToken": SharedInfo.getInstance.formToken
+            ,"cookieToken": SharedInfo.getInstance.cookieToken ]
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
         
         var request = URLRequest(url: url)
@@ -415,23 +401,13 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     
     
     func doPriceOil(){
-        
-        
-        let customer:[AnyObject]
-        
-        customer = SharedInfo.getInstance.jsonCustomer!
-        
-        let membercode = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.formToken
-        let cookieToken:String = SharedInfo.getInstance.cookieToken
-        
-        
+
         // create post request
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/Standardprice/Get")!
-        let jsonDict = [ "membercode": membercode
-            ,"formToken": formToken
-            ,"cookieToken": cookieToken ]
+        let jsonDict = [ "membercode": SharedInfo.getInstance.member_code
+            ,"formToken": SharedInfo.getInstance.formToken
+            ,"cookieToken": SharedInfo.getInstance.cookieToken ]
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
         
         var request = URLRequest(url: url)
@@ -470,24 +446,15 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
 
     ////////////////////////////////////////////////
     func doGetNews(){
-        
-        
-        let customer:[AnyObject]
-        
-        customer = SharedInfo.getInstance.jsonCustomer!
-        
-        let membercode = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.formToken
-        let cookieToken:String = SharedInfo.getInstance.cookieToken
-        
+     
         
         // create post request
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/News/getNews")!
-        let jsonDict = [ "membercode": membercode
+        let jsonDict = [ "membercode": SharedInfo.getInstance.member_code
             
-            ,"formToken": formToken
-            ,"cookieToken": cookieToken ]
+            ,"formToken": SharedInfo.getInstance.formToken
+            ,"cookieToken": SharedInfo.getInstance.cookieToken ]
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
         
         var request = URLRequest(url: url)
@@ -557,29 +524,19 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     
     ////////////////////////////////////////////////
     func GetImageBase64_News(_ button:UIButton,_ imageCode:String){
-        
-        
-        let customer:[AnyObject]
-        
-        customer = SharedInfo.getInstance.jsonCustomer!
-        
-        let membercode = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.formToken
-        let cookieToken:String = SharedInfo.getInstance.cookieToken
-        
-        
+
         // create post request
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/GetPicture/getimagebase64")!
         let jsonDict = [
-             "member_code": membercode
+             "member_code": SharedInfo.getInstance.member_code
              ,"imagecode": imageCode
              ,"Width": "1024"
              ,"Height": "400"
              ,"checkWidth": "0"
              ,"CustomWidthHigth": "1"
-             ,"formToken": formToken
-            ,"cookieToken": cookieToken
+             ,"formToken": SharedInfo.getInstance.formToken
+            ,"cookieToken": SharedInfo.getInstance.cookieToken
         ]
         
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
@@ -762,20 +719,12 @@ class HomeViewController: UIViewController,UIScrollViewDelegate {
     
     // mark: -- make connection to server
     func doLoadTransaction(){
-        
-        let customer:[AnyObject]
-        
-        customer = SharedInfo.getInstance.jsonCustomer!
-        
-        let membercode = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.formToken
-        let cookieToken:String = SharedInfo.getInstance.cookieToken
-        
+
         // create post request
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/ListTransactionCustomer/GetTransactionByMember")!
-        let jsonDict = [ "membercode": membercode
-            ,"formToken": formToken
-            ,"cookieToken": cookieToken ]
+        let jsonDict = [ "membercode": SharedInfo.getInstance.member_code
+            ,"formToken": SharedInfo.getInstance.formToken
+            ,"cookieToken": SharedInfo.getInstance.cookieToken ]
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
         
         var request = URLRequest(url: url)

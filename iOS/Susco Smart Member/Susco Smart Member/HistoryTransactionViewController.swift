@@ -135,19 +135,12 @@ UIViewController, UITableViewDelegate, UITableViewDataSource {
     // mark: -- make connection to server
     func doLoadTransaction(){
         
-        let customer:[AnyObject]
-        
-        customer = SharedInfo.getInstance.jsonCustomer!
-        
-        let membercode = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.formToken
-        let cookieToken:String = SharedInfo.getInstance.cookieToken
         
         // create post request
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/ListTransactionCustomer/GetTransactionByMember")!
-        let jsonDict = [ "membercode": membercode
-            ,"formToken": formToken
-            ,"cookieToken": cookieToken ]
+        let jsonDict = [ "membercode": SharedInfo.getInstance.member_code
+            ,"formToken": SharedInfo.getInstance.formToken
+            ,"cookieToken": SharedInfo.getInstance.cookieToken ]
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
         
         var request = URLRequest(url: url)
@@ -179,8 +172,6 @@ UIViewController, UITableViewDelegate, UITableViewDataSource {
                 
                 self.tblPointIn.reloadData()
                 self.tblPointOut.reloadData()
-                
-                
                 
                 
                 let currentDate = Date()
@@ -279,13 +270,7 @@ UIViewController, UITableViewDelegate, UITableViewDataSource {
              var getRedeemRequest:[AnyObject]
             
             getRedeemRequest = SharedInfo.getInstance.jsonTransaction!["get_redeem_request"] as! [AnyObject]
-            
-            
-//            ((TextView)giftView.findViewById(R.id.txvCol1)).setText(jsonObj.getString("service_date"));
-//            ((TextView)giftView.findViewById(R.id.txvCol2)).setText(jsonObj.getString("branch_code") + " " + jsonObj.getString("item_qty") + " ชิ้น " + " " + jsonObj.getString("item_point") + " คะแนน" );
-//            ((TextView)giftView.findViewById(R.id.txvCol3)).setText( jsonObj.getString("member_point"));
-//            
-            
+
             // set the text from the data model
             
             cell.lblDate!.text = getRedeemRequest[indexPath.row]["service_date"] as! String
@@ -309,10 +294,10 @@ UIViewController, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    // method to run when table view cell is tapped
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You tapped cell number \(indexPath.row).")
-    }
+//    // method to run when table view cell is tapped
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        //print("You tapped cell number \(indexPath.row).")
+//    }
 
 
 }

@@ -77,27 +77,18 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate,UIWebViewD
     func GetImageBase64_News(_ button:UIButton,_ imageCode:String, _ i:Int){
         
         
-        let customer:[AnyObject]
-        
-        customer = SharedInfo.getInstance.jsonCustomer!
-        
-        let membercode = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.formToken
-        let cookieToken:String = SharedInfo.getInstance.cookieToken
-        
-        
         // create post request
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/GetPicture/getimagebase64")!
         let jsonDict = [
-            "member_code": membercode
+            "member_code": SharedInfo.getInstance.member_code
             ,"imagecode": imageCode
             ,"Width": "1024"
             ,"Height": "400"
             ,"checkWidth": "0"
             ,"CustomWidthHigth": "1"
-            ,"formToken": formToken
-            ,"cookieToken": cookieToken
+            ,"formToken": SharedInfo.getInstance.formToken
+            ,"cookieToken": SharedInfo.getInstance.cookieToken
         ]
         
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
@@ -165,27 +156,19 @@ class NewsDetailViewController: UIViewController,UIScrollViewDelegate,UIWebViewD
     func GetImageBase64_View(_ imageCode:String){
         
         
-        let customer:[AnyObject]
-        
-        customer = SharedInfo.getInstance.jsonCustomer!
-        
-        let membercode = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.formToken
-        let cookieToken:String = SharedInfo.getInstance.cookieToken
-        
         
         // create post request
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/GetPicture/getimagebase64")!
         let jsonDict = [
-            "member_code": membercode
+            "member_code": SharedInfo.getInstance.member_code
             ,"imagecode": imageCode
             ,"Width": "1024"
             ,"Height": "400"
             ,"checkWidth": "0"
             ,"CustomWidthHigth": "1"
-            ,"formToken": formToken
-            ,"cookieToken": cookieToken
+            ,"formToken": SharedInfo.getInstance.formToken
+            ,"cookieToken": SharedInfo.getInstance.cookieToken
         ]
         
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])

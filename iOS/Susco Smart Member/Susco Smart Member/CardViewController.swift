@@ -29,9 +29,7 @@ class CardViewController: UIViewController {
         let angle:CGFloat = (270.0 * 3.14/180.0) as CGFloat
         let rotation = CGAffineTransform(rotationAngle: angle)
         vweCard.transform = rotation
-        //vweTitleCard.transform = rotation
-        
-        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,33 +46,16 @@ class CardViewController: UIViewController {
     
     
     override func viewDidAppear(_ animated: Bool) {
-        let customer:[AnyObject]
+
+        lblCode.text = SharedInfo.getInstance.member_code
+        lblName.text = SharedInfo.getInstance.fname + " " + SharedInfo.getInstance.lname
         
-        customer = SharedInfo.getInstance.jsonCustomer!
-        //print(customer[0])
-        var fname = customer[0]["fname"] as! String
-        var lname = customer[0]["lname"] as! String
-        var code = customer[0]["member_code"] as! String
-        var score = customer[0]["point_summary"] as! String
-        var phone = customer[0]["mobile"] as! String
-        var email = customer[0]["email"] as! String
-        var cid_card = customer[0]["cid_card"] as! String
-        var createdate = customer[0]["createdate"] as! String
-        
-        lblCode.text = code
-        lblName.text = fname + " " + lname
+        let index = SharedInfo.getInstance.createdate.index(SharedInfo.getInstance.createdate.endIndex, offsetBy: -7)
+        lblDate.text = SharedInfo.getInstance.createdate.substring(from: index)  // Hello
         
         
-        let index = createdate.index(createdate.endIndex, offsetBy: -7)
-        lblDate.text = createdate.substring(from: index)  // Hello
-        
-        
-         
-    
-        
-        let data = customer[0]["member_code"] as! String
-        
-        if let img = createQRFromString(data) {
+        // generate QR Code by Member Code
+        if let img = createQRFromString(SharedInfo.getInstance.member_code) {
             //let somImage = UIImage(CIImage: img, scale: 1.0, orientation: UIImageOrientation.Down)
             imgQR.image = img
         }

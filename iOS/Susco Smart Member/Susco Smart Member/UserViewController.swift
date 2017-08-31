@@ -29,6 +29,8 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     var tmp_id_card:String = ""
     var tmp_name:String = ""
     var tmp_email:String = ""
+    
+    var imgProfile:UIImage?
    
     
     
@@ -89,31 +91,88 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     
-    func resetImageProfile(){
-    
-        let customer:[AnyObject]
-        customer = SharedInfo.getInstance.jsonCustomer!
-        var fname =  customer[0]["fname"] as! String
-        var lname =  customer[0]["lname"] as! String
+    ////////////////////////////////////////////////
+    func GetImageBase64_Profile(_ imageCode:String){
         
-        let cid_card_pic:String? = customer[0]["cid_card_pic"] as? String
+        // create post request
         
-        // check user are set new picture profile or not
-        if cid_card_pic != nil && cid_card_pic != "" {
+        let url = URL(string: SharedInfo.getInstance.serviceUrl + "/GetPicture/getimagebase64")!
+        let jsonDict = [
+            "member_code": SharedInfo.getInstance.member_code
+            ,"imagecode": imageCode
+            ,"Width": "120"
+            ,"Height": "120"
+            ,"checkWidth": "0"
+            ,"CustomWidthHigth": "1"
+            ,"formToken": SharedInfo.getInstance.formToken
+            ,"cookieToken": SharedInfo.getInstance.cookieToken
+        ]
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "post"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
             
-            if let decodedData:Data = Data(base64Encoded: cid_card_pic!) {
-                let img:UIImage = UIImage(data:decodedData)!
-                
-                imgMember.image = img
-            }else{
-                imgMember.image = UIImage(named: "user_info")
+            
+            if let error = error {
+                print("error:", error)
+                return
             }
             
-            /////////////////////////////////
-            // .End try
+            do {
+                guard let data = data else { return }
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else { return }
+                
+                DispatchQueue.main.async(execute: {
+                    
+                    // call update screen by first time only
+                    
+                    if json["success"] as! Bool == true{
+                        
+                        var iconString:String
+                        var decodedData:Data
+                        
+                        // ตรวจสอบข้อมูลว่าเป็นค่าที่ว่างหรือไม่
+                        iconString = json["imagebase64"] as! String
+                        
+                        if iconString != "" {
+                            decodedData = Data(base64Encoded: iconString)!
+                            self.imgProfile = UIImage(data:decodedData)
+                            self.imgMember.image = self.imgProfile
+                            
+                        } // end if
+                    }
+                })
+            } catch {
+                print("error:", error)
+            }
+        }
+        
+        task.resume()
+        
+    } // end func
+
+    
+    
+    func resetImageProfile(){
+     
+        print(SharedInfo.getInstance.code_image)
+        
+        
+        // check user are set new picture profile or not
+        if SharedInfo.getInstance.had_pic_profile {
+            //imgMember.image = imgProfile
             
-        } //. End check use has image from service.
-        else{
+            GetImageBase64_Profile(SharedInfo.getInstance.code_image)
+        }
+        //. End check use has image from service.
+        else
+        {
             imgMember.image = UIImage(named: "user_info")
         }
         
@@ -126,23 +185,16 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         present(self.loadingDialog, animated: true, completion: nil)
         
-        let customer:[AnyObject]
-        
-        customer = SharedInfo.getInstance.jsonCustomer!
-        let code = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.formToken
-        let cookieToken:String = SharedInfo.getInstance.cookieToken
-        
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/UpdateDetailCustomer/UpdateDetail")!
-        let jsonDict = [ "member_code": code
+        let jsonDict = [ "member_code": SharedInfo.getInstance.member_code
             , "password": strPassword
             , "email": strEmail
             , "frist_name": strFname
             , "last_name": strLname
             , "cid_card": strCidCard
             , "imagebase64": strImgBase64
-            , "formToken": formToken
-            , "cookieToken": cookieToken ]
+            , "formToken": SharedInfo.getInstance.formToken
+            , "cookieToken": SharedInfo.getInstance.cookieToken ]
         
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
         
@@ -220,20 +272,12 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func GetUserInfo(){
         
-        //present(self.loadingDialog, animated: true, completion: nil)
-        
-        let customer:[AnyObject]
-        
-        customer = SharedInfo.getInstance.jsonCustomer!
-        let code = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.formToken
-        let cookieToken:String = SharedInfo.getInstance.cookieToken
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/GetInfo/Customer")!
-        let jsonDict = [ "membercode": code
+        let jsonDict = [ "membercode": SharedInfo.getInstance.member_code
            
-            , "formToken": formToken
-            , "cookieToken": cookieToken ]
+            , "formToken": SharedInfo.getInstance.formToken
+            , "cookieToken": SharedInfo.getInstance.cookieToken ]
         
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
         
@@ -360,19 +404,6 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
     
         picker.delegate = self
         
-        let customer:[AnyObject]
-        customer = SharedInfo.getInstance.jsonCustomer!
-        var fname =  customer[0]["fname"] as! String
-        var lname =  customer[0]["lname"] as! String
-
-     
-        
-        
-//        if  fname == "" && lname == "" {
-//            txtName.text = "* แตะที่นี่เพื่อแก้ไข *"
-//        }else{
-//            txtName.text = fname + " " + lname
-//        }
      
         resetImageProfile()
         
@@ -386,7 +417,6 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.loadingDialog.view.addSubview(loadingIndicator)
         
-        //txtName.isUserInteractionEnabled = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -419,23 +449,15 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         
-        let customer:[AnyObject]
-       
-            customer = SharedInfo.getInstance.jsonCustomer!
-            
-            //print(customer[0])
-            let fname = customer[0]["fname"] as! String
-            let lname = customer[0]["lname"] as! String
-            let code = customer[0]["member_code"] as! String
-            let score = customer[0]["point_summary"] as! String
-            let phone = customer[0]["mobile"] as! String
-            let email = customer[0]["email"] as! String
-            let cid_card = customer[0]["cid_card"] as! String
+            let fname = SharedInfo.getInstance.fname
+            let lname = SharedInfo.getInstance.lname
+        
+            let phone = SharedInfo.getInstance.mobile
+            let email = SharedInfo.getInstance.email
+            let cid_card = SharedInfo.getInstance.cid_card
         
         
             let tmp_name = fname + " " + lname
-        
-        
         
         
         SharedInfo.getInstance.tmp_email = email
@@ -523,27 +545,10 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // edit email
         if indexPath.row <= 4 {
-            
-            let customer:[AnyObject]
-            
-            customer = SharedInfo.getInstance.jsonCustomer!
-            
-            let fname = customer[0]["fname"] as! String
-            let lname = customer[0]["lname"] as! String
-            
-            let phone = customer[0]["mobile"] as! String
-            let email = customer[0]["email"] as! String
-            let cid_card = customer[0]["cid_card"] as! String
-            
-            
-//            SharedInfo.getInstance.tmp_email = email
-//            SharedInfo.getInstance.tmp_fname = fname
-//            SharedInfo.getInstance.tmp_lname = lname
-//            SharedInfo.getInstance.tmp_id_card = cid_card
-            
+
             if  indexPath.row == 0 {
                 
-                if phone == ""
+                if SharedInfo.getInstance.mobile == ""
                 {
                     // prepare to set home view controller
                     let viewController = self.storyboard?.instantiateViewController(withIdentifier: "popup_input_view") as! OneTextViewController
@@ -602,7 +607,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
 
             }
             else if indexPath.row == 2 {
-                print(SharedInfo.getInstance.tmp_fname + " " + SharedInfo.getInstance.tmp_lname)
+               // print(SharedInfo.getInstance.tmp_fname + " " + SharedInfo.getInstance.tmp_lname)
                 if SharedInfo.getInstance.tmp_fname   == "" || SharedInfo.getInstance.tmp_lname == ""
                 {
                     // prepare to set home view controller
@@ -711,38 +716,43 @@ class UserViewController: UIViewController, UITableViewDelegate, UITableViewData
           //  messageMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.greenColor(), range: NSRange(location:0,length:message.characters.count))
            // alertController.setValue(messageMutableString, forKey: "attributedMessage")
 
-            
-            
-            
-            
+             
             let alert = UIAlertController(title: "ลงชื่อออก", message: "ต้องการออกจากระบบ SUSCO Smart Member ใช่หรือไม่ ?", preferredStyle: UIAlertControllerStyle.alert)
             //alert.setValue(myMutableString, forKey: "attributedTitle")
 
-            let clearAction = UIAlertAction(title: "ใช่", style: .destructive) { (alert: UIAlertAction!) -> Void in
+            let clearAction = UIAlertAction(title: "ออก", style: .destructive) { (alert: UIAlertAction!) -> Void in
                 SharedInfo.getInstance.clear()
                 
                 let defaults = UserDefaults.standard
                 
-                defaults.removeObject( forKey: "customer_detail")
+                //@todo: remove  save default section
+                
+                defaults.removeObject( forKey: "fname")
+                defaults.removeObject( forKey: "lname")
+                defaults.removeObject( forKey: "member_code")
+                defaults.removeObject( forKey: "mobile")
+                defaults.removeObject( forKey: "code_image")
+                defaults.removeObject( forKey: "email")
+                defaults.removeObject( forKey: "cid_card")
+                defaults.removeObject( forKey: "createdate")
+                defaults.removeObject( forKey: "point_summary")
+                
                 defaults.removeObject( forKey: "formToken")
                 defaults.removeObject( forKey: "cookieToken")
                 defaults.removeObject( forKey: "pw")
                 
                 
-                // prepare to set home view controller
-                //let viewController = self.storyboard?.instantiateViewController(withIdentifier: "login_view")
-                //self.present(viewController!, animated:true,completion:nil);
+                
                self.dismiss(animated: true, completion: nil)
 
                 
             }
             
             
-            let cancelAction = UIAlertAction(title: "ไม่ใช่", style: .default)
+            let cancelAction = UIAlertAction(title: "ยกเลิก", style: .default)
             {
                 (alert: UIAlertAction!) -> Void in
-                //print("You pressed Cancel")
-            }
+                            }
             
             alert.addAction(clearAction)
             alert.addAction(cancelAction)

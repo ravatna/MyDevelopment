@@ -34,11 +34,22 @@ class SharedInfo: NSObject {
     var tmp_fname:String = ""
     var tmp_lname:String = ""
     
+    var member_code:String = ""
+    var fname:String = ""
+    var lname:String = ""
+    var email:String = ""
+    var cid_card:String = ""
+    var mobile:String = ""
+    var code_image:String = ""
+    var createdate:String  = ""
+    var point_summary:String = ""
+    var had_pic_profile:Bool = false
+    
     // let url = URL(string: "http://suscoapidev-iCRM.atlasicloud.com/V2/Security/login_customer_susco");
     //let url = URL(string: "http://192.168.88.196/SUSCOAPIV2/Security/login_customer_susco");
     //let url = URL(string: "http://192.168.88.196/SUSCOAPIV2/Security/login_customer_susco");
 
-//    var serviceUrl:String = "http://192.168.88.194/SUSCOAPIV2/";
+    //var serviceUrl:String = "http://192.168.88.174/SUSCOAPIV2/";
     var serviceUrl:String = "http://suscoapidev-iCRM.atlasicloud.com/V2/";
     
     static var getInstance = SharedInfo()

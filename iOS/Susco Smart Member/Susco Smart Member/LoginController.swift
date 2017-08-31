@@ -55,6 +55,60 @@ class LoginController:  UIViewController,UITextViewDelegate,UITextFieldDelegate 
         return result
     }
     
+    func writeJSON_2_File(_ text_json:String) -> Bool {
+    
+        let file = "login.json" //this is the file. we will write to and read from it
+        
+        
+        
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            
+            let path = dir.appendingPathComponent(file)
+            
+            //writing
+            do {
+                try text_json.write(to: path, atomically: false, encoding: String.Encoding.utf8)
+                return true
+            }
+            catch {/* error handling here */
+                return false
+            }
+           
+        }
+    
+        return false
+    }// .End write JSON to file
+    
+    func readJSON_2_File() -> String {
+        
+        let file = "login.json" //this is the file. we will write to and read from it
+        
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            
+            let path = dir.appendingPathComponent(file)
+
+             //reading
+             do {
+                let text2 = try String(contentsOf: path, encoding: String.Encoding.utf8)
+                return text2
+             }
+             catch {
+                /* error handling here */
+                return "{}"
+             }
+ 
+        }
+        
+        return "{}"
+        
+    } // .End read JSON from file
+    
+    
+    
+    
+    
+    
+    
  
     // -- validRegisterField()
     
@@ -115,6 +169,9 @@ class LoginController:  UIViewController,UITextViewDelegate,UITextFieldDelegate 
         
         return b
     }
+    
+    
+    
     
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -255,16 +312,79 @@ class LoginController:  UIViewController,UITextViewDelegate,UITextFieldDelegate 
                             let cookieToken:String = SharedInfo.getInstance.json!["cookieToken"] as! String
                             
                             SharedInfo.getInstance.jsonCustomer = customer
+                            
+                            
+                            if let s =  customer[0]["fname"] as? String {
+                                SharedInfo.getInstance.fname = s
+                            } else {
+                                SharedInfo.getInstance.fname = ""
+                            }
+                            
+                            if let s =  customer[0]["lname"] as? String {
+                                SharedInfo.getInstance.lname = s
+                            } else {
+                                SharedInfo.getInstance.lname = ""
+                            }
+                            
+                            
+                            SharedInfo.getInstance.member_code = customer[0]["member_code"] as! String
+                            SharedInfo.getInstance.mobile = customer[0]["mobile"] as! String
+                            
+                            
+                            if let s =  customer[0]["code_image"] as? String {
+                                SharedInfo.getInstance.code_image = s
+                            } else {
+                                SharedInfo.getInstance.code_image = ""
+                            }
+                            
+                            if let s =  customer[0]["email"] as? String {
+                                SharedInfo.getInstance.email = s
+                            } else {
+                                SharedInfo.getInstance.email = ""
+                            }
+                            
+                            
+                            SharedInfo.getInstance.createdate = customer[0]["createdate"] as! String
+                            
+                            if let s =  customer[0]["cid_card"] as? String {
+                                SharedInfo.getInstance.cid_card = s
+                            } else {
+                                SharedInfo.getInstance.cid_card = ""
+                            }
+                            
+                            SharedInfo.getInstance.point_summary = customer[0]["point_summary"] as! String
+                            
+                            if customer[0]["cid_card_pic"] as! String != "" {
+                                SharedInfo.getInstance.had_pic_profile = true
+                            }else{
+                                SharedInfo.getInstance.had_pic_profile = false
+                            }
+                            
+                            
                             SharedInfo.getInstance.formToken = formToken
                             SharedInfo.getInstance.cookieToken = cookieToken
                             
                             let defaults = UserDefaults.standard
-                            //print(customer)
-                            defaults.setValue(customer, forKey: "customer_detail")
-                            defaults.setValue(formToken, forKey: "formToken")
-                            defaults.setValue(cookieToken, forKey: "cookieToken")
+
+                            //@todo: change from save default
+                            // remember user to default section //
+                            defaults.setValue(SharedInfo.getInstance.fname, forKey: "fname")
+                            defaults.setValue(SharedInfo.getInstance.lname, forKey: "lname")
+                            defaults.setValue(SharedInfo.getInstance.member_code, forKey: "member_code")
+                            defaults.setValue(SharedInfo.getInstance.mobile, forKey: "mobile")
+                            defaults.setValue(SharedInfo.getInstance.code_image, forKey: "code_image")
+                            defaults.setValue(SharedInfo.getInstance.email, forKey: "email")
+                            defaults.setValue(SharedInfo.getInstance.cid_card, forKey: "cid_card")
+                            defaults.setValue(SharedInfo.getInstance.createdate, forKey: "createdate")
+                            defaults.setValue(SharedInfo.getInstance.point_summary, forKey: "point_summary")
+                            defaults.setValue(SharedInfo.getInstance.had_pic_profile, forKey: "had_pic_profile")
+                            
+                            defaults.setValue(SharedInfo.getInstance.formToken, forKey: "formToken")
+                            defaults.setValue(SharedInfo.getInstance.cookieToken, forKey: "cookieToken")
                             defaults.setValue(self.txtP.text, forKey: "pw")
  
+                            
+                            // next display main view
                             
                             // prepare to set home view controller
                             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "home_tabview")
@@ -539,27 +659,32 @@ class LoginController:  UIViewController,UITextViewDelegate,UITextFieldDelegate 
     
     override func viewDidAppear(_ animated: Bool) {
         
-        
         let defaults = UserDefaults.standard
-              
-        
+
         do{
-            
-            
             
             let f = defaults.string(forKey: "formToken")
             let c = defaults.string(forKey: "cookieToken")
             
             if f != nil && c != nil {
                 
-                SharedInfo.getInstance.jsonCustomer = defaults.object(forKey: "customer_detail") as! [AnyObject]
+                SharedInfo.getInstance.fname = defaults.string(forKey: "fname")!
+                SharedInfo.getInstance.lname = defaults.string(forKey: "lname")!
+                SharedInfo.getInstance.member_code = defaults.string(forKey: "member_code")!
+                SharedInfo.getInstance.mobile = defaults.string(forKey: "mobile")!
+                SharedInfo.getInstance.code_image = defaults.string(forKey: "code_image")!
+                SharedInfo.getInstance.email = defaults.string(forKey: "email")!
+                SharedInfo.getInstance.createdate = defaults.string(forKey:"createdate")!
+                SharedInfo.getInstance.cid_card = defaults.string(forKey:"cid_card")!
+                SharedInfo.getInstance.point_summary = defaults.string(forKey:"point_summary")!
                 
-               
+                
+                SharedInfo.getInstance.had_pic_profile = defaults.bool(forKey:"had_pic_profile")
+                
                 
                 SharedInfo.getInstance.formToken = f!
                 SharedInfo.getInstance.cookieToken = c!
 
-                
                 // prepare to set home view controller
                 let viewController = self.storyboard?.instantiateViewController(withIdentifier: "home_tabview")
                 self.present(viewController!, animated:true,completion:nil);

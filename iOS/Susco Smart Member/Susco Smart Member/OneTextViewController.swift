@@ -453,6 +453,10 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
         }
     } // .End
     
+    override func viewDidAppear(_ animated: Bool) {
+        txtInput.becomeFirstResponder()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -460,9 +464,9 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
         
         
         
-        txtInput.delegate = self
-        txtInput2.delegate = self
-        txtInput3.delegate = self
+        //txtInput.delegate = self
+        //txtInput2.delegate = self
+        //txtInput3.delegate = self
         
         
         
@@ -508,23 +512,17 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
 
         present(self.loadingDialog, animated: true, completion: nil)
         
-        let customer:[AnyObject]
-        
-        customer = SharedInfo.getInstance.jsonCustomer!
-        let code = customer[0]["member_code"] as! String
-        let formToken:String = SharedInfo.getInstance.formToken
-        let cookieToken:String = SharedInfo.getInstance.cookieToken
         
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/UpdateDetailCustomer/UpdateDetail")!
-        let jsonDict = [ "member_code": code
+        let jsonDict = [ "member_code": SharedInfo.getInstance.member_code
             , "password": strPassword
             , "email": strEmail
             , "frist_name": strFname
             , "last_name": strLname
             , "cid_card": strCidCard
             , "imagebase64": strImgBase64
-        , "formToken": formToken
-        , "cookieToken": cookieToken ]
+        , "formToken": SharedInfo.getInstance.formToken
+        , "cookieToken": SharedInfo.getInstance.cookieToken ]
         
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
         
@@ -617,20 +615,12 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
         
         present(self.loadingDialog, animated: true, completion: nil)
         
-        let customer:[AnyObject]
-        
-        customer = SharedInfo.getInstance.jsonCustomer!
-        let mobile = customer[0]["mobile"] as! String
-        let formToken:String = SharedInfo.getInstance.formToken
-        let cookieToken:String = SharedInfo.getInstance.cookieToken
-        
         let url = URL(string: SharedInfo.getInstance.serviceUrl + "/CheckFormatID/CheckPID")!
-        let jsonDict = [ "mobile": mobile
+        let jsonDict = [ "mobile": SharedInfo.getInstance.mobile
             ,"cid_card":pid
-            , "formToken": formToken
-            , "cookieToken": cookieToken ]
+            , "formToken": SharedInfo.getInstance.formToken
+            , "cookieToken": SharedInfo.getInstance.cookieToken ]
         
-        print(jsonDict)
         
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
         
@@ -673,15 +663,11 @@ class OneTextViewController: UIViewController,UITextFieldDelegate {
                     } catch {
                         print("error:", error)
                     }
-                    
-                    
-                    
-                    
+
                 })
                 
             }) // end DispatchQueue
-            
-            
+
         }
         
         task.resume()
