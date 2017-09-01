@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,18 +63,26 @@ public class CardActivity extends AppCompatActivity {
         txvMyDateExpire = (TextView)findViewById(R.id.txvDate);
         p  = (ProgressBar) findViewById(R.id.progressBar);
 
-        cardLayout.setRotation(-90f);
+      //  cardLayout.setRotation(-90f);
+
+      //  int width = (getResources().getSystem().getDisplayMetrics().widthPixels/2);
+        //int xPosition = (width/2) - 250;
+
+      //  cardLayout.setX(xPosition);
+
 
         try {
             txvMyName.setText(App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("\r","").replace("\n",""));
 //            txvMyDateExpire.setText(App.getInstance().customerMember.getString("createdate"));
 
             String m = App.getInstance().customerMember.getString("createdate");
-            m  = m.substring(m.length()-1, -7);
+            m  = m.substring(m.length()-7);
             txvMyDateExpire.setText(m);
 
             txvMyNumber.setText(App.getInstance().customerMember.getString("member_code"));
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (Exception e){
             e.printStackTrace();
         }
 

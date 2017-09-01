@@ -428,7 +428,7 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
 
                 try {
 
-                    if(!App.getInstance().customerMember.getString("email").equals("") && !App.getInstance().customerMember.getString("email").equals("null")){
+                    if(!App.getInstance().customerMember.getString("email").replace("null","").equals("")){
 
                         AlertDialog.Builder aaDialog = new AlertDialog.Builder(getActivity());
                         aaDialog.setTitle("แก้ไขอีเมล์");
@@ -578,7 +578,7 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
                 new AlertDialog.Builder(getActivity())
                         .setTitle("ลงชื่อออก")
                         .setMessage("ต้องการลงชื่อออกจากระบบใช่หรือไม่?")
-                        .setPositiveButton("ใช่",
+                        .setPositiveButton("ออก",
                                 new DialogInterface.OnClickListener() {
 
                                     @Override
@@ -593,7 +593,7 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
                                     }
                                 })
                         .setNegativeButton(
-                                "ไม่",
+                                "ยกเลิก",
                                 new DialogInterface.OnClickListener() {
 
                                     @Override
@@ -612,11 +612,6 @@ lnrPhoneNo.setOnClickListener(new View.OnClickListener() {
             }
         });
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            imgProfile.setImageDrawable(getActivity().getDrawable(R.drawable.user));
-//        } else {
-//            imgProfile.setImageDrawable(getActivity().getDrawable(R.drawable.user,getContext().getTheme()));
-//        }
 
         // if imgProfile == null then do assign value image from base64 string.
         if(App.getInstance().imgProfile == null) {
@@ -661,26 +656,26 @@ else {
             txvPhoneNo.setText(App.getInstance().customerMember.getString("mobile"));
 
             // @todo debug
-            if(!App.getInstance().customerMember.getString("fname").equals("") && !App.getInstance().customerMember.getString("lname").equals("")) {
-                txvMyName.setText(App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("\r","").replace("\n",""));
-                tmpMyName = App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("\r","").replace("\n","");
+            if(!App.getInstance().customerMember.getString("fname").replace("null","").equals("") && !App.getInstance().customerMember.getString("lname").replace("null","").equals("")) {
+                txvMyName.setText(App.getInstance().customerMember.getString("fname").replace("null","").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("null","").replace("\r","").replace("\n",""));
+                tmpMyName = App.getInstance().customerMember.getString("fname").replace("null","").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("null","").replace("\r","").replace("\n","");
             }else{
                 txvMyName.setText("* แตะที่นี่เพื่อแก้ไข *");
                 tmpMyName = "";
             }
 
             // @check email for test is empty or
-            if(!App.getInstance().customerMember.getString("email").equals("") && !App.getInstance().customerMember.getString("email").equals("null") ) {
-                txvEmail.setText(App.getInstance().customerMember.getString("email").replace("\r","").replace("\n",""));
-                tmpEmail = App.getInstance().customerMember.getString("email").replace("\r","").replace("\n","");
+            if(!App.getInstance().customerMember.getString("email").equals("") && !App.getInstance().customerMember.getString("email").replace("null","").equals("null") ) {
+                txvEmail.setText(App.getInstance().customerMember.getString("email").replace("\r","").replace("null","").replace("\n",""));
+                tmpEmail = App.getInstance().customerMember.getString("email").replace("\r","").replace("null","").replace("\n","");
             }else{
                 txvEmail.setText("* แตะที่นี่เพื่อแก้ไข *");
                 tmpEmail = "";
             }
 
-            if(!App.getInstance().customerMember.getString("cid_card").equals("")) {
-                txvIdCard.setText(App.getInstance().customerMember.getString("cid_card").replace("\r","").replace("\n",""));
-                tmpIdCard = App.getInstance().customerMember.getString("cid_card").replace("\r","").replace("\n","");
+            if(!App.getInstance().customerMember.getString("cid_card").replace("null","").equals("")) {
+                txvIdCard.setText(App.getInstance().customerMember.getString("cid_card").replace("\r","").replace("null","").replace("\n",""));
+                tmpIdCard = App.getInstance().customerMember.getString("cid_card").replace("\r","").replace("null","").replace("\n","");
             }else{
                 txvIdCard.setText("* แตะที่นี่เพื่อแก้ไข *");
                 tmpIdCard = "";

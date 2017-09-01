@@ -93,7 +93,7 @@ import java.util.ArrayList;
         txvGiftEmpty = (TextView)rootView.findViewById(R.id.txvGiftEmpty);
 
         try {
-            txvMyName.setText(App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","") + " " + App.getInstance().customerMember.getString("lname").replace("\r","").replace("\n",""));
+            txvMyName.setText(App.getInstance().customerMember.getString("fname").replace("\r","").replace("\n","").replace("null","") + " " + App.getInstance().customerMember.getString("lname").replace("null","").replace("\r","").replace("\n",""));
             txvMyScore.setText(App.getInstance().customerMember.getString("point_summary"));
             txvMyNumber.setText(App.getInstance().customerMember.getString("mobile"));
         } catch (JSONException e) {

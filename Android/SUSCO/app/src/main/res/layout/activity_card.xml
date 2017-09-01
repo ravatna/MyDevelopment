@@ -85,11 +85,11 @@ android:visibility="gone"
 
         <RelativeLayout
             android:id="@+id/cardLayout"
-            android:rotation="0"
-            android:layout_marginLeft="0dp"
+            android:rotation="-90"
             android:layout_width="500dp"
             android:layout_height="300dp"
-            android:layout_gravity="center_vertical"
+
+            android:layout_gravity="center_horizontal|center_vertical"
             android:orientation="vertical" >
 
             <ImageView
@@ -125,20 +125,20 @@ android:visibility="gone"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="38dp"
                 android:layout_marginStart="38dp"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="14dp" />
 
             <TextView
                 android:id="@+id/txvName"
                 android:textColor="#333333"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:text="Name "
                 android:layout_below="@+id/txvCode"
                 android:layout_alignLeft="@+id/txvDate"
                 android:layout_alignStart="@+id/txvDate"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="14dp" />
 
             <ImageView
                 android:id="@+id/imgQr"
